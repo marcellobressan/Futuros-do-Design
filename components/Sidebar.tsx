@@ -49,6 +49,17 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         {/* Navigation */}
         <nav style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <button 
+            onClick={() => { setView(AppView.HOME); toggleSidebar(); }}
+            className={navItemClass(AppView.HOME)} 
+            style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Conheça o manifesto e a metodologia do portal"
+          >
+            <Compass size={20} />
+            <span>Manifesto & Método</span>
+            {currentView === AppView.HOME && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
+          </button>
+          
+          <button 
             onClick={() => { setView(AppView.DASHBOARD); toggleSidebar(); }}
             className={navItemClass(AppView.DASHBOARD)} 
             style={currentView === AppView.DASHBOARD ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
@@ -90,17 +101,6 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             <Database size={20} />
             <span>Soluções Cadastradas</span>
             {currentView === AppView.SOLUTIONS && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
-          </button>
-          
-          <button 
-            onClick={() => { setView(AppView.HOME); toggleSidebar(); }}
-            className={navItemClass(AppView.HOME)} 
-            style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
-            title="Conheça o manifesto e metodologia"
-          >
-            <Compass size={20} />
-            <span>Manifesto & Método</span>
-            {currentView === AppView.HOME && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
           </button>
 
           <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>

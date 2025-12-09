@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import StoryBoard from './components/StoryBoard';
+import ManifestoMetodo from './components/ManifestoMetodo';
 import AIIllustration from './components/AIIllustration';
 import Dashboard from './components/Dashboard';
 import { initializeGemini, getSolutions } from './services/geminiService';
@@ -20,7 +21,7 @@ const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(getEnvApiKey());
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<AppView>(AppView.DASHBOARD);
+  const [currentView, setCurrentView] = useState<AppView>(AppView.HOME);
   const [registeredSolutions, setRegisteredSolutions] = useState<RegisteredSolution[]>([]);
   const [keyError, setKeyError] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -207,7 +208,7 @@ const App: React.FC = () => {
           )}
 
           {currentView === AppView.HOME && (
-            <StoryBoard onNavigate={setCurrentView} />
+            <ManifestoMetodo onNavigate={setCurrentView} />
           )}
 
           {currentView === AppView.CHAT && (
