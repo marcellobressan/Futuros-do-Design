@@ -18,6 +18,12 @@ export interface Scenario {
   archetype: string;
 }
 
+export interface UserProfile {
+  name: string;
+  email: string;
+  turma: 'A' | 'B';
+}
+
 export interface RegisteredSolution {
   id: string;
   nome_da_solucao: string;
@@ -38,6 +44,7 @@ export interface RegisteredSolution {
 }
 
 export enum AppView {
+  HOME = 'HOME',
   CHAT = 'CHAT',
   SOLUTIONS = 'SOLUTIONS',
   KNOWLEDGE = 'KNOWLEDGE'

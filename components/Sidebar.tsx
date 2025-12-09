@@ -1,16 +1,18 @@
 import React from 'react';
 import { SCENARIOS_DATA } from '../constants';
-import { AppView } from '../types';
-import { BookOpen, MessageSquare, Database, Menu, X } from 'lucide-react';
+import { AppView, UserProfile } from '../types';
+import { BookOpen, MessageSquare, Database, X, LogIn, Compass } from 'lucide-react';
 
 interface SidebarProps {
   currentView: AppView;
   setView: (view: AppView) => void;
   isOpen: boolean;
   toggleSidebar: () => void;
+  userProfile: UserProfile | null;
+  onLoginClick: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleSidebar, userProfile, onLoginClick }) => {
   return (
     <>
       {/* Mobile Overlay */}
@@ -42,6 +44,18 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         </div>
 
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+          <button
+            onClick={() => setView(AppView.HOME)}
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+              currentView === AppView.HOME
+                ? 'bg-slate-800 text-white border border-slate-600' 
+                : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+            }`}
+          >
+            <Compass size={20} />
+            <span className="font-medium">Manifesto & Método</span>
+          </button>
+
           <button
             onClick={() => setView(AppView.CHAT)}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
@@ -97,6 +111,29 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             </div>
           </div>
         </nav>
+
+        {/* User Profile Section */}
+        <div className="p-4 border-t border-slate-700 bg-slate-900/50">
+          {userProfile ? (
+            <div className="flex items-center space-x-3 bg-slate-800 p-3 rounded-lg border border-slate-700">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center text-white font-bold text-sm">
+                 {userProfile.name.substring(0, 2).toUpperCase()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-white truncate">{userProfile.name}</p>
+                <p className="text-xs text-slate-400 truncate">Turma {userProfile.turma}</p>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={onLoginClick}
+              className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 transition-colors group"
+            >
+              <LogIn size={18} className="text-cyan-400 group-hover:text-cyan-300" />
+              <span className="text-sm font-medium">Entrar / Identificar-se</span>
+            </button>
+          )}
+        </div>
       </div>
     </>
   );

@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
+import StoryBoard from './components/StoryBoard';
 import { initializeGemini, getSolutions } from './services/geminiService';
-import { AppView, RegisteredSolution } from './types';
+import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA } from './constants';
-import { Menu, AlertTriangle, Key, ExternalLink } from 'lucide-react';
+import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X } from 'lucide-react';
 
 const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(process.env.API_KEY || null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<AppView>(AppView.CHAT);
+  // Default view is now HOME
+  const [currentView, setCurrentView] = useState<AppView>(AppView.HOME);
   const [registeredSolutions, setRegisteredSolutions] = useState<RegisteredSolution[]>([]);
   const [keyError, setKeyError] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  
+  // Registration Form State
+  const [formName, setFormName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formTurma, setFormTurma] = useState<'A' | 'B'>('A');
 
   useEffect(() => {
     // Check for API Key if not already in env
@@ -20,9 +29,6 @@ const App: React.FC = () => {
         try {
           const hasKey = await (window as any).aistudio.hasSelectedApiKey();
           if (hasKey) {
-             // In a real scenario, the key is injected into env. 
-             // We'll assume process.env.API_KEY becomes available or is handled by the proxy.
-             // For this prompt's requirement, we assume process.env.API_KEY is populated if selected.
              setApiKey(process.env.API_KEY || 'VALID_KEY_PLACEHOLDER'); 
           }
         } catch (e) {
@@ -37,7 +43,6 @@ const App: React.FC = () => {
     if ((window as any).aistudio) {
       try {
         await (window as any).aistudio.openSelectKey();
-        // Assume success as per prompt instructions
         setApiKey(process.env.API_KEY || 'VALID_KEY_PLACEHOLDER');
         setKeyError(false);
       } catch (e: any) {
@@ -48,13 +53,27 @@ const App: React.FC = () => {
     }
   };
 
+  const handleUserRegistration = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formName && formEmail) {
+      setUserProfile({
+        name: formName,
+        email: formEmail,
+        turma: formTurma
+      });
+      setIsLoginModalOpen(false);
+    }
+  };
+
   useEffect(() => {
     if (apiKey) {
-      initializeGemini(apiKey);
+      // initializeGemini handles both anonymous (null profile) and logged in users
+      // It also preserves history inside the service
+      initializeGemini(apiKey, userProfile || undefined);
     }
-  }, [apiKey]);
+  }, [apiKey, userProfile]);
 
-  // Poll for solutions changes (simplistic approach for demo)
+  // Poll for solutions changes
   useEffect(() => {
     const interval = setInterval(() => {
       setRegisteredSolutions(getSolutions());
@@ -62,6 +81,7 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // 1. API Key Screen (Always blocking)
   if (!apiKey) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
@@ -98,13 +118,16 @@ const App: React.FC = () => {
     );
   }
 
+  // 2. Main Application
   return (
     <div className="flex h-screen bg-slate-950 text-slate-100 overflow-hidden font-['Inter']">
       <Sidebar 
         currentView={currentView} 
         setView={setCurrentView} 
         isOpen={isSidebarOpen} 
-        toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} 
+        toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+        userProfile={userProfile}
+        onLoginClick={() => setIsLoginModalOpen(true)}
       />
 
       <div className="flex-1 flex flex-col min-w-0 relative">
@@ -120,6 +143,11 @@ const App: React.FC = () => {
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-hidden relative">
+          
+          {currentView === AppView.HOME && (
+            <StoryBoard onNavigate={setCurrentView} />
+          )}
+
           {currentView === AppView.CHAT && (
             <ChatInterface apiKey={apiKey} />
           )}
@@ -194,6 +222,81 @@ const App: React.FC = () => {
           )}
         </main>
       </div>
+
+      {/* Login Modal */}
+      {isLoginModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-md w-full border border-slate-700 relative animate-in fade-in zoom-in duration-200">
+            <button 
+              onClick={() => setIsLoginModalOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-cyan-600 rounded-xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20">
+              <UserCheck className="text-white" size={32} />
+            </div>
+            <h1 className="text-2xl font-bold text-white mb-2 font-['Space_Grotesk'] text-center">Identificação</h1>
+            <p className="text-slate-400 mb-6 text-center text-sm">
+              Identifique-se para cadastrar soluções no portal. <br/>A visualização de conteúdo é livre.
+            </p>
+            
+            <form onSubmit={handleUserRegistration} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Nome Completo</label>
+                <input 
+                  type="text" 
+                  required
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                  placeholder="Ex: Ana Silva"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Email Institucional</label>
+                <input 
+                  type="email" 
+                  required
+                  value={formEmail}
+                  onChange={(e) => setFormEmail(e.target.value)}
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                  placeholder="ana@cesar.school"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Turma</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setFormTurma('A')}
+                    className={`py-3 rounded-lg border text-sm font-medium transition-all ${formTurma === 'A' ? 'bg-cyan-900/50 border-cyan-500 text-cyan-400' : 'bg-slate-900 border-slate-700 text-slate-500 hover:bg-slate-800'}`}
+                  >
+                    Turma A
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormTurma('B')}
+                    className={`py-3 rounded-lg border text-sm font-medium transition-all ${formTurma === 'B' ? 'bg-purple-900/50 border-purple-500 text-purple-400' : 'bg-slate-900 border-slate-700 text-slate-500 hover:bg-slate-800'}`}
+                  >
+                    Turma B
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 mt-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-lg font-bold transition-all shadow-lg hover:shadow-cyan-500/25 flex items-center justify-center gap-2"
+              >
+                Identificar-se <ArrowRight size={18} />
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
