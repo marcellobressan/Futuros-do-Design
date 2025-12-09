@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import StoryBoard from './components/StoryBoard';
+import AIIllustration from './components/AIIllustration';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
@@ -365,37 +366,35 @@ const App: React.FC = () => {
                     {scenariosFilteredByTurma.map(sc => (
                     <div key={sc.id} className="card fade-in" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                         <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
-                        <div className="flex justify-between items-start mb-6">
-                            <h3 className="text-xl font-bold text-black leading-tight">{sc.title}</h3>
-                            <span className={`badge ${sc.turma === 'A' ? 'badge-A' : 'badge-B'}`}>
-                            Turma {sc.turma}
-                            </span>
-                        </div>
-                        
-                        <div className="flex flex-col gap-3 mb-5">
-                            <div>
-                            <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
-                            <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                            <div className="flex justify-between items-start mb-6">
+                                <h3 className="text-xl font-bold text-black leading-tight">{sc.title}</h3>
+                                <span className={`badge ${sc.turma === 'A' ? 'badge-A' : 'badge-B'}`}>
+                                Turma {sc.turma}
+                                </span>
                             </div>
-                            {sc.metaphor && (
-                            <div>
-                                <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
-                                <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
+                            
+                            <div className="flex flex-col gap-3 mb-5">
+                                <div>
+                                <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
+                                <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                </div>
+                                {sc.metaphor && (
+                                <div>
+                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
+                                    <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
+                                </div>
+                                )}
                             </div>
-                            )}
-                        </div>
 
-                        <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
                         </div>
                         
-                        {/* Static Image Section */}
-                        <div style={{ width: '100%', height: '200px', position: 'relative', overflow: 'hidden' }}>
-                            <img 
-                                src={sc.imageUrl} 
-                                alt={sc.title} 
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        {/* AI Illustration Section */}
+                        <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                            <AIIllustration 
+                                prompt={sc.imagePrompt || sc.description} 
+                                aspectRatio="video"
                             />
-                            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.2), transparent)' }}></div>
                         </div>
                     </div>
                     ))}
