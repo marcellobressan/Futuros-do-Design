@@ -5,7 +5,7 @@ import StoryBoard from './components/StoryBoard';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
-import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter } from 'lucide-react';
+import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles } from 'lucide-react';
 
 const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(process.env.API_KEY || null);
@@ -25,6 +25,7 @@ const App: React.FC = () => {
   // Reports & Extraction State
   const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
   const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
+  const [extractionMessage, setExtractionMessage] = useState<string | null>(null);
 
   useEffect(() => {
     // Check for API Key if not already in env
@@ -83,18 +84,22 @@ const App: React.FC = () => {
   };
 
   const handleExtraction = (id: string, turma: 'A' | 'B') => {
+    // If already done, just filter
     if (extractionStatus[id] === 'done') {
         setScenariosFilter(turma);
+        setExtractionMessage(`Visualizando cenários extraídos do Relatório da Turma ${turma}.`);
         document.getElementById('scenarios-grid')?.scrollIntoView({ behavior: 'smooth' });
         return;
     }
 
+    setExtractionMessage(null);
     setExtractionStatus(prev => ({ ...prev, [id]: 'extracting' }));
     
     // Simulate AI processing time
     setTimeout(() => {
         setExtractionStatus(prev => ({ ...prev, [id]: 'done' }));
         setScenariosFilter(turma);
+        setExtractionMessage(`Análise de IA concluída: 4 Cenários identificados e extraídos com sucesso do documento da Turma ${turma}.`);
         document.getElementById('scenarios-grid')?.scrollIntoView({ behavior: 'smooth' });
     }, 2000);
   };
@@ -294,18 +299,39 @@ const App: React.FC = () => {
 
               {/* Scenarios Grid */}
               <div id="scenarios-grid" className="scroll-mt-8">
-                <div className="flex items-center justify-between mb-6 pt-8 border-t border-gray-100">
-                    <h2 className="text-2xl font-extrabold text-cesar-black tracking-tight">
-                        Cenários Desenvolvidos
-                    </h2>
-                    {scenariosFilter !== 'ALL' && (
-                        <button 
-                            onClick={() => setScenariosFilter('ALL')}
-                            className="text-xs font-bold text-cesar-orange hover:text-cesar-orange-deep flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full transition-colors"
-                        >
-                            <Filter size={12} />
-                            Filtro Ativo: Turma {scenariosFilter} <X size={12} className="ml-1" />
-                        </button>
+                <div className="flex flex-col gap-4 mb-6 pt-8 border-t border-gray-100">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-extrabold text-cesar-black tracking-tight">
+                            Cenários Desenvolvidos
+                        </h2>
+                        {scenariosFilter !== 'ALL' && (
+                            <button 
+                                onClick={() => {
+                                    setScenariosFilter('ALL');
+                                    setExtractionMessage(null);
+                                }}
+                                className="text-xs font-bold text-cesar-orange hover:text-cesar-orange-deep flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full transition-colors"
+                            >
+                                <Filter size={12} />
+                                Filtro Ativo: Turma {scenariosFilter} <X size={12} className="ml-1" />
+                            </button>
+                        )}
+                    </div>
+
+                    {/* Extraction Success Banner */}
+                    {extractionMessage && (
+                        <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-xl flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div className="p-1.5 bg-emerald-100 rounded-full text-emerald-600 mt-0.5">
+                                <Sparkles size={16} />
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-sm font-bold text-emerald-800">Extração Concluída</p>
+                                <p className="text-xs text-emerald-700 mt-0.5">{extractionMessage}</p>
+                            </div>
+                            <button onClick={() => setExtractionMessage(null)} className="text-emerald-500 hover:text-emerald-700">
+                                <X size={16} />
+                            </button>
+                        </div>
                     )}
                 </div>
 
