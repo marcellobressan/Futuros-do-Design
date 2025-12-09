@@ -214,7 +214,7 @@ Quando o usuário declarar interesse, como em *"quero cadastrar uma solução"*,
 6. **ETAPA 4 — Coleta de descrição livre**: Pergunte a descrição.
 7. **ETAPA 5 — Refinamento (Function Calling)**: Use \`refinarDescricaoSolucao\`.
 8. **ETAPA 6 — Revisão e Edição (IMPORTANTE)**:
-   - APÓS o refinamento, NÃO chame `registrarSolucao` imediatamente.
+   - APÓS o refinamento, NÃO chame registrarSolucao imediatamente.
    - CHAME a função \`apresentarRascunhoParaRevisao\` passando todos os dados coletados (nome, participantes, turma, cenários, descrição, imagem).
    - O frontend exibirá um cartão interativo para o usuário revisar e editar os dados.
    - AGUARDE a resposta do sistema/usuário confirmando que os dados estão validados.
