@@ -7,8 +7,17 @@ import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
 import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles } from 'lucide-react';
 
+// Safe access to process.env to prevent "Missing initializer" syntax errors if build replacement fails
+const getEnvApiKey = () => {
+  try {
+    return typeof process !== 'undefined' && process.env ? process.env.API_KEY : null;
+  } catch (e) {
+    return null;
+  }
+};
+
 const App: React.FC = () => {
-  const [apiKey, setApiKey] = useState<string | null>(process.env.API_KEY || null);
+  const [apiKey, setApiKey] = useState<string | null>(getEnvApiKey() || null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   // Default view is now HOME
@@ -34,7 +43,8 @@ const App: React.FC = () => {
         try {
           const hasKey = await (window as any).aistudio.hasSelectedApiKey();
           if (hasKey) {
-             setApiKey(process.env.API_KEY || 'VALID_KEY_PLACEHOLDER'); 
+             const envKey = getEnvApiKey();
+             setApiKey(envKey || 'VALID_KEY_PLACEHOLDER'); 
           }
         } catch (e) {
           console.error("Error checking key", e);
@@ -48,7 +58,8 @@ const App: React.FC = () => {
     if ((window as any).aistudio) {
       try {
         await (window as any).aistudio.openSelectKey();
-        setApiKey(process.env.API_KEY || 'VALID_KEY_PLACEHOLDER');
+        const envKey = getEnvApiKey();
+        setApiKey(envKey || 'VALID_KEY_PLACEHOLDER');
         setKeyError(false);
       } catch (e: any) {
         if (e.message && e.message.includes("Requested entity was not found")) {
