@@ -5,7 +5,7 @@ import StoryBoard from './components/StoryBoard';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
-import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles } from 'lucide-react';
+import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search } from 'lucide-react';
 
 const getEnvApiKey = () => {
   try {
@@ -31,6 +31,7 @@ const App: React.FC = () => {
   const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
   const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
   const [extractionMessage, setExtractionMessage] = useState<string | null>(null);
+  const [solutionsSearchQuery, setSolutionsSearchQuery] = useState('');
 
   useEffect(() => {
     const checkKey = async () => {
@@ -129,9 +130,26 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const filteredScenarios = scenariosFilter === 'ALL' 
+  const scenariosFilteredByTurma = scenariosFilter === 'ALL' 
     ? SCENARIOS_DATA 
     : SCENARIOS_DATA.filter(s => s.turma === scenariosFilter);
+
+  const filteredSolutions = registeredSolutions.filter(sol => {
+    const query = solutionsSearchQuery.toLowerCase().trim();
+    if (!query) return true;
+
+    const nameMatch = sol.nome_da_solucao.toLowerCase().includes(query);
+    
+    const participantMatch = sol.participantes.some(p => 
+      p.nome_completo.toLowerCase().includes(query)
+    );
+      
+    const scenarioMatch = sol.cenarios_relacionados.some(cen => 
+      cen.toLowerCase().includes(query)
+    );
+
+    return nameMatch || participantMatch || scenarioMatch;
+  });
 
   // 1. API Key Screen
   if (!apiKey) {
@@ -344,7 +362,7 @@ const App: React.FC = () => {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', paddingBottom: '3rem' }}>
-                    {filteredScenarios.map(sc => (
+                    {scenariosFilteredByTurma.map(sc => (
                     <div key={sc.id} className="card fade-in" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                         <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
                         <div className="flex justify-between items-start mb-6">
@@ -390,24 +408,48 @@ const App: React.FC = () => {
           {currentView === AppView.SOLUTIONS && (
             <div style={{ height: '100%', overflowY: 'auto', padding: '2rem' }}>
                 <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-4">
                  <h2 className="text-3xl font-extrabold text-black">Soluções Cadastradas</h2>
                  <div className="text-xs font-bold text-neutral uppercase tracking-widest bg-white px-3 py-1 rounded-full border border-gray-200">
-                    {registeredSolutions.length} Registros
+                    {filteredSolutions.length} / {registeredSolutions.length} Registros
                  </div>
               </div>
 
-              {registeredSolutions.length === 0 ? (
+              <div className="relative mb-8">
+                <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral" style={{ pointerEvents: 'none' }} />
+                <input
+                  type="text"
+                  placeholder="Buscar por nome da solução, participante ou cenário..."
+                  value={solutionsSearchQuery}
+                  onChange={(e) => setSolutionsSearchQuery(e.target.value)}
+                  className="input-field w-full"
+                  style={{ paddingLeft: '2.75rem', height: '52px' }}
+                  aria-label="Buscar soluções"
+                />
+              </div>
+
+              {filteredSolutions.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '6rem 0', backgroundColor: 'white', borderRadius: '24px', border: '1px dashed #e5e7eb' }}>
-                    <p className="text-neutral font-medium mb-4">Nenhuma solução cadastrada ainda.</p>
-                    <button onClick={() => setCurrentView(AppView.CHAT)} className="btn btn-primary">
-                        Cadastrar via Chat
-                    </button>
+                    {registeredSolutions.length > 0 ? (
+                        <>
+                          <p className="text-neutral font-medium mb-4">Nenhum resultado encontrado para "{solutionsSearchQuery}".</p>
+                          <button onClick={() => setSolutionsSearchQuery('')} className="btn btn-secondary">
+                            Limpar Busca
+                          </button>
+                        </>
+                    ) : (
+                        <>
+                            <p className="text-neutral font-medium mb-4">Nenhuma solução cadastrada ainda.</p>
+                            <button onClick={() => setCurrentView(AppView.CHAT)} className="btn btn-primary">
+                                Cadastrar via Chat
+                            </button>
+                        </>
+                    )}
                 </div>
               ) : (
                 <div className="flex flex-col gap-6">
-                  {registeredSolutions.map((sol) => (
-                    <div key={sol.id} className="card flex flex-col md:flex-row gap-8">
+                  {filteredSolutions.map((sol) => (
+                    <div key={sol.id} className="card flex flex-col md:flex-row gap-8 fade-in">
                         <div style={{ flex: 1 }}>
                             <div className="flex items-center gap-3 mb-2">
                                 <h3 className="text-2xl font-bold text-black">{sol.nome_da_solucao}</h3>
