@@ -16,6 +16,7 @@ export interface Scenario {
   turma: 'A' | 'B';
   description: string;
   archetype: string;
+  imagePrompt?: string;
 }
 
 export interface UserProfile {

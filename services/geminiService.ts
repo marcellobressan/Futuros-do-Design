@@ -1,5 +1,5 @@
 import { GoogleGenAI, FunctionDeclaration, Type, Tool } from "@google/genai";
-import { SYSTEM_INSTRUCTION } from "../constants";
+import { SYSTEM_INSTRUCTION, BASE_IMAGE_STYLE } from "../constants";
 import { RegisteredSolution, UserProfile } from "../types";
 
 // --- Function Declarations ---
@@ -123,6 +123,37 @@ export const initializeGemini = async (apiKey: string, userProfile?: UserProfile
 };
 
 export const getSolutions = () => [...solutionsDatabase];
+
+export const generateIllustration = async (prompt: string): Promise<string> => {
+    if (!client) throw new Error("Gemini not initialized");
+
+    const fullPrompt = `${BASE_IMAGE_STYLE} Descrição específica: ${prompt}`;
+
+    try {
+        const response = await client.models.generateContent({
+            model: 'gemini-2.5-flash-image',
+            contents: {
+                parts: [{ text: fullPrompt }],
+            }
+        });
+
+        // The response for image generation contains the image in inlineData
+        // We iterate to find it.
+        const parts = response.candidates?.[0]?.content?.parts;
+        if (parts) {
+            for (const part of parts) {
+                if (part.inlineData && part.inlineData.data) {
+                    return `data:image/png;base64,${part.inlineData.data}`;
+                }
+            }
+        }
+        
+        throw new Error("No image data found in response");
+    } catch (e) {
+        console.error("Error generating illustration:", e);
+        throw e;
+    }
+}
 
 // Executing the "Backend" logic for the tools on the client side
 const executeFunction = async (name: string, args: any): Promise<any> => {

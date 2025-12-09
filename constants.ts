@@ -1,17 +1,76 @@
 import { Scenario } from './types';
 
+// Visual Style for AI Generation
+export const BASE_IMAGE_STYLE = "Estilo de ilustração vetorial moderno e abstrato, minimalista. Cores predominantes: Laranja vibrante (#ff6002), Branco e Preto. Formas geométricas limpas, design flat ou 3D isométrico suave. Sem texto, foco na composição visual conceitual. Alta qualidade, estilo institucional de escola de design e inovação.";
+
 // Mock Data for the "Knowledge Pack" context
 export const SCENARIOS_DATA: Scenario[] = [
   // Turma A
-  { id: 'CENARIO_A1', title: 'Tecnocracia Verde', turma: 'A', archetype: 'Crescimento Contínuo', description: 'Um futuro onde a tecnologia resolveu a crise climática, mas a um custo de vigilância extrema.' },
-  { id: 'CENARIO_A2', title: 'Desconexão Radical', turma: 'A', archetype: 'Colapso', description: 'Sociedades fragmentadas rejeitam a tecnologia digital global em favor de redes locais analógicas.' },
-  { id: 'CENARIO_A3', title: 'Algoritmo Soberano', turma: 'A', archetype: 'Disciplina', description: 'A governança é delegada a IAs imparciais, impondo uma ordem lógica rígida que suprime a subjetividade humana.' },
-  { id: 'CENARIO_A4', title: 'Simbiose Criativa', turma: 'A', archetype: 'Transformação', description: 'Humanos e IAs co-criam a realidade em tempo real, dissolvendo a autoria individual e a barreira físico-digital.' },
+  { 
+    id: 'CENARIO_A1', 
+    title: 'Tecnocracia Verde', 
+    turma: 'A', 
+    archetype: 'Crescimento Contínuo', 
+    description: 'Um futuro onde a tecnologia resolveu a crise climática, mas a um custo de vigilância extrema.',
+    imagePrompt: 'Uma cidade futurista branca com muita vegetação integrada aos prédios, câmeras de vigilância sutis com luzes laranja, céu limpo, utopia tecnológica monitorada.'
+  },
+  { 
+    id: 'CENARIO_A2', 
+    title: 'Desconexão Radical', 
+    turma: 'A', 
+    archetype: 'Colapso', 
+    description: 'Sociedades fragmentadas rejeitam a tecnologia digital global em favor de redes locais analógicas.',
+    imagePrompt: 'Pessoas reunidas em círculo ao redor de uma fogueira urbana, cabos desconectados pendurados ao fundo, ambiente analógico, texturas rústicas, iluminação quente laranja.'
+  },
+  { 
+    id: 'CENARIO_A3', 
+    title: 'Algoritmo Soberano', 
+    turma: 'A', 
+    archetype: 'Disciplina', 
+    description: 'A governança é delegada a IAs imparciais, impondo uma ordem lógica rígida que suprime a subjetividade humana.',
+    imagePrompt: 'Uma grade geométrica perfeita, estruturas rígidas e simétricas, fluxos de dados azuis e laranjas organizados, representação abstrata de ordem e inteligência artificial.'
+  },
+  { 
+    id: 'CENARIO_A4', 
+    title: 'Simbiose Criativa', 
+    turma: 'A', 
+    archetype: 'Transformação', 
+    description: 'Humanos e IAs co-criam a realidade em tempo real, dissolvendo a autoria individual e a barreira físico-digital.',
+    imagePrompt: 'Formas fluidas e orgânicas se misturando com polígonos digitais, mãos humanas tocando hologramas laranjas, explosão de criatividade abstrata, fusão físico-digital.'
+  },
   // Turma B
-  { id: 'CENARIO_B1', title: 'Capitalismo de Dados', turma: 'B', archetype: 'Crescimento Contínuo', description: 'A mercantilização da experiência humana atinge o ápice; emoções e memórias são commodities negociáveis.' },
-  { id: 'CENARIO_B2', title: 'Ruína Digital', turma: 'B', archetype: 'Colapso', description: 'Um evento solar massivo inutiliza a infraestrutura global, forçando o retorno a tecnologias mecânicas e conhecimento oral.' },
-  { id: 'CENARIO_B3', title: 'Corporatocracia Híbrida', turma: 'B', archetype: 'Disciplina', description: 'Grandes corporações gerem os recursos escassos com eficiência brutal e controle social rígido via bio-implantes.' },
-  { id: 'CENARIO_B4', title: 'Consciência Coletiva', turma: 'B', archetype: 'Transformação', description: 'A humanidade transcende a barreira biológica através de interfaces cérebro-máquina, operando como uma mente colmeia empática.' },
+  { 
+    id: 'CENARIO_B1', 
+    title: 'Capitalismo de Dados', 
+    turma: 'B', 
+    archetype: 'Crescimento Contínuo', 
+    description: 'A mercantilização da experiência humana atinge o ápice; emoções e memórias são commodities negociáveis.',
+    imagePrompt: 'Silhuetas humanas formadas por códigos de barras e fluxos de dados, moedas douradas e laranjas flutuando, ambiente de mercado financeiro abstrato e digital.'
+  },
+  { 
+    id: 'CENARIO_B2', 
+    title: 'Ruína Digital', 
+    turma: 'B', 
+    archetype: 'Colapso', 
+    description: 'Um evento solar massivo inutiliza a infraestrutura global, forçando o retorno a tecnologias mecânicas e conhecimento oral.',
+    imagePrompt: 'Servidores de computador em ruínas cobertos por plantas, luz do sol forte ao fundo criando reflexos, contraste entre tecnologia quebrada e natureza renascendo.'
+  },
+  { 
+    id: 'CENARIO_B3', 
+    title: 'Corporatocracia Híbrida', 
+    turma: 'B', 
+    archetype: 'Disciplina', 
+    description: 'Grandes corporações gerem os recursos escassos com eficiência brutal e controle social rígido via bio-implantes.',
+    imagePrompt: 'Arranha-céus corporativos monolíticos e pretos, trabalhadores em filas organizadas com pequenos implantes brilhando em laranja, atmosfera de eficiência e controle.'
+  },
+  { 
+    id: 'CENARIO_B4', 
+    title: 'Consciência Coletiva', 
+    turma: 'B', 
+    archetype: 'Transformação', 
+    description: 'A humanidade transcende a barreira biológica através de interfaces cérebro-máquina, operando como uma mente colmeia empática.',
+    imagePrompt: 'Rede de nós brilhantes conectando mentes humanas, teia etérea de luz laranja e branca, sensação de unidade e empatia, fundo minimalista e suave.'
+  },
 ];
 
 export const SYSTEM_INSTRUCTION = `

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Zap, Layers, Globe, Cpu, Users, Eye, Mic, ExternalLink, Headphones } from 'lucide-react';
 import { AppView } from '../types';
+import AIIllustration from './AIIllustration';
 
 interface StoryBoardProps {
   onNavigate: (view: AppView) => void;
@@ -16,32 +17,45 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
         <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-orange-100/40 rounded-full blur-3xl"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-gray-100 rounded-full blur-3xl"></div>
 
-        <div className="relative z-10 max-w-4xl text-center space-y-8">
-          <div className="inline-block px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-xs font-bold tracking-widest text-cesar-orange uppercase mb-4">
-            CESAR School 2025 • Teoria e Futuro do Design
-          </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-cesar-black tracking-tight leading-[1.1]">
-            Explore os <br/>
-            <span className="text-cesar-orange">Futuros do Design</span>
-          </h1>
-          <p className="text-lg md:text-xl text-cesar-gray/80 max-w-2xl mx-auto leading-relaxed font-light">
-            Um laboratório de imaginação, crítica e criação. Navegue por fenômenos, cenários e ferramentas criadas para um mundo em constante transformação.
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center pt-8">
-            <button 
-              onClick={() => onNavigate(AppView.CHAT)}
-              className="px-8 py-4 bg-cesar-orange text-white rounded-xl font-bold hover:bg-cesar-orange-deep transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 group"
-            >
-              Conversar com o Agente
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button 
-              onClick={() => onNavigate(AppView.KNOWLEDGE)}
-              className="px-8 py-4 bg-white border border-gray-200 text-cesar-black rounded-xl font-bold hover:border-gray-300 hover:bg-gray-50 transition-colors shadow-sm"
-            >
-              Ver Cenários
-            </button>
-          </div>
+        <div className="relative z-10 grid md:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
+            
+            <div className="space-y-8 text-left">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-xs font-bold tracking-widest text-cesar-orange uppercase mb-4">
+                    CESAR School 2025 • Teoria e Futuro do Design
+                </div>
+                <h1 className="text-5xl md:text-7xl font-extrabold text-cesar-black tracking-tight leading-[1.1]">
+                    Explore os <br/>
+                    <span className="text-cesar-orange">Futuros do Design</span>
+                </h1>
+                <p className="text-lg md:text-xl text-cesar-gray/80 max-w-xl leading-relaxed font-light">
+                    Um laboratório de imaginação, crítica e criação. Navegue por fenômenos, cenários e ferramentas criadas para um mundo em constante transformação.
+                </p>
+                <div className="flex flex-col md:flex-row gap-4 pt-4">
+                    <button 
+                    onClick={() => onNavigate(AppView.CHAT)}
+                    className="px-8 py-4 bg-cesar-orange text-white rounded-xl font-bold hover:bg-cesar-orange-deep transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 group"
+                    >
+                    Conversar com o Agente
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    <button 
+                    onClick={() => onNavigate(AppView.KNOWLEDGE)}
+                    className="px-8 py-4 bg-white border border-gray-200 text-cesar-black rounded-xl font-bold hover:border-gray-300 hover:bg-gray-50 transition-colors shadow-sm"
+                    >
+                    Ver Cenários
+                    </button>
+                </div>
+            </div>
+
+            {/* Hero Visual */}
+            <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-tr from-orange-200 to-transparent rounded-[2.5rem] blur-xl opacity-50"></div>
+                <AIIllustration 
+                    prompt="Uma composição abstrata representando o futuro do design, formas geométricas flutuantes, gradiente laranja e branco, render 3D limpo, futurista, inovador, minimalista, estilo CESAR School." 
+                    className="w-full shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-700 bg-white"
+                />
+            </div>
+
         </div>
       </section>
 

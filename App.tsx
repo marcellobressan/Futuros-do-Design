@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import StoryBoard from './components/StoryBoard';
+import AIIllustration from './components/AIIllustration';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA } from './constants';
@@ -155,20 +156,31 @@ const App: React.FC = () => {
           {currentView === AppView.KNOWLEDGE && (
             <div className="h-full overflow-y-auto p-6 md:p-12 max-w-5xl mx-auto bg-cesar-off-white">
               <h2 className="text-3xl font-extrabold text-cesar-black mb-8 tracking-tight">Base de Conhecimento: Cenários</h2>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-8">
                 {SCENARIOS_DATA.map(sc => (
-                  <div key={sc.id} className="bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group">
-                    <div className="flex justify-between items-start mb-6">
-                      <h3 className="text-xl font-bold text-cesar-black group-hover:text-cesar-orange transition-colors">{sc.title}</h3>
-                      <span className={`px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-widest ${sc.turma === 'A' ? 'bg-cyan-50 text-cyan-600' : 'bg-purple-50 text-purple-600'}`}>
-                        Turma {sc.turma}
-                      </span>
+                  <div key={sc.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div className="p-8 pb-4 flex-1">
+                      <div className="flex justify-between items-start mb-6">
+                        <h3 className="text-xl font-bold text-cesar-black group-hover:text-cesar-orange transition-colors">{sc.title}</h3>
+                        <span className={`px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-widest ${sc.turma === 'A' ? 'bg-cyan-50 text-cyan-600' : 'bg-purple-50 text-purple-600'}`}>
+                          Turma {sc.turma}
+                        </span>
+                      </div>
+                      <div className="mb-4">
+                          <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-1">Arquétipo</span>
+                          <p className="text-cesar-black font-medium">{sc.archetype}</p>
+                      </div>
+                      <p className="text-cesar-gray leading-relaxed text-sm mb-6">{sc.description}</p>
                     </div>
-                    <div className="mb-4">
-                        <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-1">Arquétipo</span>
-                        <p className="text-cesar-black font-medium">{sc.archetype}</p>
+                    
+                    {/* Integrated AI Illustration Section */}
+                    <div className="border-t border-gray-50 bg-gray-50/50 p-6">
+                      <AIIllustration 
+                        prompt={sc.imagePrompt || sc.description} 
+                        className="w-full bg-white shadow-sm"
+                        aspectRatio="video"
+                      />
                     </div>
-                    <p className="text-cesar-gray leading-relaxed text-sm">{sc.description}</p>
                   </div>
                 ))}
               </div>
