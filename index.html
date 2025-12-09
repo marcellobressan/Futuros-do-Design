@@ -5,30 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal Futuros do Design</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'cesar-orange': '#ff6002',
+              'cesar-orange-deep': '#dd4012',
+              'cesar-black': '#161616',
+              'cesar-gray': '#3f3f3f',
+              'cesar-neutral': '#818b9d',
+              'cesar-off-white': '#fffeee',
+              'cesar-white': '#ffffff',
+            },
+            fontFamily: {
+              sans: ['DM Sans', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
     <style>
       body {
-        font-family: 'Inter', sans-serif;
-        background-color: #0f172a;
-        color: #e2e8f0;
+        font-family: 'DM Sans', sans-serif;
+        background-color: #fffeee; /* cesar-off-white */
+        color: #3f3f3f; /* cesar-gray */
       }
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Space Grotesk', sans-serif;
-      }
-      /* Custom Scrollbar */
+      /* Custom Scrollbar for Light Theme */
       ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #1e293b; 
+        background: #f1f5f9; 
       }
       ::-webkit-scrollbar-thumb {
-        background: #475569; 
+        background: #cbd5e1; 
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #64748b; 
+        background: #94a3b8; 
       }
     </style>
   <script type="importmap">

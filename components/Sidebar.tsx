@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-20 md:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20 md:hidden"
           onClick={toggleSidebar}
         />
       )}
@@ -26,86 +26,98 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
       {/* Sidebar Content */}
       <div className={`
         fixed md:static inset-y-0 left-0 z-30
-        w-72 bg-slate-900 border-r border-slate-700
+        w-72 bg-white border-r border-gray-200
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-        flex flex-col
+        flex flex-col shadow-lg md:shadow-none
       `}>
-        <div className="p-6 border-b border-slate-700 flex justify-between items-center">
-          <div>
-            <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 font-['Space_Grotesk']">
-              FUTUROS DO DESIGN
+        {/* Header / Logo Area */}
+        <div className="p-8 pb-6 border-b border-gray-100 flex justify-between items-start">
+          <div className="flex flex-col">
+            <h1 className="text-xl font-extrabold text-cesar-orange leading-none tracking-tight">
+              FUTUROS<br/>DO DESIGN
             </h1>
-            <p className="text-xs text-slate-400 mt-1">CESAR School 2025</p>
+            <p className="text-[11px] font-medium text-cesar-neutral mt-2 tracking-wide uppercase">
+              CESAR School 2025
+            </p>
           </div>
-          <button onClick={toggleSidebar} className="md:hidden text-slate-400 hover:text-white">
+          <button onClick={toggleSidebar} className="md:hidden text-cesar-neutral hover:text-cesar-orange">
             <X size={24} />
           </button>
         </div>
 
+        {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           <button
             onClick={() => setView(AppView.HOME)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
               currentView === AppView.HOME
-                ? 'bg-slate-800 text-white border border-slate-600' 
-                : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                ? 'bg-orange-50 text-cesar-orange font-bold' 
+                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
             }`}
           >
-            <Compass size={20} />
-            <span className="font-medium">Manifesto & Método</span>
+            <Compass size={20} className={currentView === AppView.HOME ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+            <span>Manifesto & Método</span>
           </button>
 
           <button
             onClick={() => setView(AppView.CHAT)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
               currentView === AppView.CHAT 
-                ? 'bg-slate-800 text-cyan-400 border border-slate-700' 
-                : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                ? 'bg-orange-50 text-cesar-orange font-bold' 
+                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
             }`}
           >
-            <MessageSquare size={20} />
-            <span className="font-medium">Agente do Portal</span>
+            <MessageSquare size={20} className={currentView === AppView.CHAT ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+            <span>Agente do Portal</span>
           </button>
 
           <button
             onClick={() => setView(AppView.KNOWLEDGE)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
               currentView === AppView.KNOWLEDGE 
-                ? 'bg-slate-800 text-purple-400 border border-slate-700' 
-                : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                ? 'bg-orange-50 text-cesar-orange font-bold' 
+                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
             }`}
           >
-            <BookOpen size={20} />
-            <span className="font-medium">Cenários & Arquétipos</span>
+            <BookOpen size={20} className={currentView === AppView.KNOWLEDGE ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+            <span>Cenários & Arquétipos</span>
           </button>
 
           <button
             onClick={() => setView(AppView.SOLUTIONS)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
               currentView === AppView.SOLUTIONS 
-                ? 'bg-slate-800 text-emerald-400 border border-slate-700' 
-                : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                ? 'bg-orange-50 text-cesar-orange font-bold' 
+                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
             }`}
           >
-            <Database size={20} />
-            <span className="font-medium">Soluções Cadastradas</span>
+            <Database size={20} className={currentView === AppView.SOLUTIONS ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+            <span>Soluções Cadastradas</span>
           </button>
 
-          <div className="mt-8 pt-4 border-t border-slate-700">
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-2">
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <h3 className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest mb-4 px-2">
               Cenários Ativos
             </h3>
             <div className="space-y-3">
               {SCENARIOS_DATA.map((scenario) => (
-                <div key={scenario.id} className="bg-slate-800/50 p-3 rounded-md border border-slate-700/50">
+                <div key={scenario.id} className="bg-cesar-off-white/50 hover:bg-white p-3 rounded-lg border border-gray-100 hover:border-orange-200 transition-colors group">
                   <div className="flex justify-between items-start mb-1">
-                    <span className="text-sm font-bold text-white">{scenario.title}</span>
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${scenario.turma === 'A' ? 'bg-cyan-900 text-cyan-200' : 'bg-purple-900 text-purple-200'}`}>
-                      Turma {scenario.turma}
+                    <span className="text-sm font-bold text-cesar-gray group-hover:text-cesar-orange-deep transition-colors">
+                      {scenario.title}
+                    </span>
+                    <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wide ${
+                      scenario.turma === 'A' 
+                        ? 'bg-cyan-50 text-cyan-600' 
+                        : 'bg-purple-50 text-purple-600'
+                    }`}>
+                      {scenario.turma}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400 line-clamp-2">{scenario.description}</p>
+                  <p className="text-[11px] text-cesar-neutral leading-relaxed line-clamp-2">
+                    {scenario.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -113,23 +125,23 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         </nav>
 
         {/* User Profile Section */}
-        <div className="p-4 border-t border-slate-700 bg-slate-900/50">
+        <div className="p-4 border-t border-gray-100 bg-gray-50/50">
           {userProfile ? (
-            <div className="flex items-center space-x-3 bg-slate-800 p-3 rounded-lg border border-slate-700">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center text-white font-bold text-sm">
+            <div className="flex items-center space-x-3 bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-cesar-orange text-white flex items-center justify-center font-bold text-sm">
                  {userProfile.name.substring(0, 2).toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">{userProfile.name}</p>
-                <p className="text-xs text-slate-400 truncate">Turma {userProfile.turma}</p>
+                <p className="text-sm font-bold text-cesar-black truncate">{userProfile.name}</p>
+                <p className="text-xs text-cesar-neutral truncate">Turma {userProfile.turma}</p>
               </div>
             </div>
           ) : (
             <button
               onClick={onLoginClick}
-              className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 transition-colors group"
+              className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-cesar-black hover:bg-gray-800 text-white transition-all shadow-sm group"
             >
-              <LogIn size={18} className="text-cyan-400 group-hover:text-cyan-300" />
+              <LogIn size={18} className="text-cesar-off-white group-hover:text-white" />
               <span className="text-sm font-medium">Entrar / Identificar-se</span>
             </button>
           )}
