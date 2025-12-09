@@ -17,7 +17,7 @@ const getEnvApiKey = () => {
 };
 
 const App: React.FC = () => {
-  const [apiKey, setApiKey] = useState<string | null>(getEnvApiKey() || null);
+  const [apiKey, setApiKey] = useState<string | null>(getEnvApiKey());
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentView, setCurrentView] = useState<AppView>(AppView.DASHBOARD);
