@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, FunctionDeclaration, Type, Tool } from "@google/genai";
 import { SYSTEM_INSTRUCTION, BASE_IMAGE_STYLE } from "../constants";
 import { RegisteredSolution, UserProfile } from "../types";
@@ -146,9 +145,6 @@ const tools: Tool[] = [
 let client: GoogleGenAI | null = null;
 let chatSession: any = null;
 
-// Mock Database in memory
-const solutionsDatabase: RegisteredSolution[] = [];
-
 export const initializeGemini = async (apiKey: string, userProfile?: UserProfile) => {
   // Preserve history if session exists
   let previousHistory = [];
@@ -179,7 +175,20 @@ export const initializeGemini = async (apiKey: string, userProfile?: UserProfile
   });
 };
 
-export const getSolutions = () => [...solutionsDatabase];
+// Now fetch from Serverless API instead of in-memory array
+export const getSolutions = async (): Promise<RegisteredSolution[]> => {
+  try {
+    const response = await fetch('/.netlify/functions/solutions');
+    if (!response.ok) {
+        throw new Error('Failed to fetch solutions');
+    }
+    const data = await response.json();
+    return data as RegisteredSolution[];
+  } catch (error) {
+    console.error("Error fetching solutions:", error);
+    return [];
+  }
+};
 
 export const generateIllustration = async (prompt: string): Promise<string> => {
     if (!client) throw new Error("Gemini not initialized");
@@ -212,7 +221,7 @@ export const generateIllustration = async (prompt: string): Promise<string> => {
     }
 }
 
-// Executing the "Backend" logic for the tools on the client side
+// Executing the "Backend" logic for the tools on the client side (calls API)
 const executeFunction = async (name: string, args: any): Promise<any> => {
   console.log(`[System] Executing tool: ${name}`, args);
 
@@ -240,17 +249,34 @@ const executeFunction = async (name: string, args: any): Promise<any> => {
   }
 
   if (name === "registrarSolucao") {
-    // Save to our in-memory array
-    const newSolution: RegisteredSolution = {
-      id: Math.random().toString(36).substring(7),
-      ...args,
-    };
-    solutionsDatabase.push(newSolution);
-    return {
-      status: "success",
-      message: "Solução registrada no banco de dados oficial.",
-      id: newSolution.id,
-    };
+    // Call the serverless API to save to DB
+    try {
+        const response = await fetch('/.netlify/functions/solutions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(args)
+        });
+
+        if (!response.ok) {
+            throw new Error('Database insertion failed');
+        }
+
+        const result = await response.json();
+        
+        return {
+            status: "success",
+            message: "Solução registrada no banco de dados oficial (Netlify DB/Neon).",
+            id: result.id,
+        };
+    } catch (e) {
+        console.error("DB Error", e);
+        return {
+            status: "error",
+            message: "Falha ao registrar no banco de dados."
+        };
+    }
   }
 
   throw new Error(`Function ${name} not found`);

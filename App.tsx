@@ -115,9 +115,17 @@ const App: React.FC = () => {
   }, [apiKey, userProfile]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRegisteredSolutions(getSolutions());
-    }, 2000);
+    const fetchData = async () => {
+        try {
+            const solutions = await getSolutions();
+            setRegisteredSolutions(solutions);
+        } catch (e) {
+            console.error("Error polling solutions", e);
+        }
+    };
+
+    fetchData(); // Initial fetch
+    const interval = setInterval(fetchData, 5000); // Poll every 5s instead of 2s for DB sanity
     return () => clearInterval(interval);
   }, []);
 
