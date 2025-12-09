@@ -294,37 +294,36 @@ export const sendMessage = async (
   if (!chatSession) throw new Error("Gemini not initialized");
 
   let fullTextResponse = "";
+  let accumulatedFunctionCalls: any[] = [];
 
   try {
-    const result = await chatSession.sendMessageStream({ message });
+    const resultStream = await chatSession.sendMessageStream({ message });
 
-    for await (const chunk of result) {
+    // First pass: process the stream for text and function calls
+    for await (const chunk of resultStream) {
       if (chunk.text) {
         fullTextResponse += chunk.text;
         onChunk(fullTextResponse);
       }
+      if (chunk.functionCalls) {
+        accumulatedFunctionCalls.push(...chunk.functionCalls);
+      }
     }
 
-    const history = await chatSession.getHistory();
-    const lastMsg = history[history.length - 1];
-    
-    // NOTE: The `parts` property is not in the public types but exists on the object.
-    const toolCalls: any[] = lastMsg?.parts?.filter((p: any) => p.functionCall) || [];
-    
-    if (toolCalls.length > 0) {
+    // After the stream is finished, if there were function calls, execute them
+    if (accumulatedFunctionCalls.length > 0) {
       const functionResponseParts = [];
 
-      for (const part of toolCalls) {
-        const fc = part.functionCall;
+      for (const fc of accumulatedFunctionCalls) {
         if (onFunctionCall) onFunctionCall(fc.name, fc.args);
         
         const functionResult = await executeFunction(fc.name, fc.args);
         
-        // This is the corrected structure for the function response.
+        // Corrected structure for the function response.
         functionResponseParts.push({
           functionResponse: {
             name: fc.name,
-            response: { result: functionResult },
+            response: functionResult,
           },
         });
       }
@@ -332,8 +331,13 @@ export const sendMessage = async (
       // Send the function response back to the model and stream the new reply.
       const toolResultStream = await chatSession.sendMessageStream(functionResponseParts);
       
+      let finalResponseStarted = false;
       for await (const chunk of toolResultStream) {
         if (chunk.text) {
+          if (!finalResponseStarted) {
+            fullTextResponse += '\n\n'; // Add separator
+            finalResponseStarted = true;
+          }
           fullTextResponse += chunk.text;
           onChunk(fullTextResponse);
         }
@@ -341,7 +345,8 @@ export const sendMessage = async (
     }
   } catch (e: any) {
     console.error("sendMessage error:", e);
-    onChunk(fullTextResponse + "\n\n[Ocorreu um erro. Por favor, tente novamente.]");
+    const errorMessage = e instanceof Error ? e.message : String(e);
+    onChunk(fullTextResponse + `\n\n[Ocorreu um erro: ${errorMessage}. Por favor, tente novamente.]`);
   }
 
   return fullTextResponse;

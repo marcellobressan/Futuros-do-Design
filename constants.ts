@@ -1,4 +1,5 @@
 
+
 import { Scenario, KoriReport } from './types';
 
 // Visual Style for AI Generation (kept for reference or future use)

@@ -132,17 +132,20 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
             { icon: Layers, title: 'CLA', desc: 'Causal Layered Analysis: do sintoma ao mito.', color: '#059669', bg: '#ecfdf5' },
             { icon: Globe, title: 'Cenários de Dator', desc: 'Crescimento, Colapso, Disciplina e Transformação.', color: '#2563eb', bg: '#eff6ff' },
             { icon: Cpu, title: 'Vibe Coding', desc: 'Ferramentas e protocolos sensíveis ao contexto.', color: '#ca8a04', bg: '#fefce8' },
-          ].map((item, idx) => (
-            <div key={idx} className="card hover:shadow-lg transition-all">
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', backgroundColor: item.bg, color: item.color }}>
-                <item.icon size={24} />
+          ].map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div key={idx} className="card hover:shadow-lg transition-all">
+                <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', backgroundColor: item.bg, color: item.color }}>
+                  <Icon size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-black mb-3">{item.title}</h3>
+                <p className="text-sm text-gray" style={{ lineHeight: 1.6 }}>
+                  {item.desc}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-black mb-3">{item.title}</h3>
-              <p className="text-sm text-gray" style={{ lineHeight: 1.6 }}>
-                {item.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
