@@ -1,7 +1,7 @@
 import React from 'react';
 import { SCENARIOS_DATA } from '../constants';
 import { AppView, UserProfile } from '../types';
-import { BookOpen, MessageSquare, Database, X, LogIn, Compass, LayoutGrid } from 'lucide-react';
+import { BookOpen, MessageSquare, Database, X, LogIn, Compass, LayoutGrid, ChevronRight } from 'lucide-react';
 
 interface SidebarProps {
   currentView: AppView;
@@ -48,43 +48,85 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
 
         {/* Navigation */}
         <nav style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <button onClick={() => setView(AppView.DASHBOARD)} className={navItemClass(AppView.DASHBOARD)} style={currentView === AppView.DASHBOARD ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+          <button 
+            onClick={() => { setView(AppView.DASHBOARD); toggleSidebar(); }}
+            className={navItemClass(AppView.DASHBOARD)} 
+            style={currentView === AppView.DASHBOARD ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Acesso rápido aos dados e resumos"
+          >
             <LayoutGrid size={20} />
             <span>Dashboard</span>
+            {currentView === AppView.DASHBOARD && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
           </button>
           
-          <button onClick={() => setView(AppView.CHAT)} className={navItemClass(AppView.CHAT)} style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+          <button 
+            onClick={() => { setView(AppView.CHAT); toggleSidebar(); }}
+            className={navItemClass(AppView.CHAT)} 
+            style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Converse com o assistente IA e registre soluções"
+          >
             <MessageSquare size={20} />
             <span>Agente do Portal</span>
+            {currentView === AppView.CHAT && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
           </button>
 
-          <button onClick={() => setView(AppView.KNOWLEDGE)} className={navItemClass(AppView.KNOWLEDGE)} style={currentView === AppView.KNOWLEDGE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+          <button 
+            onClick={() => { setView(AppView.KNOWLEDGE); toggleSidebar(); }}
+            className={navItemClass(AppView.KNOWLEDGE)} 
+            style={currentView === AppView.KNOWLEDGE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Explore cenários e arquétipos do projeto"
+          >
             <BookOpen size={20} />
             <span>Cenários & Arquétipos</span>
+            {currentView === AppView.KNOWLEDGE && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
           </button>
 
-          <button onClick={() => setView(AppView.SOLUTIONS)} className={navItemClass(AppView.SOLUTIONS)} style={currentView === AppView.SOLUTIONS ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+          <button 
+            onClick={() => { setView(AppView.SOLUTIONS); toggleSidebar(); }}
+            className={navItemClass(AppView.SOLUTIONS)} 
+            style={currentView === AppView.SOLUTIONS ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Veja todas as soluções registradas"
+          >
             <Database size={20} />
             <span>Soluções Cadastradas</span>
+            {currentView === AppView.SOLUTIONS && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
           </button>
           
-          <button onClick={() => setView(AppView.HOME)} className={navItemClass(AppView.HOME)} style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+          <button 
+            onClick={() => { setView(AppView.HOME); toggleSidebar(); }}
+            className={navItemClass(AppView.HOME)} 
+            style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Conheça o manifesto e metodologia"
+          >
             <Compass size={20} />
             <span>Manifesto & Método</span>
+            {currentView === AppView.HOME && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
           </button>
 
           <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>
-            <h3 className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold', marginBottom: '1rem', paddingLeft: '0.5rem' }}>
-              Cenários Ativos
+            <h3 className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold', marginBottom: '1rem', paddingLeft: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span>🎯 Cenários Ativos</span>
             </h3>
             <div className="flex flex-col gap-2">
               {SCENARIOS_DATA.map((scenario) => (
-                <div key={scenario.id} className="card" style={{ padding: '0.75rem', background: '#fcfcfc', border: '1px solid #f3f4f6', cursor: 'default' }}>
+                <div 
+                  key={scenario.id} 
+                  className="card" 
+                  style={{ 
+                    padding: '0.75rem', 
+                    background: '#fcfcfc', 
+                    border: '1px solid #f3f4f6', 
+                    cursor: 'default',
+                    transition: 'all 0.2s ease',
+                    borderLeft: `3px solid ${scenario.turma === 'A' ? '#ff6002' : '#0066cc'}`
+                  }}
+                  title={scenario.description}
+                >
                   <div className="flex justify-between items-start mb-1">
                     <span className="text-sm font-bold text-gray">
                       {scenario.title}
                     </span>
-                    <span className={`badge ${scenario.turma === 'A' ? 'badge-A' : 'badge-B'}`}>
+                    <span className={`badge ${scenario.turma === 'A' ? 'badge-A' : 'badge-B'}`} style={{ fontSize: '10px' }}>
                       {scenario.turma}
                     </span>
                   </div>
@@ -100,20 +142,54 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         {/* User Profile Section */}
         <div style={{ padding: '1rem', borderTop: '1px solid var(--c-border)', backgroundColor: '#f9fafb' }}>
           {userProfile ? (
-            <div className="flex items-center gap-3 bg-white p-3 rounded-xl border" style={{ borderRadius: '12px', padding: '0.75rem', border: '1px solid var(--c-border)' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--c-orange)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '14px' }}>
+            <div 
+              className="flex items-center gap-3 bg-white p-3 rounded-xl" 
+              style={{ 
+                borderRadius: '12px', 
+                padding: '0.75rem', 
+                border: '1px solid var(--c-border)',
+                backgroundColor: 'white',
+                transition: 'all 0.2s ease'
+              }}
+              title={`Conectado como ${userProfile.name}`}
+            >
+              <div 
+                style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  borderRadius: '50%', 
+                  backgroundColor: 'var(--c-orange)', 
+                  color: 'white', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  fontWeight: 'bold', 
+                  fontSize: '14px',
+                  flexShrink: 0
+                }}
+              >
                  {userProfile.name.substring(0, 2).toUpperCase()}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p className="text-sm font-bold text-black" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userProfile.name}</p>
-                <p className="text-xs text-neutral">Turma {userProfile.turma}</p>
+                <p className="text-sm font-bold text-black" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {userProfile.name}
+                </p>
+                <p className="text-xs text-neutral" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  📚 Turma {userProfile.turma}
+                </p>
               </div>
             </div>
           ) : (
             <button
               onClick={onLoginClick}
-              className="btn"
-              style={{ width: '100%', backgroundColor: 'var(--c-black)', color: 'white' }}
+              className="btn w-full"
+              style={{ 
+                width: '100%', 
+                backgroundColor: 'var(--c-black)', 
+                color: 'white',
+                transition: 'all 0.2s ease'
+              }}
+              title="Clique para se identificar na plataforma"
             >
               <LogIn size={18} />
               <span className="text-sm">Entrar / Identificar-se</span>

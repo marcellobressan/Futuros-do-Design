@@ -1,7 +1,7 @@
 import React from 'react';
 import { UserProfile, RegisteredSolution, AppView } from '../types';
 import { SCENARIOS_DATA } from '../constants';
-import { ArrowRight, MessageSquare, BookOpen, Database, Clock } from 'lucide-react';
+import { ArrowRight, MessageSquare, BookOpen, Database, Clock, TrendingUp, Sparkles } from 'lucide-react';
 
 interface DashboardProps {
     userProfile: UserProfile | null;
@@ -10,7 +10,28 @@ interface DashboardProps {
 }
 
 const StatCard: React.FC<{ icon: React.ElementType, value: number, label: string, color: string }> = ({ icon: Icon, value, label, color }) => (
-    <div className="card" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1.5rem', padding: '1.5rem' }}>
+    <div 
+        className="card" 
+        style={{ 
+            flex: 1, 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '1.5rem', 
+            padding: '1.5rem',
+            transition: 'all 0.3s ease',
+            cursor: 'default',
+            border: `1px solid ${color}33`
+        }}
+        onMouseEnter={(e) => {
+            (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)';
+            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 12px 24px ${color}22`;
+        }}
+        onMouseLeave={(e) => {
+            (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+            (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+        }}
+        title={label}
+    >
         <div style={{ padding: '1rem', borderRadius: '50%', backgroundColor: `${color}1A`, color: color }}>
             <Icon size={28} />
         </div>
@@ -29,11 +50,14 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
             <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
                 {/* Header */}
                 <header className="mb-10">
-                    <h1 className="text-4xl font-extrabold text-black">
-                        {userProfile ? `Bem-vindo, ${userProfile.name.split(' ')[0]}!` : 'Dashboard de Prospecção'}
-                    </h1>
+                    <div className="flex items-center gap-3 mb-3">
+                        <Sparkles size={32} style={{ color: 'var(--c-orange)' }} />
+                        <h1 className="text-4xl font-extrabold text-black">
+                            {userProfile ? `Bem-vindo, ${userProfile.name.split(' ')[0]}!` : 'Dashboard de Prospecção'}
+                        </h1>
+                    </div>
                     <p className="text-lg text-neutral mt-2">
-                        Seu centro de comando para os Futuros do Design.
+                        🎯 Seu centro de comando para explorar os Futuros do Design. Acompanhe contribuições e descubra oportunidades.
                     </p>
                 </header>
 

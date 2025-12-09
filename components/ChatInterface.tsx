@@ -1,11 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Message, DraftSolution } from '../types';
 import { sendMessage } from '../services/geminiService';
-import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, Save } from 'lucide-react';
+import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, Save, AlertCircle, HelpCircle } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 interface ChatInterfaceProps {
   apiKey: string;
+}
+
+interface ChatMessage extends Message {
+  id: string;
+  role: 'user' | 'model';
+  content: string;
+  isStreaming?: boolean;
+  error?: boolean;
 }
 
 const DraftReviewCard: React.FC<{
@@ -48,7 +56,7 @@ const DraftReviewCard: React.FC<{
         </div>
         <div>
           <h3 className="text-lg font-bold text-black">Revisão Final</h3>
-          <p className="text-xs text-neutral">Edite os dados se necessário antes de salvar.</p>
+          <p className="text-xs text-neutral">✏️ Edite os dados se necessário antes de salvar. Todos os campos são editáveis.</p>
         </div>
       </div>
 
@@ -215,8 +223,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ apiKey }) => {
       );
     } catch (error) {
       console.error(error);
+      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
       setMessages(prev => prev.map(m => 
-        m.id === aiMsgId ? { ...m, content: m.content + '\n\n[Erro de conexão. Tente novamente.]' } : m
+        m.id === aiMsgId ? { ...m, content: `⚠️ **Erro ao processar solicitação**\n\nDesculpe, ocorreu um problema ao tentar processar sua mensagem. Por favor, tente novamente.\n\n_Detalhes: ${errorMessage}_`, error: true } : m
       ));
     } finally {
       setIsLoading(false);
@@ -261,20 +270,28 @@ Não faça mais perguntas. Registre agora.`;
       <div className="chat-messages">
         {messages.map((msg) => (
           !msg.content.startsWith('[CONFIRMAÇÃO DO USUÁRIO]') && (
-          <div key={msg.id} className={`msg-row ${msg.role}`}>
+          <div key={msg.id} className={`msg-row ${msg.role}`} style={{ opacity: msg.error ? 0.9 : 1 }}>
             {/* Avatar */}
             <div style={{
               width: '36px', height: '36px', borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              backgroundColor: msg.role === 'model' ? 'white' : 'var(--c-gray)',
-              color: msg.role === 'model' ? 'var(--c-orange)' : 'white',
+              backgroundColor: msg.error ? '#fee2e2' : (msg.role === 'model' ? 'white' : 'var(--c-gray)'),
+              color: msg.error ? '#dc2626' : (msg.role === 'model' ? 'var(--c-orange)' : 'white'),
               border: msg.role === 'model' ? '1px solid #e5e7eb' : 'none'
             }}>
-              {msg.role === 'model' ? <Sparkles size={18} /> : <User size={18} />}
+              {msg.error ? (
+                <AlertCircle size={18} />
+              ) : (
+                msg.role === 'model' ? <Sparkles size={18} /> : <User size={18} />
+              )}
             </div>
 
             {/* Bubble */}
-            <div className={`msg-bubble ${msg.role}`}>
+            <div className={`msg-bubble ${msg.role}`} style={{
+              backgroundColor: msg.error ? '#fef2f2' : undefined,
+              borderColor: msg.error ? '#fecaca' : undefined,
+              borderWidth: msg.error ? '1px' : undefined
+            }}>
                 <div className="markdown-content">
                   <ReactMarkdown>{msg.content}</ReactMarkdown>
                 </div>
@@ -286,12 +303,12 @@ Não faça mais perguntas. Registre agora.`;
         {/* Tool Execution Indicator */}
         {activeTool && (
           <div className="flex items-center justify-center py-4">
-            <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold">
+            <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold" style={{ animation: 'fadeIn 0.3s ease-in' }}>
               <Cpu className="animate-spin" size={16} />
               <span>
-                {activeTool === 'refinarDescricaoSolucao' && 'Refinando texto com IA...'}
-                {activeTool === 'apresentarRascunhoParaRevisao' && 'Gerando cartão de revisão...'}
-                {activeTool === 'registrarSolucao' && 'Registrando solução no banco de dados...'}
+                {activeTool === 'refinarDescricaoSolucao' && '✨ Refinando texto com IA...'}
+                {activeTool === 'apresentarRascunhoParaRevisao' && '📋 Gerando cartão de revisão...'}
+                {activeTool === 'registrarSolucao' && '💾 Registrando solução no banco de dados...'}
               </span>
             </div>
           </div>
@@ -303,7 +320,7 @@ Não faça mais perguntas. Registre agora.`;
         )}
 
         {isLoading && !activeTool && (
-          <div className="flex items-center gap-2 text-neutral text-sm" style={{ marginLeft: '4rem' }}>
+          <div className="flex items-center gap-2 text-neutral text-sm" style={{ marginLeft: '4rem', animation: 'fadeIn 0.3s ease-in' }}>
             <Loader2 className="animate-spin" size={16} />
             <span>Gerando resposta...</span>
           </div>
@@ -314,34 +331,56 @@ Não faça mais perguntas. Registre agora.`;
 
       {/* Input Area */}
       <div style={{ padding: '1.5rem', backgroundColor: 'white', borderTop: '1px solid var(--c-border)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={isReviewing ? "Revise os dados acima e clique em confirmar..." : "Pergunte sobre os cenários ou cadastre uma solução..."}
-            className="input-field"
-            style={{ 
-              height: '60px', 
-              resize: 'none', 
-              paddingRight: '3.5rem',
-              fontSize: '1rem'
-            }}
-            disabled={isLoading || isReviewing}
-          />
+        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', display: 'flex', alignItems: 'flex-end', gap: '0.75rem' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={isReviewing ? "Revise os dados acima e clique em confirmar..." : "Pergunte sobre os cenários ou cadastre uma solução..."}
+              className="input-field"
+              style={{ 
+                height: '60px', 
+                resize: 'none', 
+                fontSize: '1rem',
+                transition: 'border-color 0.2s ease',
+                borderColor: input.trim() ? 'var(--c-orange)' : 'var(--c-border)'
+              }}
+              disabled={isLoading || isReviewing}
+              title="Pressione Enter para enviar, Shift+Enter para nova linha"
+            />
+            {!input.trim() && !isReviewing && (
+              <p className="text-neutral" style={{ fontSize: '10px', fontWeight: 500, paddingLeft: '0.5rem' }}>
+                💡 Dica: Pergunte sobre cenários, contribua com ideias ou solicite cadastro de uma solução
+              </p>
+            )}
+          </div>
           <button
             onClick={() => handleSend()}
             disabled={!input.trim() || isLoading || isReviewing}
-            className="absolute right-3"
+            className="btn btn-primary"
             style={{ 
-              padding: '0.5rem', 
+              padding: '0.75rem 1rem',
               backgroundColor: 'var(--c-orange)', 
               color: 'white', 
               borderRadius: '8px', 
-              opacity: (!input.trim() || isLoading) ? 0.5 : 1
+              opacity: (!input.trim() || isLoading) ? 0.5 : 1,
+              transition: 'all 0.2s ease',
+              cursor: !input.trim() || isLoading ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              minWidth: '45px',
+              minHeight: '45px'
             }}
+            title={!input.trim() ? "Digite uma mensagem para enviar" : "Enviar mensagem (Enter)"}
           >
-            {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
+            {isLoading ? (
+              <Loader2 size={20} className="animate-spin" />
+            ) : (
+              <Send size={20} />
+            )}
           </button>
         </div>
         <p className="text-center text-neutral mt-3 font-medium" style={{ fontSize: '10px' }}>

@@ -38,17 +38,47 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
                     <button 
                     onClick={() => onNavigate(AppView.CHAT)}
                     className="btn btn-primary"
-                    style={{ padding: '1rem 2rem', fontSize: '1rem' }}
+                    style={{ 
+                        padding: '1rem 2rem', 
+                        fontSize: '1rem',
+                        transition: 'all 0.3s ease',
+                        boxShadow: '0 4px 12px rgba(255, 96, 2, 0.15)'
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 20px rgba(255, 96, 2, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(255, 96, 2, 0.15)';
+                    }}
+                    title="Converse com nosso assistente IA para explorar ideias e registrar soluções"
                     >
-                    Conversar com o Agente
+                    ✨ Conversar com o Agente
                     <ArrowRight size={20} />
                     </button>
                     <button 
                     onClick={() => onNavigate(AppView.KNOWLEDGE)}
                     className="btn btn-secondary"
-                    style={{ padding: '1rem 2rem', fontSize: '1rem' }}
+                    style={{ 
+                        padding: '1rem 2rem', 
+                        fontSize: '1rem',
+                        transition: 'all 0.3s ease',
+                        border: '2px solid var(--c-black)'
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--c-black)';
+                      (e.currentTarget as HTMLButtonElement).style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
+                      (e.currentTarget as HTMLButtonElement).style.color = 'var(--c-black)';
+                    }}
+                    title="Explore cenários e arquétipos do projeto"
                     >
-                    Ver Cenários
+                    📚 Ver Cenários
                     </button>
                 </div>
             </div>
@@ -79,14 +109,14 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
             </p>
             <ul className="flex flex-col gap-3 pt-2">
               {[
-                "Lidar com incertezas e choques sistêmicos",
-                "Tencionar narrativas dominantes de tecnologia",
-                "Preparar habilidades para transições profundas",
-                "Criar ferramentas de agência e adaptação"
+                { icon: "⚡", text: "Lidar com incertezas e choques sistêmicos" },
+                { icon: "🔊", text: "Tencionar narrativas dominantes de tecnologia" },
+                { icon: "🎯", text: "Preparar habilidades para transições profundas" },
+                { icon: "🛠️", text: "Criar ferramentas de agência e adaptação" }
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 font-medium">
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--c-orange)' }}></div>
-                  {item}
+                <li key={i} className="flex items-center gap-3 font-medium hover:translate-x-1 transition-transform" title={item.text}>
+                  <span style={{ fontSize: '1.25rem' }}>{item.icon}</span>
+                  <span style={{ color: 'var(--c-gray)' }}>{item.text}</span>
                 </li>
               ))}
             </ul>
