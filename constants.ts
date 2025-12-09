@@ -1,7 +1,10 @@
 import { Scenario } from './types';
 
-// Visual Style for AI Generation
+// Visual Style for AI Generation (kept for reference or future use)
 export const BASE_IMAGE_STYLE = "Estilo de ilustração vetorial moderno e abstrato, minimalista. Cores predominantes: Laranja vibrante (#ff6002), Branco e Preto. Formas geométricas limpas, design flat ou 3D isométrico suave. Sem texto, foco na composição visual conceitual. Alta qualidade, estilo institucional de escola de design e inovação.";
+
+// Static Assets
+export const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"; // Abstract Orange/White Liquid 3D
 
 // Mock Data for the "Knowledge Pack" context
 export const SCENARIOS_DATA: Scenario[] = [
@@ -12,7 +15,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'A', 
     archetype: 'Crescimento Contínuo', 
     description: 'Um futuro onde a tecnologia resolveu a crise climática, mas a um custo de vigilância extrema.',
-    imagePrompt: 'Uma cidade futurista branca com muita vegetação integrada aos prédios, câmeras de vigilância sutis com luzes laranja, céu limpo, utopia tecnológica monitorada.'
+    imagePrompt: 'Uma cidade futurista branca com muita vegetação integrada aos prédios, câmeras de vigilância sutis com luzes laranja, céu limpo, utopia tecnológica monitorada.',
+    imageUrl: 'https://images.unsplash.com/photo-1518005020951-ecc8e54333b0?q=80&w=2000&auto=format&fit=crop' // Futuristic building / Solarpunk vibes
   },
   { 
     id: 'CENARIO_A2', 
@@ -20,7 +24,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'A', 
     archetype: 'Colapso', 
     description: 'Sociedades fragmentadas rejeitam a tecnologia digital global em favor de redes locais analógicas.',
-    imagePrompt: 'Pessoas reunidas em círculo ao redor de uma fogueira urbana, cabos desconectados pendurados ao fundo, ambiente analógico, texturas rústicas, iluminação quente laranja.'
+    imagePrompt: 'Pessoas reunidas em círculo ao redor de uma fogueira urbana, cabos desconectados pendurados ao fundo, ambiente analógico, texturas rústicas, iluminação quente laranja.',
+    imageUrl: 'https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=2000&auto=format&fit=crop' // Analog/Darker/Human connection
   },
   { 
     id: 'CENARIO_A3', 
@@ -28,7 +33,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'A', 
     archetype: 'Disciplina', 
     description: 'A governança é delegada a IAs imparciais, impondo uma ordem lógica rígida que suprime a subjetividade humana.',
-    imagePrompt: 'Uma grade geométrica perfeita, estruturas rígidas e simétricas, fluxos de dados azuis e laranjas organizados, representação abstrata de ordem e inteligência artificial.'
+    imagePrompt: 'Uma grade geométrica perfeita, estruturas rígidas e simétricas, fluxos de dados azuis e laranjas organizados, representação abstrata de ordem e inteligência artificial.',
+    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop' // Geometric/Structured/Tech
   },
   { 
     id: 'CENARIO_A4', 
@@ -36,7 +42,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'A', 
     archetype: 'Transformação', 
     description: 'Humanos e IAs co-criam a realidade em tempo real, dissolvendo a autoria individual e a barreira físico-digital.',
-    imagePrompt: 'Formas fluidas e orgânicas se misturando com polígonos digitais, mãos humanas tocando hologramas laranjas, explosão de criatividade abstrata, fusão físico-digital.'
+    imagePrompt: 'Formas fluidas e orgânicas se misturando com polígonos digitais, mãos humanas tocando hologramas laranjas, explosão de criatividade abstrata, fusão físico-digital.',
+    imageUrl: 'https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=2000&auto=format&fit=crop' // Fluid/Colorful/Abstract
   },
   // Turma B
   { 
@@ -45,7 +52,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'B', 
     archetype: 'Crescimento Contínuo', 
     description: 'A mercantilização da experiência humana atinge o ápice; emoções e memórias são commodities negociáveis.',
-    imagePrompt: 'Silhuetas humanas formadas por códigos de barras e fluxos de dados, moedas douradas e laranjas flutuando, ambiente de mercado financeiro abstrato e digital.'
+    imagePrompt: 'Silhuetas humanas formadas por códigos de barras e fluxos de dados, moedas douradas e laranjas flutuando, ambiente de mercado financeiro abstrato e digital.',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop' // Data/Analytics/Graphs
   },
   { 
     id: 'CENARIO_B2', 
@@ -53,7 +61,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'B', 
     archetype: 'Colapso', 
     description: 'Um evento solar massivo inutiliza a infraestrutura global, forçando o retorno a tecnologias mecânicas e conhecimento oral.',
-    imagePrompt: 'Servidores de computador em ruínas cobertos por plantas, luz do sol forte ao fundo criando reflexos, contraste entre tecnologia quebrada e natureza renascendo.'
+    imagePrompt: 'Servidores de computador em ruínas cobertos por plantas, luz do sol forte ao fundo criando reflexos, contraste entre tecnologia quebrada e natureza renascendo.',
+    imageUrl: 'https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?q=80&w=2000&auto=format&fit=crop' // Industrial/Rust/Nature takeover
   },
   { 
     id: 'CENARIO_B3', 
@@ -61,7 +70,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'B', 
     archetype: 'Disciplina', 
     description: 'Grandes corporações gerem os recursos escassos com eficiência brutal e controle social rígido via bio-implantes.',
-    imagePrompt: 'Arranha-céus corporativos monolíticos e pretos, trabalhadores em filas organizadas com pequenos implantes brilhando em laranja, atmosfera de eficiência e controle.'
+    imagePrompt: 'Arranha-céus corporativos monolíticos e pretos, trabalhadores em filas organizadas com pequenos implantes brilhando em laranja, atmosfera de eficiência e controle.',
+    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop' // Corporate/High-rise/Monolith
   },
   { 
     id: 'CENARIO_B4', 
@@ -69,7 +79,8 @@ export const SCENARIOS_DATA: Scenario[] = [
     turma: 'B', 
     archetype: 'Transformação', 
     description: 'A humanidade transcende a barreira biológica através de interfaces cérebro-máquina, operando como uma mente colmeia empática.',
-    imagePrompt: 'Rede de nós brilhantes conectando mentes humanas, teia etérea de luz laranja e branca, sensação de unidade e empatia, fundo minimalista e suave.'
+    imagePrompt: 'Rede de nós brilhantes conectando mentes humanas, teia etérea de luz laranja e branca, sensação de unidade e empatia, fundo minimalista e suave.',
+    imageUrl: 'https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?q=80&w=2000&auto=format&fit=crop' // Neural network/Dots/Connection
   },
 ];
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Zap, Layers, Globe, Cpu, Users, Eye, Mic, ExternalLink, Headphones } from 'lucide-react';
 import { AppView } from '../types';
-import AIIllustration from './AIIllustration';
+import { HERO_IMAGE_URL } from '../constants';
 
 interface StoryBoardProps {
   onNavigate: (view: AppView) => void;
@@ -50,10 +50,14 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
             {/* Hero Visual */}
             <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-tr from-orange-200 to-transparent rounded-[2.5rem] blur-xl opacity-50"></div>
-                <AIIllustration 
-                    prompt="Uma composição abstrata representando o futuro do design, formas geométricas flutuantes, gradiente laranja e branco, render 3D limpo, futurista, inovador, minimalista, estilo CESAR School." 
-                    className="w-full shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-700 bg-white"
-                />
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-700 bg-white">
+                    <img 
+                      src={HERO_IMAGE_URL} 
+                      alt="Futuros do Design Hero" 
+                      className="w-full h-auto object-cover" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                </div>
             </div>
 
         </div>

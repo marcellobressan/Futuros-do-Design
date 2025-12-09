@@ -17,6 +17,7 @@ export interface Scenario {
   description: string;
   archetype: string;
   imagePrompt?: string;
+  imageUrl: string; // New field for static images
 }
 
 export interface UserProfile {

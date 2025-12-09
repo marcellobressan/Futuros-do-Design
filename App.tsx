@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import StoryBoard from './components/StoryBoard';
-import AIIllustration from './components/AIIllustration';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA } from './constants';
@@ -173,13 +172,14 @@ const App: React.FC = () => {
                       <p className="text-cesar-gray leading-relaxed text-sm mb-6">{sc.description}</p>
                     </div>
                     
-                    {/* Integrated AI Illustration Section */}
-                    <div className="border-t border-gray-50 bg-gray-50/50 p-6">
-                      <AIIllustration 
-                        prompt={sc.imagePrompt || sc.description} 
-                        className="w-full bg-white shadow-sm"
-                        aspectRatio="video"
-                      />
+                    {/* Static Image Section */}
+                    <div className="w-full h-48 overflow-hidden relative border-t border-gray-50">
+                        <img 
+                            src={sc.imageUrl} 
+                            alt={sc.title} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                     </div>
                   </div>
                 ))}
