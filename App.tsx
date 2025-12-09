@@ -10,14 +10,10 @@ import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
 import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search } from 'lucide-react';
 
 const getEnvApiKey = () => {
-  try {
-    // Since we now use server-side Gemini API (via Netlify Functions),
-    // the frontend doesn't need the API key anymore.
-    // This function returns null to avoid showing the "Select API Key" screen.
-    return null;
-  } catch (e) {
-    return null;
-  }
+  // Since we now use server-side Gemini API (via Netlify Functions),
+  // we return a dummy/placeholder value to bypass the API key screen.
+  // The actual API key is stored server-side in GEMINI_API_KEY env var.
+  return "SERVER_SIDE_GEMINI_API";
 };
 
 const App: React.FC = () => {
@@ -39,35 +35,19 @@ const App: React.FC = () => {
   const [solutionsSearchQuery, setSolutionsSearchQuery] = useState('');
 
   useEffect(() => {
-    const checkKey = async () => {
-      if (!apiKey && (window as any).aistudio) {
-        try {
-          const hasKey = await (window as any).aistudio.hasSelectedApiKey();
-          if (hasKey) {
-             const envKey = getEnvApiKey();
-             setApiKey(envKey || 'VALID_KEY_PLACEHOLDER'); 
-          }
-        } catch (e) {
-          console.error("Error checking key", e);
-        }
-      }
-    };
-    checkKey();
-  }, [apiKey]);
+    // API key is now server-side only (GEMINI_API_KEY in Netlify env).
+    // Set a placeholder value to initialize the app without the key selection screen.
+    const envKey = getEnvApiKey();
+    if (envKey) {
+      setApiKey(envKey);
+    }
+  }, []);
 
   const handleSelectKey = async () => {
-    if ((window as any).aistudio) {
-      try {
-        await (window as any).aistudio.openSelectKey();
-        const envKey = getEnvApiKey();
-        setApiKey(envKey || 'VALID_KEY_PLACEHOLDER');
-        setKeyError(false);
-      } catch (e: any) {
-        if (e.message && e.message.includes("Requested entity was not found")) {
-          setKeyError(true);
-        }
-      }
-    }
+    // Placeholder for backward compatibility.
+    // Since API is server-side, this won't actually select a key,
+    // but keeps the UI consistent in case of future changes.
+    setKeyError(false);
   };
 
   const handleUserRegistration = (e: React.FormEvent) => {
