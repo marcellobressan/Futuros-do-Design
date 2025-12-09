@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import StoryBoard from './components/StoryBoard';
 import AIIllustration from './components/AIIllustration';
+import Dashboard from './components/Dashboard';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
@@ -20,7 +21,7 @@ const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(getEnvApiKey() || null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<AppView>(AppView.HOME);
+  const [currentView, setCurrentView] = useState<AppView>(AppView.DASHBOARD);
   const [registeredSolutions, setRegisteredSolutions] = useState<RegisteredSolution[]>([]);
   const [keyError, setKeyError] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -214,6 +215,14 @@ const App: React.FC = () => {
 
         <main style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
           
+          {currentView === AppView.DASHBOARD && (
+            <Dashboard 
+              userProfile={userProfile}
+              solutions={registeredSolutions}
+              onNavigate={setCurrentView}
+            />
+          )}
+
           {currentView === AppView.HOME && (
             <StoryBoard onNavigate={setCurrentView} />
           )}

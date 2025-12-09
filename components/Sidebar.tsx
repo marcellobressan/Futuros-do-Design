@@ -1,7 +1,7 @@
 import React from 'react';
 import { SCENARIOS_DATA } from '../constants';
 import { AppView, UserProfile } from '../types';
-import { BookOpen, MessageSquare, Database, X, LogIn, Compass } from 'lucide-react';
+import { BookOpen, MessageSquare, Database, X, LogIn, Compass, LayoutGrid } from 'lucide-react';
 
 interface SidebarProps {
   currentView: AppView;
@@ -48,11 +48,11 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
 
         {/* Navigation */}
         <nav style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <button onClick={() => setView(AppView.HOME)} className={navItemClass(AppView.HOME)} style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
-            <Compass size={20} />
-            <span>Manifesto & Método</span>
+          <button onClick={() => setView(AppView.DASHBOARD)} className={navItemClass(AppView.DASHBOARD)} style={currentView === AppView.DASHBOARD ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+            <LayoutGrid size={20} />
+            <span>Dashboard</span>
           </button>
-
+          
           <button onClick={() => setView(AppView.CHAT)} className={navItemClass(AppView.CHAT)} style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
             <MessageSquare size={20} />
             <span>Agente do Portal</span>
@@ -66,6 +66,11 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button onClick={() => setView(AppView.SOLUTIONS)} className={navItemClass(AppView.SOLUTIONS)} style={currentView === AppView.SOLUTIONS ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
             <Database size={20} />
             <span>Soluções Cadastradas</span>
+          </button>
+          
+          <button onClick={() => setView(AppView.HOME)} className={navItemClass(AppView.HOME)} style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+            <Compass size={20} />
+            <span>Manifesto & Método</span>
           </button>
 
           <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>

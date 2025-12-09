@@ -75,8 +75,9 @@ export interface DraftSolution {
 }
 
 export enum AppView {
-  HOME = 'HOME',
+  DASHBOARD = 'DASHBOARD',
   CHAT = 'CHAT',
+  KNOWLEDGE = 'KNOWLEDGE',
   SOLUTIONS = 'SOLUTIONS',
-  KNOWLEDGE = 'KNOWLEDGE'
+  HOME = 'HOME', // Manifesto
 }
