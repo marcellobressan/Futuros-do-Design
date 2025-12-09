@@ -1,3 +1,4 @@
+
 export interface Message {
   id: string;
   role: 'user' | 'model' | 'system';
@@ -53,6 +54,23 @@ export interface RegisteredSolution {
     url: string;
   };
   data_submissao: string;
+}
+
+export interface DraftSolution {
+  nome_da_solucao: string;
+  participantes: { nome_completo: string; email: string }[];
+  turma: 'A' | 'B';
+  cenarios_relacionados: string[];
+  descricao_refinada: {
+    resumo: string;
+    problema_que_resolve: string;
+    como_funciona: string;
+    relacao_com_os_cenarios: string;
+  };
+  imagem?: {
+    tipo: 'upload' | 'url';
+    url: string;
+  };
 }
 
 export enum AppView {

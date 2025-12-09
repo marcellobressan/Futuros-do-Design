@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, FunctionDeclaration, Type, Tool } from "@google/genai";
 import { SYSTEM_INSTRUCTION, BASE_IMAGE_STYLE } from "../constants";
 import { RegisteredSolution, UserProfile } from "../types";
@@ -17,6 +18,62 @@ const refinarDescricaoSolucaoFunc: FunctionDeclaration = {
       },
     },
     required: ["texto_bruto", "cenarios_relacionados"],
+  },
+};
+
+const apresentarRascunhoParaRevisaoFunc: FunctionDeclaration = {
+  name: "apresentarRascunhoParaRevisao",
+  description: "Apresenta os dados coletados para revisão do usuário antes do registro final.",
+  parameters: {
+    type: Type.OBJECT,
+    properties: {
+      nome_da_solucao: { type: Type.STRING },
+      participantes: {
+        type: Type.ARRAY,
+        items: {
+          type: Type.OBJECT,
+          properties: {
+            nome_completo: { type: Type.STRING },
+            email: { type: Type.STRING },
+          },
+          required: ["nome_completo", "email"],
+        },
+      },
+      turma: { type: Type.STRING, enum: ["A", "B"] },
+      cenarios_relacionados: {
+        type: Type.ARRAY,
+        items: { type: Type.STRING },
+      },
+      descricao_refinada: {
+        type: Type.OBJECT,
+        properties: {
+          resumo: { type: Type.STRING },
+          problema_que_resolve: { type: Type.STRING },
+          como_funciona: { type: Type.STRING },
+          relacao_com_os_cenarios: { type: Type.STRING },
+        },
+        required: [
+          "resumo",
+          "problema_que_resolve",
+          "como_funciona",
+          "relacao_com_os_cenarios",
+        ],
+      },
+      imagem: {
+        type: Type.OBJECT,
+        properties: {
+          tipo: { type: Type.STRING, enum: ["upload", "url"] },
+          url: { type: Type.STRING },
+        },
+      },
+    },
+    required: [
+      "nome_da_solucao",
+      "participantes",
+      "turma",
+      "cenarios_relacionados",
+      "descricao_refinada",
+    ],
   },
 };
 
@@ -81,7 +138,7 @@ const registrarSolucaoFunc: FunctionDeclaration = {
 };
 
 const tools: Tool[] = [
-  { functionDeclarations: [refinarDescricaoSolucaoFunc, registrarSolucaoFunc] },
+  { functionDeclarations: [refinarDescricaoSolucaoFunc, apresentarRascunhoParaRevisaoFunc, registrarSolucaoFunc] },
 ];
 
 // --- Service Logic ---
@@ -170,6 +227,15 @@ const executeFunction = async (name: string, args: any): Promise<any> => {
         ", "
       )}`,
       observacoes: "Refinamento automático concluído com sucesso.",
+    };
+  }
+
+  if (name === "apresentarRascunhoParaRevisao") {
+    // Just pass the data through to the frontend to render the card
+    return {
+        status: "waiting_for_user_review",
+        message: "Rascunho apresentado. Aguardando edição e confirmação do usuário.",
+        data: args
     };
   }
 

@@ -1,3 +1,4 @@
+
 import { Scenario, KoriReport } from './types';
 
 // Visual Style for AI Generation (kept for reference or future use)
@@ -212,6 +213,10 @@ Quando o usuário declarar interesse, como em *"quero cadastrar uma solução"*,
 5. **ETAPA 3 — Escolha dos cenários relacionados**: Valide com a lista existente.
 6. **ETAPA 4 — Coleta de descrição livre**: Pergunte a descrição.
 7. **ETAPA 5 — Refinamento (Function Calling)**: Use \`refinarDescricaoSolucao\`.
-8. **ETAPA 6 — Upload/Link Imagem**: Peça URL.
-9. **ETAPA 7 — Registro final (Function Calling)**: Use \`registrarSolucao\` APÓS confirmação explícita.
+8. **ETAPA 6 — Revisão e Edição (IMPORTANTE)**:
+   - APÓS o refinamento, NÃO chame `registrarSolucao` imediatamente.
+   - CHAME a função \`apresentarRascunhoParaRevisao\` passando todos os dados coletados (nome, participantes, turma, cenários, descrição, imagem).
+   - O frontend exibirá um cartão interativo para o usuário revisar e editar os dados.
+   - AGUARDE a resposta do sistema/usuário confirmando que os dados estão validados.
+9. **ETAPA 7 — Registro final (Function Calling)**: SOMENTE quando o usuário clicar em "CONFIRMAR" no cartão de revisão, o sistema enviará uma mensagem de confirmação. Aí sim, use \`registrarSolucao\`.
 `;
