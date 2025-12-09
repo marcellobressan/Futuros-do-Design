@@ -13,7 +13,7 @@ Arquitetura (big-picture)
 - Banco: Drizzle ORM + Neon. Definição de tabela em `db/schema.ts`. Conexão em `db/index.ts` usa `process.env.DATABASE_URL`.
 
 Fluxos importantes e convenções do projeto
-- Autenticação da API Gemini: a app espera uma chave de API selecionada (ver `App.tsx`). README sugere `GEMINI_API_KEY` em `.env.local`, mas `services/geminiService.initializeGemini(apiKey, userProfile)` é a API interna.
+- Autenticação da API Gemini: a app espera uma chave de API selecionada (ver `App.tsx`). Use a variável de build `VITE_GEMINI_API_KEY` para injetar a chave no bundle (ex.: setar `VITE_GEMINI_API_KEY` em Netlify Site settings → Build & deploy → Environment). O código faz fallback para `GEMINI_API_KEY` / `API_KEY` se presentes em tempo de build.
 - Chat → Ações/DB: modelo pode solicitar execução de funções (tools). As funções declaradas em `services/geminiService.ts` (`refinarDescricaoSolucao`, `apresentarRascunhoParaRevisao`, `registrarSolucao`) são esperadas pelo frontend. O fluxo de confirmação do usuário está implementado em `components/ChatInterface.tsx` (busque o prompt que começa com `[CONFIRMAÇÃO DO USUÁRIO]`).
 - Persistência: `netlify/functions/solutions.ts` aceita GET e POST. Mantenha o formato JSON compatível com `db/schema.ts` (campos complexos em `jsonb`). Não mude nomes de colunas (`nome_da_solucao`, `turma`, `participantes`, `descricao_refinada`, `imagem`, `data_submissao`).
 - Geração de imagens: chamada a `generateIllustration(prompt)` em `services/geminiService.ts`. A UI (`AIIllustration.tsx`) espera um data URL ou URL retornado.

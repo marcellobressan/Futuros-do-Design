@@ -11,7 +11,19 @@ import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileT
 
 const getEnvApiKey = () => {
   try {
-    return typeof process !== 'undefined' && process.env ? process.env.API_KEY : null;
+    // Prefer Vite env var injected at build time: VITE_GEMINI_API_KEY
+    // (Netlify build envs should set this variable so Vite inlines it)
+    // Use a safe access since import.meta may not exist in all runtimes.
+    // @ts-ignore
+    const viteKey = typeof import !== 'undefined' && typeof import.meta !== 'undefined' ? (import.meta as any).env?.VITE_GEMINI_API_KEY : null;
+    if (viteKey) return viteKey;
+
+    // Fall back to common env names (may be available during SSR/build)
+    if (typeof process !== 'undefined' && process.env) {
+      return process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || process.env.API_KEY || null;
+    }
+
+    return null;
   } catch (e) {
     return null;
   }
