@@ -36,7 +36,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Prometeu 2.0 / Máquina de Guerra',
     description: 'A influência da tecnologia digital expande-se. A Teoria da Internet Morta ganha força, IAs e bots geram a maior parte do conteúdo. A dificuldade de distinção corrói a confiança.',
     imagePrompt: 'Uma cidade futurista branca com muita vegetação integrada aos prédios, câmeras de vigilância sutis com luzes laranja, céu limpo, utopia tecnológica monitorada.',
-    imageUrl: 'https://images.unsplash.com/photo-1518005020951-ecc8e54333b0?q=80&w=2000&auto=format&fit=crop' 
+    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2000&auto=format&fit=crop' 
   },
   { 
     id: 'CENARIO_A2', 
@@ -46,7 +46,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'O fim do Mito do Progresso Linear',
     description: 'Crise de confiança generalizada. Envenenamento de IAs e manipulação de dados levam à desconexão e à busca por autonomia local e bioregionalismo.',
     imagePrompt: 'Pessoas reunidas em círculo ao redor de uma fogueira urbana, cabos desconectados pendurados ao fundo, ambiente analógico, texturas rústicas, iluminação quente laranja.',
-    imageUrl: 'https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=2000&auto=format&fit=crop'
+    imageUrl: 'https://images.unsplash.com/photo-1516110833967-0b5716ca1387?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_A3', 
@@ -56,7 +56,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Fim da Naturalidade / Luta pela Voz',
     description: 'Um futuro de limites e controle na Era da IA. Filtros e algoritmos priorizam a "verdade oficial" para evitar o caos. A criatividade é sufocada pela burocracia.',
     imagePrompt: 'Uma grade geométrica perfeita, estruturas rígidas e simétricas, fluxos de dados azuis e laranjas organizados, representação abstrata de ordem e inteligência artificial.',
-    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop'
+    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_A4', 
@@ -66,7 +66,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Jornada do Herói no Local e Rudimentar',
     description: 'Da autenticidade humana à inteligência planetária. Gaia 2.0 emerge. O "Design Sem Projeto" e a "Estética do Erro" celebram a imperfeição contra a perfeição asséptica da IA.',
     imagePrompt: 'Formas fluidas e orgânicas se misturando com polígonos digitais, mãos humanas tocando hologramas laranjas, explosão de criatividade abstrata, fusão físico-digital.',
-    imageUrl: 'https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=2000&auto=format&fit=crop'
+    imageUrl: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop'
   },
   // Turma B
   { 
@@ -87,7 +87,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Dilúvio / Queda de Ícaro',
     description: 'Crise de confiança e disfunção sistêmica. "Torre de Babel informacional" onde nada é verificável. Emergência climática sobrecarrega infraestruturas.',
     imagePrompt: 'Servidores de computador em ruínas cobertos por plantas, luz do sol forte ao fundo criando reflexos, contraste entre tecnologia quebrada e natureza renascendo.',
-    imageUrl: 'https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?q=80&w=2000&auto=format&fit=crop'
+    imageUrl: 'https://images.unsplash.com/photo-1594322436404-5a0526db4d13?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_B3', 
@@ -107,7 +107,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Rizoma / Tecno-xamã',
     description: 'Entre a saturação digital e a busca por autenticidade. Revalorização do físico, analógico e sensorial. Autoria híbrida e criatividade distribuída.',
     imagePrompt: 'Rede de nós brilhantes conectando mentes humanas, teia etérea de luz laranja e branca, sensação de unidade e empatia, fundo minimalista e suave.',
-    imageUrl: 'https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?q=80&w=2000&auto=format&fit=crop'
+    imageUrl: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop'
   }
 ];
 

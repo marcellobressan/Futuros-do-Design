@@ -5,7 +5,7 @@ import StoryBoard from './components/StoryBoard';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
-import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download } from 'lucide-react';
+import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter } from 'lucide-react';
 
 const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(process.env.API_KEY || null);
@@ -21,6 +21,10 @@ const App: React.FC = () => {
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
   const [formTurma, setFormTurma] = useState<'A' | 'B'>('A');
+
+  // Reports & Extraction State
+  const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
+  const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
 
   useEffect(() => {
     // Check for API Key if not already in env
@@ -65,6 +69,36 @@ const App: React.FC = () => {
     }
   };
 
+  const simulateDownload = (report: typeof KORI_REPORTS_DATA[0]) => {
+    const text = `RELATÓRIO KORI - TURMA ${report.turma}\n\nEste é um arquivo simulado contendo a extração completa dos dados de pesquisa da Turma ${report.turma}.\n\nData de Geração: ${report.date}\nTamanho Original: ${report.size}\n\n(O download do PDF real requer backend configurado)`;
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = report.filename.replace('.pdf', '.txt');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const handleExtraction = (id: string, turma: 'A' | 'B') => {
+    if (extractionStatus[id] === 'done') {
+        setScenariosFilter(turma);
+        document.getElementById('scenarios-grid')?.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
+
+    setExtractionStatus(prev => ({ ...prev, [id]: 'extracting' }));
+    
+    // Simulate AI processing time
+    setTimeout(() => {
+        setExtractionStatus(prev => ({ ...prev, [id]: 'done' }));
+        setScenariosFilter(turma);
+        document.getElementById('scenarios-grid')?.scrollIntoView({ behavior: 'smooth' });
+    }, 2000);
+  };
+
   useEffect(() => {
     if (apiKey) {
       // initializeGemini handles both anonymous (null profile) and logged in users
@@ -80,6 +114,10 @@ const App: React.FC = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  const filteredScenarios = scenariosFilter === 'ALL' 
+    ? SCENARIOS_DATA 
+    : SCENARIOS_DATA.filter(s => s.turma === scenariosFilter);
 
   // 1. API Key Screen (Always blocking)
   if (!apiKey) {
@@ -197,67 +235,119 @@ const App: React.FC = () => {
                   <FileText className="text-cesar-neutral" size={20}/> Relatórios Originais
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {KORI_REPORTS_DATA.map(report => (
-                    <div key={report.id} className="bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-cesar-orange transition-colors group">
-                      <div className="flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white ${report.turma === 'A' ? 'bg-cyan-500' : 'bg-purple-500'}`}>
-                          {report.turma}
+                  {KORI_REPORTS_DATA.map(report => {
+                    const status = extractionStatus[report.id] || 'idle';
+                    return (
+                        <div key={report.id} className={`bg-white border p-5 rounded-2xl flex flex-col gap-4 transition-all duration-300 ${status === 'done' ? 'border-orange-200 shadow-md ring-1 ring-orange-100' : 'border-gray-200 hover:border-gray-300'}`}>
+                        <div className="flex items-start justify-between">
+                            <div className="flex items-center gap-4">
+                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white text-lg ${report.turma === 'A' ? 'bg-cyan-500' : 'bg-purple-500'}`}>
+                                    {report.turma}
+                                </div>
+                                <div>
+                                    <p className="font-bold text-sm text-cesar-black">Relatório Turma {report.turma}</p>
+                                    <p className="text-xs text-cesar-neutral font-medium mt-0.5">PDF • {report.size} • {report.date}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                          <p className="font-bold text-sm text-cesar-black group-hover:text-cesar-orange transition-colors">Relatório Turma {report.turma}</p>
-                          <p className="text-xs text-cesar-neutral">PDF • {report.size} • {report.date}</p>
+                        
+                        <div className="flex gap-2 mt-1">
+                            <button 
+                                onClick={() => simulateDownload(report)}
+                                className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gray-50 hover:bg-gray-100 text-cesar-gray rounded-xl text-xs font-bold transition-colors border border-gray-100"
+                            >
+                                <Download size={14} />
+                                Baixar
+                            </button>
+                            <button 
+                                onClick={() => handleExtraction(report.id, report.turma)}
+                                disabled={status === 'extracting'}
+                                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold transition-all border ${
+                                    status === 'done' 
+                                        ? 'bg-orange-50 text-cesar-orange border-orange-100' 
+                                        : 'bg-white text-cesar-orange border-orange-200 hover:bg-orange-50'
+                                }`}
+                            >
+                                {status === 'extracting' ? (
+                                    <>
+                                        <Cpu size={14} className="animate-spin" />
+                                        Processando...
+                                    </>
+                                ) : status === 'done' ? (
+                                    <>
+                                        <Check size={14} />
+                                        Extraído
+                                    </>
+                                ) : (
+                                    <>
+                                        <Cpu size={14} />
+                                        Extrair Cenários
+                                    </>
+                                )}
+                            </button>
                         </div>
-                      </div>
-                      <button className="p-2 text-cesar-neutral hover:text-cesar-orange hover:bg-orange-50 rounded-lg transition-all">
-                        <Download size={20} />
-                      </button>
-                    </div>
-                  ))}
+                        </div>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Scenarios Grid */}
-              <h2 className="text-2xl font-extrabold text-cesar-black mb-6 tracking-tight border-t border-gray-100 pt-8">
-                Cenários Desenvolvidos
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8 pb-12">
-                {SCENARIOS_DATA.map(sc => (
-                  <div key={sc.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col">
-                    <div className="p-8 pb-4 flex-1">
-                      <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-xl font-bold text-cesar-black group-hover:text-cesar-orange transition-colors leading-tight">{sc.title}</h3>
-                        <span className={`px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-widest ${sc.turma === 'A' ? 'bg-cyan-50 text-cyan-600' : 'bg-purple-50 text-purple-600'}`}>
-                          Turma {sc.turma}
-                        </span>
-                      </div>
-                      
-                      <div className="flex flex-col gap-3 mb-5">
-                        <div>
-                          <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-0.5">Arquétipo</span>
-                          <p className="text-cesar-black font-medium text-sm">{sc.archetype}</p>
-                        </div>
-                        {sc.metaphor && (
-                          <div>
-                            <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-0.5">Metáfora / Mito</span>
-                            <p className="text-cesar-orange-deep font-medium text-sm italic">"{sc.metaphor}"</p>
-                          </div>
-                        )}
-                      </div>
+              <div id="scenarios-grid" className="scroll-mt-8">
+                <div className="flex items-center justify-between mb-6 pt-8 border-t border-gray-100">
+                    <h2 className="text-2xl font-extrabold text-cesar-black tracking-tight">
+                        Cenários Desenvolvidos
+                    </h2>
+                    {scenariosFilter !== 'ALL' && (
+                        <button 
+                            onClick={() => setScenariosFilter('ALL')}
+                            className="text-xs font-bold text-cesar-orange hover:text-cesar-orange-deep flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full transition-colors"
+                        >
+                            <Filter size={12} />
+                            Filtro Ativo: Turma {scenariosFilter} <X size={12} className="ml-1" />
+                        </button>
+                    )}
+                </div>
 
-                      <p className="text-cesar-gray leading-relaxed text-sm mb-6">{sc.description}</p>
+                <div className="grid md:grid-cols-2 gap-8 pb-12">
+                    {filteredScenarios.map(sc => (
+                    <div key={sc.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="p-8 pb-4 flex-1">
+                        <div className="flex justify-between items-start mb-6">
+                            <h3 className="text-xl font-bold text-cesar-black group-hover:text-cesar-orange transition-colors leading-tight">{sc.title}</h3>
+                            <span className={`px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-widest ${sc.turma === 'A' ? 'bg-cyan-50 text-cyan-600' : 'bg-purple-50 text-purple-600'}`}>
+                            Turma {sc.turma}
+                            </span>
+                        </div>
+                        
+                        <div className="flex flex-col gap-3 mb-5">
+                            <div>
+                            <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-0.5">Arquétipo</span>
+                            <p className="text-cesar-black font-medium text-sm">{sc.archetype}</p>
+                            </div>
+                            {sc.metaphor && (
+                            <div>
+                                <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-0.5">Metáfora / Mito</span>
+                                <p className="text-cesar-orange-deep font-medium text-sm italic">"{sc.metaphor}"</p>
+                            </div>
+                            )}
+                        </div>
+
+                        <p className="text-cesar-gray leading-relaxed text-sm mb-6">{sc.description}</p>
+                        </div>
+                        
+                        {/* Static Image Section */}
+                        <div className="w-full h-48 overflow-hidden relative border-t border-gray-50">
+                            <img 
+                                src={sc.imageUrl} 
+                                alt={sc.title} 
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
                     </div>
-                    
-                    {/* Static Image Section */}
-                    <div className="w-full h-48 overflow-hidden relative border-t border-gray-50">
-                        <img 
-                            src={sc.imageUrl} 
-                            alt={sc.title} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                </div>
               </div>
             </div>
           )}
