@@ -7,10 +7,19 @@ Resumo rápido
 
 Arquitetura (big-picture)
 - Frontend: React + Vite. Entrada principal: `index.tsx` → `App.tsx`.
-- Componentes importandes: `components/ChatInterface.tsx`, `StoryBoard.tsx`, `Sidebar.tsx`, `AIIllustration.tsx`.
-- Serviço de IA: `services/geminiService.ts` — encapsula a integração com `@google/genai`, manutenção de sessão de chat, geração de imagens e execução simulada de "tools".
-- Backend leve: Netlify Functions em `netlify/functions/*` (ex.: `solutions.ts`) que expõem endpoints acessíveis do frontend via `/.netlify/functions/solutions`.
+- Componentes importantes: `components/ChatInterface.tsx`, `StoryBoard.tsx`, `Sidebar.tsx`, `AIIllustration.tsx`.
+- Serviço de IA (client-side proxy): `services/geminiService.ts` — faz fetch para `netlify/functions/genai.ts` (não usa `@google/genai` no cliente).
+- Backend serverless: 
+  - `netlify/functions/genai.ts` — encapsula `@google/genai`, chat + geração de imagens com chave server-side (`GEMINI_API_KEY` env).
+  - `netlify/functions/solutions.ts` — CRUD de soluções, fetch via `db/` (Drizzle ORM + Neon).
 - Banco: Drizzle ORM + Neon. Definição de tabela em `db/schema.ts`. Conexão em `db/index.ts` usa `process.env.DATABASE_URL`.
+
+Fluxos importantes e convenções do projeto
+- Autenticação da API Gemini: a app usa `GEMINI_API_KEY` como **variável de ambiente server-side** no Netlify (não `VITE_`). O frontend chama `/.netlify/functions/genai?action=chat` ou `?action=generateImage` — a chave é usada apenas no servidor.
+- Chat → Ações/DB: o modelo pode solicitar execução de funções (tools). As funções declaradas em `netlify/functions/genai.ts` (`refinarDescricaoSolucao`, `apresentarRascunhoParaRevisao`, `registrarSolucao`) seguem o contrato de `@google/genai`. O fluxo de confirmação do usuário está implementado em `components/ChatInterface.tsx` (busque o prompt que começa com `[CONFIRMAÇÃO DO USUÁRIO]`).
+- Persistência: `netlify/functions/solutions.ts` aceita GET e POST. Mantenha o formato JSON compatível com `db/schema.ts` (campos complexos em `jsonb`). Não mude nomes de colunas (`nome_da_solucao`, `turma`, `participantes`, `descricao_refinada`, `imagem`, `data_submissao`).
+- Geração de imagens: `geminiService.generateIllustration(prompt)` faz POST para `/.netlify/functions/genai?action=generateImage`. A UI (`AIIllustration.tsx`) espera um data URL ou URL retornado.
+- Polling: `App.tsx` usa `getSolutions()` e faz polling a cada 5s — tenha cuidado ao modificar essa lógica para não gerar carga desnecessária.
 
 Fluxos importantes e convenções do projeto
 - Autenticação da API Gemini: a app espera uma chave de API selecionada (ver `App.tsx`). Use a variável de build `VITE_GEMINI_API_KEY` para injetar a chave no bundle (ex.: setar `VITE_GEMINI_API_KEY` em Netlify Site settings → Build & deploy → Environment). O código faz fallback para `GEMINI_API_KEY` / `API_KEY` se presentes em tempo de build.
@@ -20,11 +29,11 @@ Fluxos importantes e convenções do projeto
 - Polling: `App.tsx` usa `getSolutions()` e faz polling a cada 5s — tenha cuidado ao modificar essa lógica para não gerar carga desnecessária.
 
 Scripts e fluxos de desenvolvedor
-- Rodar localmente: `npm install` && `npm run dev` (Vite).
+- Rodar localmente: `npm install` && criar `.env.local` com `GEMINI_API_KEY=sk-...` && `npm run dev` (Vite + Netlify Functions via `netlify dev` ou simulação).
 - Build/preview: `npm run build`; `npm run preview`.
 - TypeScript check: `npm run check`.
 - Drizzle DB: `npm run db:generate`, `npm run db:migrate`, `npm run db:push`, `npm run db:studio`.
-- Variáveis de ambiente críticas: `DATABASE_URL` (Neon/Netlify) e chave API Gemini (conforme README / `.env.local`).
+- Variáveis de ambiente críticas: `GEMINI_API_KEY` (server-side, Netlify env ou `.env` local), `DATABASE_URL` (Neon/Netlify).
 
 Padrões de código e expectativas
 - Tipagem: TypeScript com tipos centrais em `types.ts`. Prefira usar os tipos definidos ao alterar payloads.
@@ -40,7 +49,10 @@ O que procurar ao editar
 Pequenos exemplos úteis
 - Para salvar solução (sigam o contrato JSON):
   - POST para `/.netlify/functions/solutions` com body contendo `nome_da_solucao`, `turma`, `participantes` (array de objetos com `nome_completo` e `email`), `cenarios_relacionados` (array), `descricao_refinada` (obj com `resumo`, `problema_que_resolve`, `como_funciona`, `relacao_com_os_cenarios`), `imagem` (obj com `url`) e `data_submissao`.
-- Ex.: o frontend chama `sendMessage` em `services/geminiService.ts` que, ao executar `registrarSolucao`, faz um POST para a função serverless.
+- Para chat com IA (fluxo cliente → servidor):
+  - POST para `/.netlify/functions/genai?action=chat` com `{ message, userProfile?, chatHistory? }`. Resposta: `{ response: string, functionCalls: Array<{ name, args }> }`.
+- Para gerar imagem:
+  - POST para `/.netlify/functions/genai?action=generateImage` com `{ prompt }`. Resposta: `{ imageUrl: string }` (data URL ou URL pública).
 
 Checklist rápido ao abrir um PR
 - Verificar se `types.ts` e `db/schema.ts` foram atualizados em sincronia.
