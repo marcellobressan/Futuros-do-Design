@@ -1,8 +1,7 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Message, DraftSolution } from '../types';
 import { sendMessage } from '../services/geminiService';
-import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, X, Save } from 'lucide-react';
+import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, Save } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 interface ChatInterfaceProps {
@@ -19,14 +18,13 @@ const DraftReviewCard: React.FC<{
 
   const startEdit = (section: string, value: any) => {
     setEditingSection(section);
-    setTempValue(value); // Deep copy if needed, but simple types work for now
+    setTempValue(value); 
   };
 
   const saveEdit = (section: string) => {
     if (section === 'nome') setData({ ...data, nome_da_solucao: tempValue });
     if (section === 'turma') setData({ ...data, turma: tempValue });
     if (section === 'participantes') {
-        // Parsing the textarea back to array
         const parts = tempValue.split(',').map((p: string) => {
             const [name, email] = p.trim().split('(');
             return { 
@@ -43,72 +41,72 @@ const DraftReviewCard: React.FC<{
   };
 
   return (
-    <div className="bg-white border-2 border-orange-100 rounded-2xl p-6 shadow-xl my-6 max-w-2xl mx-auto animate-in fade-in zoom-in duration-300">
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
-        <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center text-cesar-orange">
+    <div className="card fade-in" style={{ border: '2px solid #ffedd5', margin: '1.5rem auto', maxWidth: '42rem' }}>
+      <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '1px solid #f3f4f6' }}>
+        <div style={{ width: '40px', height: '40px', backgroundColor: '#fff7ed', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--c-orange)' }}>
           <Edit2 size={20} />
         </div>
         <div>
-          <h3 className="text-lg font-bold text-cesar-black">Revisão Final</h3>
-          <p className="text-xs text-cesar-neutral">Edite os dados se necessário antes de salvar.</p>
+          <h3 className="text-lg font-bold text-black">Revisão Final</h3>
+          <p className="text-xs text-neutral">Edite os dados se necessário antes de salvar.</p>
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div className="flex flex-col gap-6">
         {/* Nome */}
-        <div className="group">
+        <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest">Nome da Solução</label>
+            <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Nome da Solução</label>
             {editingSection !== 'nome' && (
-              <button onClick={() => startEdit('nome', data.nome_da_solucao)} className="text-cesar-orange opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold hover:underline">Editar</button>
+              <button onClick={() => startEdit('nome', data.nome_da_solucao)} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
             )}
           </div>
           {editingSection === 'nome' ? (
             <div className="flex gap-2">
-              <input type="text" value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="flex-1 bg-gray-50 border border-orange-200 rounded p-2 text-sm" />
-              <button onClick={() => saveEdit('nome')} className="p-2 bg-cesar-orange text-white rounded"><Save size={16} /></button>
+              <input type="text" value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="input-field" />
+              <button onClick={() => saveEdit('nome')} className="btn btn-primary" style={{ padding: '0.5rem' }}><Save size={16} /></button>
             </div>
           ) : (
-            <p className="text-cesar-black font-bold text-lg">{data.nome_da_solucao}</p>
+            <p className="text-black font-bold text-lg">{data.nome_da_solucao}</p>
           )}
         </div>
 
         {/* Participantes & Turma */}
-        <div className="grid grid-cols-2 gap-4">
-            <div className="group">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div>
                 <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest">Turma</label>
+                    <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Turma</label>
                     {editingSection !== 'turma' && (
-                    <button onClick={() => startEdit('turma', data.turma)} className="text-cesar-orange opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold hover:underline">Editar</button>
+                    <button onClick={() => startEdit('turma', data.turma)} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
                     )}
                 </div>
                 {editingSection === 'turma' ? (
                     <div className="flex gap-2">
-                        <select value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="bg-gray-50 border border-orange-200 rounded p-1 text-sm">
+                        <select value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="input-field" style={{ padding: '0.5rem' }}>
                             <option value="A">A</option>
                             <option value="B">B</option>
                         </select>
-                        <button onClick={() => saveEdit('turma')} className="p-1 bg-cesar-orange text-white rounded"><Save size={14} /></button>
+                        <button onClick={() => saveEdit('turma')} className="btn btn-primary" style={{ padding: '0.25rem' }}><Save size={14} /></button>
                     </div>
                 ) : (
-                    <span className="bg-gray-100 text-cesar-gray px-2 py-1 rounded text-xs font-bold">{data.turma}</span>
+                    <span className="badge badge-neutral" style={{ fontSize: '0.8rem' }}>{data.turma}</span>
                 )}
             </div>
             
-            <div className="group">
+            <div>
                 <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest">Participantes</label>
+                    <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Participantes</label>
                     {editingSection !== 'participantes' && (
-                    <button onClick={() => startEdit('participantes', data.participantes.map(p => `${p.nome_completo} (${p.email})`).join(', '))} className="text-cesar-orange opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold hover:underline">Editar</button>
+                    <button onClick={() => startEdit('participantes', data.participantes.map(p => `${p.nome_completo} (${p.email})`).join(', '))} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
                     )}
                 </div>
                 {editingSection === 'participantes' ? (
                     <div className="flex gap-2 items-start">
-                        <textarea value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="flex-1 bg-gray-50 border border-orange-200 rounded p-2 text-sm h-20" />
-                        <button onClick={() => saveEdit('participantes')} className="p-2 bg-cesar-orange text-white rounded"><Save size={16} /></button>
+                        <textarea value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="input-field" style={{ height: '80px' }} />
+                        <button onClick={() => saveEdit('participantes')} className="btn btn-primary" style={{ padding: '0.5rem' }}><Save size={16} /></button>
                     </div>
                 ) : (
-                    <p className="text-sm text-cesar-gray leading-relaxed">
+                    <p className="text-sm text-gray" style={{ lineHeight: '1.6' }}>
                         {data.participantes.map(p => p.nome_completo).join(', ')}
                     </p>
                 )}
@@ -116,20 +114,20 @@ const DraftReviewCard: React.FC<{
         </div>
 
         {/* Resumo */}
-        <div className="group">
+        <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest">Resumo Refinado</label>
+            <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Resumo Refinado</label>
             {editingSection !== 'resumo' && (
-              <button onClick={() => startEdit('resumo', data.descricao_refinada.resumo)} className="text-cesar-orange opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold hover:underline">Editar</button>
+              <button onClick={() => startEdit('resumo', data.descricao_refinada.resumo)} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
             )}
           </div>
           {editingSection === 'resumo' ? (
             <div className="flex gap-2 items-start">
-              <textarea value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="flex-1 bg-gray-50 border border-orange-200 rounded p-2 text-sm h-24" />
-              <button onClick={() => saveEdit('resumo')} className="p-2 bg-cesar-orange text-white rounded"><Save size={16} /></button>
+              <textarea value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="input-field" style={{ height: '100px' }} />
+              <button onClick={() => saveEdit('resumo')} className="btn btn-primary" style={{ padding: '0.5rem' }}><Save size={16} /></button>
             </div>
           ) : (
-            <div className="bg-orange-50/50 p-4 rounded-xl border border-orange-100 text-sm text-cesar-gray italic">
+            <div style={{ backgroundColor: '#fff7ed', padding: '1rem', borderRadius: '12px', border: '1px solid #ffedd5', fontStyle: 'italic', fontSize: '0.875rem' }}>
                 "{data.descricao_refinada.resumo}"
             </div>
           )}
@@ -138,7 +136,8 @@ const DraftReviewCard: React.FC<{
 
       <button 
         onClick={() => onConfirm(data)}
-        className="w-full mt-8 py-3 bg-cesar-orange hover:bg-cesar-orange-deep text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
+        className="btn btn-primary w-full"
+        style={{ marginTop: '2rem' }}
       >
         <CheckCircle size={18} />
         Confirmar e Registrar Solução
@@ -159,8 +158,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ apiKey }) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [activeTool, setActiveTool] = useState<string | null>(null);
-  
-  // State for Review Workflow
   const [isReviewing, setIsReviewing] = useState(false);
   const [draftData, setDraftData] = useState<DraftSolution | null>(null);
 
@@ -210,21 +207,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ apiKey }) => {
         },
         (toolName, args) => {
           setActiveTool(toolName);
-          
           if (toolName === 'apresentarRascunhoParaRevisao') {
              setDraftData(args as DraftSolution);
              setIsReviewing(true);
           }
-
-          // Optional: Add a system message showing the tool was called
-          const sysMsg: Message = {
-            id: Date.now().toString() + '-tool',
-            role: 'system',
-            content: `Executando: ${toolName}...`,
-            timestamp: new Date(),
-            functionCall: { name: toolName, args }
-          };
-          // We don't render system messages in the main UI usually, but tracking history
         }
       );
     } catch (error) {
@@ -245,7 +231,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ apiKey }) => {
     setIsReviewing(false);
     setDraftData(null);
     
-    // Construct a prompt that forces the AI to register with the VALIDATED data
     const confirmationPrompt = `[CONFIRMAÇÃO DO USUÁRIO]
 Os dados do rascunho foram revisados e aprovados pelo usuário.
 Prossiga IMEDIATAMENTE com a função "registrarSolucao" usando EXATAMENTE os dados abaixo:
@@ -271,43 +256,28 @@ Não faça mais perguntas. Registre agora.`;
   };
 
   return (
-    <div className="flex flex-col h-full bg-cesar-off-white">
+    <div className="flex flex-col h-full bg-page">
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
+      <div className="chat-messages">
         {messages.map((msg) => (
-          !msg.content.startsWith('[CONFIRMAÇÃO DO USUÁRIO]') && ( // Hide the system prompt injection from UI
-          <div
-            key={msg.id}
-            className={`flex items-start gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
-          >
+          !msg.content.startsWith('[CONFIRMAÇÃO DO USUÁRIO]') && (
+          <div key={msg.id} className={`msg-row ${msg.role}`}>
             {/* Avatar */}
-            <div className={`
-              flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border
-              ${msg.role === 'model' 
-                ? 'bg-white border-gray-200 text-cesar-orange' 
-                : 'bg-cesar-gray border-transparent text-white'}
-            `}>
+            <div style={{
+              width: '36px', height: '36px', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              backgroundColor: msg.role === 'model' ? 'white' : 'var(--c-gray)',
+              color: msg.role === 'model' ? 'var(--c-orange)' : 'white',
+              border: msg.role === 'model' ? '1px solid #e5e7eb' : 'none'
+            }}>
               {msg.role === 'model' ? <Sparkles size={18} /> : <User size={18} />}
             </div>
 
             {/* Bubble */}
-            <div className={`
-              flex flex-col max-w-[85%] md:max-w-[70%]
-              ${msg.role === 'user' ? 'items-end' : 'items-start'}
-            `}>
-              <div className={`
-                px-6 py-4 shadow-sm
-                ${msg.role === 'user' 
-                  ? 'bg-cesar-orange text-white rounded-2xl rounded-tr-none' 
-                  : 'bg-white text-cesar-gray border border-gray-100 rounded-2xl rounded-tl-none'}
-              `}>
-                <div className={`prose max-w-none ${msg.role === 'user' ? 'prose-invert' : 'prose-neutral'}`}>
+            <div className={`msg-bubble ${msg.role}`}>
+                <div className="markdown-content">
                   <ReactMarkdown>{msg.content}</ReactMarkdown>
                 </div>
-              </div>
-              <span className="text-[10px] text-cesar-neutral mt-1.5 px-1 font-medium">
-                {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </span>
             </div>
           </div>
           )
@@ -315,8 +285,8 @@ Não faça mais perguntas. Registre agora.`;
         
         {/* Tool Execution Indicator */}
         {activeTool && (
-          <div className="flex items-center justify-center gap-3 py-4">
-            <div className="bg-white border border-orange-200 text-cesar-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-medium animate-pulse">
+          <div className="flex items-center justify-center py-4">
+            <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold">
               <Cpu className="animate-spin" size={16} />
               <span>
                 {activeTool === 'refinarDescricaoSolucao' && 'Refinando texto com IA...'}
@@ -327,13 +297,13 @@ Não faça mais perguntas. Registre agora.`;
           </div>
         )}
 
-        {/* Draft Review Card (Interjected in stream) */}
+        {/* Draft Review Card */}
         {isReviewing && draftData && (
             <DraftReviewCard initialData={draftData} onConfirm={handleDraftConfirmation} />
         )}
 
         {isLoading && !activeTool && (
-          <div className="flex items-center gap-2 text-cesar-neutral text-sm ml-14">
+          <div className="flex items-center gap-2 text-neutral text-sm" style={{ marginLeft: '4rem' }}>
             <Loader2 className="animate-spin" size={16} />
             <span>Gerando resposta...</span>
           </div>
@@ -343,25 +313,38 @@ Não faça mais perguntas. Registre agora.`;
       </div>
 
       {/* Input Area */}
-      <div className="p-4 md:p-6 bg-white border-t border-gray-200">
-        <div className="max-w-4xl mx-auto relative flex items-center gap-2">
+      <div style={{ padding: '1.5rem', backgroundColor: 'white', borderTop: '1px solid var(--c-border)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', display: 'flex', alignItems: 'center' }}>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={isReviewing ? "Revise os dados acima e clique em confirmar..." : "Pergunte sobre os cenários ou cadastre uma solução..."}
-            className="w-full bg-gray-50 text-cesar-gray placeholder-cesar-neutral border border-gray-200 rounded-xl px-4 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-cesar-orange focus:border-transparent resize-none h-[60px] max-h-[120px] transition-all shadow-inner disabled:opacity-50"
+            className="input-field"
+            style={{ 
+              height: '60px', 
+              resize: 'none', 
+              paddingRight: '3.5rem',
+              fontSize: '1rem'
+            }}
             disabled={isLoading || isReviewing}
           />
           <button
             onClick={() => handleSend()}
             disabled={!input.trim() || isLoading || isReviewing}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-cesar-orange text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-cesar-orange-deep transition-all shadow-md hover:shadow-orange-200"
+            className="absolute right-3"
+            style={{ 
+              padding: '0.5rem', 
+              backgroundColor: 'var(--c-orange)', 
+              color: 'white', 
+              borderRadius: '8px', 
+              opacity: (!input.trim() || isLoading) ? 0.5 : 1
+            }}
           >
             {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
           </button>
         </div>
-        <p className="text-center text-[10px] text-cesar-neutral mt-3 font-medium">
+        <p className="text-center text-neutral mt-3 font-medium" style={{ fontSize: '10px' }}>
           Portal Interativo v1.0 • CESAR School 2025
         </p>
       </div>

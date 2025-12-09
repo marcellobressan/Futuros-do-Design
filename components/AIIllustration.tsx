@@ -24,32 +24,45 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
         }
     };
 
+    const containerStyle: React.CSSProperties = {
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: '#f9fafb',
+        border: '1px solid #e5e7eb',
+        borderRadius: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        aspectRatio: aspectRatio === 'square' ? '1/1' : '16/9',
+    };
+
     return (
-        <div className={`relative overflow-hidden bg-gray-50 border border-gray-100 flex items-center justify-center group ${aspectRatio === 'square' ? 'aspect-square' : 'aspect-video'} rounded-2xl ${className}`}>
+        <div style={containerStyle} className={className}>
             
             {status === 'idle' && (
                 <div className="text-center p-6">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                        <Image className="text-cesar-neutral" size={24} />
+                    <div style={{ width: '64px', height: '64px', backgroundColor: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto', boxShadow: 'var(--shadow-sm)' }}>
+                        <Image className="text-neutral" size={24} />
                     </div>
                     <button 
                         onClick={(e) => {
                             e.stopPropagation();
                             handleGenerate();
                         }}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 text-cesar-orange text-sm font-bold rounded-full hover:bg-cesar-orange hover:text-white transition-all shadow-sm mx-auto"
+                        className="btn btn-secondary"
+                        style={{ borderRadius: '999px', fontSize: '0.875rem' }}
                     >
-                        <Sparkles size={16} />
+                        <Sparkles size={16} style={{ color: 'var(--c-orange)' }} />
                         Visualizar com IA
                     </button>
-                    <p className="text-[10px] text-cesar-neutral mt-3 max-w-[200px] mx-auto leading-tight">
+                    <p className="text-neutral mt-3" style={{ fontSize: '10px', maxWidth: '200px', margin: '0.75rem auto 0 auto' }}>
                         Gere uma ilustração exclusiva deste cenário usando o modelo Nano do Gemini.
                     </p>
                 </div>
             )}
 
             {status === 'loading' && (
-                <div className="flex flex-col items-center justify-center text-cesar-orange animate-pulse">
+                <div className="flex flex-col items-center justify-center text-orange animate-pulse">
                     <Loader2 size={32} className="animate-spin mb-3" />
                     <span className="text-xs font-bold uppercase tracking-widest">Criando Arte...</span>
                 </div>
@@ -57,10 +70,11 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
 
             {status === 'error' && (
                 <div className="text-center p-4">
-                    <p className="text-xs text-red-500 font-bold mb-3">Falha na geração</p>
+                    <p style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#ef4444', marginBottom: '0.75rem' }}>Falha na geração</p>
                     <button 
                         onClick={handleGenerate}
-                        className="flex items-center gap-2 px-4 py-2 bg-white border border-red-100 text-red-500 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors"
+                        className="btn btn-secondary"
+                        style={{ fontSize: '0.75rem', color: '#ef4444', borderColor: '#fee2e2' }}
                     >
                         <RefreshCw size={14} />
                         Tentar Novamente
@@ -69,10 +83,10 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
             )}
 
             {status === 'loaded' && imageUrl && (
-                <div className="relative w-full h-full">
-                    <img src={imageUrl} alt="AI Generated Illustration" className="w-full h-full object-cover animate-in fade-in duration-700" />
-                    <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                         <span className="bg-black/60 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded border border-white/20">
+                <div className="relative w-full h-full fade-in">
+                    <img src={imageUrl} alt="AI Generated Illustration" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'absolute', bottom: '12px', right: '12px' }}>
+                         <span className="badge" style={{ backgroundColor: 'rgba(0,0,0,0.6)', color: 'white', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.2)' }}>
                             Gerado por Gemini
                          </span>
                     </div>

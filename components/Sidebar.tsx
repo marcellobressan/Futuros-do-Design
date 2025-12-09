@@ -13,109 +13,77 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleSidebar, userProfile, onLoginClick }) => {
+  
+  const navItemClass = (view: AppView) => `
+    w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group cursor-pointer
+    ${currentView === view ? 'bg-orange-50 text-orange font-bold' : 'text-gray hover:bg-gray-50 hover:text-orange-deep'}
+  `;
+
   return (
     <>
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20 md:hidden"
+          className="mobile-overlay"
           onClick={toggleSidebar}
         />
       )}
 
       {/* Sidebar Content */}
-      <div className={`
-        fixed md:static inset-y-0 left-0 z-30
-        w-72 bg-white border-r border-gray-200
-        transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-        flex flex-col shadow-lg md:shadow-none
-      `}>
+      <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
         {/* Header / Logo Area */}
-        <div className="p-8 pb-6 border-b border-gray-100 flex justify-between items-start">
+        <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid var(--c-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div className="flex flex-col">
-            <h1 className="text-xl font-extrabold text-cesar-orange leading-none tracking-tight">
+            <h1 className="text-xl font-extrabold text-orange leading-none" style={{ lineHeight: '1' }}>
               FUTUROS<br/>DO DESIGN
             </h1>
-            <p className="text-[11px] font-medium text-cesar-neutral mt-2 tracking-wide uppercase">
+            <p className="text-neutral mt-2 uppercase tracking-wide" style={{ fontSize: '11px', fontWeight: 500 }}>
               CESAR School 2025
             </p>
           </div>
-          <button onClick={toggleSidebar} className="md:hidden text-cesar-neutral hover:text-cesar-orange">
+          <button onClick={toggleSidebar} className="md:hidden text-neutral hover:text-orange" style={{ display: window.innerWidth > 768 ? 'none' : 'block' }}>
             <X size={24} />
           </button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-          <button
-            onClick={() => setView(AppView.HOME)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-              currentView === AppView.HOME
-                ? 'bg-orange-50 text-cesar-orange font-bold' 
-                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
-            }`}
-          >
-            <Compass size={20} className={currentView === AppView.HOME ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+        <nav style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <button onClick={() => setView(AppView.HOME)} className={navItemClass(AppView.HOME)} style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+            <Compass size={20} />
             <span>Manifesto & Método</span>
           </button>
 
-          <button
-            onClick={() => setView(AppView.CHAT)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-              currentView === AppView.CHAT 
-                ? 'bg-orange-50 text-cesar-orange font-bold' 
-                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
-            }`}
-          >
-            <MessageSquare size={20} className={currentView === AppView.CHAT ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+          <button onClick={() => setView(AppView.CHAT)} className={navItemClass(AppView.CHAT)} style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+            <MessageSquare size={20} />
             <span>Agente do Portal</span>
           </button>
 
-          <button
-            onClick={() => setView(AppView.KNOWLEDGE)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-              currentView === AppView.KNOWLEDGE 
-                ? 'bg-orange-50 text-cesar-orange font-bold' 
-                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
-            }`}
-          >
-            <BookOpen size={20} className={currentView === AppView.KNOWLEDGE ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+          <button onClick={() => setView(AppView.KNOWLEDGE)} className={navItemClass(AppView.KNOWLEDGE)} style={currentView === AppView.KNOWLEDGE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+            <BookOpen size={20} />
             <span>Cenários & Arquétipos</span>
           </button>
 
-          <button
-            onClick={() => setView(AppView.SOLUTIONS)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-              currentView === AppView.SOLUTIONS 
-                ? 'bg-orange-50 text-cesar-orange font-bold' 
-                : 'text-cesar-gray hover:bg-gray-50 hover:text-cesar-orange-deep'
-            }`}
-          >
-            <Database size={20} className={currentView === AppView.SOLUTIONS ? 'text-cesar-orange' : 'text-cesar-neutral group-hover:text-cesar-orange-deep'} />
+          <button onClick={() => setView(AppView.SOLUTIONS)} className={navItemClass(AppView.SOLUTIONS)} style={currentView === AppView.SOLUTIONS ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}>
+            <Database size={20} />
             <span>Soluções Cadastradas</span>
           </button>
 
-          <div className="mt-8 pt-6 border-t border-gray-100">
-            <h3 className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest mb-4 px-2">
+          <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>
+            <h3 className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold', marginBottom: '1rem', paddingLeft: '0.5rem' }}>
               Cenários Ativos
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-col gap-2">
               {SCENARIOS_DATA.map((scenario) => (
-                <div key={scenario.id} className="bg-cesar-off-white/50 hover:bg-white p-3 rounded-lg border border-gray-100 hover:border-orange-200 transition-colors group">
+                <div key={scenario.id} className="card" style={{ padding: '0.75rem', background: '#fcfcfc', border: '1px solid #f3f4f6', cursor: 'default' }}>
                   <div className="flex justify-between items-start mb-1">
-                    <span className="text-sm font-bold text-cesar-gray group-hover:text-cesar-orange-deep transition-colors">
+                    <span className="text-sm font-bold text-gray">
                       {scenario.title}
                     </span>
-                    <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wide ${
-                      scenario.turma === 'A' 
-                        ? 'bg-cyan-50 text-cyan-600' 
-                        : 'bg-purple-50 text-purple-600'
-                    }`}>
+                    <span className={`badge ${scenario.turma === 'A' ? 'badge-A' : 'badge-B'}`}>
                       {scenario.turma}
                     </span>
                   </div>
-                  <p className="text-[11px] text-cesar-neutral leading-relaxed line-clamp-2">
+                  <p className="text-neutral" style={{ fontSize: '11px', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {scenario.description}
                   </p>
                 </div>
@@ -125,24 +93,25 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         </nav>
 
         {/* User Profile Section */}
-        <div className="p-4 border-t border-gray-100 bg-gray-50/50">
+        <div style={{ padding: '1rem', borderTop: '1px solid var(--c-border)', backgroundColor: '#f9fafb' }}>
           {userProfile ? (
-            <div className="flex items-center space-x-3 bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-cesar-orange text-white flex items-center justify-center font-bold text-sm">
+            <div className="flex items-center gap-3 bg-white p-3 rounded-xl border" style={{ borderRadius: '12px', padding: '0.75rem', border: '1px solid var(--c-border)' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--c-orange)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '14px' }}>
                  {userProfile.name.substring(0, 2).toUpperCase()}
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-cesar-black truncate">{userProfile.name}</p>
-                <p className="text-xs text-cesar-neutral truncate">Turma {userProfile.turma}</p>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p className="text-sm font-bold text-black" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userProfile.name}</p>
+                <p className="text-xs text-neutral">Turma {userProfile.turma}</p>
               </div>
             </div>
           ) : (
             <button
               onClick={onLoginClick}
-              className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-cesar-black hover:bg-gray-800 text-white transition-all shadow-sm group"
+              className="btn"
+              style={{ width: '100%', backgroundColor: 'var(--c-black)', color: 'white' }}
             >
-              <LogIn size={18} className="text-cesar-off-white group-hover:text-white" />
-              <span className="text-sm font-medium">Entrar / Identificar-se</span>
+              <LogIn size={18} />
+              <span className="text-sm">Entrar / Identificar-se</span>
             </button>
           )}
         </div>
