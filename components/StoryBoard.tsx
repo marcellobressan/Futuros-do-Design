@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Zap, Layers, Globe, Cpu, Users, Eye } from 'lucide-react';
+import { ArrowRight, Zap, Layers, Globe, Cpu, Users, Eye, Mic, ExternalLink, Headphones } from 'lucide-react';
 import { AppView } from '../types';
 
 interface StoryBoardProps {
@@ -174,7 +174,110 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Chamada Final */}
+      {/* 4. Produção Intelectual (NEW) */}
+      <section className="py-24 px-6 bg-slate-950 border-b border-slate-800">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold font-['Space_Grotesk'] mb-12 text-center">Produção Intelectual & Criativa</h2>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            
+            {/* Esquerda: Strateegia */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 text-indigo-400 mb-2">
+                 <Mic size={28} />
+                 <h3 className="text-2xl font-bold text-white">Debates Estruturados</h3>
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                As turmas A e B participaram de rodadas de debate na plataforma Strateegia, analisando e confrontando visões de autores da vanguarda do design contemporâneo.
+              </p>
+              
+              <div className="bg-slate-900/50 p-5 rounded-lg border border-slate-800">
+                 <h4 className="text-sm font-bold text-slate-300 uppercase tracking-wide mb-3">Temas Principais</h4>
+                 <div className="flex flex-wrap gap-2">
+                    {['Pós-normalidade', 'Design orientado por IA', 'Ontologias', 'Human-machine teaming', 'Ética e Afeto'].map(tag => (
+                      <span key={tag} className="text-xs bg-indigo-950 text-indigo-300 px-2 py-1 rounded border border-indigo-900/50">
+                        {tag}
+                      </span>
+                    ))}
+                 </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <a 
+                  href="https://app.strateegia.digital/dashboard/public-link/boyoaM" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-lg transition-colors group"
+                >
+                  <span className="font-semibold">Turma A</span>
+                  <ExternalLink size={14} className="group-hover:translate-x-0.5 transition-transform"/>
+                </a>
+                <a 
+                  href="https://app.strateegia.digital/dashboard/public-link/afrnxv" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-lg transition-colors group"
+                >
+                   <span className="font-semibold">Turma B</span>
+                   <ExternalLink size={14} className="group-hover:translate-x-0.5 transition-transform"/>
+                </a>
+              </div>
+            </div>
+
+            {/* Direita: Podcasts */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 text-emerald-400 mb-2">
+                 <Headphones size={28} />
+                 <h3 className="text-2xl font-bold text-white">Podcasts</h3>
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                Como síntese criativa, cada turma produziu um podcast que capturou suas tensões, esperanças e provocações sobre a era da inteligência artificial.
+              </p>
+
+              <div className="space-y-4 pt-2">
+                {/* Podcast Card A */}
+                <a 
+                  href="https://open.spotify.com/show/5jdYWrY0SbEHk1OcN6qt4l?si=d6b357d69efc4b0c"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block group bg-slate-900 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-5 transition-all hover:bg-slate-800"
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h4 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">IAgora Designers?</h4>
+                      <p className="text-sm text-slate-500 mt-1">Turma A • Spotify</p>
+                    </div>
+                    <div className="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                      <ExternalLink size={18} />
+                    </div>
+                  </div>
+                </a>
+
+                {/* Podcast Card B */}
+                <a 
+                  href="https://open.spotify.com/show/6SIZ5HFIib1UdSDTfxetNz?si=67f5f91e6a014d2b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block group bg-slate-900 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-5 transition-all hover:bg-slate-800"
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h4 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">PodIA ser design?</h4>
+                      <p className="text-sm text-slate-500 mt-1">Turma B • Spotify</p>
+                    </div>
+                    <div className="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                      <ExternalLink size={18} />
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Chamada Final */}
       <section className="py-32 px-6 bg-slate-950">
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-cyan-900/20 to-purple-900/20 rounded-3xl p-8 md:p-16 border border-slate-800 text-center backdrop-blur-sm">
           <h2 className="text-3xl md:text-5xl font-bold font-['Space_Grotesk'] mb-6 text-white">

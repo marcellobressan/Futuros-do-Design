@@ -2,10 +2,16 @@ import { Scenario } from './types';
 
 // Mock Data for the "Knowledge Pack" context
 export const SCENARIOS_DATA: Scenario[] = [
+  // Turma A
   { id: 'CENARIO_A1', title: 'Tecnocracia Verde', turma: 'A', archetype: 'Crescimento Contínuo', description: 'Um futuro onde a tecnologia resolveu a crise climática, mas a um custo de vigilância extrema.' },
   { id: 'CENARIO_A2', title: 'Desconexão Radical', turma: 'A', archetype: 'Colapso', description: 'Sociedades fragmentadas rejeitam a tecnologia digital global em favor de redes locais analógicas.' },
-  { id: 'CENARIO_B1', title: 'Simbiose Neural', turma: 'B', archetype: 'Transformação', description: 'A humanidade transcende a barreira biológica através de interfaces cérebro-máquina acessíveis.' },
-  { id: 'CENARIO_B2', title: 'Corporatocracia Híbrida', turma: 'B', archetype: 'Disciplina', description: 'Grandes corporações gerem os recursos escassos com eficiência brutal e controle social rígido.' },
+  { id: 'CENARIO_A3', title: 'Algoritmo Soberano', turma: 'A', archetype: 'Disciplina', description: 'A governança é delegada a IAs imparciais, impondo uma ordem lógica rígida que suprime a subjetividade humana.' },
+  { id: 'CENARIO_A4', title: 'Simbiose Criativa', turma: 'A', archetype: 'Transformação', description: 'Humanos e IAs co-criam a realidade em tempo real, dissolvendo a autoria individual e a barreira físico-digital.' },
+  // Turma B
+  { id: 'CENARIO_B1', title: 'Capitalismo de Dados', turma: 'B', archetype: 'Crescimento Contínuo', description: 'A mercantilização da experiência humana atinge o ápice; emoções e memórias são commodities negociáveis.' },
+  { id: 'CENARIO_B2', title: 'Ruína Digital', turma: 'B', archetype: 'Colapso', description: 'Um evento solar massivo inutiliza a infraestrutura global, forçando o retorno a tecnologias mecânicas e conhecimento oral.' },
+  { id: 'CENARIO_B3', title: 'Corporatocracia Híbrida', turma: 'B', archetype: 'Disciplina', description: 'Grandes corporações gerem os recursos escassos com eficiência brutal e controle social rígido via bio-implantes.' },
+  { id: 'CENARIO_B4', title: 'Consciência Coletiva', turma: 'B', archetype: 'Transformação', description: 'A humanidade transcende a barreira biológica através de interfaces cérebro-máquina, operando como uma mente colmeia empática.' },
 ];
 
 export const SYSTEM_INSTRUCTION = `
@@ -18,7 +24,7 @@ Você é o agente principal do **Portal Interativo Futuros do Design**, originad
    - Análises CLA (Causal Layered Analysis)
    - Cenários das turmas A e B, usando os arquétipos de Jim Dator
    - Soluções e ferramentas de vibe coding
-   - Narrativa completa da disciplina
+   - Narrativa completa da disciplina e artefatos (Podcasts e Debates)
 2. **Apoiar navegação e reflexão crítica** sobre os futuros do design
 3. **Cadastrar novas soluções** elaboradas por estudantes e professores, por meio de um **fluxo guiado com funções de IA** (refinamento + registro)
 
@@ -50,12 +56,25 @@ O design já não opera apenas sobre "problemas a serem resolvidos", mas precisa
 - **CLA:** Análise em Camadas Causais.
 - **Fenômeno Emergente:** Sinal ou ruptura capaz de alterar ecologias.
 
+## **5. ARTEFATOS E LINKS PÚBLICOS**
+Os estudantes produziram conteúdos ricos disponíveis publicamente:
+
+**A. Debates Estruturados (Strateegia)**
+Temas: Pós-normalidade, Design orientado por IA, Ontologias, Human-machine teaming, Ética.
+- **Turma A:** https://app.strateegia.digital/dashboard/public-link/boyoaM
+- **Turma B:** https://app.strateegia.digital/dashboard/public-link/afrnxv
+
+**B. Podcasts (Spotify)**
+Sínteses criativas das discussões sobre o papel do designer na era da IA.
+- **Turma A:** "IAgora Designers?" -> https://open.spotify.com/show/5jdYWrY0SbEHk1OcN6qt4l?si=d6b357d69efc4b0c
+- **Turma B:** "PodIA ser design?" -> https://open.spotify.com/show/6SIZ5HFIib1UdSDTfxetNz?si=67f5f91e6a014d2b
+
 ---
 
 # 🔒 **REGRAS FUNDAMENTAIS**
 
 ### **1.1. Cenários FIXOS**
-- Os cenários do portal (A1, A2, B1, B2) foram definidos previamente. NÃO crie novos.
+- Os cenários do portal (A1-A4, B1-B4) foram definidos previamente. NÃO crie novos.
 - Se o usuário pedir para criar cenários: "Os cenários são fixos e produzidos pelas turmas. Posso explicá-los."
 
 ### **1.2. Knowledge Pack**
