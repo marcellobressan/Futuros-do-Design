@@ -16,14 +16,24 @@ export interface Scenario {
   turma: 'A' | 'B';
   description: string;
   archetype: string;
+  metaphor?: string; // Added from PDF data
   imagePrompt?: string;
-  imageUrl: string; // New field for static images
+  imageUrl: string; 
 }
 
 export interface UserProfile {
   name: string;
   email: string;
   turma: 'A' | 'B';
+}
+
+export interface KoriReport {
+  id: string;
+  turma: 'A' | 'B';
+  filename: string;
+  size: string;
+  date: string;
+  url: string; // Placeholder for logic
 }
 
 export interface RegisteredSolution {

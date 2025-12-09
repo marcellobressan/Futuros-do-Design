@@ -4,8 +4,8 @@ import ChatInterface from './components/ChatInterface';
 import StoryBoard from './components/StoryBoard';
 import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
-import { SCENARIOS_DATA } from './constants';
-import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X } from 'lucide-react';
+import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
+import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download } from 'lucide-react';
 
 const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(process.env.API_KEY || null);
@@ -153,22 +153,97 @@ const App: React.FC = () => {
           )}
 
           {currentView === AppView.KNOWLEDGE && (
-            <div className="h-full overflow-y-auto p-6 md:p-12 max-w-5xl mx-auto bg-cesar-off-white">
-              <h2 className="text-3xl font-extrabold text-cesar-black mb-8 tracking-tight">Base de Conhecimento: Cenários</h2>
-              <div className="grid md:grid-cols-2 gap-8">
+            <div className="h-full overflow-y-auto p-6 md:p-12 max-w-6xl mx-auto bg-cesar-off-white">
+              
+              {/* Context Section */}
+              <div className="mb-12 bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+                <h2 className="text-3xl font-extrabold text-cesar-black mb-6 tracking-tight">
+                  Prospectar na Pós-Normalidade
+                </h2>
+                <div className="grid md:grid-cols-3 gap-8 text-sm leading-relaxed text-cesar-gray">
+                  <div>
+                    <h3 className="font-bold text-cesar-orange mb-2">Ecossistemas Instáveis</h3>
+                    <p>Sistemas sociotécnicos mudam rapidamente. Projetar requer compreender como essas dinâmicas evoluem e impactam pessoas e territórios.</p>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-cesar-orange mb-2">Imaginar Alternativas</h3>
+                    <p>Cenários ajudam a escapar da dependência do presente, fortalecendo a criatividade, a criticidade e a responsabilidade ética.</p>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-cesar-orange mb-2">Decisão no Presente</h3>
+                    <p>Reconhecer sinais fracos e antecipar riscos permite criar soluções mais robustas, adaptáveis e sensíveis às mudanças.</p>
+                  </div>
+                </div>
+                
+                {/* Kori Card */}
+                <div className="mt-8 bg-orange-50 border border-orange-100 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
+                   <div className="flex-1">
+                      <h4 className="font-bold text-cesar-orange-deep text-lg mb-1">Metodologia Kori</h4>
+                      <p className="text-sm text-cesar-gray">
+                        Utilizamos a plataforma Kori para varredura de horizonte (3, 7, 15 anos), organizando fenômenos em <strong>Caos, Complexidade e Contradições</strong>, e aprofundando com <strong>CLA</strong>.
+                      </p>
+                   </div>
+                   <div className="flex gap-3">
+                      <span className="px-3 py-1 bg-white rounded-lg text-xs font-bold text-cesar-orange shadow-sm">Varredura</span>
+                      <span className="px-3 py-1 bg-white rounded-lg text-xs font-bold text-cesar-orange shadow-sm">CLA</span>
+                      <span className="px-3 py-1 bg-white rounded-lg text-xs font-bold text-cesar-orange shadow-sm">Cenários</span>
+                   </div>
+                </div>
+              </div>
+
+              {/* Reports Download Section */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-cesar-black mb-4 flex items-center gap-2">
+                  <FileText className="text-cesar-neutral" size={20}/> Relatórios Originais
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {KORI_REPORTS_DATA.map(report => (
+                    <div key={report.id} className="bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-cesar-orange transition-colors group">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white ${report.turma === 'A' ? 'bg-cyan-500' : 'bg-purple-500'}`}>
+                          {report.turma}
+                        </div>
+                        <div>
+                          <p className="font-bold text-sm text-cesar-black group-hover:text-cesar-orange transition-colors">Relatório Turma {report.turma}</p>
+                          <p className="text-xs text-cesar-neutral">PDF • {report.size} • {report.date}</p>
+                        </div>
+                      </div>
+                      <button className="p-2 text-cesar-neutral hover:text-cesar-orange hover:bg-orange-50 rounded-lg transition-all">
+                        <Download size={20} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Scenarios Grid */}
+              <h2 className="text-2xl font-extrabold text-cesar-black mb-6 tracking-tight border-t border-gray-100 pt-8">
+                Cenários Desenvolvidos
+              </h2>
+              <div className="grid md:grid-cols-2 gap-8 pb-12">
                 {SCENARIOS_DATA.map(sc => (
                   <div key={sc.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col">
                     <div className="p-8 pb-4 flex-1">
                       <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-xl font-bold text-cesar-black group-hover:text-cesar-orange transition-colors">{sc.title}</h3>
+                        <h3 className="text-xl font-bold text-cesar-black group-hover:text-cesar-orange transition-colors leading-tight">{sc.title}</h3>
                         <span className={`px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-widest ${sc.turma === 'A' ? 'bg-cyan-50 text-cyan-600' : 'bg-purple-50 text-purple-600'}`}>
                           Turma {sc.turma}
                         </span>
                       </div>
-                      <div className="mb-4">
-                          <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-1">Arquétipo</span>
-                          <p className="text-cesar-black font-medium">{sc.archetype}</p>
+                      
+                      <div className="flex flex-col gap-3 mb-5">
+                        <div>
+                          <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-0.5">Arquétipo</span>
+                          <p className="text-cesar-black font-medium text-sm">{sc.archetype}</p>
+                        </div>
+                        {sc.metaphor && (
+                          <div>
+                            <span className="text-[10px] font-bold text-cesar-neutral uppercase tracking-widest block mb-0.5">Metáfora / Mito</span>
+                            <p className="text-cesar-orange-deep font-medium text-sm italic">"{sc.metaphor}"</p>
+                          </div>
+                        )}
                       </div>
+
                       <p className="text-cesar-gray leading-relaxed text-sm mb-6">{sc.description}</p>
                     </div>
                     

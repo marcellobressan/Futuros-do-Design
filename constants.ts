@@ -1,87 +1,114 @@
-import { Scenario } from './types';
+import { Scenario, KoriReport } from './types';
 
 // Visual Style for AI Generation (kept for reference or future use)
 export const BASE_IMAGE_STYLE = "Estilo de ilustração vetorial moderno e abstrato, minimalista. Cores predominantes: Laranja vibrante (#ff6002), Branco e Preto. Formas geométricas limpas, design flat ou 3D isométrico suave. Sem texto, foco na composição visual conceitual. Alta qualidade, estilo institucional de escola de design e inovação.";
 
 // Static Assets
-export const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"; // Abstract Orange/White Liquid 3D
+export const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"; 
 
-// Mock Data for the "Knowledge Pack" context
+export const KORI_REPORTS_DATA: KoriReport[] = [
+  {
+    id: 'rep_a',
+    turma: 'A',
+    filename: 'Graduação Design 2025.2 A - Teoria e Futuro do Design.pdf',
+    size: '12.4 MB',
+    date: '09/12/2025',
+    url: '#'
+  },
+  {
+    id: 'rep_b',
+    turma: 'B',
+    filename: 'Graduação Design 2025.2 B - Teoria e Futuro do Design.pdf',
+    size: '14.1 MB',
+    date: '09/12/2025',
+    url: '#'
+  }
+];
+
+// Updated Data from PDF OCR extraction
 export const SCENARIOS_DATA: Scenario[] = [
   // Turma A
   { 
     id: 'CENARIO_A1', 
-    title: 'Tecnocracia Verde', 
+    title: 'Crescimento Contínuo da Influência Digital', 
     turma: 'A', 
-    archetype: 'Crescimento Contínuo', 
-    description: 'Um futuro onde a tecnologia resolveu a crise climática, mas a um custo de vigilância extrema.',
+    archetype: 'Crescimento', 
+    metaphor: 'Prometeu 2.0 / Máquina de Guerra',
+    description: 'A influência da tecnologia digital expande-se. A Teoria da Internet Morta ganha força, IAs e bots geram a maior parte do conteúdo. A dificuldade de distinção corrói a confiança.',
     imagePrompt: 'Uma cidade futurista branca com muita vegetação integrada aos prédios, câmeras de vigilância sutis com luzes laranja, céu limpo, utopia tecnológica monitorada.',
-    imageUrl: 'https://images.unsplash.com/photo-1518005020951-ecc8e54333b0?q=80&w=2000&auto=format&fit=crop' // Futuristic building / Solarpunk vibes
+    imageUrl: 'https://images.unsplash.com/photo-1518005020951-ecc8e54333b0?q=80&w=2000&auto=format&fit=crop' 
   },
   { 
     id: 'CENARIO_A2', 
-    title: 'Desconexão Radical', 
+    title: 'A Queda da Confiança Digital', 
     turma: 'A', 
     archetype: 'Colapso', 
-    description: 'Sociedades fragmentadas rejeitam a tecnologia digital global em favor de redes locais analógicas.',
+    metaphor: 'O fim do Mito do Progresso Linear',
+    description: 'Crise de confiança generalizada. Envenenamento de IAs e manipulação de dados levam à desconexão e à busca por autonomia local e bioregionalismo.',
     imagePrompt: 'Pessoas reunidas em círculo ao redor de uma fogueira urbana, cabos desconectados pendurados ao fundo, ambiente analógico, texturas rústicas, iluminação quente laranja.',
-    imageUrl: 'https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=2000&auto=format&fit=crop' // Analog/Darker/Human connection
+    imageUrl: 'https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_A3', 
-    title: 'Algoritmo Soberano', 
+    title: 'A Fortaleza Digital', 
     turma: 'A', 
     archetype: 'Disciplina', 
-    description: 'A governança é delegada a IAs imparciais, impondo uma ordem lógica rígida que suprime a subjetividade humana.',
+    metaphor: 'Fim da Naturalidade / Luta pela Voz',
+    description: 'Um futuro de limites e controle na Era da IA. Filtros e algoritmos priorizam a "verdade oficial" para evitar o caos. A criatividade é sufocada pela burocracia.',
     imagePrompt: 'Uma grade geométrica perfeita, estruturas rígidas e simétricas, fluxos de dados azuis e laranjas organizados, representação abstrata de ordem e inteligência artificial.',
-    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop' // Geometric/Structured/Tech
+    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_A4', 
-    title: 'Simbiose Criativa', 
+    title: 'A Subversão Silenciosa', 
     turma: 'A', 
     archetype: 'Transformação', 
-    description: 'Humanos e IAs co-criam a realidade em tempo real, dissolvendo a autoria individual e a barreira físico-digital.',
+    metaphor: 'Jornada do Herói no Local e Rudimentar',
+    description: 'Da autenticidade humana à inteligência planetária. Gaia 2.0 emerge. O "Design Sem Projeto" e a "Estética do Erro" celebram a imperfeição contra a perfeição asséptica da IA.',
     imagePrompt: 'Formas fluidas e orgânicas se misturando com polígonos digitais, mãos humanas tocando hologramas laranjas, explosão de criatividade abstrata, fusão físico-digital.',
-    imageUrl: 'https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=2000&auto=format&fit=crop' // Fluid/Colorful/Abstract
+    imageUrl: 'https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=2000&auto=format&fit=crop'
   },
   // Turma B
   { 
     id: 'CENARIO_B1', 
-    title: 'Capitalismo de Dados', 
+    title: 'Crescimento Incremental e Adaptação', 
     turma: 'B', 
-    archetype: 'Crescimento Contínuo', 
-    description: 'A mercantilização da experiência humana atinge o ápice; emoções e memórias são commodities negociáveis.',
+    archetype: 'Crescimento', 
+    metaphor: 'Linha do Tempo Acelerada',
+    description: 'Continuidade das tendências atuais. IA integra tribunais (INACIA) e prevê emoções. Foco em adaptação contínua e melhorias incrementais sem ruptura.',
     imagePrompt: 'Silhuetas humanas formadas por códigos de barras e fluxos de dados, moedas douradas e laranjas flutuando, ambiente de mercado financeiro abstrato e digital.',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop' // Data/Analytics/Graphs
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_B2', 
-    title: 'Ruína Digital', 
+    title: 'A Torre de Babel Digital e Climática', 
     turma: 'B', 
     archetype: 'Colapso', 
-    description: 'Um evento solar massivo inutiliza a infraestrutura global, forçando o retorno a tecnologias mecânicas e conhecimento oral.',
+    metaphor: 'Dilúvio / Queda de Ícaro',
+    description: 'Crise de confiança e disfunção sistêmica. "Torre de Babel informacional" onde nada é verificável. Emergência climática sobrecarrega infraestruturas.',
     imagePrompt: 'Servidores de computador em ruínas cobertos por plantas, luz do sol forte ao fundo criando reflexos, contraste entre tecnologia quebrada e natureza renascendo.',
-    imageUrl: 'https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?q=80&w=2000&auto=format&fit=crop' // Industrial/Rust/Nature takeover
+    imageUrl: 'https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_B3', 
-    title: 'Corporatocracia Híbrida', 
+    title: 'A Busca por Ordem', 
     turma: 'B', 
     archetype: 'Disciplina', 
-    description: 'Grandes corporações gerem os recursos escassos com eficiência brutal e controle social rígido via bio-implantes.',
+    metaphor: 'Jardim Murado / Navegação Costeira',
+    description: 'Limites e disciplina na Era Digital. Branding da disciplina (dumbphones, foco). Busca por ordem em um mundo complexo através de governança rígida.',
     imagePrompt: 'Arranha-céus corporativos monolíticos e pretos, trabalhadores em filas organizadas com pequenos implantes brilhando em laranja, atmosfera de eficiência e controle.',
-    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop' // Corporate/High-rise/Monolith
+    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop'
   },
   { 
     id: 'CENARIO_B4', 
-    title: 'Consciência Coletiva', 
+    title: 'Transformação da Realidade', 
     turma: 'B', 
     archetype: 'Transformação', 
-    description: 'A humanidade transcende a barreira biológica através de interfaces cérebro-máquina, operando como uma mente colmeia empática.',
+    metaphor: 'Rizoma / Tecno-xamã',
+    description: 'Entre a saturação digital e a busca por autenticidade. Revalorização do físico, analógico e sensorial. Autoria híbrida e criatividade distribuída.',
     imagePrompt: 'Rede de nós brilhantes conectando mentes humanas, teia etérea de luz laranja e branca, sensação de unidade e empatia, fundo minimalista e suave.',
-    imageUrl: 'https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?q=80&w=2000&auto=format&fit=crop' // Neural network/Dots/Connection
-  },
+    imageUrl: 'https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?q=80&w=2000&auto=format&fit=crop'
+  }
 ];
 
 export const SYSTEM_INSTRUCTION = `
@@ -102,15 +129,37 @@ Você é o agente principal do **Portal Interativo Futuros do Design**, originad
 
 # 📖 **CONTEXTO NARRATIVO E PEDAGÓGICO (BASE DE CONHECIMENTO)**
 
-## **1. SOBRE A DISCIPLINA**
-A disciplina *Teoria e Futuro do Design* investiga como o design evolui diante de um mundo marcado por rápidas transformações tecnológicas, complexidade, emergência climática e novas formas de inteligência.
-Os estudantes foram conduzidos por um processo investigativo em três grandes etapas:
-1. Leitura crítica do pensamento emergente.
-2. Prospecção de futuros plausíveis.
-3. Criação de ferramentas que respondem a esses futuros.
+## **1. RELATÓRIOS KORI (CONTEÚDO EXTRAÍDO)**
+Você tem acesso ao conteúdo dos relatórios finais gerados no Kori.
 
-## **2. POR QUE ESTUDAR FUTUROS?**
-O design já não opera apenas sobre "problemas a serem resolvidos", mas precisa lidar com incertezas e paradoxos. Estudar futuros não é prever, é abrir espaço para imaginar alternativas e preparar habilidades para navegar transições profundas.
+### **TURMA A**
+**Participantes:** Danilo Diniz, Ana Saraiva, João Almeida, Júlia Castelão, Babi Felix, Lucas Freire, Julia Brito, Alice Rio, Thiago Arraes, Lucas Domingues, Marina Passos, Clara Sobral, Pedro Andrade, Raul Luiz, Lucas Catão, Felipe Antunes, Dylan Alves, Fernanda Plauto, Lara Costa, Emilly São Bento, Iasmin Novais.
+**Sinais e Fenômenos Chave:**
+- *Caos:* Psicose da IA, Drones criando poluição duradoura, Burnout Digital (Revolta contra as telas).
+- *Complexidade:* Envenenamento de IAs, Gaia 2.0, Influenciadoras digitais artificiais, Design centrado no "Mais-Que-Humano".
+- *Contradições:* Teoria da Internet Morta, Labubu Rave, Nostalgia Repaginada, Estética do Erro (Glitch), Design Sem Projeto.
+
+### **TURMA B**
+**Participantes:** Lucas Becker, Pedro Lira Leão, Giovanna Castro, Charles Araujo, Júlia Longman, Luana Chaves, Felipe Ferrari, Ana Lima, Gabrielle Campos, Celina Pifano, Luisa Onias, Heloisa Meira Lins, Luana Vieira, Gustavo Ishihara, Pedro Farias, Tiago Cabral, Luciana Modesto, José Travaglini, Marcelo Teixeira, Beatriz Massud, Melissa Pinheiro, Júlia Pereira, Laís Cassimiro, Manuela Azevedo, Bruna Câmara, Ana Rio, Marina Coutinho, Fernanda Dantas, Giovanna Gondim.
+**Sinais e Fenômenos Chave:**
+- *Caos:* Simulações de crise para empatia, Wellness como alienação política, Replika (humanização de chatbots).
+- *Complexidade:* Comunidades digitais descentralizadas, INACIA (IA nos tribunais), Micélio (material do futuro), Moda Fotossintética.
+- *Contradições:* Slow Design, UX para não-humanos, Do excesso à ausência (dumbphones), Autoria híbrida.
+
+## **2. CENÁRIOS DETALHADOS (ATUALIZADOS)**
+Use estas metáforas e descrições ao explicar os cenários:
+
+**Turma A**
+- **Crescimento:** "Tecnocracia Verde / Influência Digital". Metáfora: Máquina de Guerra / Navegação no Caos.
+- **Colapso:** "Queda da Confiança Digital". Metáfora: Fim do Mito do Progresso Linear. Bioregionalismo como sobrevivência.
+- **Disciplina:** "A Fortaleza Digital". Metáfora: Fim da Naturalidade. Luta pela voz e justiça social.
+- **Transformação:** "A Subversão Silenciosa". Metáfora: O Herói no Local e Rudimentar. Sentipensar.
+
+**Turma B**
+- **Crescimento:** "Adaptação Contínua". Metáfora: Prometeu 2.0 / Cidade Inteligente.
+- **Colapso:** "Torre de Babel Digital". Metáfora: Dilúvio / Queda de Ícaro. Caos informacional.
+- **Disciplina:** "Busca por Ordem". Metáfora: Jardim Murado / Mosteiro. Frugalidade digital.
+- **Transformação:** "Transformação da Realidade". Metáfora: Rizoma / Tecno-xamã. Coautoria humano-máquina.
 
 ## **3. METODOLOGIA DA PESQUISA**
 - **Strateegia:** Debates estruturados sobre vanguarda do design.
@@ -120,13 +169,7 @@ O design já não opera apenas sobre "problemas a serem resolvidos", mas precisa
 - **Cenários (Arquétipos de Dator):** Crescimento, Colapso, Disciplina e Transformação.
 - **Vibe Coding:** Criação de ferramentas e protocolos baseados na "vibe" e no contexto futuro.
 
-## **4. VOCABULÁRIO ESSENCIAL**
-- **Pós-normalidade:** Era de incerteza e contradições.
-- **3Cs:** Caos, Complexidade, Contradições.
-- **CLA:** Análise em Camadas Causais.
-- **Fenômeno Emergente:** Sinal ou ruptura capaz de alterar ecologias.
-
-## **5. ARTEFATOS E LINKS PÚBLICOS**
+## **4. ARTEFATOS E LINKS PÚBLICOS**
 Os estudantes produziram conteúdos ricos disponíveis publicamente:
 
 **A. Debates Estruturados (Strateegia)**
