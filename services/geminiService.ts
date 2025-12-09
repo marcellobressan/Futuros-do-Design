@@ -296,7 +296,7 @@ export const sendMessage = async (
   let fullTextResponse = "";
 
   try {
-    let result = await chatSession.sendMessageStream({ message });
+    const result = await chatSession.sendMessageStream({ message });
 
     for await (const chunk of result) {
       if (chunk.text) {
@@ -304,44 +304,44 @@ export const sendMessage = async (
         onChunk(fullTextResponse);
       }
     }
-  } catch (e: any) {
-    console.error("Stream error", e);
-  }
-  
-  // Checking for tool calls requires checking the turn.
-  const history = await chatSession.getHistory();
-  const lastMsg = history[history.length - 1];
-  
-  const toolCalls = lastMsg?.parts?.filter((p: any) => p.functionCall);
-  
-  if (toolCalls && toolCalls.length > 0) {
-    for (const part of toolCalls) {
+
+    const history = await chatSession.getHistory();
+    const lastMsg = history[history.length - 1];
+    
+    // NOTE: The `parts` property is not in the public types but exists on the object.
+    const toolCalls: any[] = lastMsg?.parts?.filter((p: any) => p.functionCall) || [];
+    
+    if (toolCalls.length > 0) {
+      const functionResponseParts = [];
+
+      for (const part of toolCalls) {
         const fc = part.functionCall;
         if (onFunctionCall) onFunctionCall(fc.name, fc.args);
         
         const functionResult = await executeFunction(fc.name, fc.args);
         
-        // Send the result back to the model
-        const toolResponse = {
-            functionResponses: [
-                {
-                    id: fc.id, 
-                    name: fc.name,
-                    response: { result: functionResult }
-                }
-            ]
-        };
-        
-        // Send tool response and stream the NEXT text
-        const nextResult = await chatSession.sendMessageStream(toolResponse);
-        
-        for await (const chunk of nextResult) {
-            if (chunk.text) {
-                fullTextResponse += chunk.text;
-                onChunk(fullTextResponse);
-            }
+        // This is the corrected structure for the function response.
+        functionResponseParts.push({
+          functionResponse: {
+            name: fc.name,
+            response: { result: functionResult },
+          },
+        });
+      }
+      
+      // Send the function response back to the model and stream the new reply.
+      const toolResultStream = await chatSession.sendMessageStream(functionResponseParts);
+      
+      for await (const chunk of toolResultStream) {
+        if (chunk.text) {
+          fullTextResponse += chunk.text;
+          onChunk(fullTextResponse);
         }
+      }
     }
+  } catch (e: any) {
+    console.error("sendMessage error:", e);
+    onChunk(fullTextResponse + "\n\n[Ocorreu um erro. Por favor, tente novamente.]");
   }
 
   return fullTextResponse;
