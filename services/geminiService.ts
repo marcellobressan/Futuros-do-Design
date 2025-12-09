@@ -178,9 +178,11 @@ export const initializeGemini = async (apiKey: string, userProfile?: UserProfile
 // Now fetch from Serverless API instead of in-memory array
 export const getSolutions = async (): Promise<RegisteredSolution[]> => {
   try {
-    const response = await fetch('/api/solutions');
+    const response = await fetch('/.netlify/functions/solutions');
     if (!response.ok) {
-        throw new Error('Failed to fetch solutions');
+        const errorBody = await response.text();
+        console.error("Serverless function error response:", errorBody);
+        throw new Error(`Failed to fetch solutions. Status: ${response.status}`);
     }
     const data = await response.json();
     return data as RegisteredSolution[];
@@ -251,7 +253,7 @@ const executeFunction = async (name: string, args: any): Promise<any> => {
   if (name === "registrarSolucao") {
     // Call the serverless API to save to DB
     try {
-        const response = await fetch('/api/solutions', {
+        const response = await fetch('/.netlify/functions/solutions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -260,7 +262,9 @@ const executeFunction = async (name: string, args: any): Promise<any> => {
         });
 
         if (!response.ok) {
-            throw new Error('Database insertion failed');
+            const errorBody = await response.text();
+            console.error("Serverless function error on POST:", errorBody);
+            throw new Error(`Database insertion failed. Status: ${response.status}`);
         }
 
         const result = await response.json();
