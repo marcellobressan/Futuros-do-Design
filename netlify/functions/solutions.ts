@@ -35,7 +35,12 @@ export default async (req: Request) => {
 
   if (method === 'POST') {
     try {
-      const body = await req.json();
+      let body;
+      try {
+        body = await req.json();
+      } catch (e) {
+        return new Response(JSON.stringify({ error: 'Invalid JSON body' }), { status: 400, headers });
+      }
       
       if (!body.nome_da_solucao || !body.turma) {
         return new Response(JSON.stringify({ error: 'Missing required fields' }), {
