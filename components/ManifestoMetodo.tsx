@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Users, Zap, Layers, Sparkles, BookOpen, Compass, ChevronDown } from 'lucide-react';
+import IconImage from './IconImage';
 import { AppView } from '../types';
 
 interface ManifestoMetodoProps {
@@ -312,7 +313,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                 style={{ padding: '1rem 2rem', fontSize: '1rem' }}
               >
                 Explorar Cenários
-                <ArrowRight size={20} />
+                <IconImage name="arrow-right" alt="seguir" size={20} fallback={<ArrowRight size={20} />} />
               </button>
               <button 
                 onClick={() => onNavigate(AppView.CHAT)}
@@ -352,7 +353,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
           </div>
           <div className="card" style={{ backgroundColor: '#f9fafb', border: '1px solid #f3f4f6' }}>
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-black">
-              <Users className="text-orange" />
+              <IconImage name="users" alt="disciplina" size={20} fallback={<Users className="text-orange" />} />
               A Disciplina
             </h3>
             <p className="text-gray mb-8">
@@ -479,19 +480,6 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* Watermarks (words behind content) */}
-          <div aria-hidden style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
-            <div style={{ position: 'absolute', left: '-6%', top: '10%', fontSize: '96px', color: '#0f172a', opacity: 0.03, transform: 'rotate(-12deg)', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>
-              complexidade
-            </div>
-            <div style={{ position: 'absolute', right: '-8%', top: '38%', fontSize: '120px', color: '#0f172a', opacity: 0.03, transform: 'rotate(8deg)', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>
-              caos
-            </div>
-            <div style={{ position: 'absolute', left: '10%', bottom: '-6%', fontSize: '110px', color: '#0f172a', opacity: 0.03, transform: 'rotate(-6deg)', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>
-              contradições
-            </div>
-          </div>
-
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
             {[
               {
@@ -531,7 +519,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
           <div style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '1rem', position: 'relative', zIndex: 3 }}>
             <h3 className="text-2xl font-bold text-black mb-6">Análise STEEPLED</h3>
             <p className="text-gray mb-6" style={{ maxWidth: '800px' }}>
-              Uma varredura estruturada de horizonte que mapeia sinais fracos nos pilares social, tecnológico, econômico (x2), político, legal, ético e demográfico.
+              Uma varredura estruturada de horizonte que mapeia sinais fracos nos pilares social, tecnológico, econômico, ambiental (environmental), político, legal, ético e demográfico.
             </p>
 
             <SteepleAnalysis />
@@ -539,10 +527,60 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. Call to Action */}
+      {/* 5. Podcasts Section */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: '#f9fafb', borderTop: '1px solid var(--c-border)' }}>
+        <div style={{ ...containerStyle }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <h2 className="text-4xl font-extrabold text-black mb-4">Podcasts Recomendados</h2>
+            <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto' }}>
+              Escute conversas aprofundadas sobre o futuro do design, tecnologia e inovação. Estes podcasts exploram perspectivas críticas e criativas sobre como designers podem navegar a transformação tecnológica.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+            {/* podIA ser design? */}
+            <div style={{ backgroundColor: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: 'var(--shadow-sm)', border: '1px solid #e5e7eb' }}>
+              <h3 className="text-xl font-bold text-black mb-4">🎙️ podIA ser design?</h3>
+              <div style={{ marginBottom: '1rem' }}>
+                <iframe 
+                  data-testid="embed-iframe" 
+                  style={{ borderRadius: '12px' }} 
+                  src="https://open.spotify.com/embed/show/6SIZ5HFIib1UdSDTfxetNz?utm_source=generator" 
+                  width="100%" 
+                  height="352" 
+                  frameBorder="0" 
+                  allowFullScreen={true}
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* IAgora, Designers? */}
+            <div style={{ backgroundColor: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: 'var(--shadow-sm)', border: '1px solid #e5e7eb' }}>
+              <h3 className="text-xl font-bold text-black mb-4">🎙️ IAgora, Designers?</h3>
+              <div style={{ marginBottom: '1rem' }}>
+                <iframe 
+                  data-testid="embed-iframe" 
+                  style={{ borderRadius: '12px' }} 
+                  src="https://open.spotify.com/embed/show/5jdYWrY0SbEHk1OcN6qt4l?utm_source=generator" 
+                  width="100%" 
+                  height="352" 
+                  frameBorder="0" 
+                  allowFullScreen={true}
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Call to Action */}
       <section style={{ padding: '8rem 1.5rem', backgroundColor: 'white' }}>
         <div style={{ ...containerStyle, backgroundColor: 'var(--c-off-white)', padding: '4rem', borderRadius: '2rem', border: '1px solid var(--c-border)', textAlign: 'center' }}>
-          <Sparkles size={48} style={{ color: 'var(--c-orange)', margin: '0 auto 2rem' }} />
+          <IconImage name="sparkles" alt="destaque" size={48} fallback={<Sparkles size={48} style={{ color: 'var(--c-orange)', margin: '0 auto 2rem' }} />} />
           <h2 className="text-4xl font-extrabold text-black mb-6">
             Pronto para explorar?
           </h2>
