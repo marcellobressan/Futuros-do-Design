@@ -151,6 +151,7 @@ const SteepleAnalysis: React.FC = () => {
             }}
           >
             <span style={{ fontWeight: 800, marginRight: '0.25rem' }}>{data.shortLabel}</span> — {data.label}
+            <span style={{ marginLeft: '0.5rem', fontSize: '0.85rem', opacity: 0.7 }}>({data.phenomena.length})</span>
           </button>
         ))}
       </div>
