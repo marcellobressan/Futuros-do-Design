@@ -94,6 +94,7 @@ const DraftReviewCard: React.FC<{
                         <select value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="input-field" style={{ padding: '0.5rem' }}>
                             <option value="A">A</option>
                             <option value="B">B</option>
+                            <option value="PROFESSOR">Professor</option>
                         </select>
                         <button onClick={() => saveEdit('turma')} className="btn btn-primary" style={{ padding: '0.25rem' }}><IconImage name="save" alt="salvar" size={14} fallback={<Save size={14} />} /></button>
                     </div>
