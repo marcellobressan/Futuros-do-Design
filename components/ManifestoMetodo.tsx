@@ -528,50 +528,46 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 5. Podcasts Section */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: '#f9fafb', borderTop: '1px solid var(--c-border)' }}>
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--c-off-white)', borderTop: '1px solid var(--c-border)' }}>
         <div style={{ ...containerStyle }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 className="text-4xl font-extrabold text-black mb-4">Podcasts Recomendados</h2>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 className="text-4xl font-extrabold text-black mb-4">Podcasts</h2>
             <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto' }}>
-              Escute conversas aprofundadas sobre o futuro do design, tecnologia e inovação. Estes podcasts exploram perspectivas críticas e criativas sobre como designers podem navegar a transformação tecnológica.
+              Escute conversas aprofundadas sobre design, IA e os futuros que estamos imaginando. Estes episódios oferecem perspectivas críticas e criativas sobre como designers podem se posicionar em um mundo transformado pela inteligência artificial.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
-            {/* podIA ser design? */}
-            <div style={{ backgroundColor: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: 'var(--shadow-sm)', border: '1px solid #e5e7eb' }}>
-              <h3 className="text-xl font-bold text-black mb-4">🎙️ podIA ser design?</h3>
-              <div style={{ marginBottom: '1rem' }}>
-                <iframe 
-                  data-testid="embed-iframe" 
-                  style={{ borderRadius: '12px' }} 
-                  src="https://open.spotify.com/embed/show/6SIZ5HFIib1UdSDTfxetNz?utm_source=generator" 
-                  width="100%" 
-                  height="352" 
-                  frameBorder="0" 
-                  allowFullScreen={true}
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                  loading="lazy"
-                />
-              </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginBottom: '2rem' }}>
+            {/* Podcast 1: podIA ser design? */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h3 className="text-xl font-bold text-black">podIA ser design?</h3>
+              <iframe
+                data-testid="embed-iframe"
+                style={{ borderRadius: '12px' }}
+                src="https://open.spotify.com/embed/show/6SIZ5HFIib1UdSDTfxetNz?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
             </div>
 
-            {/* IAgora, Designers? */}
-            <div style={{ backgroundColor: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: 'var(--shadow-sm)', border: '1px solid #e5e7eb' }}>
-              <h3 className="text-xl font-bold text-black mb-4">🎙️ IAgora, Designers?</h3>
-              <div style={{ marginBottom: '1rem' }}>
-                <iframe 
-                  data-testid="embed-iframe" 
-                  style={{ borderRadius: '12px' }} 
-                  src="https://open.spotify.com/embed/show/5jdYWrY0SbEHk1OcN6qt4l?utm_source=generator" 
-                  width="100%" 
-                  height="352" 
-                  frameBorder="0" 
-                  allowFullScreen={true}
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                  loading="lazy"
-                />
-              </div>
+            {/* Podcast 2: IAgora, Designers? */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h3 className="text-xl font-bold text-black">IAgora, Designers?</h3>
+              <iframe
+                data-testid="embed-iframe"
+                style={{ borderRadius: '12px' }}
+                src="https://open.spotify.com/embed/show/5jdYWrY0SbEHk1OcN6qt4l?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
