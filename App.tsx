@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import SolutionRegistration from './components/SolutionRegistration';
@@ -13,6 +14,9 @@ import { AppView, RegisteredSolution, UserProfile as UserProfileType } from './t
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
 import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search } from 'lucide-react';
 import IconImage from './components/IconImage';
+
+// Google OAuth Client ID
+const GOOGLE_CLIENT_ID = '421543325846-d8mdb1qp99qaa9dsl1lbn9hmhcaegr5v.apps.googleusercontent.com';
 
 const getEnvApiKey = () => {
   // Since we now use server-side Gemini API (via Netlify Functions),
@@ -501,4 +505,13 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+// Wrapper component com GoogleOAuthProvider
+const AppWithGoogleAuth: React.FC = () => {
+  return (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <App />
+    </GoogleOAuthProvider>
+  );
+};
+
+export default AppWithGoogleAuth;

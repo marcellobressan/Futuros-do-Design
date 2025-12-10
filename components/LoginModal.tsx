@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { Mail, User } from 'lucide-react';
 import IconImage from './IconImage';
 
@@ -8,37 +9,43 @@ interface LoginModalProps {
   onLogin: (name: string, email: string, turma: 'A' | 'B') => void;
 }
 
+// Função para decodificar o JWT do Google (payload base64)
+const parseJwt = (token: string) => {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  } catch (e) {
+    console.error('Error parsing JWT:', e);
+    return null;
+  }
+};
+
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => {
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
   const [formTurma, setFormTurma] = useState<'A' | 'B'>('A');
   const [loginMethod, setLoginMethod] = useState<'manual' | 'google'>('google');
-  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
 
-  const handleGoogleLogin = async () => {
-    setIsLoadingGoogle(true);
-    try {
-      // Simula autenticação com Google OAuth
-      // Em produção, você usaria: https://www.npmjs.com/package/@react-oauth/google
-      // ou integração nativa com Firebase
+  const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
+    if (credentialResponse.credential) {
+      const userInfo = parseJwt(credentialResponse.credential);
       
-      // Para demonstração, vamos usar uma simulação
-      // Idealmente você faria uma chamada para um endpoint que trata o fluxo OAuth
-      
-      const mockGoogleUser = {
-        name: 'Usuário Google',
-        email: `user-${Date.now()}@gmail.com`,
-      };
-
-      onLogin(mockGoogleUser.name, mockGoogleUser.email, formTurma);
-      setFormName('');
-      setFormEmail('');
-      onClose();
-    } catch (error) {
-      console.error('Erro ao autenticar com Google:', error);
-    } finally {
-      setIsLoadingGoogle(false);
+      if (userInfo) {
+        onLogin(userInfo.name || 'Usuário Google', userInfo.email, formTurma);
+        setFormName('');
+        setFormEmail('');
+        onClose();
+      }
     }
+  };
+
+  const handleGoogleError = () => {
+    console.error('Google Login Failed');
+    alert('Falha ao autenticar com Google. Tente novamente ou use o login manual.');
   };
 
   const handleManualLogin = (e: React.FormEvent) => {
@@ -119,42 +126,21 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               </select>
             </div>
 
-            <button
-              onClick={handleGoogleLogin}
-              disabled={isLoadingGoogle}
-              style={{
-                width: '100%',
-                padding: '1rem',
-                backgroundColor: '#ffffff',
-                border: '1px solid #d1d5db',
-                borderRadius: '8px',
-                fontWeight: 600,
-                cursor: isLoadingGoogle ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.75rem',
-                opacity: isLoadingGoogle ? 0.6 : 1,
-                transition: 'all 200ms'
-              }}
-              onMouseEnter={(e) => !isLoadingGoogle && (e.currentTarget.style.backgroundColor = '#f3f4f6')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
-            >
-              {isLoadingGoogle ? (
-                <>
-                  <span style={{ animation: 'spin 1s linear infinite' }}>⏳</span>
-                  Autenticando...
-                </>
-              ) : (
-                <>
-                  <IconImage name="mail" alt="google" size={20} fallback={<Mail size={20} />} />
-                  Continuar com Google
-                </>
-              )}
-            </button>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                useOneTap
+                theme="outline"
+                size="large"
+                text="continue_with"
+                shape="rectangular"
+                width="100%"
+              />
+            </div>
 
             <p className="text-xs text-gray text-center mt-4">
-              Você será redirecionado para a página de login do Google para autenticar com segurança.
+              Clique no botão acima para autenticar com sua conta Google de forma segura.
             </p>
           </div>
         ) : (
