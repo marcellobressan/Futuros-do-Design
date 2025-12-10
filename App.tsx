@@ -225,14 +225,16 @@ const App: React.FC = () => {
           )}
 
           {currentView === AppView.SOLUTION_REGISTRATION && userProfile && (
-            <SolutionForm 
-              userProfile={userProfile} 
-              onSuccess={async () => {
-                const solutions = await getSolutions();
-                setRegisteredSolutions(solutions);
-                setCurrentView(AppView.SOLUTIONS);
-              }}
-            />
+            <div style={{ height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
+              <SolutionForm 
+                userProfile={userProfile} 
+                onSuccess={async () => {
+                  const solutions = await getSolutions();
+                  setRegisteredSolutions(solutions);
+                  setCurrentView(AppView.SOLUTIONS);
+                }}
+              />
+            </div>
           )}
 
           {currentView === AppView.SOLUTION_REGISTRATION && !userProfile && (

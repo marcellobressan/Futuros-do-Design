@@ -153,10 +153,47 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
   }
 
   return (
-    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem' }}>
-      <div className="mb-8">
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 2rem 4rem 2rem' }}>
+      {/* Header Fixo */}
+      <div style={{ 
+        position: 'sticky', 
+        top: 0, 
+        backgroundColor: 'var(--c-off-white)', 
+        paddingBottom: '1.5rem',
+        marginBottom: '1.5rem',
+        zIndex: 10,
+        borderBottom: '1px solid #e5e7eb'
+      }}>
         <h1 className="text-3xl font-extrabold text-black mb-2">Cadastrar Nova Solução</h1>
-        <p className="text-neutral">Preencha os campos abaixo para registrar sua solução no portal.</p>
+        <p className="text-neutral text-sm">Preencha os campos abaixo para registrar sua solução no portal.</p>
+        
+        {/* Progress Indicator */}
+        <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+          {[
+            { label: 'Nome', filled: !!nomeSolucao },
+            { label: 'Participantes', filled: participantes.every(p => p.nome_completo && p.email) },
+            { label: 'Cenários', filled: cenariosRelacionados.length > 0 },
+            { label: 'Descrição', filled: resumo && problemaQueResolve && comoFunciona && relacaoComCenarios }
+          ].map((step, idx) => (
+            <div key={idx} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+              <div style={{
+                height: '4px',
+                borderRadius: '2px',
+                backgroundColor: step.filled ? 'var(--c-orange)' : '#e5e7eb',
+                transition: 'background-color 0.3s ease'
+              }} />
+              <span style={{
+                fontSize: '9px',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                color: step.filled ? 'var(--c-orange)' : '#9ca3af'
+              }}>
+                {step.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -400,38 +437,64 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
             padding: '1rem',
             backgroundColor: '#fef2f2',
             border: '1px solid #fecaca',
-            borderRadius: '8px',
+            borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem'
+            gap: '0.75rem',
+            animation: 'fadeIn 0.3s ease-in'
           }}>
             <AlertCircle size={20} style={{ color: '#dc2626', flexShrink: 0 }} />
             <p className="text-sm" style={{ color: '#dc2626' }}>{error}</p>
           </div>
         )}
 
-        {/* Submit Button */}
-        <div className="flex gap-3 justify-end">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn btn-primary"
-            style={{ padding: '1rem 2rem', fontSize: '1rem' }}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="animate-spin" size={20} />
-                Cadastrando...
-              </>
-            ) : (
-              <>
-                <Save size={20} />
-                Cadastrar Solução
-              </>
-            )}
-          </button>
-        </div>
+        {/* Spacer para o sticky footer */}
+        <div style={{ height: '100px' }} />
       </form>
+
+      {/* Submit Button - Sticky Footer */}
+      <div style={{
+        position: 'sticky',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'white',
+        borderTop: '1px solid #e5e7eb',
+        padding: '1.25rem 0',
+        marginTop: '2rem',
+        display: 'flex',
+        gap: '1rem',
+        justifyContent: 'flex-end',
+        boxShadow: '0 -4px 6px -1px rgba(0, 0, 0, 0.05)'
+      }}>
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="btn btn-secondary"
+          style={{ padding: '0.875rem 1.5rem' }}
+        >
+          ↑ Voltar ao Topo
+        </button>
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          className="btn btn-primary"
+          style={{ padding: '0.875rem 2rem', fontSize: '1rem' }}
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="animate-spin" size={20} />
+              Cadastrando...
+            </>
+          ) : (
+            <>
+              <Save size={20} />
+              Cadastrar Solução
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 };
