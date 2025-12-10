@@ -242,7 +242,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
 
         <div style={{ ...containerStyle, position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 className="text-4xl font-extrabold text-black mb-4">Prospectar na Pós-Normalidade</h2>
+            <h2 className="text-4xl font-extrabold text-black mb-4">Prospectar Futuros na Pós-Normalidade</h2>
             <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto' }}>
               Entendemos que o mundo mudou de forma irreversível. Aqui estão os princípios que guiam nosso trabalho — ilustrados com uma estética inspirada em ondas para sugerir varredura, marés e movimentos sistêmicos.
             </p>
