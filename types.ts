@@ -82,4 +82,5 @@ export enum AppView {
   SOLUTIONS = 'SOLUTIONS',
   HOME = 'HOME', // Manifesto
   SOLUTION_REGISTRATION = 'SOLUTION_REGISTRATION', // Cadastro de Soluções
+  USER_PROFILE = 'USER_PROFILE', // Perfil do Usuário
 }

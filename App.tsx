@@ -6,8 +6,10 @@ import StoryBoard from './components/StoryBoard';
 import ManifestoMetodo from './components/ManifestoMetodo';
 import AIIllustration from './components/AIIllustration';
 import Dashboard from './components/Dashboard';
+import UserProfile from './components/UserProfile';
+import LoginModal from './components/LoginModal';
 import { initializeGemini, getSolutions } from './services/geminiService';
-import { AppView, RegisteredSolution, UserProfile } from './types';
+import { AppView, RegisteredSolution, UserProfile as UserProfileType } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
 import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search } from 'lucide-react';
 import IconImage from './components/IconImage';
@@ -21,16 +23,12 @@ const getEnvApiKey = () => {
 
 const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string | null>(getEnvApiKey());
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentView, setCurrentView] = useState<AppView>(AppView.HOME);
   const [registeredSolutions, setRegisteredSolutions] = useState<RegisteredSolution[]>([]);
   const [keyError, setKeyError] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  
-  const [formName, setFormName] = useState('');
-  const [formEmail, setFormEmail] = useState('');
-  const [formTurma, setFormTurma] = useState<'A' | 'B'>('A');
 
   const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
   const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
@@ -53,16 +51,18 @@ const App: React.FC = () => {
     setKeyError(false);
   };
 
-  const handleUserRegistration = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formName && formEmail) {
-      setUserProfile({
-        name: formName,
-        email: formEmail,
-        turma: formTurma
-      });
-      setIsLoginModalOpen(false);
-    }
+  const handleUserRegistration = (name: string, email: string, turma: 'A' | 'B') => {
+    setUserProfile({
+      name,
+      email,
+      turma
+    });
+    setIsLoginModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    setUserProfile(null);
+    setCurrentView(AppView.HOME);
   };
 
   const simulateDownload = (report: typeof KORI_REPORTS_DATA[0]) => {
@@ -480,86 +480,23 @@ const App: React.FC = () => {
             </div>
             </div>
           )}
+
+          {currentView === AppView.USER_PROFILE && userProfile && (
+            <UserProfile 
+              userProfile={userProfile}
+              solutions={registeredSolutions}
+              onLogout={handleLogout}
+            />
+          )}
         </main>
       </div>
 
       {/* Login Modal */}
-      {isLoginModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', backgroundColor: 'rgba(22, 22, 22, 0.4)', backdropFilter: 'blur(4px)' }}>
-          <div className="card fade-in" style={{ width: '100%', maxWidth: '400px', position: 'relative', padding: '2.5rem' }}>
-            <button 
-              onClick={() => setIsLoginModalOpen(false)}
-              style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: 'var(--c-neutral)' }}
-            >
-              <X size={24} />
-            </button>
-
-            <div style={{ width: '56px', height: '56px', backgroundColor: 'var(--c-orange)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', boxShadow: 'var(--shadow-lg)' }}>
-              <UserCheck className="text-white" size={28} />
-            </div>
-            <h1 className="text-2xl font-extrabold text-black mb-2 text-center">Identificação</h1>
-            <p className="text-gray mb-8 text-center text-sm" style={{ padding: '0 1rem' }}>
-              Identifique-se para cadastrar soluções no portal. <br/>A visualização de conteúdo é livre.
-            </p>
-            
-            <form onSubmit={handleUserRegistration} className="flex flex-col gap-5">
-              <div>
-                <label className="text-neutral uppercase tracking-widest block mb-1.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Nome Completo</label>
-                <input 
-                  type="text" 
-                  required
-                  value={formName}
-                  onChange={(e) => setFormName(e.target.value)}
-                  className="input-field"
-                  placeholder="Ex: Ana Silva"
-                />
-              </div>
-              
-              <div>
-                <label className="text-neutral uppercase tracking-widest block mb-1.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Email Institucional</label>
-                <input 
-                  type="email" 
-                  required
-                  value={formEmail}
-                  onChange={(e) => setFormEmail(e.target.value)}
-                  className="input-field"
-                  placeholder="ana@cesar.school"
-                />
-              </div>
-
-              <div>
-                <label className="text-neutral uppercase tracking-widest block mb-1.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Turma</label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                  <button
-                    type="button"
-                    onClick={() => setFormTurma('A')}
-                    className="btn"
-                    style={formTurma === 'A' ? { backgroundColor: '#ecfeff', border: '1px solid #a5f3fc', color: '#0e7490' } : { backgroundColor: 'white', border: '1px solid #e5e7eb', color: 'var(--c-neutral)' }}
-                  >
-                    Turma A
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFormTurma('B')}
-                    className="btn"
-                    style={formTurma === 'B' ? { backgroundColor: '#f5f3ff', border: '1px solid #ddd6fe', color: '#7e22ce' } : { backgroundColor: 'white', border: '1px solid #e5e7eb', color: 'var(--c-neutral)' }}
-                  >
-                    Turma B
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="btn btn-primary w-full"
-                style={{ marginTop: '1rem', backgroundColor: 'var(--c-black)' }}
-              >
-                Identificar-se <ArrowRight size={18} />
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+      <LoginModal 
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onLogin={handleUserRegistration}
+      />
     </div>
   );
 };
