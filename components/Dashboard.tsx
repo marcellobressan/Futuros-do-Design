@@ -3,6 +3,7 @@ import { UserProfile, RegisteredSolution, AppView } from '../types';
 import { SCENARIOS_DATA } from '../constants';
 import { ArrowRight, MessageSquare, BookOpen, Database, Clock, TrendingUp, Sparkles } from 'lucide-react';
 import IconImage from './IconImage';
+import SteepleAnalysis from './SteepleAnalysis';
 
 interface DashboardProps {
     userProfile: UserProfile | null;
@@ -111,6 +112,12 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                                    </div>
                                )}
                            </div>
+                        </div>
+                        {/* STEEPLED Analysis Section */}
+                        <div className="card">
+                          <h2 className="text-2xl font-bold text-black mb-4">Análise STEEPLED</h2>
+                          <p className="text-sm text-neutral mb-4">Explore fatores sociais, tecnológicos, econômicos, ambientais, políticos, legais, éticos e demográficos que impactam os cenários.</p>
+                          <SteepleAnalysis />
                         </div>
                     </div>
 
