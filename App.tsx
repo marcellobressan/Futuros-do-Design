@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
-import SolutionRegistration from './components/SolutionRegistration';
+import SolutionForm from './components/SolutionForm';
 import StoryBoard from './components/StoryBoard';
 import ManifestoMetodo from './components/ManifestoMetodo';
 import AIIllustration from './components/AIIllustration';
@@ -224,8 +224,44 @@ const App: React.FC = () => {
             <ChatInterface apiKey={apiKey} />
           )}
 
-          {currentView === AppView.SOLUTION_REGISTRATION && (
-            <SolutionRegistration apiKey={apiKey} />
+          {currentView === AppView.SOLUTION_REGISTRATION && userProfile && (
+            <SolutionForm 
+              userProfile={userProfile} 
+              onSuccess={async () => {
+                const solutions = await getSolutions();
+                setRegisteredSolutions(solutions);
+                setCurrentView(AppView.SOLUTIONS);
+              }}
+            />
+          )}
+
+          {currentView === AppView.SOLUTION_REGISTRATION && !userProfile && (
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              minHeight: '400px',
+              padding: '2rem'
+            }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: '50%',
+                backgroundColor: '#fff7ed',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.5rem'
+              }}>
+                <UserCheck size={40} style={{ color: 'var(--c-orange)' }} />
+              </div>
+              <h2 className="text-2xl font-bold text-black mb-2">Login Necessário</h2>
+              <p className="text-neutral mb-6">Faça login para cadastrar uma solução</p>
+              <button onClick={() => setIsLoginModalOpen(true)} className="btn btn-primary">
+                Fazer Login
+              </button>
+            </div>
           )}
 
           {currentView === AppView.KNOWLEDGE && (
