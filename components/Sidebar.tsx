@@ -2,6 +2,7 @@ import React from 'react';
 import { SCENARIOS_DATA } from '../constants';
 import { AppView, UserProfile } from '../types';
 import { BookOpen, MessageSquare, Database, X, LogIn, Compass, LayoutGrid, ChevronRight } from 'lucide-react';
+import IconImage from './IconImage';
 
 interface SidebarProps {
   currentView: AppView;
@@ -42,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             </p>
           </div>
           <button onClick={toggleSidebar} className="md:hidden text-neutral hover:text-orange" style={{ display: window.innerWidth > 768 ? 'none' : 'block' }}>
-            <X size={24} />
+            <IconImage name="x" alt="fechar" size={24} fallback={<X size={24} />} />
           </button>
         </div>
 
@@ -54,9 +55,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
             title="Conheça o manifesto e a metodologia do portal"
           >
-            <Compass size={20} />
+            <IconImage name="compass" alt="manifesto e método" size={20} fallback={<Compass size={20} />} />
             <span>Manifesto & Método</span>
-            {currentView === AppView.HOME && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
+            {currentView === AppView.HOME && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
           
           <button 
@@ -65,9 +66,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             style={currentView === AppView.DASHBOARD ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
             title="Acesso rápido aos dados e resumos"
           >
-            <LayoutGrid size={20} />
+            <IconImage name="layout-grid" alt="dashboard" size={20} fallback={<LayoutGrid size={20} />} />
             <span>Dashboard</span>
-            {currentView === AppView.DASHBOARD && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
+            {currentView === AppView.DASHBOARD && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
           
           <button 
@@ -76,9 +77,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
             title="Converse com o assistente IA e registre soluções"
           >
-            <MessageSquare size={20} />
+            <IconImage name="message-square" alt="agente do portal" size={20} fallback={<MessageSquare size={20} />} />
             <span>Agente do Portal</span>
-            {currentView === AppView.CHAT && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
+            {currentView === AppView.CHAT && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
 
           <button 
@@ -87,9 +88,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             style={currentView === AppView.KNOWLEDGE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
             title="Explore cenários e arquétipos do projeto"
           >
-            <BookOpen size={20} />
+            <IconImage name="book-open" alt="cenários e arquétipos" size={20} fallback={<BookOpen size={20} />} />
             <span>Cenários & Arquétipos</span>
-            {currentView === AppView.KNOWLEDGE && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
+            {currentView === AppView.KNOWLEDGE && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
 
           <button 
@@ -98,9 +99,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             style={currentView === AppView.SOLUTIONS ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
             title="Veja todas as soluções registradas"
           >
-            <Database size={20} />
+            <IconImage name="database" alt="soluções cadastradas" size={20} fallback={<Database size={20} />} />
             <span>Soluções Cadastradas</span>
-            {currentView === AppView.SOLUTIONS && <ChevronRight size={16} style={{ marginLeft: 'auto' }} />}
+            {currentView === AppView.SOLUTIONS && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
 
           <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>
@@ -191,7 +192,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
               }}
               title="Clique para se identificar na plataforma"
             >
-              <LogIn size={18} />
+              <IconImage name="log-in" alt="entrar" size={18} fallback={<LogIn size={18} />} />
               <span className="text-sm">Entrar / Identificar-se</span>
             </button>
           )}

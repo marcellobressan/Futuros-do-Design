@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Zap, Layers, Globe, Cpu, Users, Eye, Mic, ExternalLink, Headphones } from 'lucide-react';
+import IconImage from './IconImage';
 import { AppView } from '../types';
 import { HERO_IMAGE_URL } from '../constants';
 
@@ -55,7 +56,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
                     title="Converse com nosso assistente IA para explorar ideias e registrar soluções"
                     >
                     ✨ Conversar com o Agente
-                    <ArrowRight size={20} />
+                    <IconImage name="arrow-right" alt="seguir" size={20} fallback={<ArrowRight size={20} />} />
                     </button>
                     <button 
                     onClick={() => onNavigate(AppView.KNOWLEDGE)}
@@ -123,7 +124,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
           </div>
           <div className="card" style={{ backgroundColor: '#f9fafb', border: '1px solid #f3f4f6' }}>
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-black">
-              <Users className="text-orange" />
+              <IconImage name="users" alt="disciplina" size={20} fallback={<Users className="text-orange" />} />
               A Disciplina
             </h3>
             <p className="text-gray mb-8">
@@ -190,7 +191,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3 text-black mb-2">
                  <div style={{ padding: '0.5rem', backgroundColor: '#e0e7ff', color: '#4f46e5', borderRadius: '8px' }}>
-                   <Mic size={24} />
+                   <IconImage name="mic" alt="debates" size={24} fallback={<Mic size={24} />} />
                  </div>
                  <h3 className="text-2xl font-bold">Debates Estruturados</h3>
               </div>
@@ -211,10 +212,10 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
 
               <div className="flex gap-4">
                 <a href="https://app.strateegia.digital/dashboard/public-link/boyoaM" target="_blank" className="btn btn-secondary flex-1" style={{ fontSize: '0.875rem' }}>
-                  Turma A <ExternalLink size={14} />
+                  Turma A <IconImage name="external-link" alt="abrir" size={14} fallback={<ExternalLink size={14} />} />
                 </a>
                 <a href="https://app.strateegia.digital/dashboard/public-link/afrnxv" target="_blank" className="btn btn-secondary flex-1" style={{ fontSize: '0.875rem' }}>
-                   Turma B <ExternalLink size={14} />
+                   Turma B <IconImage name="external-link" alt="abrir" size={14} fallback={<ExternalLink size={14} />} />
                 </a>
               </div>
             </div>
@@ -223,7 +224,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3 text-black mb-2">
                  <div style={{ padding: '0.5rem', backgroundColor: '#ecfdf5', color: '#059669', borderRadius: '8px' }}>
-                   <Headphones size={24} />
+                   <IconImage name="headphones" alt="podcasts" size={24} fallback={<Headphones size={24} />} />
                  </div>
                  <h3 className="text-2xl font-bold">Podcasts</h3>
               </div>
@@ -237,7 +238,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
                       <h4 className="text-lg font-bold text-black">IAgora Designers?</h4>
                       <p className="text-xs font-bold text-neutral mt-1 uppercase">Turma A • Spotify</p>
                     </div>
-                    <ExternalLink size={16} className="text-neutral" />
+                    <IconImage name="external-link" alt="abrir" size={16} fallback={<ExternalLink size={16} className="text-neutral" />} />
                 </a>
 
                 <a href="https://open.spotify.com/show/6SIZ5HFIib1UdSDTfxetNz?si=67f5f91e6a014d2b" target="_blank" className="card flex justify-between items-center hover:shadow-md">
