@@ -1,4 +1,4 @@
-# Configuração do Google OAuth
+git # Configuração do Google OAuth
 
 Este projeto utiliza autenticação Google OAuth para login de usuários.
 

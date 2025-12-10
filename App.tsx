@@ -225,7 +225,12 @@ const App: React.FC = () => {
           )}
 
           {currentView === AppView.SOLUTION_REGISTRATION && userProfile && (
-            <div style={{ height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
+            <div style={{ 
+              height: '100%', 
+              overflowY: 'auto', 
+              overflowX: 'hidden',
+              WebkitOverflowScrolling: 'touch'
+            }}>
               <SolutionForm 
                 userProfile={userProfile} 
                 onSuccess={async () => {
