@@ -194,8 +194,18 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
               <div key={i} className="inf-step" style={{ flex: '1 1 220px', minWidth: '220px', display: 'flex', alignItems: 'center', gap: '1rem', position: 'relative', ['--delay' as any]: `${i * 160}ms` }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: `${step.color}1A`, color: step.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
-                      <Icon size={28} />
+                    <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: `${step.color}1A`, color: step.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', boxShadow: '0 6px 18px rgba(0,0,0,0.06)', position: 'relative', overflow: 'hidden' }}>
+                      <img
+                        src={`/images/manifesto/step-${i+1}.png`}
+                        alt={`${step.title} illustration`}
+                        style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '8px' }}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                        onLoad={(e) => { /* image loaded — keep it visible */ }}
+                      />
+                      {/* If image is missing the icon fallback can remain visible via CSS/DOM — we keep the Icon component as a hidden fallback for screen-readers */}
+                      <span style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} aria-hidden>
+                        <Icon size={28} />
+                      </span>
                     </div>
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -280,7 +290,16 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
               }
             ].map((item, i) => (
               <div key={i} className="card" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', position: 'relative', zIndex: 3 }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{item.icon}</div>
+                <div style={{ position: 'relative', width: '64px', height: '64px', marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div className="prospect-placeholder" style={{ fontSize: '2.5rem' }}>{item.icon}</div>
+                  <img
+                    src={`/images/manifesto/prospect-${i+1}.png`}
+                    alt={`${item.title} illustration`}
+                    style={{ width: '56px', height: '56px', objectFit: 'cover', borderRadius: '8px', position: 'absolute', top: '4px', left: '4px' }}
+                    onLoad={(e) => { const prev = e.currentTarget.previousElementSibling as HTMLElement; if (prev) prev.style.display = 'none'; }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                </div>
                 <h3 className="text-lg font-bold text-black mb-3">{item.title}</h3>
                 <p className="text-gray text-sm">{item.description}</p>
               </div>
