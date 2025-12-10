@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { generateIllustration } from '../services/geminiService';
 import { Image, Sparkles, Loader2, RefreshCw } from 'lucide-react';
+import IconImage from './IconImage';
 
 interface AIIllustrationProps {
     prompt: string;
@@ -13,15 +13,10 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
     const [imageUrl, setImageUrl] = useState<string | null>(null);
 
     const handleGenerate = async () => {
-        setStatus('loading');
-        try {
-            const url = await generateIllustration(prompt);
-            setImageUrl(url);
-            setStatus('loaded');
-        } catch (error) {
-            console.error(error);
-            setStatus('error');
-        }
+        // AI generation disabled in UI — use local placeholder instead.
+        const PLACEHOLDER_SRC = '/images/placeholders/ai-placeholder.png';
+        setImageUrl(PLACEHOLDER_SRC);
+        setStatus('loaded');
     };
 
     const containerStyle: React.CSSProperties = {
@@ -41,8 +36,8 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
             
             {status === 'idle' && (
                 <div className="text-center p-6">
-                    <div style={{ width: '64px', height: '64px', backgroundColor: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto', boxShadow: 'var(--shadow-sm)' }}>
-                        <Image className="text-neutral" size={24} />
+                        <div style={{ width: '64px', height: '64px', backgroundColor: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto', boxShadow: 'var(--shadow-sm)' }}>
+                        <IconImage name="image" alt="ilustração" size={24} fallback={<Image className="text-neutral" size={24} />} />
                     </div>
                     <button 
                         onClick={(e) => {
@@ -52,7 +47,7 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
                         className="btn btn-secondary"
                         style={{ borderRadius: '999px', fontSize: '0.875rem' }}
                     >
-                        <Sparkles size={16} style={{ color: 'var(--c-orange)' }} />
+                        <IconImage name="sparkles" alt="visualizar" size={16} fallback={<Sparkles size={16} style={{ color: 'var(--c-orange)' }} />} />
                         Visualizar com IA
                     </button>
                     <p className="text-neutral mt-3" style={{ fontSize: '10px', maxWidth: '200px', margin: '0.75rem auto 0 auto' }}>
@@ -63,7 +58,7 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
 
             {status === 'loading' && (
                 <div className="flex flex-col items-center justify-center text-orange animate-pulse">
-                    <Loader2 size={32} className="animate-spin mb-3" />
+                    <IconImage name="loader2" alt="carregando" size={32} className="animate-spin mb-3" fallback={<Loader2 size={32} className="animate-spin mb-3" />} />
                     <span className="text-xs font-bold uppercase tracking-widest">Criando Arte...</span>
                 </div>
             )}
@@ -76,7 +71,7 @@ const AIIllustration: React.FC<AIIllustrationProps> = ({ prompt, className = '',
                         className="btn btn-secondary"
                         style={{ fontSize: '0.75rem', color: '#ef4444', borderColor: '#fee2e2' }}
                     >
-                        <RefreshCw size={14} />
+                        <IconImage name="refresh-cw" alt="tentar novamente" size={14} fallback={<RefreshCw size={14} />} />
                         Tentar Novamente
                     </button>
                 </div>
