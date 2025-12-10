@@ -297,7 +297,7 @@ export default async (req: Request) => {
             },
           }));
 
-          const toolResultStream = await chatSession.sendMessageStream(functionResponseParts);
+          const toolResultStream = await chatSession.sendMessageStream({ message: functionResponseParts });
           for await (const chunk of toolResultStream) {
             if (chunk.text) {
               fullTextResponse += '\n\n' + chunk.text;
