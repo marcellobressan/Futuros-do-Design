@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Users, Zap, Layers, Sparkles, BookOpen, Compass } from 'lucide-react';
 import { AppView } from '../types';
 
@@ -10,8 +10,58 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
   const sectionStyle: React.CSSProperties = { padding: '6rem 1.5rem' };
   const containerStyle: React.CSSProperties = { maxWidth: '1100px', margin: '0 auto' };
 
+  const stepsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const container = stepsRef.current;
+    if (!container) return;
+
+    const items = Array.from(container.querySelectorAll('.inf-step')) as HTMLElement[];
+
+    if (prefersReduced) {
+      items.forEach(it => it.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    items.forEach(it => observer.observe(it));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div style={{ height: '100%', overflowY: 'auto', backgroundColor: 'var(--c-bg-page)' }}>
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .inf-step { will-change: transform, opacity; opacity: 0; transform: translateY(12px); }
+        .inf-step.visible { animation: fadeUp 520ms ease var(--delay, 0ms) both; }
+        /* Connectors: horizontal for desktop, vertical for mobile */
+        .connector-h { display: block; }
+        .connector-v { display: none; position: absolute; left: 50%; transform: translateX(-50%); bottom: -36px; width: 2px; height: 48px; background: var(--c-border); opacity: 0.85; border-radius: 2px; }
+        .connector-v::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -6px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--c-border); }
+        @media (max-width: 720px) {
+          .connector-h { display: none !important; }
+          .connector-v { display: block !important; }
+          /* make steps stack nicely on mobile */
+          .inf-step { width: 100% !important; min-width: auto !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .inf-step { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+        }
+      `}</style>
       
       {/* 1. Hero - Manifesto */}
       <section style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '2rem' }}>
@@ -103,59 +153,70 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 3. Metodologia */}
+      {/* 3. Metodologia (Infográfico) */}
       <section style={{ ...sectionStyle }}>
-        <div style={{ ...containerStyle, textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="text-4xl font-extrabold text-black mb-6">Como Funciona?</h2>
-          <p className="text-lg text-gray" style={{ maxWidth: '700px', margin: '0 auto 4rem auto' }}>
-            Utilizamos a metodologia Kori para varredura de horizonte e análise estruturada de futuros.
+        <div style={{ ...containerStyle, textAlign: 'center', marginBottom: '2.5rem' }}>
+          <h2 className="text-4xl font-extrabold text-black mb-4">Como Funciona?</h2>
+          <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto 2.5rem auto' }}>
+            Utilizamos a metodologia Kori para varredura de horizonte e análise estruturada de futuros. Abaixo um resumo em formato infográfico com o fluxo principal.
           </p>
         </div>
 
-        <div style={{ ...containerStyle, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+        <div ref={stepsRef} style={{ ...containerStyle, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
           {[
             {
               icon: Sparkles,
-              title: '🔍 Varredura de Horizonte',
-              description: 'Organizamos fenômenos emergentes em 3, 7 e 15 anos, categorizando em Caos, Complexidade e Contradições.',
+              title: 'Varredura de Horizonte',
+              description: 'Mapeamos sinais fracos em horizontes 3 / 7 / 15 anos.' ,
               color: 'var(--c-orange)'
             },
             {
               icon: Layers,
-              title: '📊 Análise Estruturada (CLA)',
-              description: 'Causal Layered Analysis aprofunda a compreensão das dinâmicas que sustentam cada cenário.',
+              title: 'Análise Estruturada (CLA)',
+              description: 'Exploramos camadas de causa, discurso e metáforas para cada fenômeno.',
               color: '#3b82f6'
             },
             {
               icon: BookOpen,
-              title: '🎬 Cenários Plausíveis',
-              description: 'Desenvolvemos narrativas futuras que exploram diferentes possibilidades e implicações.',
+              title: 'Cenários Plausíveis',
+              description: 'Construímos narrativas que ilustram futuros possíveis e suas implicações.',
               color: '#10b981'
             },
             {
               icon: Zap,
-              title: '🛠️ Ferramentas Criativas',
-              description: 'Criamos recursos práticos como Vibe Coding para trazer os futuros para o presente.',
+              title: 'Ferramentas Criativas',
+              description: 'Desenvolvemos protótipos e ferramentas (ex.: Vibe Coding) para experimentar soluções.',
               color: '#f59e0b'
             }
-          ].map((step, i) => {
+          ].map((step, i, arr) => {
             const Icon = step.icon;
             return (
-              <div key={i} className="card" style={{ border: `1px solid ${step.color}33`, transition: 'all 0.3s ease' }} 
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-8px)';
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = `0 12px 24px ${step.color}22`;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-                }}
-              >
-                <div style={{ padding: '1rem', borderRadius: '12px', backgroundColor: `${step.color}1A`, color: step.color, marginBottom: '1rem', display: 'inline-block' }}>
-                  <Icon size={28} />
+              <div key={i} className="inf-step" style={{ flex: '1 1 220px', minWidth: '220px', display: 'flex', alignItems: 'center', gap: '1rem', position: 'relative', ['--delay' as any]: `${i * 160}ms` }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: `${step.color}1A`, color: step.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
+                      <Icon size={28} />
+                    </div>
+                    <div style={{ textAlign: 'left' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: step.color, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{i+1}</div>
+                        <h4 className="text-lg font-bold text-black" style={{ margin: 0 }}>{step.title}</h4>
+                      </div>
+                      <p className="text-neutral" style={{ margin: 0, fontSize: '0.95rem' }}>{step.description}</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-black mb-3">{step.title}</h3>
-                <p className="text-gray">{step.description}</p>
+
+                {/* Connectors: horizontal (desktop) + vertical (mobile) */}
+                {i < arr.length - 1 && (
+                  <>
+                    <svg aria-hidden className="connector-h" style={{ position: 'absolute', right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '24%', minWidth: '100px', height: '28px', overflow: 'visible' }} viewBox="0 0 120 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="4" y1="14" x2="96" y2="14" stroke="var(--c-border)" strokeWidth="2" strokeOpacity="0.7" strokeLinecap="round" />
+                      <polyline points="92,6 108,14 92,22" fill="none" stroke="var(--c-border)" strokeWidth="2" strokeOpacity="0.85" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div aria-hidden className="connector-v" />
+                  </>
+                )}
               </div>
             );
           })}
