@@ -6,6 +6,7 @@ export interface Message {
   content: string;
   isStreaming?: boolean;
   timestamp: Date;
+  error?: boolean;
   functionCall?: {
     name: string;
     args: any;
@@ -80,4 +81,5 @@ export enum AppView {
   KNOWLEDGE = 'KNOWLEDGE',
   SOLUTIONS = 'SOLUTIONS',
   HOME = 'HOME', // Manifesto
+  SOLUTION_REGISTRATION = 'SOLUTION_REGISTRATION', // Cadastro de Soluções
 }

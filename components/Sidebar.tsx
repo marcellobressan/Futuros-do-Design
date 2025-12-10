@@ -75,11 +75,22 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             onClick={() => { setView(AppView.CHAT); toggleSidebar(); }}
             className={navItemClass(AppView.CHAT)} 
             style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
-            title="Converse com o assistente IA e registre soluções"
+            title="Converse com o assistente IA e explore Futuros do Design"
           >
             <IconImage name="message-square" alt="agente do portal" size={20} fallback={<MessageSquare size={20} />} />
             <span>Agente do Portal</span>
             {currentView === AppView.CHAT && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
+          </button>
+
+          <button 
+            onClick={() => { setView(AppView.SOLUTION_REGISTRATION); toggleSidebar(); }}
+            className={navItemClass(AppView.SOLUTION_REGISTRATION)} 
+            style={currentView === AppView.SOLUTION_REGISTRATION ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            title="Registrar uma solução designada para Futuros do Design"
+          >
+            <IconImage name="message-square" alt="cadastro de soluções" size={20} fallback={<MessageSquare size={20} />} />
+            <span>Cadastrar Solução</span>
+            {currentView === AppView.SOLUTION_REGISTRATION && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
 
           <button 

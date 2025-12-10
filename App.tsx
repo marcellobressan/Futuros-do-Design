@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
+import SolutionRegistration from './components/SolutionRegistration';
 import StoryBoard from './components/StoryBoard';
 import ManifestoMetodo from './components/ManifestoMetodo';
 import AIIllustration from './components/AIIllustration';
@@ -9,6 +10,7 @@ import { initializeGemini, getSolutions } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
 import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search } from 'lucide-react';
+import IconImage from './components/IconImage';
 
 const getEnvApiKey = () => {
   // Since we now use server-side Gemini API (via Netlify Functions),
@@ -143,7 +145,7 @@ const App: React.FC = () => {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--c-off-white)' }}>
         <div className="card" style={{ maxWidth: '400px', textAlign: 'center', boxShadow: 'var(--shadow-xl)' }}>
           <div style={{ width: '64px', height: '64px', backgroundColor: 'var(--c-orange)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto' }}>
-            <Key className="text-white" size={32} />
+            <IconImage name="key" alt="chave de api" size={32} fallback={<Key className="text-white" size={32} />} />
           </div>
           <h1 className="text-2xl font-extrabold text-black mb-2">Acesso ao Portal</h1>
           <p className="text-neutral mb-8">
@@ -160,14 +162,14 @@ const App: React.FC = () => {
 
           {keyError && (
             <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', color: '#dc2626', fontSize: '0.875rem', display: 'flex', gap: '0.5rem', textAlign: 'left' }}>
-              <AlertTriangle size={16} />
+              <IconImage name="alert-triangle" alt="erro" size={16} fallback={<AlertTriangle size={16} />} />
               <span>Erro ao validar chave. Por favor, tente selecionar novamente.</span>
             </div>
           )}
           
           <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>
              <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noreferrer" className="text-xs font-bold text-neutral uppercase tracking-wide flex justify-center items-center gap-1">
-               Informações sobre faturamento <ExternalLink size={10} />
+               Informações sobre faturamento <IconImage name="external-link" alt="abrir link" size={10} fallback={<ExternalLink size={10} />} />
              </a>
           </div>
         </div>
@@ -193,7 +195,7 @@ const App: React.FC = () => {
             FUTUROS
           </h1>
           <button onClick={() => setIsSidebarOpen(true)} className="text-gray">
-            <Menu size={24} />
+            <IconImage name="menu" alt="abrir menu" size={24} fallback={<Menu size={24} />} />
           </button>
         </div>
 
@@ -213,6 +215,10 @@ const App: React.FC = () => {
 
           {currentView === AppView.CHAT && (
             <ChatInterface apiKey={apiKey} />
+          )}
+
+          {currentView === AppView.SOLUTION_REGISTRATION && (
+            <SolutionRegistration apiKey={apiKey} />
           )}
 
           {currentView === AppView.KNOWLEDGE && (
@@ -258,7 +264,7 @@ const App: React.FC = () => {
               {/* Reports Download Section */}
               <div style={{ marginBottom: '3rem' }}>
                 <h3 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                  <FileText className="text-neutral" size={20}/> Relatórios Originais
+                  <IconImage name="file-text" alt="relatórios" size={20} fallback={<FileText className="text-neutral" size={20}/>} /> Relatórios Originais
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
                   {KORI_REPORTS_DATA.map(report => {
@@ -283,7 +289,7 @@ const App: React.FC = () => {
                                 onClick={() => simulateDownload(report)}
                                 className="btn btn-secondary flex-1 text-xs"
                             >
-                                <Download size={14} />
+                                <IconImage name="download" alt="baixar" size={14} fallback={<Download size={14} />} />
                                 Baixar
                             </button>
                             <button 
@@ -294,17 +300,17 @@ const App: React.FC = () => {
                             >
                                 {status === 'extracting' ? (
                                     <>
-                                        <Cpu size={14} className="animate-spin" />
+                                        <IconImage name="cpu" alt="processando" size={14} fallback={<Cpu size={14} className="animate-spin" />} />
                                         Processando...
                                     </>
                                 ) : isDone ? (
                                     <>
-                                        <Check size={14} />
+                                        <IconImage name="check" alt="concluído" size={14} fallback={<Check size={14} />} />
                                         Extraído
                                     </>
                                 ) : (
                                     <>
-                                        <Cpu size={14} />
+                                        <IconImage name="cpu" alt="extrair" size={14} fallback={<Cpu size={14} />} />
                                         Extrair Cenários
                                     </>
                                 )}
@@ -332,7 +338,7 @@ const App: React.FC = () => {
                                 className="badge flex items-center gap-1"
                                 style={{ backgroundColor: '#fff7ed', color: 'var(--c-orange)', cursor: 'pointer', padding: '0.5rem 1rem' }}
                             >
-                                <Filter size={12} />
+                                <IconImage name="filter" alt="filtro" size={12} fallback={<Filter size={12} />} />
                                 Filtro Ativo: Turma {scenariosFilter} <X size={12} className="ml-1" />
                             </button>
                         )}
@@ -342,14 +348,14 @@ const App: React.FC = () => {
                     {extractionMessage && (
                         <div className="fade-in" style={{ backgroundColor: '#ecfdf5', border: '1px solid #d1fae5', padding: '1rem', borderRadius: '12px', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                             <div style={{ padding: '0.25rem', backgroundColor: '#d1fae5', borderRadius: '50%', color: '#059669' }}>
-                                <Sparkles size={16} />
+                              <IconImage name="sparkles" alt="sucesso" size={16} fallback={<Sparkles size={16} />} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <p className="text-sm font-bold" style={{ color: '#065f46' }}>Extração Concluída</p>
                                 <p className="text-xs" style={{ color: '#047857' }}>{extractionMessage}</p>
                             </div>
                             <button onClick={() => setExtractionMessage(null)} style={{ color: '#10b981' }}>
-                                <X size={16} />
+                              <IconImage name="x" alt="fechar" size={16} fallback={<X size={16} />} />
                             </button>
                         </div>
                     )}

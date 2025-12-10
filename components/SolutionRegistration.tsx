@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Message, DraftSolution } from '../types';
 import { sendMessage } from '../services/geminiService';
-import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, Save, AlertCircle, HelpCircle } from 'lucide-react';
+import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, Save, AlertCircle } from 'lucide-react';
 import IconImage from './IconImage';
 import ReactMarkdown from 'react-markdown';
 
-interface ChatInterfaceProps {
+interface SolutionRegistrationProps {
   apiKey: string;
 }
 
@@ -155,22 +155,22 @@ const DraftReviewCard: React.FC<{
   );
 };
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ apiKey }) => {
+const SolutionRegistration: React.FC<SolutionRegistrationProps> = ({ apiKey }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
       role: 'model',
-      content: `Bem-vindo ao **Portal Futuros do Design**! 🚀
+      content: `🚀 **Bem-vindo ao Cadastro de Soluções!**
 
-Sou seu assistente para explorar e compreender os **Futuros do Design a partir da Pós-Normalidade**.
+Sou seu assistente especializado em ajudar você a **registrar e documentar uma solução** criada a partir da disciplina Futuros do Design.
 
-Posso ajudá-lo a:
-- 🔍 **Explorar fenômenos** mapeados pela análise STEEPLED (Social, Tecnológico, Econômico, Ambiental, Político, Legal, Ético, Demográfico)
-- 📚 **Navegar cenários** desenvolvidos pelas Turmas A e B
-- 💡 **Compreender conexões** entre sinais fracos, arquétipos e possíveis futuros
-- 🎯 **Analisar implicações** de tendências emergentes para o design
+Vou guiá-lo através de:
+- 💡 **Descrição clara** da sua solução
+- 🎯 **Relação com cenários** do projeto
+- 👥 **Dados dos participantes** (nome, turma, email)
+- 🎨 **Upload de ilustração** (opcional)
 
-**O que você gostaria de explorar?**`,
+**Vamos começar?** Descreva brevemente sua solução!`,
       timestamp: new Date()
     }
   ]);
@@ -314,7 +314,7 @@ Não faça mais perguntas. Registre agora.`;
         {/* Tool Execution Indicator */}
         {activeTool && (
           <div className="flex items-center justify-center py-4">
-              <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold" style={{ animation: 'fadeIn 0.3s ease-in' }}>
+            <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold" style={{ animation: 'fadeIn 0.3s ease-in' }}>
               <IconImage name="cpu" alt="processando" size={16} fallback={<Cpu className="animate-spin" size={16} />} />
               <span>
                 {activeTool === 'refinarDescricaoSolucao' && '✨ Refinando texto com IA...'}
@@ -331,7 +331,7 @@ Não faça mais perguntas. Registre agora.`;
         )}
 
         {isLoading && !activeTool && (
-            <div className="flex items-center gap-2 text-neutral text-sm" style={{ marginLeft: '4rem', animation: 'fadeIn 0.3s ease-in' }}>
+          <div className="flex items-center gap-2 text-neutral text-sm" style={{ marginLeft: '4rem', animation: 'fadeIn 0.3s ease-in' }}>
             <IconImage name="loader2" alt="carregando" size={16} fallback={<Loader2 className="animate-spin" size={16} />} />
             <span>Gerando resposta...</span>
           </div>
@@ -348,7 +348,7 @@ Não faça mais perguntas. Registre agora.`;
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={isReviewing ? "Revise os dados acima e clique em confirmar..." : "Pergunte sobre os cenários ou cadastre uma solução..."}
+              placeholder={isReviewing ? "Revise os dados acima e clique em confirmar..." : "Descreva sua solução, cenários relacionados, participantes..."}
               className="input-field"
               style={{ 
                 height: '60px', 
@@ -362,7 +362,7 @@ Não faça mais perguntas. Registre agora.`;
             />
             {!input.trim() && !isReviewing && (
               <p className="text-neutral" style={{ fontSize: '10px', fontWeight: 500, paddingLeft: '0.5rem' }}>
-                💡 Dica: Pergunte sobre cenários, contribua com ideias ou solicite cadastro de uma solução
+                💡 Dica: Descreva sua solução, participantes e cenários relacionados
               </p>
             )}
           </div>
@@ -395,11 +395,11 @@ Não faça mais perguntas. Registre agora.`;
           </button>
         </div>
         <p className="text-center text-neutral mt-3 font-medium" style={{ fontSize: '10px' }}>
-          Portal Interativo v1.0 • CESAR School 2025
+          Assistente de Cadastro de Soluções • CESAR School 2025
         </p>
       </div>
     </div>
   );
 };
 
-export default ChatInterface;
+export default SolutionRegistration;
