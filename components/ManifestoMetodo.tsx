@@ -223,14 +223,42 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Contexto - Prospecção */}
-      <section style={{ ...sectionStyle, backgroundColor: '#f9fafb' }}>
-        <div style={{ ...containerStyle }}>
+      {/* 4. Contexto - Prospecção (Inspirado em ondas + marcas d'água) */}
+      <section style={{ ...sectionStyle, backgroundColor: '#f9fafb', position: 'relative', overflow: 'hidden' }}>
+        {/* Wave background (SVG) */}
+        <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '40%', pointerEvents: 'none', zIndex: 0 }}>
+          <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style={{ width: '100%', height: '100%', display: 'block' }}>
+            <defs>
+              <linearGradient id="waveGrad" x1="0" x2="1">
+                <stop offset="0%" stopColor="#fff" stopOpacity="0.0" />
+                <stop offset="50%" stopColor="#f8fafc" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#f9fafb" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+            <path d="M0,120 C150,200 350,40 600,80 C850,120 1050,40 1200,80 L1200,200 L0,200 Z" fill="url(#waveGrad)" />
+            <path d="M0,140 C200,80 400,160 600,120 C800,80 1000,160 1200,120 L1200,200 L0,200 Z" fill="#ffffff" opacity="0.06" />
+          </svg>
+        </div>
+
+        <div style={{ ...containerStyle, position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 className="text-4xl font-extrabold text-black mb-4">Prospectar na Pós-Normalidade</h2>
-            <p className="text-lg text-gray" style={{ maxWidth: '700px', margin: '0 auto' }}>
-              Entendemos que o mundo mudou de forma irreversível. Aqui estão os princípios que guiam nosso trabalho:
+            <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto' }}>
+              Entendemos que o mundo mudou de forma irreversível. Aqui estão os princípios que guiam nosso trabalho — ilustrados com uma estética inspirada em ondas para sugerir varredura, marés e movimentos sistêmicos.
             </p>
+          </div>
+
+          {/* Watermarks (words behind content) */}
+          <div aria-hidden style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', left: '-6%', top: '10%', fontSize: '96px', color: '#0f172a', opacity: 0.03, transform: 'rotate(-12deg)', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>
+              complexidade
+            </div>
+            <div style={{ position: 'absolute', right: '-8%', top: '38%', fontSize: '120px', color: '#0f172a', opacity: 0.03, transform: 'rotate(8deg)', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>
+              caos
+            </div>
+            <div style={{ position: 'absolute', left: '10%', bottom: '-6%', fontSize: '110px', color: '#0f172a', opacity: 0.03, transform: 'rotate(-6deg)', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>
+              contradições
+            </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
@@ -251,7 +279,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                 description: 'Reconhecer sinais fracos e antecipar riscos permite criar soluções mais robustas, adaptáveis e sensíveis às mudanças.'
               }
             ].map((item, i) => (
-              <div key={i} className="card" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb' }}>
+              <div key={i} className="card" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', position: 'relative', zIndex: 3 }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{item.icon}</div>
                 <h3 className="text-lg font-bold text-black mb-3">{item.title}</h3>
                 <p className="text-gray text-sm">{item.description}</p>
