@@ -2,6 +2,7 @@ import React from 'react';
 import { UserProfile, RegisteredSolution, AppView } from '../types';
 import { SCENARIOS_DATA } from '../constants';
 import { ArrowRight, MessageSquare, BookOpen, Database, Clock, TrendingUp, Sparkles } from 'lucide-react';
+import IconImage from './IconImage';
 
 interface DashboardProps {
     userProfile: UserProfile | null;
@@ -51,7 +52,7 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                 {/* Header */}
                 <header className="mb-10">
                     <div className="flex items-center gap-3 mb-3">
-                        <Sparkles size={32} style={{ color: 'var(--c-orange)' }} />
+                        <IconImage name="sparkles" alt="destaque" size={32} fallback={<Sparkles size={32} style={{ color: 'var(--c-orange)' }} />} />
                         <h1 className="text-4xl font-extrabold text-black">
                             {userProfile ? `Bem-vindo, ${userProfile.name.split(' ')[0]}!` : 'Dashboard de Prospecção'}
                         </h1>
@@ -74,12 +75,12 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                     <div className="flex flex-col gap-8 col-span-3 md:col-span-2">
                         {/* Call to Actions */}
                         <div className="card" style={{ display: 'flex', gap: '1rem', padding: '2rem' }}>
-                           <button onClick={() => onNavigate(AppView.CHAT)} className="btn btn-primary" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
-                                <MessageSquare size={24} />
+                          <button onClick={() => onNavigate(AppView.CHAT)} className="btn btn-primary" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
+                              <IconImage name="message-square" alt="conversar" size={24} fallback={<MessageSquare size={24} />} />
                                 <span className="text-base">Conversar com Agente</span>
                            </button>
                            <button onClick={() => onNavigate(AppView.KNOWLEDGE)} className="btn btn-secondary" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
-                                <BookOpen size={24} />
+                              <IconImage name="book-open" alt="explorar" size={24} fallback={<BookOpen size={24} />} />
                                <span className="text-base">Explorar Cenários</span>
                            </button>
                         </div>
@@ -87,7 +88,7 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                         {/* Recent Activity */}
                         <div>
                            <h2 className="text-2xl font-bold text-black mb-4 flex items-center gap-2">
-                               <Clock className="text-neutral" size={22}/>
+                               <IconImage name="clock" alt="atividade" size={22} fallback={<Clock className="text-neutral" size={22}/>} />
                                Atividade Recente
                            </h2>
                            <div className="flex flex-col gap-4">
@@ -120,12 +121,12 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                         <p className="text-sm" style={{ color: '#d4d4d4', lineHeight: '1.6', flexGrow: 1 }}>
                             Este é um repositório vivo da disciplina Teoria e Futuro do Design. Use o agente de IA para explorar e registrar suas ideias.
                         </p>
-                        <button 
+                            <button 
                             onClick={() => onNavigate(AppView.HOME)}
                             className="btn btn-ghost" 
                             style={{ color: 'white', justifyContent: 'flex-start', padding: 0, marginTop: 'auto', alignSelf: 'flex-start' }}
                         >
-                            Ver Manifesto & Método <ArrowRight size={16} />
+                            Ver Manifesto & Método <IconImage name="arrow-right" alt="ver manifesto" size={16} fallback={<ArrowRight size={16} />} />
                         </button>
                     </div>
                 </div>
