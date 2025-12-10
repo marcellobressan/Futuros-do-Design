@@ -38,7 +38,13 @@ const UserProfilePage: React.FC<UserProfilePageProps> = ({ userProfile, solution
                 </div>
                 <div className="flex items-center gap-3 text-gray text-sm mt-2">
                   <IconImage name="user-check" alt="turma" size={16} fallback={<User size={16} />} />
-                  <span className="font-semibold">Turma {userProfile.turma}</span>
+                  {userProfile.turma === 'PROFESSOR' ? (
+                    <span className="font-semibold">
+                      Professor {userProfile.isSuperUser && <span style={{ color: '#f59e0b' }}>• Super User</span>}
+                    </span>
+                  ) : (
+                    <span className="font-semibold">Turma {userProfile.turma}</span>
+                  )}
                 </div>
               </div>
             </div>

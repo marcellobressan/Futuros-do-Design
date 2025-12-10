@@ -6,7 +6,7 @@ import IconImage from './IconImage';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: (name: string, email: string, turma: 'A' | 'B') => void;
+  onLogin: (name: string, email: string, turma: 'A' | 'B' | 'PROFESSOR') => void;
 }
 
 // Função para decodificar o JWT do Google (payload base64)
@@ -27,14 +27,22 @@ const parseJwt = (token: string) => {
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => {
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
-  const [formTurma, setFormTurma] = useState<'A' | 'B'>('A');
+  const [formTurma, setFormTurma] = useState<'A' | 'B' | 'PROFESSOR'>('A');
   const [loginMethod, setLoginMethod] = useState<'manual' | 'google'>('google');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
       const userInfo = parseJwt(credentialResponse.credential);
       
       if (userInfo) {
+        // Validar se é professor com email autorizado
+        if (formTurma === 'PROFESSOR' && userInfo.email !== 'mcb2@cesar.school') {
+          setValidationError('Apenas o email mcb2@cesar.school pode se cadastrar como Professor.');
+          return;
+        }
+        
+        setValidationError(null);
         onLogin(userInfo.name || 'Usuário Google', userInfo.email, formTurma);
         setFormName('');
         setFormEmail('');
@@ -50,7 +58,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
 
   const handleManualLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validar se é professor com email autorizado
+    if (formTurma === 'PROFESSOR' && formEmail !== 'mcb2@cesar.school') {
+      setValidationError('Apenas o email mcb2@cesar.school pode se cadastrar como Professor.');
+      return;
+    }
+    
     if (formName && formEmail) {
+      setValidationError(null);
       onLogin(formName, formEmail, formTurma);
       setFormName('');
       setFormEmail('');
@@ -111,7 +127,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               <label className="block text-sm font-semibold text-black mb-2">Selecione sua turma</label>
               <select
                 value={formTurma}
-                onChange={(e) => setFormTurma(e.target.value as 'A' | 'B')}
+                onChange={(e) => { setFormTurma(e.target.value as 'A' | 'B' | 'PROFESSOR'); setValidationError(null); }}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
@@ -123,8 +139,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               >
                 <option value="A">Turma A</option>
                 <option value="B">Turma B</option>
+                <option value="PROFESSOR">Professor</option>
               </select>
+              {formTurma === 'PROFESSOR' && (
+                <p className="text-xs" style={{ color: '#d97706', marginTop: '-0.5rem', marginBottom: '0.5rem' }}>
+                  ⚠️ Apenas mcb2@cesar.school pode se cadastrar como Professor
+                </p>
+              )}
             </div>
+
+            {validationError && (
+              <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', color: '#dc2626', fontSize: '0.875rem' }}>
+                {validationError}
+              </div>
+            )}
 
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
               <GoogleLogin
@@ -187,7 +215,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               <label className="block text-sm font-semibold text-black mb-2">Turma</label>
               <select
                 value={formTurma}
-                onChange={(e) => setFormTurma(e.target.value as 'A' | 'B')}
+                onChange={(e) => { setFormTurma(e.target.value as 'A' | 'B' | 'PROFESSOR'); setValidationError(null); }}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
@@ -198,8 +226,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               >
                 <option value="A">Turma A</option>
                 <option value="B">Turma B</option>
+                <option value="PROFESSOR">Professor</option>
               </select>
+              {formTurma === 'PROFESSOR' && (
+                <p className="text-xs" style={{ color: '#d97706', marginTop: '0.5rem' }}>
+                  ⚠️ Apenas mcb2@cesar.school pode se cadastrar como Professor
+                </p>
+              )}
             </div>
+
+            {validationError && (
+              <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', color: '#dc2626', fontSize: '0.875rem' }}>
+                {validationError}
+              </div>
+            )}
 
             <button
               type="submit"

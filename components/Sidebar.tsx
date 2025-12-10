@@ -198,7 +198,13 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
                     {userProfile.name}
                   </p>
                   <p className="text-xs text-neutral" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    📚 Turma {userProfile.turma}
+                    {userProfile.turma === 'PROFESSOR' ? (
+                      <>
+                        👨‍🏫 Professor {userProfile.isSuperUser && <span style={{ color: '#f59e0b', fontWeight: 'bold' }}>(Admin)</span>}
+                      </>
+                    ) : (
+                      <>📚 Turma {userProfile.turma}</>
+                    )}
                   </p>
                 </div>
               </div>

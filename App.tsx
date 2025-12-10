@@ -55,11 +55,14 @@ const App: React.FC = () => {
     setKeyError(false);
   };
 
-  const handleUserRegistration = (name: string, email: string, turma: 'A' | 'B') => {
+  const handleUserRegistration = (name: string, email: string, turma: 'A' | 'B' | 'PROFESSOR') => {
+    const isSuperUser = turma === 'PROFESSOR' && email === 'mcb2@cesar.school';
+    
     setUserProfile({
       name,
       email,
-      turma
+      turma,
+      isSuperUser
     });
     setIsLoginModalOpen(false);
   };

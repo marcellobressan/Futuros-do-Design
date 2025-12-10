@@ -27,7 +27,8 @@ export interface Scenario {
 export interface UserProfile {
   name: string;
   email: string;
-  turma: 'A' | 'B';
+  turma: 'A' | 'B' | 'PROFESSOR';
+  isSuperUser?: boolean;
 }
 
 export interface KoriReport {
@@ -43,7 +44,7 @@ export interface RegisteredSolution {
   id: string;
   nome_da_solucao: string;
   participantes: { nome_completo: string; email: string }[];
-  turma: 'A' | 'B';
+  turma: 'A' | 'B' | 'PROFESSOR';
   cenarios_relacionados: string[];
   descricao_refinada: {
     resumo: string;
@@ -61,7 +62,7 @@ export interface RegisteredSolution {
 export interface DraftSolution {
   nome_da_solucao: string;
   participantes: { nome_completo: string; email: string }[];
-  turma: 'A' | 'B';
+  turma: 'A' | 'B' | 'PROFESSOR';
   cenarios_relacionados: string[];
   descricao_refinada: {
     resumo: string;
