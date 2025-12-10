@@ -230,26 +230,30 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
 
         {/* Cenários Relacionados */}
         <div className="card">
-          <label className="text-neutral uppercase tracking-widest mb-3 block" style={{ fontSize: '11px', fontWeight: 'bold' }}>
+          <label className="text-neutral uppercase tracking-widest mb-4 block" style={{ fontSize: '11px', fontWeight: 'bold' }}>
             Cenários Relacionados * (Selecione pelo menos um)
           </label>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-4">
             {scenariosDisponiveis.map(cenario => (
               <button
                 key={cenario.id}
                 type="button"
                 onClick={() => toggleCenario(cenario.id)}
-                className={`text-left p-3 rounded-lg border-2 transition-all ${
-                  cenariosRelacionados.includes(cenario.id)
-                    ? 'border-orange bg-orange-50'
-                    : 'border-gray-200 hover:border-orange-200'
-                }`}
+                className="text-left transition-all"
+                style={{
+                  padding: '1.25rem',
+                  borderRadius: '12px',
+                  border: '2px solid',
+                  borderColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : '#e5e7eb',
+                  backgroundColor: cenariosRelacionados.includes(cenario.id) ? '#fff7ed' : 'white',
+                  boxShadow: cenariosRelacionados.includes(cenario.id) ? '0 0 0 3px rgba(255, 96, 2, 0.1)' : 'none'
+                }}
               >
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-4">
                   <div style={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '4px',
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '6px',
                     border: '2px solid',
                     borderColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : '#d1d5db',
                     backgroundColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : 'white',
@@ -257,20 +261,28 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    marginTop: '2px'
+                    marginTop: '2px',
+                    transition: 'all 0.2s ease'
                   }}>
                     {cenariosRelacionados.includes(cenario.id) && (
-                      <IconImage name="check" alt="selecionado" size={14} fallback={<CheckCircle size={14} style={{ color: 'white' }} />} />
+                      <IconImage name="check" alt="selecionado" size={16} fallback={<CheckCircle size={16} style={{ color: 'white' }} />} />
                     )}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div className="font-bold text-sm text-black mb-1">{cenario.title}</div>
-                    <div className="text-xs text-neutral">
-                      <span className="badge badge-neutral" style={{ fontSize: '10px', marginRight: '0.5rem' }}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="badge badge-neutral" style={{ fontSize: '10px', fontWeight: 'bold' }}>
                         Turma {cenario.turma}
                       </span>
-                      {cenario.archetype}
+                      <span className="text-xs font-medium" style={{ color: 'var(--c-orange)' }}>
+                        {cenario.archetype}
+                      </span>
                     </div>
+                    <h4 className="font-bold text-base text-black mb-2" style={{ lineHeight: '1.4' }}>
+                      {cenario.title}
+                    </h4>
+                    <p className="text-xs text-neutral" style={{ lineHeight: '1.5', maxWidth: '100%' }}>
+                      {cenario.description.substring(0, 150)}...
+                    </p>
                   </div>
                 </div>
               </button>
