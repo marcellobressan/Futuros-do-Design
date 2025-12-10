@@ -284,9 +284,20 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
           .inf-step { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
         }
       `}</style>
+
+      {/* Navigation Bar */}
+      <nav style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'white', borderBottom: '1px solid var(--c-border)', padding: '1rem 1.5rem', backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
+        <div style={{ ...containerStyle, display: 'flex', gap: '2rem', overflowX: 'auto', scrollBehavior: 'smooth' }}>
+          <a href="#hero" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Manifesto</a>
+          <a href="#por-que" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Por Que?</a>
+          <a href="#como-funciona" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Como Funciona</a>
+          <a href="#prospeccao" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Prospecção</a>
+          <a href="#podcasts" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-orange)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease', fontWeight: 700 }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-orange)')}>Podcasts</a>
+        </div>
+      </nav>
       
       {/* 1. Hero - Manifesto */}
-      <section style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '2rem' }}>
+      <section id="hero" style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '2rem' }}>
         {/* Decorative Circles */}
         <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '800px', height: '800px', background: 'rgba(255,96,2,0.05)', borderRadius: '50%', filter: 'blur(80px)' }}></div>
         <div style={{ position: 'absolute', bottom: '-10%', left: '-10%', width: '600px', height: '600px', background: 'rgba(0,0,0,0.02)', borderRadius: '50%', filter: 'blur(80px)' }}></div>
@@ -328,7 +339,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 2. Por que Futuros do Design? */}
-      <section style={{ ...sectionStyle, backgroundColor: 'white', borderTop: '1px solid var(--c-border)', borderBottom: '1px solid var(--c-border)' }}>
+      <section id="por-que" style={{ ...sectionStyle, backgroundColor: 'white', borderTop: '1px solid var(--c-border)', borderBottom: '1px solid var(--c-border)' }}>
         <div style={{ ...containerStyle, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
           <div className="flex flex-col gap-6">
             <h2 className="text-4xl font-extrabold text-black">
@@ -376,7 +387,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 3. Metodologia (Infográfico) */}
-      <section style={{ ...sectionStyle }}>
+      <section id="como-funciona" style={{ ...sectionStyle }}>
         <div style={{ ...containerStyle, textAlign: 'center', marginBottom: '2.5rem' }}>
           <h2 className="text-4xl font-extrabold text-black mb-4">Como Funciona?</h2>
           <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto 2.5rem auto' }}>
@@ -456,7 +467,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 4. Contexto - Prospecção (Inspirado em ondas + marcas d'água) */}
-      <section style={{ ...sectionStyle, backgroundColor: '#f9fafb', position: 'relative', overflow: 'hidden' }}>
+      <section id="prospeccao" style={{ ...sectionStyle, backgroundColor: '#f9fafb', position: 'relative', overflow: 'hidden' }}>
         {/* Wave background (SVG) */}
         <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '40%', pointerEvents: 'none', zIndex: 0 }}>
           <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style={{ width: '100%', height: '100%', display: 'block' }}>
@@ -528,7 +539,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 5. Podcasts Section */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--c-off-white)', borderTop: '1px solid var(--c-border)' }}>
+      <section id="podcasts" style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--c-off-white)', borderTop: '1px solid var(--c-border)' }}>
         <div style={{ ...containerStyle }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 className="text-4xl font-extrabold text-black mb-4">Podcasts</h2>
