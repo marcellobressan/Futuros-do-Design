@@ -1,7 +1,7 @@
 import React from 'react';
 import { SCENARIOS_DATA } from '../constants';
 import { AppView, UserProfile } from '../types';
-import { BookOpen, MessageSquare, Database, X, LogIn, Compass, LayoutGrid, ChevronRight } from 'lucide-react';
+import { BookOpen, MessageSquare, Database, X, LogIn, Compass, LayoutGrid, ChevronRight, User } from 'lucide-react';
 import IconImage from './IconImage';
 
 interface SidebarProps {
@@ -154,41 +154,53 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         {/* User Profile Section */}
         <div style={{ padding: '1rem', borderTop: '1px solid var(--c-border)', backgroundColor: '#f9fafb' }}>
           {userProfile ? (
-            <div 
-              className="flex items-center gap-3 bg-white p-3 rounded-xl" 
-              style={{ 
-                borderRadius: '12px', 
-                padding: '0.75rem', 
-                border: '1px solid var(--c-border)',
-                backgroundColor: 'white',
-                transition: 'all 0.2s ease'
-              }}
-              title={`Conectado como ${userProfile.name}`}
-            >
-              <div 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: 'var(--c-orange)', 
-                  color: 'white', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  fontWeight: 'bold', 
-                  fontSize: '14px',
-                  flexShrink: 0
-                }}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <button 
+                onClick={() => { setView(AppView.USER_PROFILE); toggleSidebar(); }}
+                className={navItemClass(AppView.USER_PROFILE)} 
+                style={currentView === AppView.USER_PROFILE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+                title="Veja seu perfil e soluções cadastradas"
               >
-                 {userProfile.name.substring(0, 2).toUpperCase()}
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <p className="text-sm font-bold text-black" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {userProfile.name}
-                </p>
-                <p className="text-xs text-neutral" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  📚 Turma {userProfile.turma}
-                </p>
+                <IconImage name="user" alt="meu perfil" size={20} fallback={<User size={20} />} />
+                <span>Meu Perfil</span>
+                {currentView === AppView.USER_PROFILE && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
+              </button>
+              <div 
+                className="flex items-center gap-3 bg-white p-3 rounded-xl" 
+                style={{ 
+                  borderRadius: '12px', 
+                  padding: '0.75rem', 
+                  border: '1px solid var(--c-border)',
+                  backgroundColor: 'white',
+                  transition: 'all 0.2s ease'
+                }}
+                title={`Conectado como ${userProfile.name}`}
+              >
+                <div 
+                  style={{ 
+                    width: '40px', 
+                    height: '40px', 
+                    borderRadius: '50%', 
+                    backgroundColor: 'var(--c-orange)', 
+                    color: 'white', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    fontWeight: 'bold', 
+                    fontSize: '14px',
+                    flexShrink: 0
+                  }}
+                >
+                   {userProfile.name.substring(0, 2).toUpperCase()}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p className="text-sm font-bold text-black" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {userProfile.name}
+                  </p>
+                  <p className="text-xs text-neutral" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                    📚 Turma {userProfile.turma}
+                  </p>
+                </div>
               </div>
             </div>
           ) : (
