@@ -446,42 +446,148 @@ const App: React.FC = () => {
                     )}
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', paddingBottom: '3rem' }}>
-                    {scenariosFilteredByTurma.map(sc => (
-                    <div key={sc.id} className="card fade-in" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                        <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
-                            <div className="flex justify-between items-start mb-6">
-                                <h3 className="text-xl font-bold text-black leading-tight">{sc.title}</h3>
-                                <span className={`badge ${sc.turma === 'A' ? 'badge-A' : 'badge-B'}`}>
-                                Turma {sc.turma}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', paddingBottom: '3rem' }}>
+                    {/* Turma A */}
+                    {scenariosFilteredByTurma.some(sc => sc.turma === 'A') && (
+                        <div className="card fade-in" style={{ 
+                            padding: '2rem', 
+                            backgroundColor: '#fff7ed',
+                            border: '2px solid var(--c-orange)',
+                            boxShadow: '0 4px 6px -1px rgba(255, 96, 2, 0.1)'
+                        }}>
+                            <div style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '1rem', 
+                                marginBottom: '1.5rem',
+                                paddingBottom: '1rem',
+                                borderBottom: '2px solid var(--c-orange)'
+                            }}>
+                                <h3 className="text-2xl font-extrabold" style={{ color: 'var(--c-orange)' }}>
+                                    Turma A
+                                </h3>
+                                <span className="badge" style={{ 
+                                    backgroundColor: 'var(--c-orange)', 
+                                    color: 'white',
+                                    padding: '0.375rem 0.75rem',
+                                    fontSize: '0.75rem'
+                                }}>
+                                    {scenariosFilteredByTurma.filter(sc => sc.turma === 'A').length} cenários
                                 </span>
                             </div>
                             
-                            <div className="flex flex-col gap-3 mb-5">
-                                <div>
-                                <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
-                                <p className="text-black font-medium text-sm">{sc.archetype}</p>
-                                </div>
-                                {sc.metaphor && (
-                                <div>
-                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
-                                    <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
-                                </div>
-                                )}
-                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
+                                {scenariosFilteredByTurma.filter(sc => sc.turma === 'A').map(sc => (
+                                    <div key={sc.id} className="card" style={{ 
+                                        padding: 0, 
+                                        overflow: 'hidden', 
+                                        display: 'flex', 
+                                        flexDirection: 'column',
+                                        backgroundColor: 'white',
+                                        border: '1px solid #e5e7eb'
+                                    }}>
+                                        <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
+                                            <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
+                                            
+                                            <div className="flex flex-col gap-3 mb-5">
+                                                <div>
+                                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
+                                                    <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                                </div>
+                                                {sc.metaphor && (
+                                                    <div>
+                                                        <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
+                                                        <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
+                                                    </div>
+                                                )}
+                                            </div>
 
-                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                        </div>
+                                        
+                                        {/* AI Illustration Section */}
+                                        <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                                            <AIIllustration 
+                                                prompt={sc.imagePrompt || sc.description} 
+                                                aspectRatio="video"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        
-                        {/* AI Illustration Section */}
-                        <div style={{ padding: '0 2rem 2rem 2rem' }}>
-                            <AIIllustration 
-                                prompt={sc.imagePrompt || sc.description} 
-                                aspectRatio="video"
-                            />
+                    )}
+
+                    {/* Turma B */}
+                    {scenariosFilteredByTurma.some(sc => sc.turma === 'B') && (
+                        <div className="card fade-in" style={{ 
+                            padding: '2rem', 
+                            backgroundColor: '#f0f9ff',
+                            border: '2px solid #3b82f6',
+                            boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.1)'
+                        }}>
+                            <div style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '1rem', 
+                                marginBottom: '1.5rem',
+                                paddingBottom: '1rem',
+                                borderBottom: '2px solid #3b82f6'
+                            }}>
+                                <h3 className="text-2xl font-extrabold" style={{ color: '#3b82f6' }}>
+                                    Turma B
+                                </h3>
+                                <span className="badge" style={{ 
+                                    backgroundColor: '#3b82f6', 
+                                    color: 'white',
+                                    padding: '0.375rem 0.75rem',
+                                    fontSize: '0.75rem'
+                                }}>
+                                    {scenariosFilteredByTurma.filter(sc => sc.turma === 'B').length} cenários
+                                </span>
+                            </div>
+                            
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
+                                {scenariosFilteredByTurma.filter(sc => sc.turma === 'B').map(sc => (
+                                    <div key={sc.id} className="card" style={{ 
+                                        padding: 0, 
+                                        overflow: 'hidden', 
+                                        display: 'flex', 
+                                        flexDirection: 'column',
+                                        backgroundColor: 'white',
+                                        border: '1px solid #e5e7eb'
+                                    }}>
+                                        <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
+                                            <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
+                                            
+                                            <div className="flex flex-col gap-3 mb-5">
+                                                <div>
+                                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
+                                                    <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                                </div>
+                                                {sc.metaphor && (
+                                                    <div>
+                                                        <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
+                                                        <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                        </div>
+                                        
+                                        {/* AI Illustration Section */}
+                                        <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                                            <AIIllustration 
+                                                prompt={sc.imagePrompt || sc.description} 
+                                                aspectRatio="video"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    ))}
+                    )}
                 </div>
               </div>
               </div>
