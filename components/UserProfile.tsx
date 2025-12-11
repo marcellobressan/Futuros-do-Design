@@ -10,9 +10,14 @@ interface UserProfilePageProps {
 }
 
 const UserProfilePage: React.FC<UserProfilePageProps> = ({ userProfile, solutions, onLogout }) => {
+  console.log('UserProfile - Total solutions:', solutions.length);
+  console.log('UserProfile - User email:', userProfile.email);
+  
   const userSolutions = solutions.filter(sol =>
     sol.participantes.some(p => p.email === userProfile.email)
   );
+  
+  console.log('UserProfile - User solutions:', userSolutions.length);
 
   const handleLogout = () => {
     if (window.confirm('Tem certeza que deseja sair?')) {
@@ -36,16 +41,14 @@ const UserProfilePage: React.FC<UserProfilePageProps> = ({ userProfile, solution
                   <IconImage name="mail" alt="email" size={16} fallback={<Mail size={16} />} />
                   {userProfile.email}
                 </div>
-                <div className="flex items-center gap-3 text-gray text-sm mt-2">
-                  <IconImage name="user-check" alt="turma" size={16} fallback={<User size={16} />} />
-                  {userProfile.turma === 'PROFESSOR' ? (
+                {userProfile.turma === 'PROFESSOR' && (
+                  <div className="flex items-center gap-3 text-gray text-sm mt-2">
+                    <IconImage name="user-check" alt="role" size={16} fallback={<User size={16} />} />
                     <span className="font-semibold">
                       Professor {userProfile.isSuperUser && <span style={{ color: '#f59e0b' }}>• Super User</span>}
                     </span>
-                  ) : (
-                    <span className="font-semibold">Turma {userProfile.turma}</span>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
             <button
@@ -128,12 +131,7 @@ const UserProfilePage: React.FC<UserProfilePageProps> = ({ userProfile, solution
 
                   {/* Conteúdo da Solução */}
                   <div>
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-lg font-bold text-black flex-1">{sol.nome_da_solucao}</h3>
-                      <span className={`badge ${sol.turma === 'A' ? 'badge-A' : 'badge-B'}`}>
-                        Turma {sol.turma}
-                      </span>
-                    </div>
+                    <h3 className="text-lg font-bold text-black mb-3">{sol.nome_da_solucao}</h3>
 
                     {/* Resumo */}
                     <p className="text-sm text-gray mb-3" style={{ lineHeight: 1.5 }}>
