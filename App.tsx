@@ -497,32 +497,86 @@ const App: React.FC = () => {
               ) : (
                 <div className="flex flex-col gap-6">
                   {filteredSolutions.map((sol) => (
-                    <div key={sol.id} className="card flex flex-col md:flex-row gap-8 fade-in">
-                        <div style={{ flex: 1 }}>
-                            <div className="flex items-center gap-3 mb-2">
-                                <h3 className="text-2xl font-bold text-black">{sol.nome_da_solucao}</h3>
-                                <span className="badge badge-neutral">Turma {sol.turma}</span>
-                            </div>
-                            <p className="text-neutral text-xs font-bold uppercase tracking-widest mb-6">
-                                Por: {sol.participantes.map(p => p.nome_completo).join(', ')}
-                            </p>
-                            <div style={{ backgroundColor: '#f9fafb', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid #f3f4f6', fontSize: '0.875rem', lineHeight: 1.6 }}>
-                                <p className="font-bold text-orange mb-2 text-xs uppercase tracking-wide">Resumo da Solução</p>
-                                {sol.descricao_refinada.resumo}
-                            </div>
-                             <div className="flex flex-wrap gap-2">
-                                {sol.cenarios_relacionados.map(cen => (
-                                    <span key={cen} className="badge" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', fontWeight: 'bold' }}>
-                                        {cen}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
+                    <div key={sol.id} className="card fade-in" style={{ position: 'relative' }}>
+                      <div className="flex flex-col md:flex-row gap-6">
+                        {/* Imagem */}
                         {sol.imagem && sol.imagem.url && (
-                             <div style={{ width: '250px', height: 'auto', backgroundColor: '#f9fafb', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e5e7eb', flexShrink: 0 }}>
-                                 <img src={sol.imagem.url} alt="Solução" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                             </div>
+                          <div style={{ width: '280px', height: '200px', backgroundColor: '#f9fafb', borderRadius: '16px', overflow: 'hidden', border: '1px solid #e5e7eb', flexShrink: 0 }}>
+                            <img src={sol.imagem.url} alt={sol.nome_da_solucao} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          </div>
                         )}
+
+                        {/* Conteúdo */}
+                        <div style={{ flex: 1 }}>
+                          <div className="flex items-start justify-between gap-4 mb-3">
+                            <div>
+                              <h3 className="text-2xl font-bold text-black mb-2">{sol.nome_da_solucao}</h3>
+                              <p className="text-neutral text-xs font-bold uppercase tracking-widest">
+                                {sol.participantes.map(p => p.nome_completo).join(', ')}
+                              </p>
+                            </div>
+                            <span className="badge badge-neutral" style={{ flexShrink: 0 }}>Turma {sol.turma}</span>
+                          </div>
+
+                          {/* Resumo */}
+                          <div style={{ backgroundColor: '#f9fafb', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #f3f4f6', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                            <p className="font-bold text-orange mb-2 text-xs uppercase tracking-wide">Resumo</p>
+                            <p className="text-neutral">{sol.descricao_refinada.resumo}</p>
+                          </div>
+
+                          {/* Problema e Como Funciona */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                            <div style={{ fontSize: '0.813rem' }}>
+                              <p className="font-bold text-black mb-1 text-xs uppercase tracking-wide">Problema que Resolve</p>
+                              <p className="text-neutral" style={{ lineHeight: 1.5 }}>{sol.descricao_refinada.problema_que_resolve}</p>
+                            </div>
+                            <div style={{ fontSize: '0.813rem' }}>
+                              <p className="font-bold text-black mb-1 text-xs uppercase tracking-wide">Como Funciona</p>
+                              <p className="text-neutral" style={{ lineHeight: 1.5 }}>{sol.descricao_refinada.como_funciona}</p>
+                            </div>
+                          </div>
+
+                          {/* Cenários e Link */}
+                          <div className="flex flex-wrap items-center gap-2">
+                            {sol.cenarios_relacionados.map(cen => (
+                              <span key={cen} className="badge" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', fontWeight: 'bold', fontSize: '0.75rem' }}>
+                                {cen}
+                              </span>
+                            ))}
+                            {sol.link_solucao && (
+                              <a
+                                href={sol.link_solucao}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-primary"
+                                style={{ 
+                                  marginLeft: 'auto', 
+                                  padding: '0.5rem 1rem', 
+                                  fontSize: '0.875rem',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem',
+                                  textDecoration: 'none'
+                                }}
+                              >
+                                <ExternalLink size={16} />
+                                Ver Solução
+                              </a>
+                            )}
+                          </div>
+
+                          {/* Data de Submissão */}
+                          <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e5e7eb' }}>
+                            <p className="text-xs text-neutral">
+                              Cadastrada em: {new Date(sol.data_submissao).toLocaleDateString('pt-BR', { 
+                                day: '2-digit', 
+                                month: 'long', 
+                                year: 'numeric' 
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
