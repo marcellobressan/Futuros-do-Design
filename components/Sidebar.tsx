@@ -114,39 +114,6 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
             <span>Soluções Cadastradas</span>
             {currentView === AppView.SOLUTIONS && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
           </button>
-
-          <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--c-border)' }}>
-            <h3 className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold', marginBottom: '1rem', paddingLeft: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span>🎯 Cenários Ativos</span>
-            </h3>
-            <div className="flex flex-col gap-2">
-              {SCENARIOS_DATA.map((scenario) => (
-                <div 
-                  key={scenario.id} 
-                  className="card" 
-                  style={{ 
-                    padding: '0.75rem', 
-                    background: '#fcfcfc', 
-                    border: '1px solid #f3f4f6', 
-                    cursor: 'default',
-                    transition: 'all 0.2s ease',
-                    borderLeft: `3px solid ${scenario.turma === 'A' ? '#ff6002' : '#0066cc'}`
-                  }}
-                  title={scenario.description}
-                >
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-sm font-bold text-gray">
-                      {scenario.title}
-                    </span>
-
-                  </div>
-                  <p className="text-neutral" style={{ fontSize: '11px', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                    {scenario.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
         </nav>
 
         {/* User Profile Section */}
