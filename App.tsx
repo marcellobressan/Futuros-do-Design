@@ -543,9 +543,6 @@ const App: React.FC = () => {
                           <div className="flex items-start justify-between gap-4 mb-3">
                             <div>
                               <h3 className="text-2xl font-bold text-black mb-2">{sol.nome_da_solucao}</h3>
-                              <p className="text-neutral text-xs font-bold uppercase tracking-widest">
-                                {sol.participantes.map(p => p.nome_completo).join(', ')}
-                              </p>
                             </div>
                             {canEditSolution(sol) && (
                               <div className="flex gap-2">
@@ -575,6 +572,20 @@ const App: React.FC = () => {
                             )}
                           </div>
 
+                          {/* Participantes */}
+                          <div style={{ backgroundColor: '#f0f9ff', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #e0f2fe' }}>
+                            <p className="font-bold text-black mb-2 text-xs uppercase tracking-wide">Participantes</p>
+                            <div className="flex flex-col gap-2">
+                              {sol.participantes.map((p, idx) => (
+                                <div key={idx} className="flex items-center gap-2" style={{ fontSize: '0.875rem' }}>
+                                  <span className="font-semibold text-black">{p.nome_completo}</span>
+                                  <span className="text-neutral">•</span>
+                                  <a href={`mailto:${p.email}`} className="text-blue-600 hover:underline">{p.email}</a>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
                           {/* Resumo */}
                           <div style={{ backgroundColor: '#f9fafb', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #f3f4f6', fontSize: '0.875rem', lineHeight: 1.6 }}>
                             <p className="font-bold text-orange mb-2 text-xs uppercase tracking-wide">Resumo</p>
@@ -593,13 +604,26 @@ const App: React.FC = () => {
                             </div>
                           </div>
 
-                          {/* Cenários e Link */}
-                          <div className="flex flex-wrap items-center gap-2">
-                            {sol.cenarios_relacionados.map(cen => (
-                              <span key={cen} className="badge" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', fontWeight: 'bold', fontSize: '0.75rem' }}>
-                                {cen}
-                              </span>
-                            ))}
+                          {/* Relação com Cenários */}
+                          <div style={{ backgroundColor: '#fef9f5', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #fed7aa', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                            <p className="font-bold text-orange mb-2 text-xs uppercase tracking-wide">Relação com os Cenários</p>
+                            <p className="text-neutral">{sol.descricao_refinada.relacao_com_os_cenarios}</p>
+                          </div>
+
+                          {/* Cenários Relacionados */}
+                          <div className="mb-4">
+                            <p className="font-bold text-black mb-2 text-xs uppercase tracking-wide">Cenários Relacionados</p>
+                            <div className="flex flex-wrap gap-2">
+                              {sol.cenarios_relacionados.map(cen => (
+                                <span key={cen} className="badge" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', fontWeight: 'bold', fontSize: '0.75rem' }}>
+                                  {cen}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Link e Data */}
+                          <div className="flex flex-wrap items-center gap-3">
                             {sol.link_solucao && (
                               <a
                                 href={sol.link_solucao}
@@ -607,7 +631,6 @@ const App: React.FC = () => {
                                 rel="noopener noreferrer"
                                 className="btn btn-primary"
                                 style={{ 
-                                  marginLeft: 'auto', 
                                   padding: '0.5rem 1rem', 
                                   fontSize: '0.875rem',
                                   display: 'flex',
@@ -620,17 +643,15 @@ const App: React.FC = () => {
                                 Ver Solução
                               </a>
                             )}
-                          </div>
-
-                          {/* Data de Submissão */}
-                          <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e5e7eb' }}>
-                            <p className="text-xs text-neutral">
-                              Cadastrada em: {new Date(sol.data_submissao).toLocaleDateString('pt-BR', { 
-                                day: '2-digit', 
-                                month: 'long', 
-                                year: 'numeric' 
-                              })}
-                            </p>
+                            <div style={{ marginLeft: sol.link_solucao ? '0' : 'auto' }}>
+                              <p className="text-xs text-neutral">
+                                Cadastrada em: {new Date(sol.data_submissao).toLocaleDateString('pt-BR', { 
+                                  day: '2-digit', 
+                                  month: 'long', 
+                                  year: 'numeric' 
+                                })}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
