@@ -346,64 +346,145 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Reports Download Section */}
+              {/* Radar de Futuros Section */}
               <div style={{ marginBottom: '3rem' }}>
                 <h3 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                  <IconImage name="file-text" alt="relatórios" size={20} fallback={<FileText className="text-neutral" size={20}/>} /> Relatórios Originais
+                  <IconImage name="file-text" alt="radar" size={20} fallback={<FileText className="text-neutral" size={20}/>} /> Radar de Futuros
                 </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
-                  {KORI_REPORTS_DATA.map(report => {
-                    const status = extractionStatus[report.id] || 'idle';
-                    const isDone = status === 'done';
-                    return (
-                        <div key={report.id} className="card" style={isDone ? { borderColor: '#fed7aa', boxShadow: '0 0 0 1px #ffedd5' } : {}}>
-                        <div className="flex items-start justify-between mb-4">
-                            <div className="flex items-center gap-4">
-                                <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white', fontSize: '1.125rem', backgroundColor: report.turma === 'A' ? '#06b6d4' : '#a855f7' }}>
-                                    {report.turma}
-                                </div>
-                                <div>
-                                    <p className="font-bold text-sm text-black">Relatório Turma {report.turma}</p>
-                                    <p className="text-xs text-neutral font-medium mt-0.5">PDF • {report.size} • {report.date}</p>
-                                </div>
-                            </div>
+                
+                {/* Radar Images Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+                  {/* Radar Turma A */}
+                  <div className="card" style={{ padding: '1.5rem' }}>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                        <div style={{ 
+                          width: '32px', 
+                          height: '32px', 
+                          borderRadius: '8px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center', 
+                          fontWeight: 'bold', 
+                          color: 'white', 
+                          fontSize: '1rem', 
+                          backgroundColor: '#06b6d4' 
+                        }}>
+                          A
                         </div>
-                        
-                        <div className="flex gap-2">
-                            <button 
-                                onClick={() => simulateDownload(report)}
-                                className="btn btn-secondary flex-1 text-xs"
-                            >
-                                <IconImage name="download" alt="baixar" size={14} fallback={<Download size={14} />} />
-                                Baixar
-                            </button>
-                            <button 
-                                onClick={() => handleExtraction(report.id, report.turma)}
-                                disabled={status === 'extracting'}
-                                className="btn flex-1 text-xs"
-                                style={isDone ? { backgroundColor: '#fff7ed', color: 'var(--c-orange)', border: '1px solid #ffedd5' } : { backgroundColor: 'white', color: 'var(--c-orange)', border: '1px solid #fed7aa' }}
-                            >
-                                {status === 'extracting' ? (
-                                    <>
-                                        <IconImage name="cpu" alt="processando" size={14} fallback={<Cpu size={14} className="animate-spin" />} />
-                                        Processando...
-                                    </>
-                                ) : isDone ? (
-                                    <>
-                                        <IconImage name="check" alt="concluído" size={14} fallback={<Check size={14} />} />
-                                        Extraído
-                                    </>
-                                ) : (
-                                    <>
-                                        <IconImage name="cpu" alt="extrair" size={14} fallback={<Cpu size={14} />} />
-                                        Extrair Cenários
-                                    </>
-                                )}
-                            </button>
+                        <h4 className="font-bold text-black">Radar Turma A</h4>
+                      </div>
+                    </div>
+                    <div style={{ 
+                      borderRadius: '12px', 
+                      overflow: 'hidden', 
+                      border: '1px solid #e5e7eb',
+                      backgroundColor: '#f9fafb'
+                    }}>
+                      <img 
+                        src="https://i.postimg.cc/MKhDfq6t/Captura-de-tela-de-2025-12-11-14-41-46.png" 
+                        alt="Radar de Futuros - Turma A" 
+                        style={{ width: '100%', height: 'auto', display: 'block' }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Radar Turma B */}
+                  <div className="card" style={{ padding: '1.5rem' }}>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                        <div style={{ 
+                          width: '32px', 
+                          height: '32px', 
+                          borderRadius: '8px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center', 
+                          fontWeight: 'bold', 
+                          color: 'white', 
+                          fontSize: '1rem', 
+                          backgroundColor: '#a855f7' 
+                        }}>
+                          B
                         </div>
-                        </div>
-                    );
+                        <h4 className="font-bold text-black">Radar Turma B</h4>
+                      </div>
+                    </div>
+                    <div style={{ 
+                      borderRadius: '12px', 
+                      overflow: 'hidden', 
+                      border: '1px solid #e5e7eb',
+                      backgroundColor: '#f9fafb'
+                    }}>
+                      <img 
+                        src="https://i.postimg.cc/DyyVpQLD/Captura-de-tela-de-2025-12-11-14-38-48.png" 
+                        alt="Radar de Futuros - Turma B" 
+                        style={{ width: '100%', height: 'auto', display: 'block' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reports Download Section */}
+                <div>
+                  <h4 className="text-lg font-bold text-black mb-3 flex items-center gap-2">
+                    <IconImage name="download" alt="relatórios" size={18} fallback={<Download className="text-neutral" size={18}/>} /> 
+                    Relatórios Originais (Kori)
+                  </h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
+                    {KORI_REPORTS_DATA.map(report => {
+                      const status = extractionStatus[report.id] || 'idle';
+                      const isDone = status === 'done';
+                      return (
+                          <div key={report.id} className="card" style={isDone ? { borderColor: '#fed7aa', boxShadow: '0 0 0 1px #ffedd5' } : {}}>
+                          <div className="flex items-start justify-between mb-4">
+                              <div className="flex items-center gap-4">
+                                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white', fontSize: '1.125rem', backgroundColor: report.turma === 'A' ? '#06b6d4' : '#a855f7' }}>
+                                      {report.turma}
+                                  </div>
+                                  <div>
+                                      <p className="font-bold text-sm text-black">Relatório Turma {report.turma}</p>
+                                      <p className="text-xs text-neutral font-medium mt-0.5">PDF • {report.size} • {report.date}</p>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <div className="flex gap-2">
+                              <button 
+                                  onClick={() => simulateDownload(report)}
+                                  className="btn btn-secondary flex-1 text-xs"
+                              >
+                                  <IconImage name="download" alt="baixar" size={14} fallback={<Download size={14} />} />
+                                  Baixar
+                              </button>
+                              <button 
+                                  onClick={() => handleExtraction(report.id, report.turma)}
+                                  disabled={status === 'extracting'}
+                                  className="btn flex-1 text-xs"
+                                  style={isDone ? { backgroundColor: '#fff7ed', color: 'var(--c-orange)', border: '1px solid #ffedd5' } : { backgroundColor: 'white', color: 'var(--c-orange)', border: '1px solid #fed7aa' }}
+                              >
+                                  {status === 'extracting' ? (
+                                      <>
+                                          <IconImage name="cpu" alt="processando" size={14} fallback={<Cpu size={14} className="animate-spin" />} />
+                                          Processando...
+                                      </>
+                                  ) : isDone ? (
+                                      <>
+                                          <IconImage name="check" alt="concluído" size={14} fallback={<Check size={14} />} />
+                                          Extraído
+                                      </>
+                                  ) : (
+                                      <>
+                                          <IconImage name="cpu" alt="extrair" size={14} fallback={<Cpu size={14} />} />
+                                          Extrair Cenários
+                                      </>
+                                  )}
+                              </button>
+                          </div>
+                          </div>
+                      );
                   })}
+                  </div>
                 </div>
               </div>
 
