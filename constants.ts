@@ -5,6 +5,82 @@ import { Scenario, KoriReport } from './types';
 // Visual Style for AI Generation (kept for reference or future use)
 export const BASE_IMAGE_STYLE = "Estilo de ilustração vetorial moderno e abstrato, minimalista. Cores predominantes: Laranja vibrante (#ff6002), Branco e Preto. Formas geométricas limpas, design flat ou 3D isométrico suave. Sem texto, foco na composição visual conceitual. Alta qualidade, estilo institucional de escola de design e inovação.";
 
+// Termos de Uso
+export const TERMS_OF_USE = `
+**Termos de Uso do Portal Futuros do Design**
+
+Última atualização: 11 de dezembro de 2024
+
+Bem-vindo ao Portal Futuros do Design. Este espaço reúne os trabalhos, cenários, ideias e soluções digitais criados pelos estudantes da disciplina Teoria e Futuro do Design, da graduação em Design da CESAR School.
+
+Ao cadastrar sua solução ou navegar pelo portal, você concorda com os termos abaixo.
+
+**1. Sobre o Portal**
+
+O Portal existe para registrar, exibir e compartilhar o conteúdo produzido na disciplina.
+Aqui, você e seus colegas publicam:
+
+• análises sobre o estado da arte do design,
+• prospecções de futuros,
+• cenários de futuros alternativos,
+• soluções digitais desenvolvidas a partir de desafios emergentes.
+
+O objetivo é criar um repositório aberto para aprendizagem, inspiração e memória da disciplina, sem fins comerciais.
+
+**2. Seu Cadastro**
+
+Para participar, você deve informar dados verdadeiros e manter suas informações atualizadas.
+Sua conta é sua responsabilidade — cuide da senha e evite compartilhá-la.
+
+**3. Sobre o Conteúdo que Você Envia**
+
+Ao enviar qualquer conteúdo (textos, imagens, protótipos, vídeos, descrições, etc.), você confirma que:
+
+• é o autor do material, ou tem autorização para usá-lo;
+• não está infringindo direitos autorais ou de imagem de terceiros;
+• o conteúdo não contém material ofensivo, discriminatório ou ilegal.
+
+Você mantém a propriedade total sobre o que criou.
+
+**4. Permissão de Uso do Conteúdo (uso exclusivamente acadêmico)**
+
+Ao publicar sua solução no Portal, você concede à CESAR School e ao Portal uma licença não exclusiva, gratuita e restrita a usos acadêmicos para:
+
+• exibir seu trabalho no Portal,
+• utilizá-lo em aulas, atividades pedagógicas, eventos acadêmicos ou materiais institucionais da CESAR School,
+• arquivar e preservar seu conteúdo como parte do histórico da disciplina.
+
+**Importante:**
+Seu conteúdo não será usado para fins comerciais, nem poderá ser vendido, licenciado comercialmente ou explorado fora do contexto educacional sem sua permissão explícita.
+
+**5. Direitos da Plataforma**
+
+O Portal pode organizar, editar levemente o layout ou adaptar a forma de apresentação do seu conteúdo (sem alterar seu significado) para facilitar a navegação e a exibição dentro da plataforma.
+
+O design, código, identidade visual e demais elementos da Plataforma pertencem à CESAR School.
+
+**6. Convivência e Boas Práticas**
+
+Você concorda em:
+
+• respeitar colegas, professores e a comunidade acadêmica;
+• não publicar conteúdo plagiado;
+• não tentar prejudicar o funcionamento do Portal, inserir malware ou usar o sistema para fins indevidos.
+
+**7. Privacidade**
+
+Os dados pessoais fornecidos por você serão tratados conforme a Política de Privacidade da CESAR School e usados apenas para fins acadêmicos e de identificação da autoria dos projetos.
+
+**8. Alterações nos Termos**
+
+Podemos atualizar estes termos sempre que necessário.
+A versão mais recente ficará sempre disponível no Portal.
+
+**9. Contato**
+
+Se tiver dúvidas sobre estes termos ou sobre o uso do Portal, fale com a equipe da disciplina ou envie um e-mail para: mcb2@cesar.school
+`;
+
 // Static Assets
 export const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"; 
 

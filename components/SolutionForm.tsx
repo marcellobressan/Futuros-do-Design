@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { UserProfile, RegisteredSolution } from '../types';
 import { Save, Plus, X, Upload, AlertCircle, CheckCircle, Loader2, Image as ImageIcon } from 'lucide-react';
 import IconImage from './IconImage';
-import { SCENARIOS_DATA } from '../constants';
+import { SCENARIOS_DATA, TERMS_OF_USE } from '../constants';
 import { updateSolution } from '../services/geminiService';
 
 interface SolutionFormProps {
@@ -35,6 +35,8 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
 
   // Populate form when editing
   useEffect(() => {
@@ -99,6 +101,12 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
     const validationError = validateForm();
     if (validationError) {
       setError(validationError);
+      return;
+    }
+
+    // Validar aceitação dos termos apenas para novos cadastros
+    if (!editingSolution && !acceptedTerms) {
+      setError('Você precisa aceitar os Termos de Uso para cadastrar uma solução.');
       return;
     }
 
@@ -490,7 +498,64 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
             <p className="text-sm" style={{ color: '#dc2626' }}>{error}</p>
           </div>
         )}
+        {/* Termos de Uso (apenas para novos cadastros) */}
+        {!editingSolution && (
+          <div className="card" style={{ backgroundColor: '#fef3c7', borderLeft: '4px solid var(--c-orange)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                <input
+                  type="checkbox"
+                  id="acceptTerms"
+                  checked={acceptedTerms}
+                  onChange={(e) => setAcceptedTerms(e.target.checked)}
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    cursor: 'pointer',
+                    accentColor: 'var(--c-orange)',
+                    marginTop: '2px',
+                    flexShrink: 0
+                  }}
+                />
+                <label htmlFor="acceptTerms" style={{ cursor: 'pointer', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                  Li e aceito os{' '}
+                  <button
+                    type="button"
+                    onClick={() => setShowTerms(!showTerms)}
+                    style={{
+                      color: 'var(--c-orange)',
+                      textDecoration: 'underline',
+                      fontWeight: 'bold',
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Termos de Uso do Portal Futuros do Design
+                  </button>
+                  . Confirmo que sou autor(a) do conteúdo ou tenho autorização para publicá-lo, e concordo que o material seja utilizado exclusivamente para fins acadêmicos pela CESAR School.
+                </label>
+              </div>
 
+              {showTerms && (
+                <div style={{
+                  marginTop: '1rem',
+                  padding: '1.5rem',
+                  backgroundColor: 'white',
+                  borderRadius: '8px',
+                  maxHeight: '400px',
+                  overflowY: 'auto',
+                  fontSize: '0.875rem',
+                  lineHeight: '1.6',
+                  whiteSpace: 'pre-wrap'
+                }}>
+                  {TERMS_OF_USE}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
         {/* Submit Buttons */}
         <div style={{
           display: 'flex',
