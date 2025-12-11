@@ -56,6 +56,7 @@ export default async (req: Request) => {
         cenarios_relacionados: body.cenarios_relacionados,
         descricao_refinada: body.descricao_refinada,
         imagem: body.imagem,
+        link_solucao: body.link_solucao,
         data_submissao: new Date()
       }).returning();
 
