@@ -9,10 +9,10 @@ import AIIllustration from './components/AIIllustration';
 import Dashboard from './components/Dashboard';
 import UserProfile from './components/UserProfile';
 import LoginModal from './components/LoginModal';
-import { initializeGemini, getSolutions } from './services/geminiService';
+import { initializeGemini, getSolutions, deleteSolution } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile as UserProfileType } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
-import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search } from 'lucide-react';
+import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search, Edit2, Trash2 } from 'lucide-react';
 import IconImage from './components/IconImage';
 
 // Google OAuth Client ID
@@ -33,6 +33,7 @@ const App: React.FC = () => {
   const [registeredSolutions, setRegisteredSolutions] = useState<RegisteredSolution[]>([]);
   const [keyError, setKeyError] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [editingSolution, setEditingSolution] = useState<RegisteredSolution | null>(null);
 
   const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
   const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
@@ -124,6 +125,31 @@ const App: React.FC = () => {
     const interval = setInterval(fetchData, 5000); // Poll every 5s instead of 2s for DB sanity
     return () => clearInterval(interval);
   }, []);
+
+  const handleDeleteSolution = async (id: string) => {
+    if (!window.confirm('Tem certeza que deseja excluir esta solução? Esta ação não pode ser desfeita.')) {
+      return;
+    }
+
+    try {
+      await deleteSolution(id);
+      const solutions = await getSolutions();
+      setRegisteredSolutions(solutions);
+    } catch (error) {
+      console.error('Error deleting solution:', error);
+      alert('Erro ao excluir solução. Tente novamente.');
+    }
+  };
+
+  const handleEditSolution = (solution: RegisteredSolution) => {
+    setEditingSolution(solution);
+    setCurrentView(AppView.SOLUTION_REGISTRATION);
+  };
+
+  const canEditSolution = (solution: RegisteredSolution): boolean => {
+    if (!userProfile) return false;
+    return solution.participantes.some(p => p.email === userProfile.email);
+  };
 
   const scenariosFilteredByTurma = scenariosFilter === 'ALL' 
     ? SCENARIOS_DATA 
@@ -233,9 +259,15 @@ const App: React.FC = () => {
             }}>
               <SolutionForm 
                 userProfile={userProfile} 
+                editingSolution={editingSolution}
                 onSuccess={async () => {
                   const solutions = await getSolutions();
                   setRegisteredSolutions(solutions);
+                  setEditingSolution(null);
+                  setCurrentView(AppView.SOLUTIONS);
+                }}
+                onCancel={() => {
+                  setEditingSolution(null);
                   setCurrentView(AppView.SOLUTIONS);
                 }}
               />
@@ -515,6 +547,32 @@ const App: React.FC = () => {
                                 {sol.participantes.map(p => p.nome_completo).join(', ')}
                               </p>
                             </div>
+                            {canEditSolution(sol) && (
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handleEditSolution(sol)}
+                                  className="btn btn-secondary"
+                                  style={{ padding: '0.5rem', fontSize: '0.875rem' }}
+                                  title="Editar solução"
+                                >
+                                  <Edit2 size={16} />
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteSolution(sol.id)}
+                                  className="btn"
+                                  style={{ 
+                                    padding: '0.5rem', 
+                                    fontSize: '0.875rem',
+                                    backgroundColor: '#fef2f2',
+                                    color: '#dc2626',
+                                    border: '1px solid #fecaca'
+                                  }}
+                                  title="Excluir solução"
+                                >
+                                  <Trash2 size={16} />
+                                </button>
+                              </div>
+                            )}
                           </div>
 
                           {/* Resumo */}

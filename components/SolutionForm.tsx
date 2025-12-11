@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserProfile, RegisteredSolution } from '../types';
 import { Save, Plus, X, Upload, AlertCircle, CheckCircle, Loader2, Image as ImageIcon } from 'lucide-react';
 import IconImage from './IconImage';
 import { SCENARIOS_DATA } from '../constants';
+import { updateSolution } from '../services/geminiService';
 
 interface SolutionFormProps {
   userProfile: UserProfile;
+  editingSolution?: RegisteredSolution | null;
   onSuccess: () => void;
+  onCancel?: () => void;
 }
 
 interface Participant {
@@ -14,7 +17,7 @@ interface Participant {
   email: string;
 }
 
-const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) => {
+const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolution, onSuccess, onCancel }) => {
   // Form state
   const [nomeSolucao, setNomeSolucao] = useState('');
   const [participantes, setParticipantes] = useState<Participant[]>([
@@ -32,6 +35,21 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  // Populate form when editing
+  useEffect(() => {
+    if (editingSolution) {
+      setNomeSolucao(editingSolution.nome_da_solucao);
+      setParticipantes(editingSolution.participantes);
+      setCenariosRelacionados(editingSolution.cenarios_relacionados);
+      setResumo(editingSolution.descricao_refinada.resumo);
+      setProblemaQueResolve(editingSolution.descricao_refinada.problema_que_resolve);
+      setComoFunciona(editingSolution.descricao_refinada.como_funciona);
+      setRelacaoComCenarios(editingSolution.descricao_refinada.relacao_com_os_cenarios);
+      setImagemUrl(editingSolution.imagem?.url || '');
+      setLinkSolucao(editingSolution.link_solucao || '');
+    }
+  }, [editingSolution]);
 
   // Filtrar cenários pela turma do usuário (apenas se não for professor)
   const scenariosDisponiveis = userProfile.turma === 'PROFESSOR' 
@@ -109,15 +127,21 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
         link_solucao: linkSolucao.trim() || undefined
       };
 
-      const response = await fetch('/.netlify/functions/solutions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      if (editingSolution) {
+        // Update existing solution
+        await updateSolution(editingSolution.id, payload);
+      } else {
+        // Create new solution
+        const response = await fetch('/.netlify/functions/solutions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erro ao cadastrar solução');
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Erro ao cadastrar solução');
+        }
       }
 
       setSuccess(true);
@@ -148,7 +172,9 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
         }}>
           <CheckCircle size={40} style={{ color: '#16a34a' }} />
         </div>
-        <h2 className="text-2xl font-bold text-black mb-2">Solução Cadastrada!</h2>
+        <h2 className="text-2xl font-bold text-black mb-2">
+          {editingSolution ? 'Solução Atualizada!' : 'Solução Cadastrada!'}
+        </h2>
         <p className="text-neutral">Redirecionando...</p>
       </div>
     );
@@ -158,8 +184,14 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem' }}>
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="text-3xl font-extrabold text-black mb-2">Cadastrar Nova Solução</h1>
-        <p className="text-neutral text-sm mb-4">Preencha os campos abaixo para registrar sua solução no portal.</p>
+        <h1 className="text-3xl font-extrabold text-black mb-2">
+          {editingSolution ? 'Editar Solução' : 'Cadastrar Nova Solução'}
+        </h1>
+        <p className="text-neutral text-sm mb-4">
+          {editingSolution 
+            ? 'Atualize os campos abaixo para modificar sua solução.' 
+            : 'Preencha os campos abaixo para registrar sua solução no portal.'}
+        </p>
         
         {/* Progress Indicator */}
         <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.5rem' }}>
@@ -476,6 +508,17 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
           >
             ↑ Voltar ao Topo
           </button>
+          {editingSolution && onCancel && (
+            <button
+              type="button"
+              onClick={onCancel}
+              className="btn btn-secondary"
+              style={{ padding: '0.875rem 1.5rem' }}
+            >
+              <X size={20} />
+              Cancelar
+            </button>
+          )}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -485,12 +528,12 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
             {isSubmitting ? (
               <>
                 <Loader2 className="animate-spin" size={20} />
-                Cadastrando...
+                {editingSolution ? 'Atualizando...' : 'Cadastrando...'}
               </>
             ) : (
               <>
                 <Save size={20} />
-                Cadastrar Solução
+                {editingSolution ? 'Atualizar Solução' : 'Cadastrar Solução'}
               </>
             )}
           </button>

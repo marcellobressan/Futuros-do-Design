@@ -30,6 +30,45 @@ export const getSolutions = async (): Promise<RegisteredSolution[]> => {
   }
 };
 
+export const updateSolution = async (id: string, solution: Partial<RegisteredSolution>): Promise<RegisteredSolution> => {
+  try {
+    const response = await fetch(`/.netlify/functions/solutions?id=${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(solution)
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error("Update solution error:", errorBody);
+      throw new Error(`Failed to update solution. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data as RegisteredSolution;
+  } catch (error) {
+    console.error("Error updating solution:", error);
+    throw error;
+  }
+};
+
+export const deleteSolution = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`/.netlify/functions/solutions?id=${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error("Delete solution error:", errorBody);
+      throw new Error(`Failed to delete solution. Status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Error deleting solution:", error);
+    throw error;
+  }
+};
+
 export const generateIllustration = async (prompt: string): Promise<string> => {
     try {
         const response = await fetch('/.netlify/functions/genai?action=generateImage', {
