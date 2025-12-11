@@ -508,7 +508,8 @@ const App: React.FC = () => {
                                         {/* AI Illustration Section */}
                                         <div style={{ padding: '0 2rem 2rem 2rem' }}>
                                             <AIIllustration 
-                                                prompt={sc.imagePrompt || sc.description} 
+                                                prompt={sc.imagePrompt || sc.description}
+                                                imageUrl={sc.imageUrl}
                                                 aspectRatio="video"
                                             />
                                         </div>
@@ -579,7 +580,8 @@ const App: React.FC = () => {
                                         {/* AI Illustration Section */}
                                         <div style={{ padding: '0 2rem 2rem 2rem' }}>
                                             <AIIllustration 
-                                                prompt={sc.imagePrompt || sc.description} 
+                                                prompt={sc.imagePrompt || sc.description}
+                                                imageUrl={sc.imageUrl}
                                                 aspectRatio="video"
                                             />
                                         </div>
