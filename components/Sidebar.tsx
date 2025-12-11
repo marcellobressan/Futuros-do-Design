@@ -138,9 +138,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
                     <span className="text-sm font-bold text-gray">
                       {scenario.title}
                     </span>
-                    <span className={`badge ${scenario.turma === 'A' ? 'badge-A' : 'badge-B'}`} style={{ fontSize: '10px' }}>
-                      {scenario.turma}
-                    </span>
+
                   </div>
                   <p className="text-neutral" style={{ fontSize: '11px', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {scenario.description}
@@ -203,7 +201,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
                         👨‍🏫 Professor {userProfile.isSuperUser && <span style={{ color: '#f59e0b', fontWeight: 'bold' }}>(Admin)</span>}
                       </>
                     ) : (
-                      <>📚 Turma {userProfile.turma}</>
+                      <></>  
                     )}
                   </p>
                 </div>

@@ -515,7 +515,6 @@ const App: React.FC = () => {
                                 {sol.participantes.map(p => p.nome_completo).join(', ')}
                               </p>
                             </div>
-                            <span className="badge badge-neutral" style={{ flexShrink: 0 }}>Turma {sol.turma}</span>
                           </div>
 
                           {/* Resumo */}

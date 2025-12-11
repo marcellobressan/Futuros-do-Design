@@ -103,7 +103,7 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                                                    {sol.participantes.length > 1 && ' e outros'}
                                                </p>
                                            </div>
-                                           <span className={`badge ${sol.turma === 'A' ? 'badge-A' : 'badge-B'}`}>Turma {sol.turma}</span>
+
                                        </div>
                                    ))
                                ) : (

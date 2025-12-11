@@ -212,10 +212,10 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
 
               <div className="flex gap-4">
                 <a href="https://app.strateegia.digital/dashboard/public-link/boyoaM" target="_blank" className="btn btn-secondary flex-1" style={{ fontSize: '0.875rem' }}>
-                  Turma A <IconImage name="external-link" alt="abrir" size={14} fallback={<ExternalLink size={14} />} />
+                  Ver Projeto A <IconImage name="external-link" alt="abrir" size={14} fallback={<ExternalLink size={14} />} />
                 </a>
                 <a href="https://app.strateegia.digital/dashboard/public-link/afrnxv" target="_blank" className="btn btn-secondary flex-1" style={{ fontSize: '0.875rem' }}>
-                   Turma B <IconImage name="external-link" alt="abrir" size={14} fallback={<ExternalLink size={14} />} />
+                   Ver Projeto B <IconImage name="external-link" alt="abrir" size={14} fallback={<ExternalLink size={14} />} />
                 </a>
               </div>
             </div>
@@ -236,7 +236,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
                 <a href="https://open.spotify.com/show/5jdYWrY0SbEHk1OcN6qt4l?si=d6b357d69efc4b0c" target="_blank" className="card flex justify-between items-center hover:shadow-md">
                     <div>
                       <h4 className="text-lg font-bold text-black">IAgora Designers?</h4>
-                      <p className="text-xs font-bold text-neutral mt-1 uppercase">Turma A • Spotify</p>
+                      <p className="text-xs font-bold text-neutral mt-1 uppercase">Spotify</p>
                     </div>
                     <IconImage name="external-link" alt="abrir" size={16} fallback={<ExternalLink size={16} className="text-neutral" />} />
                 </a>
@@ -244,7 +244,7 @@ const StoryBoard: React.FC<StoryBoardProps> = ({ onNavigate }) => {
                 <a href="https://open.spotify.com/show/6SIZ5HFIib1UdSDTfxetNz?si=67f5f91e6a014d2b" target="_blank" className="card flex justify-between items-center hover:shadow-md">
                     <div>
                       <h4 className="text-lg font-bold text-black">PodIA ser design?</h4>
-                      <p className="text-xs font-bold text-neutral mt-1 uppercase">Turma B • Spotify</p>
+                      <p className="text-xs font-bold text-neutral mt-1 uppercase">Spotify</p>
                     </div>
                     <ExternalLink size={16} className="text-neutral" />
                 </a>
