@@ -1,0 +1,82 @@
+{
+  "id": "b9f0fdec-0328-4609-ac38-25a5448d76b9",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.solutions": {
+      "name": "solutions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nome_da_solucao": {
+          "name": "nome_da_solucao",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "turma": {
+          "name": "turma",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "participantes": {
+          "name": "participantes",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cenarios_relacionados": {
+          "name": "cenarios_relacionados",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descricao_refinada": {
+          "name": "descricao_refinada",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "imagem": {
+          "name": "imagem",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "link_solucao": {
+          "name": "link_solucao",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_submissao": {
+          "name": "data_submissao",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

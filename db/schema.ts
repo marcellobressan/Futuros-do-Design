@@ -9,6 +9,7 @@ export const solutions = pgTable('solutions', {
   cenarios_relacionados: jsonb('cenarios_relacionados').notNull(),
   descricao_refinada: jsonb('descricao_refinada').notNull(),
   imagem: jsonb('imagem').notNull(),
+  link_solucao: text('link_solucao'),
   data_submissao: timestamp('data_submissao').defaultNow(),
 });
 

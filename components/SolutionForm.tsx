@@ -26,6 +26,7 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
   const [comoFunciona, setComoFunciona] = useState('');
   const [relacaoComCenarios, setRelacaoComCenarios] = useState('');
   const [imagemUrl, setImagemUrl] = useState('');
+  const [linkSolucao, setLinkSolucao] = useState('');
 
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -104,7 +105,8 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
         imagem: {
           tipo: imagemUrl.trim() ? 'url' : 'url',
           url: imagemUrl.trim() || 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=400'
-        }
+        },
+        link_solucao: linkSolucao.trim() || undefined
       };
 
       const response = await fetch('/.netlify/functions/solutions', {
@@ -421,6 +423,23 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, onSuccess }) =
               </div>
             )}
           </div>
+        </div>
+
+        {/* Link da Solução (Opcional) */}
+        <div className="card">
+          <label className="text-neutral uppercase tracking-widest mb-2 block" style={{ fontSize: '11px', fontWeight: 'bold' }}>
+            Link da Solução (Opcional)
+          </label>
+          <input
+            type="url"
+            value={linkSolucao}
+            onChange={(e) => setLinkSolucao(e.target.value)}
+            placeholder="https://exemplo.com/sua-solucao"
+            className="input-field"
+          />
+          <p className="text-xs text-neutral mt-1">
+            Cole o link para demonstração, repositório ou documentação da sua solução.
+          </p>
         </div>
 
         {/* Error Message */}

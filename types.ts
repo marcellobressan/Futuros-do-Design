@@ -56,6 +56,7 @@ export interface RegisteredSolution {
     tipo: 'upload' | 'url';
     url: string;
   };
+  link_solucao?: string;
   data_submissao: string;
 }
 
@@ -74,6 +75,7 @@ export interface DraftSolution {
     tipo: 'upload' | 'url';
     url: string;
   };
+  link_solucao?: string;
 }
 
 export enum AppView {
