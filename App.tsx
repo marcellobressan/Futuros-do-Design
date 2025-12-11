@@ -148,6 +148,9 @@ const App: React.FC = () => {
 
   const canEditSolution = (solution: RegisteredSolution): boolean => {
     if (!userProfile) return false;
+    // Superuser pode editar qualquer solução
+    if (userProfile.isSuperUser) return true;
+    // Outros usuários podem editar apenas suas próprias soluções
     return solution.participantes.some(p => p.email === userProfile.email);
   };
 
