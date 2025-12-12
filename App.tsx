@@ -375,18 +375,36 @@ const App: React.FC = () => {
                         <h4 className="font-bold text-black">Radar Turma A</h4>
                       </div>
                     </div>
-                    <div style={{ 
-                      borderRadius: '12px', 
-                      overflow: 'hidden', 
-                      border: '1px solid #e5e7eb',
-                      backgroundColor: '#f9fafb'
-                    }}>
+                    <a 
+                      href="https://app.kori.lat/pt-BR/dashboard/projects/02afa15a-59a5-4736-8be6-e49683c9b621/radar"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ 
+                        display: 'block',
+                        borderRadius: '12px', 
+                        overflow: 'hidden', 
+                        border: '1px solid #e5e7eb',
+                        backgroundColor: '#f9fafb',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                        e.currentTarget.style.borderColor = '#06b6d4';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.borderColor = '#e5e7eb';
+                      }}
+                    >
                       <img 
                         src="https://i.postimg.cc/MKhDfq6t/Captura-de-tela-de-2025-12-11-14-41-46.png" 
                         alt="Radar de Futuros - Turma A" 
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                       />
-                    </div>
+                    </a>
                   </div>
 
                   {/* Radar Turma B */}
@@ -410,18 +428,36 @@ const App: React.FC = () => {
                         <h4 className="font-bold text-black">Radar Turma B</h4>
                       </div>
                     </div>
-                    <div style={{ 
-                      borderRadius: '12px', 
-                      overflow: 'hidden', 
-                      border: '1px solid #e5e7eb',
-                      backgroundColor: '#f9fafb'
-                    }}>
+                    <a 
+                      href="https://app.kori.lat/pt-BR/dashboard/projects/5b623270-6299-4a9f-a3e1-26ff8e381926/radar"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ 
+                        display: 'block',
+                        borderRadius: '12px', 
+                        overflow: 'hidden', 
+                        border: '1px solid #e5e7eb',
+                        backgroundColor: '#f9fafb',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                        e.currentTarget.style.borderColor = '#a855f7';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.borderColor = '#e5e7eb';
+                      }}
+                    >
                       <img 
                         src="https://i.postimg.cc/DyyVpQLD/Captura-de-tela-de-2025-12-11-14-38-48.png" 
                         alt="Radar de Futuros - Turma B" 
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                       />
-                    </div>
+                    </a>
                   </div>
                 </div>
 
