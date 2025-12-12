@@ -7,53 +7,46 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍊</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Neo-Futuristic Typography System -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     
     <style>
-      /* ═══════════════════════════════════════════════════════════
-         FUTUROS DO DESIGN — NEO-FUTURIST EDITORIAL INTERFACE
-         A speculative command center for alternative futures
-         ═══════════════════════════════════════════════════════════ */
+      /* ==============================================
+         DESIGN SYSTEM - FUTUROS DO DESIGN
+         Enhanced with sophisticated visual effects
+         ============================================== */
       
       :root {
-        /* ═══ TYPOGRAPHY SYSTEM ═══ */
-        --font-display: 'Orbitron', sans-serif;        /* Futuristic headers */
-        --font-body: 'Crimson Pro', serif;             /* Editorial body */
-        --font-accent: 'Archivo Narrow', sans-serif;   /* Metadata & labels */
+        /* Font System - Professional & Modern */
+        --font-base: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
         
-        /* ═══ NEO-FUTURIST COLOR PALETTE ═══ */
-        --c-void: #0a0a0f;                  /* Deep space black */
-        --c-slate: #1a1a2e;                 /* Dark slate base */
-        --c-slate-light: #2d2d44;           /* Elevated surfaces */
-        --c-text: #e8e8f0;                  /* Primary text */
-        --c-text-dim: #a0a0b8;              /* Secondary text */
-        --c-text-faint: #6b6b88;            /* Tertiary text */
+        /* Color Palette - Vibrant & Sophisticated */
+        --c-orange: #ff6002;
+        --c-orange-deep: #ff4500;
+        --c-orange-light: #ff8c00;
+        --c-orange-glow: rgba(255, 96, 2, 0.3);
         
-        /* ═══ NEON ACCENTS ═══ */
-        --c-cyan: #00f5ff;                  /* Electric cyan */
-        --c-magenta: #ff00ff;               /* Pure magenta */
-        --c-lime: #ccff00;                  /* Acid lime */
-        --c-orange: #ff6002;                /* Brand orange (kept for compatibility) */
+        --c-black: #0f0f0f;
+        --c-gray: #3d3d3d;
+        --c-gray-light: #9ca3af;
+        --c-neutral: #6b7280;
+        --c-white: #ffffff;
+        --c-off-white: #fafafa;
         
-        /* ═══ HOLOGRAPHIC GRADIENTS ═══ */
-        --grad-holo: linear-gradient(135deg, #00f5ff 0%, #ff00ff 50%, #ccff00 100%);
-        --grad-void: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
-        --grad-slate: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
-        --grad-cyan: linear-gradient(135deg, #00f5ff 0%, #0099ff 100%);
-        --grad-magenta: linear-gradient(135deg, #ff00ff 0%, #cc00ff 100%);
+        --c-border: #e5e7eb;
+        --c-border-light: #f3f4f6;
         
-        /* ═══ GLOW EFFECTS ═══ */
-        --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.3), 0 0 40px rgba(0, 245, 255, 0.15);
-        --glow-magenta: 0 0 20px rgba(255, 0, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.15);
-        --glow-lime: 0 0 20px rgba(204, 255, 0, 0.3), 0 0 40px rgba(204, 255, 0, 0.15);
+        --c-pink: #ec4899;
+        --c-purple: #a855f7;
         
-        /* ═══ SHADOWS & DEPTH ═══ */
-        --shadow-void: 0 10px 40px rgba(0, 0, 0, 0.8);
-        --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.6);
-        --shadow-float: 0 30px 80px rgba(0, 0, 0, 0.5);
+        /* Shadows - Dramatic depth */
+        --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+        --shadow-glow: 0 0 20px var(--c-orange-glow);
         
-        /* ═══ SPACING SCALE ═══ */
+        /* Spacing */
         --space-xs: 0.25rem;
         --space-sm: 0.5rem;
         --space-md: 1rem;
@@ -63,209 +56,53 @@
         --space-3xl: 4rem;
         --space-4xl: 6rem;
         
-        /* ═══ BORDER RADIUS ═══ */
-        --radius-sm: 4px;
-        --radius-md: 8px;
-        --radius-lg: 16px;
-        --radius-xl: 24px;
+        /* Border Radius */
+        --radius-sm: 6px;
+        --radius-md: 10px;
+        --radius-lg: 14px;
+        --radius-xl: 18px;
+        --radius-full: 9999px;
         
-        /* ═══ TRANSITIONS ═══ */
-        --trans-snap: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-        --trans-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        --trans-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Transitions */
+        --trans-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        --trans-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        --trans-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* ═══════════════════════════════════════════════════════════
-         BASE RESET & FUNDAMENTAL STYLES
-         ═══════════════════════════════════════════════════════════ */
-      
-      * { 
-        box-sizing: border-box; 
-        margin: 0; 
-        padding: 0; 
-      }
+      /* Base Reset */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       
       body {
-        font-family: var(--font-body);
-        background: var(--grad-void);
-        color: var(--c-text);
-        line-height: 1.7;
+        font-family: var(--font-base);
+        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+        color: var(--c-gray);
+        line-height: 1.6;
         overflow: hidden;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        position: relative;
       }
       
-      /* ═══ SCI-FI GRID OVERLAY ═══ */
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-image: 
-          linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        pointer-events: none;
-        z-index: 1;
-        animation: grid-drift 60s linear infinite;
-      }
+      button { cursor: pointer; border: none; background: none; font-family: inherit; }
+      a { text-decoration: none; color: inherit; }
       
-      @keyframes grid-drift {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(40px, 40px); }
-      }
-      
-      /* ═══ SCAN LINE EFFECT ═══ */
-      body::after {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(
-          transparent 0%,
-          rgba(0, 245, 255, 0.05) 50%,
-          transparent 100%
-        );
-        background-size: 100% 4px;
-        animation: scan-line 8s linear infinite;
-        pointer-events: none;
-        z-index: 1;
-        opacity: 0.3;
-      }
-      
-      @keyframes scan-line {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100vh); }
-      }
-      
-      button { 
-        cursor: pointer; 
-        border: none; 
-        background: none; 
-        font-family: inherit;
-        transition: var(--trans-smooth);
-      }
-      
-      a { 
-        text-decoration: none; 
-        color: inherit;
-        transition: var(--trans-smooth);
-      }
-      
-      /* ═══ CUSTOM SCROLLBAR — NEON STYLE ═══ */
-      ::-webkit-scrollbar { 
-        width: 12px; 
-        height: 12px; 
-      }
-      
-      ::-webkit-scrollbar-track { 
-        background: var(--c-slate);
-        border-left: 1px solid rgba(0, 245, 255, 0.2);
-      }
-      
-      ::-webkit-scrollbar-thumb { 
-        background: var(--grad-cyan);
-        border: 2px solid var(--c-slate);
-        border-radius: var(--radius-sm);
-        box-shadow: var(--glow-cyan);
-      }
-      
-      ::-webkit-scrollbar-thumb:hover { 
-        background: var(--c-cyan);
-        box-shadow: var(--glow-cyan), inset 0 0 10px rgba(255, 255, 255, 0.3);
-      }
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 10px; height: 10px; }
+      ::-webkit-scrollbar-track { background: var(--c-off-white); }
+      ::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: var(--radius-md); }
+      ::-webkit-scrollbar-thumb:hover { background: var(--c-orange); }
 
-      /* ═══════════════════════════════════════════════════════════
-         TYPOGRAPHY SYSTEM — NEO-FUTURIST EDITORIAL
-         ═══════════════════════════════════════════════════════════ */
-      
-      h1, h2, h3, h4, h5, h6 {
-        font-family: var(--font-display);
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        line-height: 1.1;
-        margin: 0;
-      }
-      
-      h1 {
-        font-size: clamp(2.5rem, 5vw, 5rem);
-        font-weight: 900;
-        background: var(--grad-holo);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-shadow: 0 0 40px rgba(0, 245, 255, 0.5);
-      }
-      
-      h2 {
-        font-size: clamp(1.75rem, 3vw, 3rem);
-        font-weight: 800;
-        color: var(--c-cyan);
-        text-shadow: var(--glow-cyan);
-      }
-      
-      h3 {
-        font-size: clamp(1.25rem, 2vw, 2rem);
-        font-weight: 700;
-        color: var(--c-text);
-      }
-      
-      p, li {
-        font-family: var(--font-body);
-        font-size: 1.0625rem;
-        line-height: 1.8;
-        color: var(--c-text-dim);
-      }
-      
-      /* ═══ ACCENT TEXT STYLES ═══ */
-      .text-display {
-        font-family: var(--font-display);
-        font-weight: 700;
-        letter-spacing: 0.075em;
-        text-transform: uppercase;
-      }
-      
-      .text-accent {
-        font-family: var(--font-accent);
-        font-size: 0.8125rem;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--c-cyan);
-      }
-      
-      .text-meta {
-        font-family: var(--font-accent);
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        color: var(--c-text-faint);
-      }
-      
-      /* ═══ HOLOGRAPHIC TEXT ═══ */
-      .text-holo {
-        background: var(--grad-holo);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 800;
-      }
-
-      /* ═══════════════════════════════════════════════════════════
-         UTILITY CLASSES
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Utilities */
       .flex { display: flex; }
       .flex-col { flex-direction: column; }
       .items-center { align-items: center; }
       .justify-center { justify-content: center; }
       .justify-between { justify-content: space-between; }
-      .gap-1 { gap: var(--space-xs); }
-      .gap-2 { gap: var(--space-sm); }
-      .gap-3 { gap: var(--space-md); }
-      .gap-4 { gap: var(--space-lg); }
-      .gap-6 { gap: var(--space-xl); }
-      .gap-8 { gap: var(--space-2xl); }
+      .gap-1 { gap: 0.25rem; }
+      .gap-2 { gap: 0.5rem; }
+      .gap-3 { gap: 1rem; }
+      .gap-4 { gap: 1.5rem; }
+      .gap-6 { gap: 2rem; }
+      .gap-8 { gap: 3rem; }
       .w-full { width: 100%; }
       .h-full { height: 100%; }
       .text-center { text-align: center; }
@@ -278,7 +115,7 @@
       .absolute { position: absolute; }
       .hidden { display: none; }
       
-      /* --- LEGACY TYPOGRAPHY UTILITIES (maintained for compatibility) --- */
+      /* --- TYPOGRAPHY --- */
       .text-xs { font-size: 0.75rem; }
       .text-sm { font-size: 0.875rem; }
       .text-base { font-size: 1rem; }
@@ -287,269 +124,195 @@
       .text-2xl { font-size: 1.5rem; }
       .text-3xl { font-size: 1.875rem; }
       .text-4xl { font-size: 2.25rem; }
-
-      /* ═══════════════════════════════════════════════════════════
-         BUTTON SYSTEM — HOLOGRAPHIC COMMAND INTERFACES
-         ═══════════════════════════════════════════════════════════ */
       
+      .text-orange { color: var(--c-orange); }
+      .text-black { color: var(--c-black); }
+      .text-neutral { color: var(--c-neutral); }
+      .text-white { color: var(--c-white); }
+
+      /* --- COMPONENTS --- */
+      
+      /* Buttons - More dramatic */
       .btn {
-        position: relative;
-        padding: 1rem 2rem;
-        font-family: var(--font-display);
-        font-size: 0.875rem;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        border: 2px solid transparent;
-        background: var(--c-slate);
-        color: var(--c-cyan);
-        cursor: pointer;
-        transition: all var(--trans-smooth);
+        padding: 0.875rem 1.75rem;
+        border-radius: var(--radius-full);
+        font-weight: 700;
+        font-size: 0.9375rem;
+        letter-spacing: 0.025em;
+        transition: all var(--trans-normal);
         display: inline-flex;
         align-items: center;
-        gap: var(--space-sm);
-        clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        gap: 0.625rem;
+        justify-content: center;
+        position: relative;
         overflow: hidden;
       }
       
       .btn::before {
         content: '';
         position: absolute;
-        inset: 0;
-        background: var(--grad-cyan);
-        opacity: 0;
-        transition: opacity var(--trans-smooth);
-      }
-      
-      .btn::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border: 2px solid var(--c-cyan);
-        clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-        opacity: 0.3;
-        transition: all var(--trans-smooth);
-      }
-      
-      .btn:hover {
-        transform: translateX(4px) translateY(-4px);
-        box-shadow: -4px 4px 0 var(--c-cyan), var(--glow-cyan);
-        color: var(--c-void);
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
       }
       
       .btn:hover::before {
-        opacity: 1;
-      }
-      
-      .btn:hover::after {
-        opacity: 1;
-        box-shadow: var(--glow-cyan);
+        width: 300px;
+        height: 300px;
       }
       
       .btn-primary {
-        background: var(--grad-cyan);
-        color: var(--c-void);
-        border-color: var(--c-cyan);
-        box-shadow: var(--glow-cyan);
-      }
-      
-      .btn-primary::before {
-        background: var(--grad-magenta);
+        background: linear-gradient(135deg, var(--c-orange) 0%, var(--c-orange-deep) 100%);
+        color: var(--c-white);
+        box-shadow: var(--shadow-md), var(--shadow-glow);
+        border: 1px solid var(--c-orange-deep);
       }
       
       .btn-primary:hover {
-        box-shadow: -6px 6px 0 var(--c-magenta), var(--glow-magenta);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg), 0 0 30px var(--c-orange-glow);
       }
       
       .btn-primary:active {
-        transform: translateX(2px) translateY(-2px);
+        transform: translateY(0);
       }
       
       .btn-primary:disabled {
-        opacity: 0.4;
+        opacity: 0.6;
         cursor: not-allowed;
         transform: none;
-        box-shadow: none;
+        box-shadow: var(--shadow-sm);
       }
       
       .btn-secondary {
-        background: transparent;
-        border: 2px solid var(--c-slate-light);
-        color: var(--c-text-dim);
+        background: var(--c-white);
+        color: var(--c-black);
+        border: 2px solid var(--c-border);
+        box-shadow: var(--shadow-sm);
       }
       
       .btn-secondary:hover {
-        border-color: var(--c-cyan);
-        color: var(--c-cyan);
+        background: var(--c-off-white);
+        border-color: var(--c-orange);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
       }
       
       .btn-ghost {
+        color: var(--c-gray);
         background: transparent;
-        border: none;
-        color: var(--c-text-dim);
-        clip-path: none;
-      }
-      
-      .btn-ghost::after {
-        display: none;
       }
       
       .btn-ghost:hover {
-        color: var(--c-cyan);
-        transform: translateX(4px);
-        box-shadow: none;
+        background: var(--c-off-white);
+        color: var(--c-orange);
       }
       
-      /* ═══════════════════════════════════════════════════════════
-         CARD SYSTEM — FUTURISTIC DATA PANELS
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Cards - More depth and sophistication */
       .card {
-        position: relative;
-        background: var(--c-slate);
-        border: 1px solid rgba(0, 245, 255, 0.15);
+        background: var(--c-white);
+        border: 1px solid var(--c-border-light);
+        border-radius: var(--radius-xl);
         padding: var(--space-xl);
-        transition: all var(--trans-smooth);
-        clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+        transition: all var(--trans-normal);
+        position: relative;
         overflow: hidden;
       }
       
-      /* Holographic edge glow */
       .card::before {
         content: '';
         position: absolute;
-        inset: -2px;
-        background: var(--grad-holo);
-        opacity: 0;
-        transition: opacity var(--trans-smooth);
-        z-index: -1;
-        clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-      }
-      
-      /* Corner accent */
-      .card::after {
-        content: '';
-        position: absolute;
         top: 0;
+        left: 0;
         right: 0;
-        width: 60px;
-        height: 60px;
-        background: var(--grad-cyan);
-        opacity: 0.1;
-        clip-path: polygon(100% 0, 100% 100%, 0 0);
-        transition: opacity var(--trans-smooth);
+        height: 3px;
+        background: linear-gradient(90deg, var(--c-orange) 0%, var(--c-pink) 50%, var(--c-purple) 100%);
+        opacity: 0;
+        transition: opacity var(--trans-normal);
       }
       
       .card:hover {
         transform: translateY(-4px);
-        border-color: var(--c-cyan);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), var(--glow-cyan);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--c-border);
       }
       
       .card:hover::before {
-        opacity: 0.2;
+        opacity: 1;
       }
       
-      .card:hover::after {
-        opacity: 0.3;
-      }
-      
-      /* ═══════════════════════════════════════════════════════════
-         INPUT SYSTEM — TERMINAL INTERFACE FIELDS
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Inputs - More premium feel */
       .input-field {
         width: 100%;
         padding: 1rem 1.25rem;
-        font-family: var(--font-body);
-        font-size: 1rem;
-        background: rgba(26, 26, 46, 0.8);
-        border: 2px solid var(--c-slate-light);
-        color: var(--c-text);
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--c-border);
+        background: var(--c-white);
+        font-family: inherit;
+        font-size: 0.9375rem;
+        transition: all var(--trans-normal);
         outline: none;
-        transition: all var(--trans-smooth);
-        clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-      }
-      
-      .input-field::placeholder {
-        color: var(--c-text-faint);
-        font-style: italic;
       }
       
       .input-field:hover {
-        border-color: rgba(0, 245, 255, 0.3);
+        border-color: var(--c-gray-light);
       }
       
       .input-field:focus {
-        border-color: var(--c-cyan);
-        box-shadow: 0 0 0 4px rgba(0, 245, 255, 0.1), var(--glow-cyan);
-        transform: translateX(4px);
+        background: var(--c-white);
+        border-color: var(--c-orange);
+        box-shadow: 0 0 0 4px var(--c-orange-glow), var(--shadow-md);
+        transform: translateY(-1px);
       }
 
-      /* ═══════════════════════════════════════════════════════════
-         BADGE SYSTEM — DATA CLASSIFICATION TAGS
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Badges - More vibrant */
       .badge {
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-full);
+        font-size: 0.6875rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.075em;
         display: inline-flex;
         align-items: center;
-        gap: var(--space-xs);
-        padding: 0.375rem 0.875rem;
-        font-family: var(--font-accent);
-        font-size: 0.6875rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        background: rgba(0, 245, 255, 0.1);
-        border: 1px solid var(--c-cyan);
-        color: var(--c-cyan);
-        clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);
-        transition: all var(--trans-snap);
+        gap: 0.375rem;
+        box-shadow: var(--shadow-sm);
+        transition: all var(--trans-fast);
       }
       
       .badge:hover {
-        background: rgba(0, 245, 255, 0.2);
         transform: scale(1.05);
-        box-shadow: var(--glow-cyan);
+        box-shadow: var(--shadow-md);
       }
       
-      .badge-A {
-        background: rgba(0, 245, 255, 0.1);
-        border-color: var(--c-cyan);
-        color: var(--c-cyan);
+      .badge-A { 
+        background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%);
+        color: #0e7490;
+        border: 1px solid #67e8f9;
+      }
+      .badge-B { 
+        background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+        color: #6b21a8;
+        border: 1px solid #d8b4fe;
       }
       
-      .badge-B {
-        background: rgba(255, 0, 255, 0.1);
-        border-color: var(--c-magenta);
-        color: var(--c-magenta);
-      }
-      
-      .badge-B:hover {
-        background: rgba(255, 0, 255, 0.2);
-        box-shadow: var(--glow-magenta);
-      }
-      
-      .badge-neutral {
-        background: rgba(160, 160, 184, 0.1);
-        border-color: var(--c-text-dim);
-        color: var(--c-text-dim);
-      }
-      
-      .badge-neutral:hover {
-        background: rgba(160, 160, 184, 0.2);
-        box-shadow: 0 0 20px rgba(160, 160, 184, 0.3);
+      .badge-neutral { 
+        background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+        color: var(--c-gray);
+        border: 1px solid #e5e7eb;
       }
 
       
-      /* ═══════════════════════════════════════════════════════════
-         ANIMATION LIBRARY — MOTION DESIGN SYSTEM
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Animations & Effects */
       @keyframes fade-in {
         from {
           opacity: 0;
-          transform: translateY(20px);
+          transform: translateY(10px);
         }
         to {
           opacity: 1;
@@ -560,7 +323,7 @@
       @keyframes slide-in-left {
         from {
           opacity: 0;
-          transform: translateX(-40px);
+          transform: translateX(-20px);
         }
         to {
           opacity: 1;
@@ -571,7 +334,7 @@
       @keyframes slide-in-right {
         from {
           opacity: 0;
-          transform: translateX(40px);
+          transform: translateX(20px);
         }
         to {
           opacity: 1;
@@ -582,7 +345,7 @@
       @keyframes scale-in {
         from {
           opacity: 0;
-          transform: scale(0.9);
+          transform: scale(0.95);
         }
         to {
           opacity: 1;
@@ -592,11 +355,27 @@
       
       @keyframes glow-pulse {
         0%, 100% {
-          box-shadow: var(--glow-cyan);
+          box-shadow: 0 0 20px var(--c-orange-glow);
         }
         50% {
-          box-shadow: 0 0 40px rgba(0, 245, 255, 0.5), 0 0 80px rgba(0, 245, 255, 0.3);
+          box-shadow: 0 0 40px var(--c-orange-glow), 0 0 60px rgba(255, 96, 2, 0.2);
         }
+      }
+      
+      .fade-in {
+        animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+      }
+      
+      .slide-in-left {
+        animation: slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+      }
+      
+      .slide-in-right {
+        animation: slide-in-right 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+      }
+      
+      .scale-in {
+        animation: scale-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
       }
       
       @keyframes spin {
@@ -604,111 +383,63 @@
         to { transform: rotate(360deg); }
       }
       
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
+      
       @keyframes pulse {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
-      }
-      
-      .fade-in {
-        animation: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-      }
-      
-      .slide-in-left {
-        animation: slide-in-left 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-      }
-      
-      .slide-in-right {
-        animation: slide-in-right 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-      }
-      
-      .scale-in {
-        animation: scale-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
-      }
-      
-      .animate-spin {
-        animation: spin 1s linear infinite;
       }
       
       .animate-pulse {
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
       }
 
-
-      /* ═══════════════════════════════════════════════════════════
-         LAYOUT ARCHITECTURE — SPATIAL COMPOSITION
-         ═══════════════════════════════════════════════════════════ */
+      /* --- LAYOUT SPECIFIC --- */
       
+      /* App Layout */
       .app-layout { 
         display: flex; 
         height: 100vh; 
-        overflow: hidden;
-        position: relative;
-        z-index: 10;
+        overflow: hidden; 
       }
       
       .sidebar-container { 
-        width: 320px; 
-        background: rgba(26, 26, 46, 0.95); 
-        backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(0, 245, 255, 0.2); 
+        width: 300px; 
+        background: var(--c-white); 
+        border-right: 1px solid var(--c-border); 
         display: flex; 
         flex-direction: column;
         flex-shrink: 0;
         z-index: 50;
-        box-shadow: 20px 0 60px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
       }
+      .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
       
-      .main-content { 
-        flex: 1; 
-        display: flex; 
-        flex-direction: column; 
-        overflow: hidden; 
-        position: relative; 
-      }
-      
-      /* ═══════════════════════════════════════════════════════════
-         RESPONSIVE SYSTEM — ADAPTIVE INTERFACE
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Mobile Responsive */
       @media (max-width: 768px) {
         .sidebar-container {
           position: fixed;
           height: 100%;
           transform: translateX(-100%);
-          transition: transform var(--trans-smooth);
-          box-shadow: 30px 0 80px rgba(0, 0, 0, 0.7);
+          transition: transform 0.3s ease;
         }
-        .sidebar-container.open { 
-          transform: translateX(0); 
-        }
+        .sidebar-container.open { transform: translateX(0); }
         .mobile-overlay {
-          position: fixed; 
-          inset: 0; 
-          background: rgba(10, 10, 15, 0.8); 
-          backdrop-filter: blur(4px);
-          z-index: 40;
+          position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40;
         }
         .mobile-header {
-          display: flex; 
-          align-items: center; 
-          justify-content: space-between;
-          height: 64px; 
-          padding: 0 1rem; 
-          background: var(--c-slate); 
-          border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+          display: flex; align-items: center; justify-content: space-between;
+          height: 64px; padding: 0 1rem; background: var(--c-white); border-bottom: 1px solid var(--c-border);
         }
       }
-      
       @media (min-width: 769px) {
         .mobile-header { display: none; }
         .mobile-overlay { display: none; }
       }
 
-
-      /* ═══════════════════════════════════════════════════════════
-         CHAT INTERFACE — CONVERSATIONAL COMMAND SYSTEM
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Chat Styles - More modern and engaging */
       .chat-messages { 
         flex: 1; 
         overflow-y: auto; 
@@ -725,7 +456,7 @@
         max-width: 900px; 
         margin: 0 auto; 
         width: 100%;
-        animation: fade-in 0.5s ease-out;
+        animation: fade-in 0.4s ease-out;
       }
       
       .msg-row.user { 
@@ -734,104 +465,72 @@
       
       .msg-bubble {
         padding: var(--space-lg) var(--space-xl);
+        border-radius: var(--radius-xl);
         max-width: 85%;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        line-height: 1.7;
+        box-shadow: var(--shadow-md);
+        line-height: 1.65;
         font-size: 0.9375rem;
         position: relative;
-        transition: all var(--trans-smooth);
-        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        transition: all var(--trans-normal);
       }
       
       .msg-bubble:hover {
         transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
       }
       
       .msg-bubble.user { 
-        background: var(--grad-magenta);
-        color: var(--c-void); 
-        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-        box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3), var(--glow-magenta);
+        background: linear-gradient(135deg, var(--c-orange) 0%, var(--c-orange-deep) 100%);
+        color: var(--c-white); 
+        border-top-right-radius: 6px;
+        box-shadow: var(--shadow-md), 0 0 20px var(--c-orange-glow);
       }
       
       .msg-bubble.model { 
-        background: rgba(26, 26, 46, 0.95); 
-        color: var(--c-text); 
-        border: 1px solid rgba(0, 245, 255, 0.2);
-        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        background: var(--c-white); 
+        color: var(--c-gray); 
+        border: 2px solid var(--c-border-light);
+        border-top-left-radius: 6px;
       }
       
-      .msg-bubble.model:hover {
-        border-color: var(--c-cyan);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--glow-cyan);
-      }
-      
-      /* ═══════════════════════════════════════════════════════════
-         MARKDOWN CONTENT STYLING — FORMATTED TEXT
-         ═══════════════════════════════════════════════════════════ */
-      
+      /* Markdown Styles inside Chat - Enhanced */
       .markdown-content p { 
-        margin-bottom: 0.875rem;
-        line-height: 1.75;
+        margin-bottom: 0.75rem;
+        line-height: 1.7;
       }
-      
       .markdown-content ul { 
         padding-left: 1.5rem; 
-        margin-bottom: 0.875rem; 
-        list-style-type: none;
+        margin-bottom: 0.75rem; 
+        list-style-type: disc; 
       }
-      
-      .markdown-content ul li {
-        margin-bottom: 0.5rem;
-        position: relative;
-        padding-left: 1.25rem;
+      .markdown-content li {
+        margin-bottom: 0.375rem;
       }
-      
-      .markdown-content ul li::before {
-        content: '▸';
-        position: absolute;
-        left: 0;
-        color: var(--c-cyan);
-        font-weight: bold;
-      }
-      
       .markdown-content strong { 
         font-weight: 700;
-        color: var(--c-text);
-        text-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+        color: var(--c-black);
       }
-      
       .markdown-content code {
-        background: rgba(0, 245, 255, 0.1);
+        background: rgba(0,0,0,0.05);
         padding: 0.25rem 0.5rem;
-        border: 1px solid rgba(0, 245, 255, 0.3);
+        border-radius: var(--radius-sm);
         font-size: 0.875em;
         font-family: 'Courier New', monospace;
-        color: var(--c-cyan);
-        clip-path: polygon(3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%, 0 3px);
       }
-      
       .markdown-content pre {
-        background: rgba(10, 10, 15, 0.8);
+        background: rgba(0,0,0,0.05);
         padding: var(--space-md);
-        border: 1px solid rgba(0, 245, 255, 0.2);
+        border-radius: var(--radius-md);
         overflow-x: auto;
         margin: var(--space-md) 0;
-        clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
       }
-      
       .markdown-content a {
-        color: var(--c-cyan);
-        text-decoration: none;
-        border-bottom: 1px solid rgba(0, 245, 255, 0.3);
-        transition: var(--trans-snap);
+        color: var(--c-orange);
+        text-decoration: underline;
+        transition: var(--trans-fast);
       }
-      
       .markdown-content a:hover {
-        color: var(--c-magenta);
-        border-bottom-color: var(--c-magenta);
-        text-shadow: var(--glow-magenta);
+        color: var(--c-orange-deep);
       }
       
       /* Glass Effect */
