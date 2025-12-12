@@ -63,4 +63,15 @@ Checklist rápido ao abrir um PR
 Perguntas/feedback
 - Se algo aqui estiver ambíguo ou faltar exemplos (ex.: contratos de funções adicionais), diga o arquivo ou fluxo que você quer que eu documente com mais detalhes.
 
+# Instruções para o GitHub Copilot
+
+## Design Frontend
+
+Ao criar ou modificar interfaces web (HTML, CSS, React, etc.), sempre:
+
+1. Consulte os princípios de design em `.claude/skills/frontend-design/design-principles.md`
+2. Siga as diretrizes em `.claude/skills/frontend-design/SKILL.md`
+3. Priorize designs modernos, interativos e responsivos
+4. Use animações sutis e transições suaves
+5. Garanta acessibilidade e boa experiência do usuário
 -- Fim do resumo específico do repositório
