@@ -9,8 +9,6 @@ import AIIllustration from './components/AIIllustration';
 import Dashboard from './components/Dashboard';
 import UserProfile from './components/UserProfile';
 import LoginModal from './components/LoginModal';
-import { ToastContainer, useToast } from './components/Toast';
-import { LoadingOverlay } from './components/LoadingComponents';
 import { initializeGemini, getSolutions, deleteSolution } from './services/geminiService';
 import { AppView, RegisteredSolution, UserProfile as UserProfileType } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
@@ -36,15 +34,11 @@ const App: React.FC = () => {
   const [keyError, setKeyError] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [editingSolution, setEditingSolution] = useState<RegisteredSolution | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
   const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
   const [extractionMessage, setExtractionMessage] = useState<string | null>(null);
   const [solutionsSearchQuery, setSolutionsSearchQuery] = useState('');
-
-  // Toast system
-  const toast = useToast();
 
   useEffect(() => {
     // API key is now server-side only (GEMINI_API_KEY in Netlify env).
@@ -137,17 +131,13 @@ const App: React.FC = () => {
       return;
     }
 
-    setIsLoading(true);
     try {
       await deleteSolution(id);
       const solutions = await getSolutions();
       setRegisteredSolutions(solutions);
-      toast.success('Solução excluída com sucesso!');
     } catch (error) {
       console.error('Error deleting solution:', error);
-      toast.error('Erro ao excluir solução. Tente novamente.');
-    } finally {
-      setIsLoading(false);
+      alert('Erro ao excluir solução. Tente novamente.');
     }
   };
 
@@ -917,12 +907,6 @@ const App: React.FC = () => {
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={handleUserRegistration}
       />
-
-      {/* Toast Notifications */}
-      <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
-
-      {/* Loading Overlay */}
-      <LoadingOverlay isVisible={isLoading} message="Processando..." />
     </div>
   );
 };

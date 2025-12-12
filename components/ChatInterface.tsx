@@ -180,7 +180,6 @@ Posso ajudá-lo a:
   const [activeTool, setActiveTool] = useState<string | null>(null);
   const [isReviewing, setIsReviewing] = useState(false);
   const [draftData, setDraftData] = useState<DraftSolution | null>(null);
-  const [isTyping, setIsTyping] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -190,7 +189,7 @@ Posso ajudá-lo a:
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, activeTool, isReviewing, isTyping]);
+  }, [messages, activeTool, isReviewing]);
 
   const handleSend = async (overrideInput?: string) => {
     const textToSend = overrideInput || input;
@@ -206,7 +205,6 @@ Posso ajudá-lo a:
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
-    setIsTyping(true);
 
     const aiMsgId = (Date.now() + 1).toString();
     const aiMsg: Message = {
@@ -226,7 +224,6 @@ Posso ajudá-lo a:
           setMessages(prev => prev.map(m => 
             m.id === aiMsgId ? { ...m, content: text } : m
           ));
-          setIsTyping(false);
         },
         (toolName, args) => {
           setActiveTool(toolName);
@@ -242,14 +239,12 @@ Posso ajudá-lo a:
       setMessages(prev => prev.map(m => 
         m.id === aiMsgId ? { ...m, content: `⚠️ **Erro ao processar solicitação**\n\nDesculpe, ocorreu um problema ao tentar processar sua mensagem. Por favor, tente novamente.\n\n_Detalhes: ${errorMessage}_`, error: true } : m
       ));
-      setIsTyping(false);
     } finally {
       setIsLoading(false);
       setMessages(prev => prev.map(m => 
         m.id === aiMsgId ? { ...m, isStreaming: false } : m
       ));
       setActiveTool(null);
-      setIsTyping(false);
     }
   };
 
@@ -319,8 +314,8 @@ Não faça mais perguntas. Registre agora.`;
         
         {/* Tool Execution Indicator */}
         {activeTool && (
-          <div className="flex items-center justify-center py-4 fade-in">
-            <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold hover-glow" style={{ animation: 'fadeIn 0.3s ease-in' }}>
+          <div className="flex items-center justify-center py-4">
+              <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold" style={{ animation: 'fadeIn 0.3s ease-in' }}>
               <IconImage name="cpu" alt="processando" size={16} fallback={<Cpu className="animate-spin" size={16} />} />
               <span>
                 {activeTool === 'refinarDescricaoSolucao' && '✨ Refinando texto com IA...'}
@@ -336,28 +331,8 @@ Não faça mais perguntas. Registre agora.`;
             <DraftReviewCard initialData={draftData} onConfirm={handleDraftConfirmation} />
         )}
 
-        {/* Typing Indicator */}
-        {isTyping && !activeTool && (
-          <div className="flex items-center gap-3 fade-in" style={{ marginLeft: '4rem', padding: '1rem 0' }}>
-            <div style={{ 
-              display: 'flex', 
-              gap: '0.5rem', 
-              padding: '0.75rem 1rem',
-              background: 'var(--c-white)',
-              borderRadius: 'var(--radius-lg)',
-              boxShadow: 'var(--shadow-soft)',
-              border: '2px solid var(--c-border-light)'
-            }}>
-              <div className="loading-dot" style={{ width: '8px', height: '8px', background: 'var(--c-orange)' }} />
-              <div className="loading-dot" style={{ width: '8px', height: '8px', background: 'var(--c-orange)' }} />
-              <div className="loading-dot" style={{ width: '8px', height: '8px', background: 'var(--c-orange)' }} />
-            </div>
-            <span className="text-neutral text-sm font-medium">Processando...</span>
-          </div>
-        )}
-
-        {isLoading && !activeTool && !isTyping && (
-            <div className="flex items-center gap-2 text-neutral text-sm fade-in" style={{ marginLeft: '4rem' }}>
+        {isLoading && !activeTool && (
+            <div className="flex items-center gap-2 text-neutral text-sm" style={{ marginLeft: '4rem', animation: 'fadeIn 0.3s ease-in' }}>
             <IconImage name="loader2" alt="carregando" size={16} fallback={<Loader2 className="animate-spin" size={16} />} />
             <span>Gerando resposta...</span>
           </div>
@@ -380,38 +355,22 @@ Não faça mais perguntas. Registre agora.`;
                 height: '60px', 
                 resize: 'none', 
                 fontSize: '1rem',
-                transition: 'all 0.3s ease',
-                borderColor: input.trim() ? 'var(--c-orange)' : 'var(--c-border)',
-                boxShadow: input.trim() ? 'var(--shadow-orange-soft)' : 'none'
+                transition: 'border-color 0.2s ease',
+                borderColor: input.trim() ? 'var(--c-orange)' : 'var(--c-border)'
               }}
               disabled={isLoading || isReviewing}
               title="Pressione Enter para enviar, Shift+Enter para nova linha"
-              aria-label="Campo de mensagem"
             />
             {!input.trim() && !isReviewing && (
-              <p className="text-neutral fade-in" style={{ fontSize: '10px', fontWeight: 500, paddingLeft: '0.5rem' }}>
+              <p className="text-neutral" style={{ fontSize: '10px', fontWeight: 500, paddingLeft: '0.5rem' }}>
                 💡 Dica: Pergunte sobre cenários, contribua com ideias ou solicite cadastro de uma solução
-              </p>
-            )}
-            {input.trim() && input.length > 500 && (
-              <p style={{ 
-                fontSize: '10px', 
-                fontWeight: 600, 
-                paddingLeft: '0.5rem',
-                color: input.length > 800 ? '#ef4444' : '#f59e0b',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.25rem'
-              }}>
-                <AlertCircle size={12} />
-                {input.length}/1000 caracteres
               </p>
             )}
           </div>
           <button
             onClick={() => handleSend()}
             disabled={!input.trim() || isLoading || isReviewing}
-            className="btn btn-primary btn-ripple hover-scale"
+            className="btn btn-primary"
             style={{ 
               padding: '0.75rem 1rem',
               backgroundColor: 'var(--c-orange)', 

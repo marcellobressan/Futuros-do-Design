@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { UserProfile, RegisteredSolution } from '../types';
-import { Save, Plus, X, Upload, AlertCircle, CheckCircle, Loader2, Image as ImageIcon, Info } from 'lucide-react';
+import { Save, Plus, X, Upload, AlertCircle, CheckCircle, Loader2, Image as ImageIcon } from 'lucide-react';
 import IconImage from './IconImage';
 import { SCENARIOS_DATA, TERMS_OF_USE } from '../constants';
 import { updateSolution } from '../services/geminiService';
-import { InlineLoader, ProgressBar } from './LoadingComponents';
 
 interface SolutionFormProps {
   userProfile: UserProfile;
@@ -168,8 +167,8 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
 
   if (success) {
     return (
-      <div className="flex flex-col items-center justify-center fade-in" style={{ minHeight: '400px' }}>
-        <div className="hover-scale" style={{
+      <div className="flex flex-col items-center justify-center" style={{ minHeight: '400px' }}>
+        <div style={{
           width: '80px',
           height: '80px',
           borderRadius: '50%',
@@ -177,20 +176,14 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          marginBottom: '1.5rem',
-          boxShadow: '0 10px 30px rgba(22, 163, 74, 0.2)'
+          marginBottom: '1.5rem'
         }}>
           <CheckCircle size={40} style={{ color: '#16a34a' }} />
         </div>
         <h2 className="text-2xl font-bold text-black mb-2">
           {editingSolution ? 'Solução Atualizada!' : 'Solução Cadastrada!'}
         </h2>
-        <p className="text-neutral mb-4">Redirecionando...</p>
-        <div className="loading-dots">
-          <div className="loading-dot" style={{ background: '#16a34a' }} />
-          <div className="loading-dot" style={{ background: '#16a34a' }} />
-          <div className="loading-dot" style={{ background: '#16a34a' }} />
-        </div>
+        <p className="text-neutral">Redirecionando...</p>
       </div>
     );
   }
@@ -209,32 +202,26 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
         </p>
         
         {/* Progress Indicator */}
-        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.5rem' }} role="progressbar" aria-label="Progresso do formulário">
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.5rem' }}>
           {[
             { label: 'Nome', filled: !!nomeSolucao },
             { label: 'Participantes', filled: participantes.every(p => p.nome_completo && p.email) },
             { label: 'Cenários', filled: cenariosRelacionados.length > 0 },
             { label: 'Descrição', filled: resumo && problemaQueResolve && comoFunciona && relacaoComCenarios }
           ].map((step, idx) => (
-            <div key={idx} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.25rem' }} className="stagger-item">
-              <div 
-                className="tooltip"
-                data-tooltip={step.filled ? `${step.label} completo` : `Complete ${step.label}`}
-                style={{
-                  height: '4px',
-                  borderRadius: '2px',
-                  backgroundColor: step.filled ? 'var(--c-orange)' : '#e5e7eb',
-                  transition: 'all 0.3s ease',
-                  cursor: 'help'
-                }} 
-              />
+            <div key={idx} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+              <div style={{
+                height: '4px',
+                borderRadius: '2px',
+                backgroundColor: step.filled ? 'var(--c-orange)' : '#e5e7eb',
+                transition: 'background-color 0.3s ease'
+              }} />
               <span style={{
                 fontSize: '9px',
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
-                color: step.filled ? 'var(--c-orange)' : '#9ca3af',
-                transition: 'color 0.3s ease'
+                color: step.filled ? 'var(--c-orange)' : '#9ca3af'
               }}>
                 {step.label}
               </span>
@@ -246,7 +233,7 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         
         {/* Nome da Solução */}
-        <div className="card fade-in-up">
+        <div className="card">
           <label className="text-neutral uppercase tracking-widest mb-2 block" style={{ fontSize: '11px', fontWeight: 'bold' }}>
             Nome da Solução *
           </label>
@@ -257,24 +244,11 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
             placeholder="Ex: Sistema de Reaproveitamento de Água"
             className="input-field"
             maxLength={100}
-            aria-required="true"
-            aria-label="Nome da solução"
           />
-          <div style={{ 
-            marginTop: '0.5rem', 
-            fontSize: '0.75rem', 
-            color: nomeSolucao.length > 80 ? '#f59e0b' : 'var(--c-neutral)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.25rem'
-          }}>
-            <Info size={12} />
-            {nomeSolucao.length}/100 caracteres
-          </div>
         </div>
 
         {/* Participantes */}
-        <div className="card fade-in-up">
+        <div className="card">
           <div className="flex justify-between items-center mb-3">
             <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '11px', fontWeight: 'bold' }}>
               Participantes * ({participantes.length})
@@ -282,9 +256,8 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
             <button
               type="button"
               onClick={addParticipant}
-              className="btn btn-secondary hover-scale btn-ripple"
+              className="btn btn-secondary"
               style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
-              aria-label="Adicionar participante"
             >
               <Plus size={16} />
               Adicionar
