@@ -40,6 +40,7 @@ Padrões de código e expectativas
 - Formato de dados: campos compostos (participantes, cenarios_relacionados, descricao_refinada, imagem) são armazenados como JSONB — sempre serialize/deserialize exatamente como exemplo em `components/ChatInterface.tsx`.
 - Serverless handlers: retornar `Response` com headers de CORS (veja `netlify/functions/solutions.ts`). Respeite o padrão `OPTIONS` → 204 e `Content-Type: application/json`.
 - Não alterar nomes de rota front-end: o frontend faz fetch para `/.netlify/functions/solutions` — qualquer mudança exige ajuste no cliente.
+- **Design de interfaces web**: Quando criar interfaces web, sempre consulte e siga os princípios em `.claude/skills/frontend-design/`.
 
 O que procurar ao editar
 - Mudanças na API do modelo (tools, nomes de função): atualize `services/geminiService.ts` e revise `ChatInterface.tsx` para garantir que as chamadas e o UI de revisão (DraftReviewCard) seguem o mesmo contrato.
