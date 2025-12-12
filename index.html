@@ -792,11 +792,335 @@
         color: var(--c-orange-deep);
       }
       
+      /* Toast Notifications */
+      .toast-container {
+        position: fixed;
+        top: var(--space-lg);
+        right: var(--space-lg);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        pointer-events: none;
+      }
+      
+      .toast {
+        background: var(--c-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-md) var(--space-lg);
+        box-shadow: var(--shadow-elevated);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        min-width: 300px;
+        max-width: 500px;
+        pointer-events: all;
+        animation: slideInRight 0.3s var(--trans-spring);
+        border-left: 4px solid var(--c-orange);
+      }
+      
+      .toast.success { border-left-color: #10b981; }
+      .toast.error { border-left-color: #ef4444; }
+      .toast.warning { border-left-color: #f59e0b; }
+      .toast.info { border-left-color: #3b82f6; }
+      
+      .toast-exit {
+        animation: slideOutRight 0.3s ease-out forwards;
+      }
+      
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes slideOutRight {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+      
+      /* Loading Overlay */
+      .loading-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9998;
+        gap: var(--space-lg);
+      }
+      
+      .loading-spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid var(--c-orange-pale);
+        border-top: 4px solid var(--c-orange);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      
+      .loading-dots {
+        display: flex;
+        gap: var(--space-xs);
+      }
+      
+      .loading-dot {
+        width: 10px;
+        height: 10px;
+        background: var(--c-orange);
+        border-radius: 50%;
+        animation: bounce 1.4s ease-in-out infinite;
+      }
+      
+      .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+      .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+      
+      @keyframes bounce {
+        0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+        40% { transform: scale(1.2); opacity: 1; }
+      }
+      
+      /* Pulse Animation for Active Elements */
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      
+      .pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      
+      /* Smooth Scroll Behavior */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Disable animations for users who prefer reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      
+      /* Enhanced Button Ripple Effect */
+      .btn-ripple {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .btn-ripple::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+      
+      .btn-ripple:active::after {
+        width: 300px;
+        height: 300px;
+      }
+      
+      /* Skeleton Shimmer */
+      .skeleton-shimmer {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          90deg,
+          var(--c-cloud) 0%,
+          var(--c-ivory) 20%,
+          var(--c-cloud) 40%,
+          var(--c-cloud) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s ease-in-out infinite;
+      }
+      
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      
+      /* Empty State Illustration */
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-5xl);
+        text-align: center;
+        gap: var(--space-lg);
+      }
+      
+      .empty-state-icon {
+        width: 120px;
+        height: 120px;
+        background: var(--grad-orange-glow);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--c-orange);
+        margin-bottom: var(--space-md);
+      }
+      
+      /* Tooltip */
+      .tooltip {
+        position: relative;
+        cursor: help;
+      }
+      
+      .tooltip::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        background: var(--c-charcoal);
+        color: var(--c-white);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-md);
+        font-size: 0.75rem;
+        white-space: nowrap;
+        opacity: 0;
+        transition: all var(--trans-smooth);
+        pointer-events: none;
+        z-index: 1000;
+      }
+      
+      .tooltip::after {
+        content: '';
+        position: absolute;
+        bottom: 115%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: var(--c-charcoal);
+        opacity: 0;
+        transition: all var(--trans-smooth);
+      }
+      
+      .tooltip:hover::before,
+      .tooltip:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+      
+      /* Progress Bar */
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--c-cloud);
+        border-radius: var(--radius-full);
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .progress-bar-fill {
+        height: 100%;
+        background: var(--grad-orange-fire);
+        transition: width var(--trans-elegant);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .progress-bar-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: progress-shine 2s ease-in-out infinite;
+      }
+      
+      @keyframes progress-shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      
       /* Animation - Keep existing */
       @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       .animate-spin { animation: spin 1s linear infinite; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+      
+      /* Fade In Up Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      
+      /* Stagger Animation for Lists */
+      .stagger-item {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      
+      .stagger-item:nth-child(1) { animation-delay: 0.05s; }
+      .stagger-item:nth-child(2) { animation-delay: 0.1s; }
+      .stagger-item:nth-child(3) { animation-delay: 0.15s; }
+      .stagger-item:nth-child(4) { animation-delay: 0.2s; }
+      .stagger-item:nth-child(5) { animation-delay: 0.25s; }
+      .stagger-item:nth-child(6) { animation-delay: 0.3s; }
+      
+      /* Smooth Scale Hover */
+      .hover-scale {
+        transition: transform var(--trans-smooth);
+      }
+      
+      .hover-scale:hover {
+        transform: scale(1.05);
+      }
+      
+      /* Glow Effect on Hover */
+      .hover-glow {
+        transition: box-shadow var(--trans-smooth);
+      }
+      
+      .hover-glow:hover {
+        box-shadow: var(--shadow-orange-glow);
+      }
 
     </style>
 <script type="importmap">

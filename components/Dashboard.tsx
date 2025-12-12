@@ -76,11 +76,11 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                     <div className="flex flex-col gap-8 col-span-3 md:col-span-2">
                         {/* Call to Actions */}
                         <div className="card" style={{ display: 'flex', gap: '1rem', padding: '2rem' }}>
-                          <button onClick={() => onNavigate(AppView.CHAT)} className="btn btn-primary" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
+                          <button onClick={() => onNavigate(AppView.CHAT)} className="btn btn-primary hover-scale btn-ripple hover-glow" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
                               <IconImage name="message-square" alt="conversar" size={24} fallback={<MessageSquare size={24} />} />
                                 <span className="text-base">Conversar com Agente</span>
                            </button>
-                           <button onClick={() => onNavigate(AppView.KNOWLEDGE)} className="btn btn-secondary" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
+                           <button onClick={() => onNavigate(AppView.KNOWLEDGE)} className="btn btn-secondary hover-scale btn-ripple" style={{ flex: 1, flexDirection: 'column', height: '120px', gap: '0.5rem' }}>
                               <IconImage name="book-open" alt="explorar" size={24} fallback={<BookOpen size={24} />} />
                                <span className="text-base">Explorar Cenários</span>
                            </button>
@@ -94,8 +94,17 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                            </h2>
                            <div className="flex flex-col gap-4">
                                {recentSolutions.length > 0 ? (
-                                   recentSolutions.map(sol => (
-                                       <div key={sol.id} className="card flex justify-between items-center fade-in">
+                                   recentSolutions.map((sol, index) => (
+                                       <div 
+                                         key={sol.id} 
+                                         className="card stagger-item hover-scale" 
+                                         style={{ 
+                                           display: 'flex', 
+                                           justifyContent: 'space-between', 
+                                           alignItems: 'center',
+                                           animationDelay: `${index * 0.1}s`
+                                         }}
+                                       >
                                            <div>
                                                <p className="font-bold text-black">{sol.nome_da_solucao}</p>
                                                <p className="text-sm text-neutral">
@@ -103,12 +112,12 @@ const Dashboard: React.FC<DashboardProps> = ({ userProfile, solutions, onNavigat
                                                    {sol.participantes.length > 1 && ' e outros'}
                                                </p>
                                            </div>
-
                                        </div>
                                    ))
                                ) : (
-                                   <div className="card text-center text-neutral font-medium">
-                                       Nenhuma solução cadastrada ainda. Seja o primeiro!
+                                   <div className="card text-center text-neutral font-medium fade-in">
+                                       <p>🚀 Nenhuma solução cadastrada ainda.</p>
+                                       <p className="text-xs mt-2">Seja o primeiro a contribuir!</p>
                                    </div>
                                )}
                            </div>
