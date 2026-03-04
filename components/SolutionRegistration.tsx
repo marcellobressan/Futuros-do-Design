@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Message, DraftSolution } from '../types';
+import { Message, DraftSolution, TURMA_CONFIG, TURMAS_ALUNO_KEYS, TurmaUsuario } from '../types';
 import { sendMessage } from '../services/geminiService';
 import { Send, Cpu, User, Loader2, Sparkles, Edit2, CheckCircle, Save, AlertCircle } from 'lucide-react';
 import IconImage from './IconImage';
@@ -91,9 +91,10 @@ const DraftReviewCard: React.FC<{
                 </div>
                 {editingSection === 'turma' ? (
                     <div className="flex gap-2">
-                        <select value={tempValue} onChange={(e) => setTempValue(e.target.value)} className="input-field" style={{ padding: '0.5rem' }}>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
+                        <select value={tempValue} onChange={(e) => setTempValue(e.target.value as TurmaUsuario)} className="input-field" style={{ padding: '0.5rem' }}>
+                            {TURMAS_ALUNO_KEYS.map(key => (
+                                <option key={key} value={key}>{TURMA_CONFIG[key].label}</option>
+                            ))}
                             <option value="PROFESSOR">Professor</option>
                         </select>
                         <button onClick={() => saveEdit('turma')} className="btn btn-primary" style={{ padding: '0.25rem' }}><IconImage name="save" alt="salvar" size={14} fallback={<Save size={14} />} /></button>

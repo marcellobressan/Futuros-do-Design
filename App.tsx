@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard';
 import UserProfile from './components/UserProfile';
 import LoginModal from './components/LoginModal';
 import { initializeGemini, getSolutions, deleteSolution } from './services/geminiService';
-import { AppView, RegisteredSolution, UserProfile as UserProfileType } from './types';
+import { AppView, RegisteredSolution, UserProfile as UserProfileType, TurmaAluno, TurmaUsuario, TURMA_CONFIG } from './types';
 import { SCENARIOS_DATA, KORI_REPORTS_DATA } from './constants';
 import { Menu, AlertTriangle, Key, ExternalLink, UserCheck, ArrowRight, X, FileText, Download, Cpu, Check, Filter, Sparkles, Search, Edit2, Trash2 } from 'lucide-react';
 import IconImage from './components/IconImage';
@@ -36,7 +36,7 @@ const App: React.FC = () => {
   const [editingSolution, setEditingSolution] = useState<RegisteredSolution | null>(null);
 
   const [extractionStatus, setExtractionStatus] = useState<Record<string, 'idle' | 'extracting' | 'done'>>({});
-  const [scenariosFilter, setScenariosFilter] = useState<'ALL' | 'A' | 'B'>('ALL');
+  const [scenariosFilter, setScenariosFilter] = useState<'ALL' | TurmaAluno>('ALL');
   const [extractionMessage, setExtractionMessage] = useState<string | null>(null);
   const [solutionsSearchQuery, setSolutionsSearchQuery] = useState('');
 
@@ -56,7 +56,7 @@ const App: React.FC = () => {
     setKeyError(false);
   };
 
-  const handleUserRegistration = (name: string, email: string, turma: 'A' | 'B' | 'PROFESSOR') => {
+  const handleUserRegistration = (name: string, email: string, turma: TurmaUsuario) => {
     const isSuperUser = turma === 'PROFESSOR' && email === 'mcb2@cesar.school';
     
     setUserProfile({
@@ -86,7 +86,7 @@ const App: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  const handleExtraction = (id: string, turma: 'A' | 'B') => {
+  const handleExtraction = (id: string, turma: TurmaAluno) => {
     if (extractionStatus[id] === 'done') {
         setScenariosFilter(turma);
         setExtractionMessage(`Visualizando cenários extraídos do Relatório da Turma ${turma}.`);
@@ -358,21 +358,21 @@ const App: React.FC = () => {
                   <div className="card" style={{ padding: '1.5rem' }}>
                     <div style={{ marginBottom: '1rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                        <div style={{ 
-                          width: '32px', 
-                          height: '32px', 
-                          borderRadius: '8px', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          fontWeight: 'bold', 
-                          color: 'white', 
-                          fontSize: '1rem', 
-                          backgroundColor: '#06b6d4' 
+                        <div style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 'bold',
+                          color: 'white',
+                          fontSize: '1rem',
+                          backgroundColor: TURMA_CONFIG['A'].color
                         }}>
                           A
                         </div>
-                        <h4 className="font-bold text-black">Radar Turma A</h4>
+                        <h4 className="font-bold text-black">Radar {TURMA_CONFIG['A'].displayName}</h4>
                       </div>
                     </div>
                     <a 
@@ -391,7 +391,7 @@ const App: React.FC = () => {
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-4px)';
                         e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
-                        e.currentTarget.style.borderColor = '#06b6d4';
+                        e.currentTarget.style.borderColor = TURMA_CONFIG['A'].color;
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
@@ -399,9 +399,9 @@ const App: React.FC = () => {
                         e.currentTarget.style.borderColor = '#e5e7eb';
                       }}
                     >
-                      <img 
-                        src="https://i.postimg.cc/MKhDfq6t/Captura-de-tela-de-2025-12-11-14-41-46.png" 
-                        alt="Radar de Futuros - Turma A" 
+                      <img
+                        src="https://i.postimg.cc/MKhDfq6t/Captura-de-tela-de-2025-12-11-14-41-46.png"
+                        alt="Radar de Futuros - Turma A"
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                       />
                     </a>
@@ -411,31 +411,31 @@ const App: React.FC = () => {
                   <div className="card" style={{ padding: '1.5rem' }}>
                     <div style={{ marginBottom: '1rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                        <div style={{ 
-                          width: '32px', 
-                          height: '32px', 
-                          borderRadius: '8px', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          fontWeight: 'bold', 
-                          color: 'white', 
-                          fontSize: '1rem', 
-                          backgroundColor: '#a855f7' 
+                        <div style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 'bold',
+                          color: 'white',
+                          fontSize: '1rem',
+                          backgroundColor: TURMA_CONFIG['B'].color
                         }}>
                           B
                         </div>
-                        <h4 className="font-bold text-black">Radar Turma B</h4>
+                        <h4 className="font-bold text-black">Radar {TURMA_CONFIG['B'].displayName}</h4>
                       </div>
                     </div>
-                    <a 
+                    <a
                       href="https://app.kori.lat/pt-BR/dashboard/projects/5b623270-6299-4a9f-a3e1-26ff8e381926/radar"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ 
+                      style={{
                         display: 'block',
-                        borderRadius: '12px', 
-                        overflow: 'hidden', 
+                        borderRadius: '12px',
+                        overflow: 'hidden',
                         border: '1px solid #e5e7eb',
                         backgroundColor: '#f9fafb',
                         cursor: 'pointer',
@@ -444,7 +444,7 @@ const App: React.FC = () => {
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-4px)';
                         e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
-                        e.currentTarget.style.borderColor = '#a855f7';
+                        e.currentTarget.style.borderColor = TURMA_CONFIG['B'].color;
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
@@ -452,12 +452,53 @@ const App: React.FC = () => {
                         e.currentTarget.style.borderColor = '#e5e7eb';
                       }}
                     >
-                      <img 
-                        src="https://i.postimg.cc/DyyVpQLD/Captura-de-tela-de-2025-12-11-14-38-48.png" 
-                        alt="Radar de Futuros - Turma B" 
+                      <img
+                        src="https://i.postimg.cc/DyyVpQLD/Captura-de-tela-de-2025-12-11-14-38-48.png"
+                        alt="Radar de Futuros - Turma B"
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                       />
                     </a>
+                  </div>
+
+                  {/* Radar Turma C */}
+                  <div className="card" style={{ padding: '1.5rem' }}>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                        <div style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 'bold',
+                          color: 'white',
+                          fontSize: '1rem',
+                          backgroundColor: TURMA_CONFIG['C'].color
+                        }}>
+                          C
+                        </div>
+                        <h4 className="font-bold text-black">Radar {TURMA_CONFIG['C'].displayName}</h4>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        border: `1px dashed ${TURMA_CONFIG['C'].borderColor}`,
+                        backgroundColor: TURMA_CONFIG['C'].bgColor,
+                        minHeight: '200px',
+                        padding: '2rem',
+                        flexDirection: 'column',
+                        gap: '0.75rem'
+                      }}
+                    >
+                      <p className="font-bold text-sm" style={{ color: TURMA_CONFIG['C'].color }}>Radar em elaboração</p>
+                      <p className="text-xs text-neutral text-center">O radar de futuros da Turma 2026.1 será disponibilizado ao longo do semestre.</p>
+                    </div>
                   </div>
                 </div>
 
@@ -475,7 +516,7 @@ const App: React.FC = () => {
                           <div key={report.id} className="card" style={isDone ? { borderColor: '#fed7aa', boxShadow: '0 0 0 1px #ffedd5' } : {}}>
                           <div className="flex items-start justify-between mb-4">
                               <div className="flex items-center gap-4">
-                                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white', fontSize: '1.125rem', backgroundColor: report.turma === 'A' ? '#06b6d4' : '#a855f7' }}>
+                                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white', fontSize: '1.125rem', backgroundColor: TURMA_CONFIG[report.turma].color }}>
                                       {report.turma}
                                   </div>
                                   <div>
@@ -541,7 +582,7 @@ const App: React.FC = () => {
                                 style={{ backgroundColor: '#fff7ed', color: 'var(--c-orange)', cursor: 'pointer', padding: '0.5rem 1rem' }}
                             >
                                 <IconImage name="filter" alt="filtro" size={12} fallback={<Filter size={12} />} />
-                                Filtro Ativo: Turma {scenariosFilter} <X size={12} className="ml-1" />
+                                Filtro Ativo: {TURMA_CONFIG[scenariosFilter as TurmaAluno].displayName} <X size={12} className="ml-1" />
                             </button>
                         )}
                     </div>
@@ -566,25 +607,25 @@ const App: React.FC = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', paddingBottom: '3rem' }}>
                     {/* Turma A */}
                     {scenariosFilteredByTurma.some(sc => sc.turma === 'A') && (
-                        <div className="card fade-in" style={{ 
-                            padding: '2rem', 
-                            backgroundColor: '#fff7ed',
-                            border: '2px solid var(--c-orange)',
+                        <div className="card fade-in" style={{
+                            padding: '2rem',
+                            backgroundColor: TURMA_CONFIG['A'].bgColor,
+                            border: `2px solid ${TURMA_CONFIG['A'].borderColor}`,
                             boxShadow: '0 4px 6px -1px rgba(255, 96, 2, 0.1)'
                         }}>
-                            <div style={{ 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                gap: '1rem', 
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
                                 marginBottom: '1.5rem',
                                 paddingBottom: '1rem',
-                                borderBottom: '2px solid var(--c-orange)'
+                                borderBottom: `2px solid ${TURMA_CONFIG['A'].borderColor}`
                             }}>
-                                <h3 className="text-2xl font-extrabold" style={{ color: 'var(--c-orange)' }}>
-                                    Turma A
+                                <h3 className="text-2xl font-extrabold" style={{ color: TURMA_CONFIG['A'].color }}>
+                                    {TURMA_CONFIG['A'].displayName}
                                 </h3>
-                                <span className="badge" style={{ 
-                                    backgroundColor: 'var(--c-orange)', 
+                                <span className="badge" style={{
+                                    backgroundColor: TURMA_CONFIG['A'].color,
                                     color: 'white',
                                     padding: '0.375rem 0.75rem',
                                     fontSize: '0.75rem'
@@ -638,25 +679,25 @@ const App: React.FC = () => {
 
                     {/* Turma B */}
                     {scenariosFilteredByTurma.some(sc => sc.turma === 'B') && (
-                        <div className="card fade-in" style={{ 
-                            padding: '2rem', 
-                            backgroundColor: '#f0f9ff',
-                            border: '2px solid #3b82f6',
+                        <div className="card fade-in" style={{
+                            padding: '2rem',
+                            backgroundColor: TURMA_CONFIG['B'].bgColor,
+                            border: `2px solid ${TURMA_CONFIG['B'].borderColor}`,
                             boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.1)'
                         }}>
-                            <div style={{ 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                gap: '1rem', 
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
                                 marginBottom: '1.5rem',
                                 paddingBottom: '1rem',
-                                borderBottom: '2px solid #3b82f6'
+                                borderBottom: `2px solid ${TURMA_CONFIG['B'].borderColor}`
                             }}>
-                                <h3 className="text-2xl font-extrabold" style={{ color: '#3b82f6' }}>
-                                    Turma B
+                                <h3 className="text-2xl font-extrabold" style={{ color: TURMA_CONFIG['B'].color }}>
+                                    {TURMA_CONFIG['B'].displayName}
                                 </h3>
-                                <span className="badge" style={{ 
-                                    backgroundColor: '#3b82f6', 
+                                <span className="badge" style={{
+                                    backgroundColor: TURMA_CONFIG['B'].color,
                                     color: 'white',
                                     padding: '0.375rem 0.75rem',
                                     fontSize: '0.75rem'
@@ -664,20 +705,20 @@ const App: React.FC = () => {
                                     {scenariosFilteredByTurma.filter(sc => sc.turma === 'B').length} cenários
                                 </span>
                             </div>
-                            
+
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
                                 {scenariosFilteredByTurma.filter(sc => sc.turma === 'B').map(sc => (
-                                    <div key={sc.id} className="card" style={{ 
-                                        padding: 0, 
-                                        overflow: 'hidden', 
-                                        display: 'flex', 
+                                    <div key={sc.id} className="card" style={{
+                                        padding: 0,
+                                        overflow: 'hidden',
+                                        display: 'flex',
                                         flexDirection: 'column',
                                         backgroundColor: 'white',
                                         border: '1px solid #e5e7eb'
                                     }}>
                                         <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
                                             <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
-                                            
+
                                             <div className="flex flex-col gap-3 mb-5">
                                                 <div>
                                                     <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
@@ -693,10 +734,82 @@ const App: React.FC = () => {
 
                                             <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
                                         </div>
-                                        
+
                                         {/* AI Illustration Section */}
                                         <div style={{ padding: '0 2rem 2rem 2rem' }}>
-                                            <AIIllustration 
+                                            <AIIllustration
+                                                prompt={sc.imagePrompt || sc.description}
+                                                imageUrl={sc.imageUrl}
+                                                aspectRatio="video"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Turma C */}
+                    {scenariosFilteredByTurma.some(sc => sc.turma === 'C') && (
+                        <div className="card fade-in" style={{
+                            padding: '2rem',
+                            backgroundColor: TURMA_CONFIG['C'].bgColor,
+                            border: `2px solid ${TURMA_CONFIG['C'].borderColor}`,
+                            boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.1)'
+                        }}>
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                                marginBottom: '1.5rem',
+                                paddingBottom: '1rem',
+                                borderBottom: `2px solid ${TURMA_CONFIG['C'].borderColor}`
+                            }}>
+                                <h3 className="text-2xl font-extrabold" style={{ color: TURMA_CONFIG['C'].color }}>
+                                    {TURMA_CONFIG['C'].displayName}
+                                </h3>
+                                <span className="badge" style={{
+                                    backgroundColor: TURMA_CONFIG['C'].color,
+                                    color: 'white',
+                                    padding: '0.375rem 0.75rem',
+                                    fontSize: '0.75rem'
+                                }}>
+                                    {scenariosFilteredByTurma.filter(sc => sc.turma === 'C').length} cenários
+                                </span>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
+                                {scenariosFilteredByTurma.filter(sc => sc.turma === 'C').map(sc => (
+                                    <div key={sc.id} className="card" style={{
+                                        padding: 0,
+                                        overflow: 'hidden',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        backgroundColor: 'white',
+                                        border: '1px solid #e5e7eb'
+                                    }}>
+                                        <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
+                                            <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
+
+                                            <div className="flex flex-col gap-3 mb-5">
+                                                <div>
+                                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
+                                                    <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                                </div>
+                                                {sc.metaphor && (
+                                                    <div>
+                                                        <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
+                                                        <p className="text-sm font-medium italic" style={{ color: TURMA_CONFIG['C'].color }}>"{sc.metaphor}"</p>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                        </div>
+
+                                        {/* AI Illustration Section */}
+                                        <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                                            <AIIllustration
                                                 prompt={sc.imagePrompt || sc.description}
                                                 imageUrl={sc.imageUrl}
                                                 aspectRatio="video"

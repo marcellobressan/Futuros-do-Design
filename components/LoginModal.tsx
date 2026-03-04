@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { Mail, User } from 'lucide-react';
 import IconImage from './IconImage';
+import { TurmaUsuario, TURMA_CONFIG, TURMAS_ALUNO_KEYS } from '../types';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: (name: string, email: string, turma: 'A' | 'B' | 'PROFESSOR') => void;
+  onLogin: (name: string, email: string, turma: TurmaUsuario) => void;
 }
 
 // Função para decodificar o JWT do Google (payload base64)
@@ -27,7 +28,7 @@ const parseJwt = (token: string) => {
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => {
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
-  const [formTurma, setFormTurma] = useState<'A' | 'B' | 'PROFESSOR'>('A');
+  const [formTurma, setFormTurma] = useState<TurmaUsuario>('A');
   const [loginMethod, setLoginMethod] = useState<'manual' | 'google'>('google');
   const [validationError, setValidationError] = useState<string | null>(null);
 
@@ -127,7 +128,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               <label className="block text-sm font-semibold text-black mb-2">Selecione sua turma</label>
               <select
                 value={formTurma}
-                onChange={(e) => { setFormTurma(e.target.value as 'A' | 'B' | 'PROFESSOR'); setValidationError(null); }}
+                onChange={(e) => { setFormTurma(e.target.value as TurmaUsuario); setValidationError(null); }}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
@@ -137,8 +138,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
                   marginBottom: '1rem'
                 }}
               >
-                <option value="A">Turma A</option>
-                <option value="B">Turma B</option>
+                {TURMAS_ALUNO_KEYS.map(key => (
+                  <option key={key} value={key}>{TURMA_CONFIG[key].displayName}</option>
+                ))}
                 <option value="PROFESSOR">Professor</option>
               </select>
               {formTurma === 'PROFESSOR' && (
@@ -215,7 +217,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               <label className="block text-sm font-semibold text-black mb-2">Turma</label>
               <select
                 value={formTurma}
-                onChange={(e) => { setFormTurma(e.target.value as 'A' | 'B' | 'PROFESSOR'); setValidationError(null); }}
+                onChange={(e) => { setFormTurma(e.target.value as TurmaUsuario); setValidationError(null); }}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
@@ -224,8 +226,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
                   fontSize: '0.95rem'
                 }}
               >
-                <option value="A">Turma A</option>
-                <option value="B">Turma B</option>
+                {TURMAS_ALUNO_KEYS.map(key => (
+                  <option key={key} value={key}>{TURMA_CONFIG[key].displayName}</option>
+                ))}
                 <option value="PROFESSOR">Professor</option>
               </select>
               {formTurma === 'PROFESSOR' && (

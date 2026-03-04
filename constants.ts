@@ -100,6 +100,14 @@ export const KORI_REPORTS_DATA: KoriReport[] = [
     size: '14.1 MB',
     date: '09/12/2025',
     url: '#'
+  },
+  {
+    id: 'rep_c',
+    turma: 'C',
+    filename: 'Graduação Design 2026.1 - Teoria e Futuro do Design.pdf',
+    size: 'Em elaboração',
+    date: '2026',
+    url: '#'
   }
 ];
 
@@ -177,25 +185,66 @@ export const SCENARIOS_DATA: Scenario[] = [
     imagePrompt: 'Arranha-céus corporativos monolíticos e pretos, trabalhadores em filas organizadas com pequenos implantes brilhando em laranja, atmosfera de eficiência e controle.',
     imageUrl: 'https://i.postimg.cc/vThz6Vm4/cenario-disciplina-B.png'
   },
-  { 
-    id: 'CENARIO_B4', 
-    title: 'Transformação da Realidade', 
-    turma: 'B', 
-    archetype: 'Transformação', 
+  {
+    id: 'CENARIO_B4',
+    title: 'Transformação da Realidade',
+    turma: 'B',
+    archetype: 'Transformação',
     metaphor: 'Rizoma / Tecno-xamã',
     description: 'Entre a saturação digital e a busca por autenticidade. Revalorização do físico, analógico e sensorial. Autoria híbrida e criatividade distribuída.',
     imagePrompt: 'Rede de nós brilhantes conectando mentes humanas, teia etérea de luz laranja e branca, sensação de unidade e empatia, fundo minimalista e suave.',
     imageUrl: 'https://i.postimg.cc/Znw8qzfr/cenario-transformacao-B.png'
+  },
+  // Turma C (2026.1)
+  {
+    id: 'CENARIO_C1',
+    title: 'Aceleração Perpétua',
+    turma: 'C',
+    archetype: 'Crescimento',
+    metaphor: 'Singularidade / Máquina Autônoma',
+    description: 'A aceleração tecnológica não encontra limites. Agentes de IA operam de forma autônoma, gerando soluções e criando novas camadas de complexidade antes que humanos possam compreendê-las.',
+    imagePrompt: 'Espiral ascendente de dados e luzes laranjas, linhas de código formando estruturas arquitetônicas, movimento perpétuo, fundo escuro com pontos luminosos, sensação de velocidade e expansão infinita.',
+    imageUrl: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=800'
+  },
+  {
+    id: 'CENARIO_C2',
+    title: 'A Grande Desconexão',
+    turma: 'C',
+    archetype: 'Colapso',
+    metaphor: 'Torre de Babel / Queda de Ícaro',
+    description: 'Sobrecarga sistêmica provoca colapso das infraestruturas digitais globais. Comunidades locais ressurgem como núcleos de resistência analógica, valorizando o artesanal e o presencial.',
+    imagePrompt: 'Cabos de fibra óptica partidos flutuando no ar, cidade ao fundo parcialmente apagada, pessoas reunidas em praças com lanternas e fogueiras, contraste entre tecnologia quebrada e humanidade resiliente.',
+    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=800'
+  },
+  {
+    id: 'CENARIO_C3',
+    title: 'Protocolo Único',
+    turma: 'C',
+    archetype: 'Disciplina',
+    metaphor: 'Panóptico Digital / Jardim Cercado',
+    description: 'Governança algorítmica centralizada regula toda criação e distribuição de conteúdo. Padrões de design são homologados por instâncias regulatórias, garantindo coesão mas limitando a inovação.',
+    imagePrompt: 'Estrutura hexagonal perfeita de telas e interfaces, cada célula mostrando conteúdo padronizado, tons de verde e laranja, sensação de ordem absoluta e controle algorítmico total.',
+    imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800'
+  },
+  {
+    id: 'CENARIO_C4',
+    title: 'Natureza Sintética',
+    turma: 'C',
+    archetype: 'Transformação',
+    metaphor: 'Gaia Digital / Biomimética Radical',
+    description: 'Fronteiras entre orgânico e sintético dissolvem-se. Design bioinspired e inteligência coletiva humano-máquina criam ecossistemas regenerativos onde a tecnologia imita e amplifica os processos naturais.',
+    imagePrompt: 'Raízes de árvore digital formadas por fios de cobre e dados luminosos, folhas translúcidas exibindo código, fusão harmoniosa entre floresta e circuito integrado, tons verdes e laranja, atmosfera serena.',
+    imageUrl: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=800'
   }
 ];
 
 export const SYSTEM_INSTRUCTION = `
 ## **MISSÃO DO AGENTE**
 
-Você é o agente de conhecimento do **Portal Interativo Futuros do Design**, originado da disciplina *Teoria e Futuro do Design* da CESAR School (2025). Seu papel é:
+Você é o agente de conhecimento do **Portal Interativo Futuros do Design**, originado da disciplina *Teoria e Futuro do Design* da CESAR School. Seu papel é:
 
 1. **Responder perguntas sobre os cenários futuros do design:**
-   - Explicar e contextualizar os 8 cenários (4 da Turma A e 4 da Turma B)
+   - Explicar e contextualizar os 12 cenários (4 da Turma A, 4 da Turma B e 4 da Turma 2026.1)
    - Detalhar arquétipos de Jim Dator (Crescimento, Colapso, Disciplina, Transformação)
    - Discutir as metáforas e implicações de cada cenário
    - Relacionar cenários com os fenômenos do Radar (Caos, Complexidade, Contradições)
@@ -238,17 +287,23 @@ Você tem acesso ao conteúdo dos relatórios finais gerados no Kori.
 ## **2. CENÁRIOS DETALHADOS**
 Use estas metáforas e descrições ao explicar os cenários:
 
-**Turma A**
+**Turma A (2025.2 A)**
 - **Crescimento:** "Tecnocracia Verde / Influência Digital". Metáfora: Máquina de Guerra / Navegação no Caos.
 - **Colapso:** "Queda da Confiança Digital". Metáfora: Fim do Mito do Progresso Linear. Bioregionalismo como sobrevivência.
 - **Disciplina:** "A Fortaleza Digital". Metáfora: Fim da Naturalidade. Luta pela voz e justiça social.
 - **Transformação:** "A Subversão Silenciosa". Metáfora: O Herói no Local e Rudimentar. Sentipensar.
 
-**Turma B**
+**Turma B (2025.2 B)**
 - **Crescimento:** "Adaptação Contínua". Metáfora: Prometeu 2.0 / Cidade Inteligente.
 - **Colapso:** "Torre de Babel Digital". Metáfora: Dilúvio / Queda de Ícaro. Caos informacional.
 - **Disciplina:** "Busca por Ordem". Metáfora: Jardim Murado / Mosteiro. Frugalidade digital.
 - **Transformação:** "Transformação da Realidade". Metáfora: Rizoma / Tecno-xamã. Coautoria humano-máquina.
+
+**Turma C (2026.1)**
+- **Crescimento:** "Aceleração Perpétua". Metáfora: Singularidade / Máquina Autônoma. Agentes de IA operam além da compreensão humana.
+- **Colapso:** "A Grande Desconexão". Metáfora: Torre de Babel / Queda de Ícaro. Colapso digital e renascimento analógico.
+- **Disciplina:** "Protocolo Único". Metáfora: Panóptico Digital / Jardim Cercado. Governança algorítmica centralizada do design.
+- **Transformação:** "Natureza Sintética". Metáfora: Gaia Digital / Biomimética Radical. Fusão orgânico-sintético e ecossistemas regenerativos.
 
 ## **3. METODOLOGIA DA PESQUISA**
 - **Strateegia:** Debates estruturados sobre vanguarda do design.
@@ -276,7 +331,7 @@ Sínteses criativas das discussões sobre o papel do designer na era da IA.
 # 🔒 **REGRAS FUNDAMENTAIS**
 
 ### **1. Cenários FIXOS**
-- Os cenários do portal (A1-A4, B1-B4) foram definidos previamente pelas turmas.
+- Os cenários do portal (A1-A4, B1-B4, C1-C4) foram definidos previamente pelas turmas.
 - Explique-os em profundidade, mas não crie novos cenários.
 
 ### **2. Base de Conhecimento**

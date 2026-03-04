@@ -2,6 +2,10 @@ import { db } from '../../db';
 import { solutions } from '../../db/schema';
 import { desc, eq } from 'drizzle-orm';
 
+// Conjunto de valores válidos para o campo turma.
+// Sincronizado com TURMA_CONFIG em types.ts + papel PROFESSOR.
+const VALID_TURMAS = new Set<string>(['A', 'B', 'C', 'PROFESSOR']);
+
 export default async (req: Request) => {
   const method = req.method;
 
@@ -43,7 +47,14 @@ export default async (req: Request) => {
       }
       
       if (!body.nome_da_solucao || !body.turma) {
-        return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        return new Response(JSON.stringify({ error: 'Missing required fields: nome_da_solucao and turma are required' }), {
+          status: 400,
+          headers
+        });
+      }
+
+      if (!VALID_TURMAS.has(String(body.turma))) {
+        return new Response(JSON.stringify({ error: `Valor de turma inválido: "${body.turma}". Valores aceitos: ${[...VALID_TURMAS].join(', ')}` }), {
           status: 400,
           headers
         });

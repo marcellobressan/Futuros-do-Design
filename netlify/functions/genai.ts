@@ -38,7 +38,7 @@ const apresentarRascunhoParaRevisaoFunc: FunctionDeclaration = {
           required: ["nome_completo", "email"],
         },
       },
-      turma: { type: Type.STRING, enum: ["A", "B", "PROFESSOR"] },
+      turma: { type: Type.STRING, enum: ["A", "B", "C", "PROFESSOR"] },
       cenarios_relacionados: {
         type: Type.ARRAY,
         items: { type: Type.STRING },
@@ -94,7 +94,7 @@ const registrarSolucaoFunc: FunctionDeclaration = {
           required: ["nome_completo", "email"],
         },
       },
-      turma: { type: Type.STRING, enum: ["A", "B", "PROFESSOR"] },
+      turma: { type: Type.STRING, enum: ["A", "B", "C", "PROFESSOR"] },
       cenarios_relacionados: {
         type: Type.ARRAY,
         items: { type: Type.STRING },
