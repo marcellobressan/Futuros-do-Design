@@ -5,9 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, (process as any).cwd(), '');
   
-  // Use the provided key if env var is missing, or override it.
-  // Ideally, use env.API_KEY, but for this specific request we hardcode the fallback.
-  const apiKey = env.API_KEY || 'AIzaSyCumxju4GUU3Og-hzcQL7zcvm-4xB4tEUE';
+  const apiKey = env.API_KEY;
 
   return {
     plugins: [react()],
