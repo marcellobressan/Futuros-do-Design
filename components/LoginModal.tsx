@@ -78,29 +78,33 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
   if (!isOpen) return null;
 
   return (
-    <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-      <div className="card" style={{ maxWidth: '450px', width: '90%', boxShadow: 'var(--shadow-2xl)' }}>
+    <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+      <div className="card" style={{ maxWidth: '450px', width: '90%', boxShadow: '0 0 60px rgba(255,96,2,0.12), 0 30px 80px rgba(0,0,0,0.8)', border: '1px solid rgba(255,96,2,0.22)' }}>
         <button
           onClick={onClose}
-          style={{ float: 'right', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: 'var(--c-gray)' }}
+          style={{ float: 'right', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: 'rgba(237,232,223,0.4)', transition: 'color 0.2s' }}
         >
           ✕
         </button>
 
-        <h2 className="text-2xl font-extrabold text-black mb-6 text-center">Entrar / Identificar-se</h2>
+        <h2 className="text-2xl font-extrabold mb-6 text-center" style={{ color: 'var(--c-text-primary)' }}>Entrar / Identificar-se</h2>
 
         {/* Tabs de método de login */}
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,96,2,0.12)', paddingBottom: '1rem' }}>
           <button
             onClick={() => setLoginMethod('google')}
             style={{
               padding: '0.5rem 1rem',
               fontWeight: loginMethod === 'google' ? 700 : 500,
-              color: loginMethod === 'google' ? 'var(--c-orange)' : 'var(--c-gray)',
+              color: loginMethod === 'google' ? 'var(--c-orange-cesar)' : 'rgba(237,232,223,0.45)',
               border: 'none',
               backgroundColor: 'transparent',
               cursor: 'pointer',
-              borderBottom: loginMethod === 'google' ? '2px solid var(--c-orange)' : 'none'
+              borderBottom: loginMethod === 'google' ? '2px solid var(--c-orange-cesar)' : '2px solid transparent',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase' as const
             }}
           >
             Google
@@ -110,11 +114,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
             style={{
               padding: '0.5rem 1rem',
               fontWeight: loginMethod === 'manual' ? 700 : 500,
-              color: loginMethod === 'manual' ? 'var(--c-orange)' : 'var(--c-gray)',
+              color: loginMethod === 'manual' ? 'var(--c-orange-cesar)' : 'rgba(237,232,223,0.45)',
               border: 'none',
               backgroundColor: 'transparent',
               cursor: 'pointer',
-              borderBottom: loginMethod === 'manual' ? '2px solid var(--c-orange)' : 'none'
+              borderBottom: loginMethod === 'manual' ? '2px solid var(--c-orange-cesar)' : '2px solid transparent',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase' as const
             }}
           >
             Manual
@@ -125,17 +133,19 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
           <div>
             {/* Google Login */}
             <div className="mb-4">
-              <label className="block text-sm font-semibold text-black mb-2">Selecione sua turma</label>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(237,232,223,0.62)' }}>Selecione sua turma</label>
               <select
                 value={formTurma}
                 onChange={(e) => { setFormTurma(e.target.value as TurmaUsuario); setValidationError(null); }}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  border: '1px solid #d1d5db',
+                  border: '1px solid rgba(255,96,2,0.2)',
                   borderRadius: '8px',
                   fontSize: '0.95rem',
-                  marginBottom: '1rem'
+                  marginBottom: '1rem',
+                  background: 'rgba(8,8,14,0.85)',
+                  color: 'var(--c-text-primary)'
                 }}
               >
                 {TURMAS_ALUNO_KEYS.map(key => (
@@ -144,14 +154,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
                 <option value="PROFESSOR">Professor</option>
               </select>
               {formTurma === 'PROFESSOR' && (
-                <p className="text-xs" style={{ color: '#d97706', marginTop: '-0.5rem', marginBottom: '0.5rem' }}>
+                <p className="text-xs" style={{ color: 'rgba(255,160,80,0.8)', marginTop: '-0.5rem', marginBottom: '0.5rem' }}>
                   ⚠️ Apenas mcb2@cesar.school pode se cadastrar como Professor
                 </p>
               )}
             </div>
 
             {validationError && (
-              <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', color: '#dc2626', fontSize: '0.875rem' }}>
+              <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.3)', borderRadius: '8px', color: '#f87171', fontSize: '0.875rem' }}>
                 {validationError}
               </div>
             )}
@@ -169,14 +179,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
               />
             </div>
 
-            <p className="text-xs text-gray text-center mt-4">
+            <p className="text-xs text-center mt-4" style={{ color: 'rgba(237,232,223,0.4)' }}>
               Clique no botão acima para autenticar com sua conta Google de forma segura.
             </p>
           </div>
         ) : (
           <form onSubmit={handleManualLogin}>
             <div className="mb-4">
-              <label className="block text-sm font-semibold text-black mb-2">Nome Completo</label>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(237,232,223,0.62)' }}>Nome Completo</label>
               <input
                 type="text"
                 value={formName}
@@ -185,17 +195,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  border: '1px solid #d1d5db',
+                  border: '1px solid rgba(255,96,2,0.2)',
                   borderRadius: '8px',
                   fontSize: '0.95rem',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box' as const,
+                  background: 'rgba(8,8,14,0.85)',
+                  color: 'var(--c-text-primary)',
+                  outline: 'none'
                 }}
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-semibold text-black mb-2">Email</label>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(237,232,223,0.62)' }}>Email</label>
               <input
                 type="email"
                 value={formEmail}
@@ -204,26 +217,31 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  border: '1px solid #d1d5db',
+                  border: '1px solid rgba(255,96,2,0.2)',
                   borderRadius: '8px',
                   fontSize: '0.95rem',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box' as const,
+                  background: 'rgba(8,8,14,0.85)',
+                  color: 'var(--c-text-primary)',
+                  outline: 'none'
                 }}
                 required
               />
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-black mb-2">Turma</label>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(237,232,223,0.62)' }}>Turma</label>
               <select
                 value={formTurma}
                 onChange={(e) => { setFormTurma(e.target.value as TurmaUsuario); setValidationError(null); }}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  border: '1px solid #d1d5db',
+                  border: '1px solid rgba(255,96,2,0.2)',
                   borderRadius: '8px',
-                  fontSize: '0.95rem'
+                  fontSize: '0.95rem',
+                  background: 'rgba(8,8,14,0.85)',
+                  color: 'var(--c-text-primary)'
                 }}
               >
                 {TURMAS_ALUNO_KEYS.map(key => (
@@ -232,14 +250,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin }) => 
                 <option value="PROFESSOR">Professor</option>
               </select>
               {formTurma === 'PROFESSOR' && (
-                <p className="text-xs" style={{ color: '#d97706', marginTop: '0.5rem' }}>
+                <p className="text-xs" style={{ color: 'rgba(255,160,80,0.8)', marginTop: '0.5rem' }}>
                   ⚠️ Apenas mcb2@cesar.school pode se cadastrar como Professor
                 </p>
               )}
             </div>
 
             {validationError && (
-              <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', color: '#dc2626', fontSize: '0.875rem' }}>
+              <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.3)', borderRadius: '8px', color: '#f87171', fontSize: '0.875rem' }}>
                 {validationError}
               </div>
             )}

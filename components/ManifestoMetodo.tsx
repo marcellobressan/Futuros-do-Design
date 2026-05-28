@@ -73,34 +73,34 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       `}</style>
 
       {/* Navigation Bar */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 100, borderBottom: '1px solid var(--c-border)', padding: '1rem 1.5rem', backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 100, borderBottom: '1px solid rgba(255, 96, 2, 0.14)', padding: '1rem 1.5rem', backdropFilter: 'blur(20px)', backgroundColor: 'rgba(6, 6, 10, 0.92)' }}>
         <div style={{ ...containerStyle, display: 'flex', gap: '2rem', overflowX: 'auto', scrollBehavior: 'smooth' }}>
-          <a href="#hero" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Manifesto</a>
-          <a href="#por-que" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Por Que?</a>
-          <a href="#como-funciona" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Como Funciona</a>
-          <a href="#prospeccao" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--c-gray)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-gray)')}>Prospecção</a>
-          <a href="#podcasts" style={{ fontSize: '0.875rem', color: 'var(--c-orange)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s ease', fontWeight: 700 }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-orange)')}>Podcasts</a>
+          <a href="#hero" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'rgba(237,232,223,0.45)', textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange-cesar)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(237,232,223,0.45)')}>Manifesto</a>
+          <a href="#por-que" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'rgba(237,232,223,0.45)', textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange-cesar)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(237,232,223,0.45)')}>Por Que?</a>
+          <a href="#como-funciona" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'rgba(237,232,223,0.45)', textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange-cesar)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(237,232,223,0.45)')}>Como Funciona</a>
+          <a href="#prospeccao" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'rgba(237,232,223,0.45)', textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-orange-cesar)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(237,232,223,0.45)')}>Prospecção</a>
+          <a href="#podcasts" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--c-orange-cesar)', textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s ease', textShadow: '0 0 12px rgba(255,96,2,0.4)' }}>Podcasts</a>
         </div>
       </nav>
       
       {/* 1. Hero - Manifesto */}
       <section id="hero" style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '2rem' }}>
-        {/* Decorative Circles */}
-        <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '800px', height: '800px', background: 'rgba(255,96,2,0.05)', borderRadius: '50%', filter: 'blur(80px)' }}></div>
-        <div style={{ position: 'absolute', bottom: '-10%', left: '-10%', width: '600px', height: '600px', background: 'rgba(0,0,0,0.02)', borderRadius: '50%', filter: 'blur(80px)' }}></div>
+        {/* Decorative neon circles */}
+        <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '800px', height: '800px', background: 'radial-gradient(circle, rgba(255,96,2,0.12) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(60px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-10%', left: '-10%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(255,119,34,0.08) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(60px)' }}></div>
 
         <div style={{ ...containerStyle, display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'center', position: 'relative', zIndex: 10, textAlign: 'center' }}>
           <div className="flex flex-col gap-6">
-            <div style={{ display: 'inline-block', padding: '0.4rem 1rem', borderRadius: '99px', background: '#fff7ed', border: '1px solid #ffedd5', color: 'var(--c-orange)', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 auto' }}>
-              MANIFESTO & MÉTODO
+            <div style={{ display: 'inline-block', padding: '0.35rem 0.9rem', borderRadius: '4px', background: 'rgba(255,96,2,0.1)', border: '1px solid rgba(255,96,2,0.3)', color: 'var(--c-orange-cesar)', fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', margin: '0 auto' }}>
+              MANIFESTO &amp; MÉTODO
             </div>
             
-            <h1 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--c-black)', lineHeight: 1.1, margin: '0 auto', maxWidth: '800px' }}>
+            <h1 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--c-text-primary)', lineHeight: 1.1, margin: '0 auto', maxWidth: '800px' }}>
               O futuro não é um lugar <br/>onde vamos,<br/>
-              <span style={{ color: 'var(--c-orange)' }}>é um lugar que criamos</span>
+              <span style={{ color: 'var(--c-orange-cesar)', textShadow: '0 0 40px rgba(255,96,2,0.35)' }}>é um lugar que criamos</span>
             </h1>
             
-            <p style={{ fontSize: '1.25rem', color: 'var(--c-gray)', lineHeight: 1.6, fontWeight: 300, margin: '0 auto', maxWidth: '700px' }}>
+            <p style={{ fontSize: '1.2rem', color: 'rgba(237,232,223,0.62)', lineHeight: 1.6, fontWeight: 300, margin: '0 auto', maxWidth: '700px' }}>
               Este é um laboratório de imaginação, crítica e criação onde você vai explorar os futuros possíveis do design em um mundo em constante transformação.
             </p>
             
@@ -116,7 +116,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
               <button 
                 onClick={() => onNavigate(AppView.CHAT)}
                 className="btn btn-secondary"
-                style={{ padding: '1rem 2rem', fontSize: '1rem', border: '2px solid var(--c-black)' }}
+                style={{ padding: '1rem 2rem', fontSize: '0.85rem', borderColor: 'rgba(237,232,223,0.25)', color: 'rgba(237,232,223,0.75)' }}
               >
                 Conversar com IA
               </button>
@@ -126,13 +126,13 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 2. Por que Futuros do Design? */}
-      <section id="por-que" style={{ ...sectionStyle, backgroundColor: 'white', borderTop: '1px solid var(--c-border)', borderBottom: '1px solid var(--c-border)' }}>
+      <section id="por-que" style={{ ...sectionStyle, backgroundColor: 'rgba(10,10,16,0.6)', borderTop: '1px solid rgba(255,96,2,0.1)', borderBottom: '1px solid rgba(255,96,2,0.1)' }}>
         <div style={{ ...containerStyle, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
           <div className="flex flex-col gap-6">
-            <h2 className="text-4xl font-extrabold text-black">
+            <h2 className="text-4xl font-extrabold mb-4" style={{ color: 'var(--c-text-primary)' }}>
               Por que estudar<br/>os futuros do design?
             </h2>
-            <p className="text-lg text-gray">
+            <p className="text-lg" style={{ color: 'rgba(237,232,223,0.62)' }}>
               O design não opera mais apenas sobre "problemas a serem resolvidos". Ele atua em ecologias vastas, lidando com incertezas, ambiguidades e paradoxos.
             </p>
             <ul className="flex flex-col gap-3 pt-2">
@@ -144,17 +144,17 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-3 font-medium hover:translate-x-1 transition-transform">
                   <span style={{ fontSize: '1.25rem' }}>{item.icon}</span>
-                  <span style={{ color: 'var(--c-gray)' }}>{item.text}</span>
+                  <span style={{ color: 'rgba(237,232,223,0.62)' }}>{item.text}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="card" style={{ backgroundColor: '#f9fafb', border: '1px solid #f3f4f6' }}>
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-black">
+          <div className="card" style={{ border: '1px solid rgba(255,96,2,0.14)' }}>
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2" style={{ color: 'var(--c-text-primary)' }}>
               <IconImage name="users" alt="disciplina" size={20} fallback={<Users className="text-orange" />} />
               A Disciplina
             </h3>
-            <p className="text-gray mb-8">
+            <p style={{ color: 'rgba(237,232,223,0.55)', marginBottom: '2rem' }}>
               Estudantes do 6º período de Design conduziram um processo investigativo profundo:
             </p>
             <div className="flex flex-col gap-4">
@@ -163,9 +163,9 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                 { phase: 'Fase 2', text: 'Prospecção de futuros plausíveis (Cenários)' },
                 { phase: 'Fase 3', text: 'Criação de ferramentas (Vibe Coding)' }
               ].map((step, i) => (
-                <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-xl border border-gray-200">
-                  <span className="badge" style={{ backgroundColor: '#fff7ed', color: '#ff6002' }}>{step.phase}</span>
-                  <p className="font-bold text-sm text-black">{step.text}</p>
+                <div key={i} className="flex items-center gap-3 p-4" style={{ borderRadius: '8px', border: '1px solid rgba(255,96,2,0.12)', backgroundColor: 'rgba(255,96,2,0.05)' }}>
+                  <span className="badge" style={{ backgroundColor: 'rgba(255,96,2,0.12)', color: 'var(--c-orange-cesar)', border: '1px solid rgba(255,96,2,0.3)', borderRadius: '4px' }}>{step.phase}</span>
+                  <p className="font-bold text-sm" style={{ color: 'var(--c-text-primary)' }}>{step.text}</p>
                 </div>
               ))}
             </div>
@@ -176,8 +176,8 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       {/* 3. Metodologia (Infográfico) */}
       <section id="como-funciona" style={{ ...sectionStyle }}>
         <div style={{ ...containerStyle, textAlign: 'center', marginBottom: '2.5rem' }}>
-          <h2 className="text-4xl font-extrabold text-black mb-4">Como Funciona?</h2>
-          <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto 2.5rem auto' }}>
+          <h2 className="text-4xl font-extrabold mb-4" style={{ color: 'var(--c-text-primary)' }}>Como Funciona?</h2>
+          <p className="text-lg" style={{ color: 'rgba(237,232,223,0.62)', maxWidth: '760px', margin: '0 auto 2.5rem auto' }}>
             Utilizamos a metodologia Kori para varredura de horizonte e análise estruturada de futuros. Abaixo um resumo em formato infográfico com o fluxo principal.
           </p>
         </div>
@@ -230,9 +230,9 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: step.color, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{i+1}</div>
-                        <h4 className="text-lg font-bold text-black" style={{ margin: 0 }}>{step.title}</h4>
+                        <h4 className="text-lg font-bold" style={{ margin: 0, color: 'var(--c-text-primary)' }}>{step.title}</h4>
                       </div>
-                      <p className="text-neutral" style={{ margin: 0, fontSize: '0.95rem' }}>{step.description}</p>
+                      <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(237,232,223,0.55)' }}>{step.description}</p>
                     </div>
                   </div>
                 </div>
@@ -241,8 +241,8 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                 {i < arr.length - 1 && (
                   <>
                     <svg aria-hidden className="connector-h" style={{ position: 'absolute', right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '24%', minWidth: '100px', height: '28px', overflow: 'visible' }} viewBox="0 0 120 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                      <line x1="4" y1="14" x2="96" y2="14" stroke="var(--c-border)" strokeWidth="2" strokeOpacity="0.7" strokeLinecap="round" />
-                      <polyline points="92,6 108,14 92,22" fill="none" stroke="var(--c-border)" strokeWidth="2" strokeOpacity="0.85" strokeLinecap="round" strokeLinejoin="round" />
+                      <line x1="4" y1="14" x2="96" y2="14" stroke="rgba(255,96,2,0.25)" strokeWidth="1.5" strokeOpacity="0.9" strokeLinecap="round" />
+                      <polyline points="92,6 108,14 92,22" fill="none" stroke="rgba(255,96,2,0.4)" strokeWidth="1.5" strokeOpacity="1" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <div aria-hidden className="connector-v" />
                   </>
@@ -253,8 +253,8 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Contexto - Prospecção (Inspirado em ondas + marcas d'água) */}
-      <section id="prospeccao" style={{ ...sectionStyle, backgroundColor: '#f9fafb', position: 'relative', overflow: 'hidden' }}>
+      {/* 4. Contexto - Prospecção */}
+      <section id="prospeccao" style={{ ...sectionStyle, backgroundColor: 'rgba(10,10,16,0.55)', position: 'relative', overflow: 'hidden' }}>
         {/* Wave background (SVG) */}
         <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '40%', pointerEvents: 'none', zIndex: 0 }}>
           <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style={{ width: '100%', height: '100%', display: 'block' }}>
@@ -272,8 +272,8 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
 
         <div style={{ ...containerStyle, position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 className="text-4xl font-extrabold text-black mb-4">Prospectar Futuros na Pós-Normalidade</h2>
-            <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto' }}>
+            <h2 className="text-4xl font-extrabold mb-4" style={{ color: 'var(--c-text-primary)' }}>Prospectar Futuros na Pós-Normalidade</h2>
+            <p className="text-lg" style={{ color: 'rgba(237,232,223,0.62)', maxWidth: '760px', margin: '0 auto' }}>
               Entendemos que o mundo mudou de forma irreversível. Aqui estão os princípios que guiam nosso trabalho — ilustrados com uma estética inspirada em ondas para sugerir varredura, marés e movimentos sistêmicos.
             </p>
           </div>
@@ -296,7 +296,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                 description: 'Reconhecer sinais fracos e antecipar riscos permite criar soluções mais robustas, adaptáveis e sensíveis às mudanças.'
               }
             ].map((item, i) => (
-              <div key={i} className="card" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', position: 'relative', zIndex: 3 }}>
+              <div key={i} className="card" style={{ border: '1px solid rgba(255,96,2,0.12)', position: 'relative', zIndex: 3 }}>
                 <div style={{ position: 'relative', width: '64px', height: '64px', marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <div className="prospect-placeholder" style={{ fontSize: '2.5rem' }}>{item.icon}</div>
                   <img
@@ -307,8 +307,8 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                 </div>
-                <h3 className="text-lg font-bold text-black mb-3">{item.title}</h3>
-                <p className="text-gray text-sm">{item.description}</p>
+                <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--c-text-primary)' }}>{item.title}</h3>
+                <p style={{ color: 'rgba(237,232,223,0.55)', fontSize: '0.9rem' }}>{item.description}</p>
               </div>
             ))}
           </div>
@@ -316,14 +316,14 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 5. Podcasts Section */}
-      <section id="podcasts" style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--c-off-white)', borderTop: '1px solid var(--c-border)' }}>
+      <section id="podcasts" style={{ padding: '6rem 1.5rem', backgroundColor: 'transparent', borderTop: '1px solid rgba(255,96,2,0.1)' }}>
         <div style={{ ...containerStyle }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 className="text-4xl font-extrabold text-black mb-4">Podcasts</h2>
-            <p className="text-lg text-gray" style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'left' }}>
+            <h2 className="text-4xl font-extrabold mb-4" style={{ color: 'var(--c-text-primary)' }}>Podcasts</h2>
+            <p className="text-lg" style={{ color: 'rgba(237,232,223,0.62)', maxWidth: '760px', margin: '0 auto', textAlign: 'left' }}>
               Podcasts-ensaio realizados com estudantes da CESAR School em 7 episódios, mediados por duas IAs da plataforma Strateegia: <strong>CESAR</strong> e <strong>Nix</strong>. A cada conversa, investigamos o design como prática situada e em transformação — do metaprojeto e do design sistêmico aos “wicked problems”, passando por teorias decoloniais, Teoria Crítica e os impactos da IA generativa em UI/UX. Sem tecnossoluções fáceis, o programa debate ética, contexto e colaboração interdisciplinar para reimaginar como projetamos, ensinamos e decidimos.
             </p>
-            <p className="text-sm text-gray" style={{ maxWidth: '760px', margin: '0.75rem auto 0', textAlign: 'left', fontWeight: 600 }}>
+            <p className="text-sm" style={{ color: 'rgba(237,232,223,0.42)', maxWidth: '760px', margin: '0.75rem auto 0', textAlign: 'left', fontWeight: 600 }}>
               Produção: CESAR School • NIX Lab • Strateegia.
             </p>
           </div>
@@ -331,7 +331,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginBottom: '2rem' }}>
             {/* Podcast 1: podIA ser design? */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h3 className="text-xl font-bold text-black">podIA ser design?</h3>
+              <h3 className="text-xl font-bold" style={{ color: 'var(--c-text-primary)' }}>podIA ser design?</h3>
               <iframe
                 data-testid="embed-iframe"
                 style={{ borderRadius: '12px' }}
@@ -347,7 +347,7 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
 
             {/* Podcast 2: IAgora, Designers? */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h3 className="text-xl font-bold text-black">IAgora, Designers?</h3>
+              <h3 className="text-xl font-bold" style={{ color: 'var(--c-text-primary)' }}>IAgora, Designers?</h3>
               <iframe
                 data-testid="embed-iframe"
                 style={{ borderRadius: '12px' }}
@@ -365,23 +365,23 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* 6. Call to Action */}
-      <section style={{ padding: '8rem 1.5rem', backgroundColor: 'white' }}>
-        <div style={{ ...containerStyle, backgroundColor: 'var(--c-off-white)', padding: '4rem', borderRadius: '2rem', border: '1px solid var(--c-border)', textAlign: 'center' }}>
-          <IconImage name="sparkles" alt="destaque" size={48} fallback={<Sparkles size={48} style={{ color: 'var(--c-orange)', margin: '0 auto 2rem' }} />} />
-          <h2 className="text-4xl font-extrabold text-black mb-6">
+      <section style={{ padding: '8rem 1.5rem', backgroundColor: 'transparent' }}>
+        <div style={{ ...containerStyle, background: 'rgba(255,96,2,0.06)', border: '1px solid rgba(255,96,2,0.2)', padding: '4rem', borderRadius: '16px', textAlign: 'center', boxShadow: '0 0 60px rgba(255,96,2,0.08), 0 20px 60px rgba(0,0,0,0.5)' }}>
+          <IconImage name="sparkles" alt="destaque" size={48} fallback={<Sparkles size={48} style={{ color: 'var(--c-orange-cesar)', margin: '0 auto 2rem' }} />} />
+          <h2 className="text-4xl font-extrabold mb-6" style={{ color: 'var(--c-text-primary)' }}>
             Pronto para explorar?
           </h2>
-          <p className="text-lg text-gray mb-10" style={{ maxWidth: '600px', margin: '0 auto 2.5rem auto' }}>
+          <p className="text-lg mb-10" style={{ color: 'rgba(237,232,223,0.6)', maxWidth: '600px', margin: '0 auto 2.5rem auto' }}>
             Navegue pelos cenários, contribua com suas soluções e participe de um repositório vivo de futuros possíveis.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button onClick={() => onNavigate(AppView.KNOWLEDGE)} className="btn btn-primary">
               📚 Explorar Cenários
             </button>
-            <button onClick={() => onNavigate(AppView.CHAT)} className="btn btn-secondary" style={{ border: '2px solid var(--c-black)' }}>
+            <button onClick={() => onNavigate(AppView.CHAT)} className="btn btn-secondary" style={{ borderColor: 'rgba(237,232,223,0.2)', color: 'rgba(237,232,223,0.7)' }}>
               💬 Conversar com IA
             </button>
-            <button onClick={() => onNavigate(AppView.DASHBOARD)} className="btn btn-secondary" style={{ border: '2px solid var(--c-black)' }}>
+            <button onClick={() => onNavigate(AppView.DASHBOARD)} className="btn btn-secondary" style={{ borderColor: 'rgba(237,232,223,0.2)', color: 'rgba(237,232,223,0.7)' }}>
               📊 Ver Dashboard
             </button>
           </div>
@@ -389,8 +389,8 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '3rem', borderTop: '1px solid var(--c-border)', backgroundColor: 'white', textAlign: 'center' }}>
-        <p className="text-xs font-bold text-neutral uppercase tracking-widest">
+      <footer style={{ padding: '3rem', borderTop: '1px solid rgba(255,96,2,0.1)', backgroundColor: 'transparent', textAlign: 'center' }}>
+        <p style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'rgba(237,232,223,0.3)' }}>
           © 2025 CESAR School • Disciplina Teoria e Futuro do Design
         </p>
       </footer>

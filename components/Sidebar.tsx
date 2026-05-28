@@ -16,8 +16,8 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleSidebar, userProfile, onLoginClick }) => {
   
   const navItemClass = (view: AppView) => `
-    w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group cursor-pointer
-    ${currentView === view ? 'bg-orange-50 text-orange font-bold' : 'text-gray hover:bg-gray-50 hover:text-orange-deep'}
+    w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group cursor-pointer
+    ${currentView === view ? 'font-bold' : 'hover:text-orange-deep'}
   `;
 
   return (
@@ -33,17 +33,17 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
       {/* Sidebar Content */}
       <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
         {/* Header / Logo Area */}
-        <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid var(--c-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div style={{ padding: '1.75rem 1.5rem 1.5rem', borderBottom: '1px solid rgba(255, 96, 2, 0.12)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div className="flex flex-col">
-            <h1 className="text-xl font-extrabold text-orange leading-none" style={{ lineHeight: '1' }}>
+            <h1 className="font-extrabold text-orange leading-none" style={{ lineHeight: '1', fontSize: '1.25rem', letterSpacing: '-0.02em', color: 'var(--c-orange-cesar)', textShadow: '0 0 20px rgba(255,96,2,0.4)' }}>
               FUTUROS<br/>DO DESIGN
             </h1>
-            <p className="text-neutral mt-2 uppercase tracking-wide" style={{ fontSize: '11px', fontWeight: 500 }}>
+            <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(237,232,223,0.38)', marginTop: '0.5rem' }}>
               CESAR School 2025
             </p>
           </div>
-          <button onClick={toggleSidebar} className="md:hidden text-neutral hover:text-orange" style={{ display: window.innerWidth > 768 ? 'none' : 'block' }}>
-            <IconImage name="x" alt="fechar" size={24} fallback={<X size={24} />} />
+          <button onClick={toggleSidebar} style={{ display: window.innerWidth > 768 ? 'none' : 'flex', color: 'rgba(237,232,223,0.5)', background: 'none', border: 'none', cursor: 'pointer' }}>
+            <IconImage name="x" alt="fechar" size={20} fallback={<X size={20} />} />
           </button>
         </div>
 
@@ -52,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button 
             onClick={() => { setView(AppView.HOME); toggleSidebar(); }}
             className={navItemClass(AppView.HOME)} 
-            style={currentView === AppView.HOME ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            style={currentView === AppView.HOME ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
             title="Conheça o manifesto e a metodologia do portal"
           >
             <IconImage name="compass" alt="manifesto e método" size={20} fallback={<Compass size={20} />} />
@@ -63,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button 
             onClick={() => { setView(AppView.DASHBOARD); toggleSidebar(); }}
             className={navItemClass(AppView.DASHBOARD)} 
-            style={currentView === AppView.DASHBOARD ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            style={currentView === AppView.DASHBOARD ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
             title="Acesso rápido aos dados e resumos"
           >
             <IconImage name="layout-grid" alt="dashboard" size={20} fallback={<LayoutGrid size={20} />} />
@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button 
             onClick={() => { setView(AppView.CHAT); toggleSidebar(); }}
             className={navItemClass(AppView.CHAT)} 
-            style={currentView === AppView.CHAT ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            style={currentView === AppView.CHAT ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
             title="Converse com o assistente IA e explore Futuros do Design"
           >
             <IconImage name="message-square" alt="agente do portal" size={20} fallback={<MessageSquare size={20} />} />
@@ -85,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button 
             onClick={() => { setView(AppView.SOLUTION_REGISTRATION); toggleSidebar(); }}
             className={navItemClass(AppView.SOLUTION_REGISTRATION)} 
-            style={currentView === AppView.SOLUTION_REGISTRATION ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            style={currentView === AppView.SOLUTION_REGISTRATION ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
             title="Registrar uma solução designada para Futuros do Design"
           >
             <IconImage name="message-square" alt="cadastro de soluções" size={20} fallback={<MessageSquare size={20} />} />
@@ -96,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button 
             onClick={() => { setView(AppView.KNOWLEDGE); toggleSidebar(); }}
             className={navItemClass(AppView.KNOWLEDGE)} 
-            style={currentView === AppView.KNOWLEDGE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            style={currentView === AppView.KNOWLEDGE ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
             title="Explore cenários e arquétipos do projeto"
           >
             <IconImage name="book-open" alt="cenários e arquétipos" size={20} fallback={<BookOpen size={20} />} />
@@ -107,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
           <button 
             onClick={() => { setView(AppView.SOLUTIONS); toggleSidebar(); }}
             className={navItemClass(AppView.SOLUTIONS)} 
-            style={currentView === AppView.SOLUTIONS ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+            style={currentView === AppView.SOLUTIONS ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
             title="Veja todas as soluções registradas"
           >
             <IconImage name="database" alt="soluções cadastradas" size={20} fallback={<Database size={20} />} />
@@ -117,13 +117,13 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
         </nav>
 
         {/* User Profile Section */}
-        <div style={{ padding: '1rem', borderTop: '1px solid var(--c-border)', backgroundColor: '#f9fafb' }}>
+        <div style={{ padding: '1rem', borderTop: '1px solid rgba(255, 96, 2, 0.12)', backgroundColor: 'transparent' }}>
           {userProfile ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <button 
                 onClick={() => { setView(AppView.USER_PROFILE); toggleSidebar(); }}
                 className={navItemClass(AppView.USER_PROFILE)} 
-                style={currentView === AppView.USER_PROFILE ? { backgroundColor: '#fff7ed', color: '#ff6002' } : { color: '#3f3f3f' }}
+                style={currentView === AppView.USER_PROFILE ? { background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', borderLeft: '2px solid var(--c-orange-cesar)', boxShadow: '0 0 12px rgba(255,96,2,0.12)' } : { color: 'rgba(237,232,223,0.55)', borderLeft: '2px solid transparent' }}
                 title="Veja seu perfil e soluções cadastradas"
               >
                 <IconImage name="user" alt="meu perfil" size={20} fallback={<User size={20} />} />
@@ -131,12 +131,12 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
                 {currentView === AppView.USER_PROFILE && <IconImage name="chevron-right" alt="selecionado" size={16} fallback={<ChevronRight size={16} style={{ marginLeft: 'auto' }} />} />}
               </button>
               <div 
-                className="flex items-center gap-3 bg-white p-3 rounded-xl" 
+                className="flex items-center gap-3 p-3" 
                 style={{ 
-                  borderRadius: '12px', 
+                  borderRadius: '8px', 
                   padding: '0.75rem', 
-                  border: '1px solid var(--c-border)',
-                  backgroundColor: 'white',
+                  border: '1px solid rgba(255,96,2,0.14)',
+                  backgroundColor: 'rgba(255,96,2,0.06)',
                   transition: 'all 0.2s ease'
                 }}
                 title={`Conectado como ${userProfile.name}`}
@@ -159,7 +159,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
                    {userProfile.name.substring(0, 2).toUpperCase()}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p className="text-sm font-bold text-black" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <p className="text-sm font-bold" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'var(--c-text-primary)' }}>
                     {userProfile.name}
                   </p>
                   <p className="text-xs text-neutral" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
@@ -180,8 +180,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, isOpen, toggleS
               className="btn w-full"
               style={{ 
                 width: '100%', 
-                backgroundColor: 'var(--c-black)', 
-                color: 'white',
+                background: 'linear-gradient(135deg, rgba(255,96,2,0.15) 0%, rgba(255,119,34,0.1) 100%)',
+                color: 'var(--c-orange-cesar)',
+                border: '1px solid rgba(255,96,2,0.4)',
                 transition: 'all 0.2s ease'
               }}
               title="Clique para se identificar na plataforma"

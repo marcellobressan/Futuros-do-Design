@@ -50,14 +50,14 @@ const DraftReviewCard: React.FC<{
   };
 
   return (
-    <div className="card fade-in" style={{ border: '2px solid #ffedd5', margin: '1.5rem auto', maxWidth: '42rem' }}>
-      <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ width: '40px', height: '40px', backgroundColor: '#fff7ed', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--c-orange)' }}>
+    <div className="card fade-in" style={{ border: '1px solid rgba(255, 96, 2, 0.3)', margin: '1.5rem auto', maxWidth: '42rem', boxShadow: '0 0 40px rgba(255,96,2,0.1), 0 20px 60px rgba(0,0,0,0.6)' }}>
+      <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '1px solid rgba(255,96,2,0.12)' }}>
+        <div style={{ width: '40px', height: '40px', backgroundColor: 'rgba(255,96,2,0.15)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--c-orange-cesar)', border: '1px solid rgba(255,96,2,0.3)' }}>
           <IconImage name="edit-2" alt="editar" size={20} fallback={<Edit2 size={20} />} />
         </div>
         <div>
-          <h3 className="text-lg font-bold text-black">Revisão Final</h3>
-          <p className="text-xs text-neutral">✏️ Edite os dados se necessário antes de salvar. Todos os campos são editáveis.</p>
+          <h3 className="text-lg font-bold" style={{ color: 'var(--c-text-primary)' }}>Revisão Final</h3>
+          <p className="text-xs" style={{ color: 'rgba(237,232,223,0.45)' }}>✏️ Edite os dados se necessário antes de salvar. Todos os campos são editáveis.</p>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ const DraftReviewCard: React.FC<{
         {/* Nome */}
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Nome da Solução</label>
+            <label className="uppercase tracking-widest" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(237,232,223,0.4)' }}>Nome da Solução</label>
             {editingSection !== 'nome' && (
               <button onClick={() => startEdit('nome', data.nome_da_solucao)} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
             )}
@@ -76,7 +76,7 @@ const DraftReviewCard: React.FC<{
               <button onClick={() => saveEdit('nome')} className="btn btn-primary" style={{ padding: '0.5rem' }}><IconImage name="save" alt="salvar" size={16} fallback={<Save size={16} />} /></button>
             </div>
           ) : (
-            <p className="text-black font-bold text-lg">{data.nome_da_solucao}</p>
+            <p className="font-bold text-lg" style={{ color: 'var(--c-text-primary)' }}>{data.nome_da_solucao}</p>
           )}
         </div>
 
@@ -84,7 +84,7 @@ const DraftReviewCard: React.FC<{
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
                 <div className="flex justify-between items-center mb-1">
-                    <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Turma</label>
+                    <label className="uppercase tracking-widest" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(237,232,223,0.4)' }}>Turma</label>
                     {editingSection !== 'turma' && (
                     <button onClick={() => startEdit('turma', data.turma)} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
                     )}
@@ -105,7 +105,7 @@ const DraftReviewCard: React.FC<{
             
             <div>
                 <div className="flex justify-between items-center mb-1">
-                    <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Participantes</label>
+                    <label className="uppercase tracking-widest" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(237,232,223,0.4)' }}>Participantes</label>
                     {editingSection !== 'participantes' && (
                     <button onClick={() => startEdit('participantes', data.participantes.map(p => `${p.nome_completo} (${p.email})`).join(', '))} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
                     )}
@@ -116,7 +116,7 @@ const DraftReviewCard: React.FC<{
                         <button onClick={() => saveEdit('participantes')} className="btn btn-primary" style={{ padding: '0.5rem' }}><IconImage name="save" alt="salvar" size={16} fallback={<Save size={16} />} /></button>
                     </div>
                 ) : (
-                    <p className="text-sm text-gray" style={{ lineHeight: '1.6' }}>
+                    <p className="text-sm" style={{ lineHeight: '1.6', color: 'rgba(237,232,223,0.6)' }}>
                         {data.participantes.map(p => p.nome_completo).join(', ')}
                     </p>
                 )}
@@ -126,7 +126,7 @@ const DraftReviewCard: React.FC<{
         {/* Resumo */}
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="text-neutral uppercase tracking-widest" style={{ fontSize: '10px', fontWeight: 'bold' }}>Resumo Refinado</label>
+            <label className="uppercase tracking-widest" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(237,232,223,0.4)' }}>Resumo Refinado</label>
             {editingSection !== 'resumo' && (
               <button onClick={() => startEdit('resumo', data.descricao_refinada.resumo)} className="text-orange text-xs font-bold" style={{ textDecoration: 'underline' }}>Editar</button>
             )}
@@ -137,7 +137,7 @@ const DraftReviewCard: React.FC<{
               <button onClick={() => saveEdit('resumo')} className="btn btn-primary" style={{ padding: '0.5rem' }}><IconImage name="save" alt="salvar" size={16} fallback={<Save size={16} />} /></button>
             </div>
           ) : (
-            <div style={{ backgroundColor: '#fff7ed', padding: '1rem', borderRadius: '12px', border: '1px solid #ffedd5', fontStyle: 'italic', fontSize: '0.875rem' }}>
+            <div style={{ background: 'rgba(255,96,2,0.08)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,96,2,0.2)', fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(237,232,223,0.72)' }}>
                 "{data.descricao_refinada.resumo}"
             </div>
           )}
