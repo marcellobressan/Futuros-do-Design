@@ -311,8 +311,8 @@ const App: React.FC = () => {
               <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
               
               {/* Context Section */}
-              <div className="card" style={{ marginBottom: '3rem', border: 'none', boxShadow: 'var(--shadow-sm)' }}>
-                <h2 className="text-3xl font-extrabold text-black mb-6">
+              <div className="card" style={{ marginBottom: '3rem' }}>
+                <h2 className="text-3xl font-extrabold mb-6" style={{ color: 'var(--c-text-primary)' }}>
                   Prospectar na Pós-Normalidade
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', fontSize: '0.875rem', lineHeight: 1.6 }}>
@@ -331,16 +331,16 @@ const App: React.FC = () => {
                 </div>
                 
                 {/* Kori Card */}
-                <div style={{ marginTop: '2rem', backgroundColor: '#fff7ed', border: '1px solid #ffedd5', borderRadius: '12px', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                <div style={{ marginTop: '2rem', background: 'rgba(255, 96, 2, 0.07)', border: '1px solid rgba(255, 96, 2, 0.22)', borderRadius: '8px', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
                    <div style={{ flex: 1 }}>
-                      <h4 className="font-bold text-lg mb-1" style={{ color: 'var(--c-orange-deep)' }}>Metodologia Kori</h4>
-                      <p className="text-sm text-gray">
-                        Utilizamos a plataforma Kori para varredura de horizonte (3, 7, 15 anos), organizando fenômenos em <strong>Caos, Complexidade e Contradições</strong>, e aprofundando com <strong>CLA</strong>.
+                      <h4 className="font-bold text-lg mb-1" style={{ color: 'var(--c-orange-cesar)' }}>Metodologia Kori</h4>
+                      <p className="text-sm" style={{ color: 'var(--c-text-secondary)', lineHeight: 1.65 }}>
+                        Utilizamos a plataforma Kori para varredura de horizonte (3, 7, 15 anos), organizando fenômenos em <strong style={{ color: 'var(--c-text-primary)', fontWeight: 700 }}>Caos, Complexidade e Contradições</strong>, e aprofundando com <strong style={{ color: 'var(--c-text-primary)', fontWeight: 700 }}>CLA</strong>.
                       </p>
                    </div>
                    <div className="flex gap-3">
                       {['Varredura', 'CLA', 'Cenários'].map(t => (
-                          <span key={t} className="badge" style={{ backgroundColor: 'white', color: 'var(--c-orange)', boxShadow: 'var(--shadow-sm)' }}>{t}</span>
+                          <span key={t} className="badge" style={{ background: 'rgba(255,96,2,0.12)', color: 'var(--c-orange-cesar)', border: '1px solid rgba(255,96,2,0.3)', fontWeight: 700 }}>{t}</span>
                       ))}
                    </div>
                 </div>
@@ -348,8 +348,8 @@ const App: React.FC = () => {
 
               {/* Radar de Futuros Section */}
               <div style={{ marginBottom: '3rem' }}>
-                <h3 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                  <IconImage name="file-text" alt="radar" size={20} fallback={<FileText className="text-neutral" size={20}/>} /> Radar de Futuros
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--c-text-primary)' }}>
+                  <IconImage name="file-text" alt="radar" size={20} fallback={<FileText size={20} style={{ color: 'var(--c-orange-cesar)' }}/>} /> Radar de Futuros
                 </h3>
                 
                 {/* Radar Images Grid */}
@@ -372,7 +372,7 @@ const App: React.FC = () => {
                         }}>
                           A
                         </div>
-                        <h4 className="font-bold text-black">Radar {TURMA_CONFIG['A'].displayName}</h4>
+                        <h4 className="font-bold" style={{ color: 'var(--c-text-primary)' }}>Radar {TURMA_CONFIG['A'].displayName}</h4>
                       </div>
                     </div>
                     <a 
@@ -381,22 +381,22 @@ const App: React.FC = () => {
                       rel="noopener noreferrer"
                       style={{ 
                         display: 'block',
-                        borderRadius: '12px', 
+                        borderRadius: '8px', 
                         overflow: 'hidden', 
-                        border: '1px solid #e5e7eb',
-                        backgroundColor: '#f9fafb',
+                        border: '1px solid rgba(255,96,2,0.2)',
+                        backgroundColor: 'rgba(8,8,14,0.6)',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-4px)';
-                        e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255,96,2,0.1)';
                         e.currentTarget.style.borderColor = TURMA_CONFIG['A'].color;
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.style.borderColor = '#e5e7eb';
+                        e.currentTarget.style.borderColor = 'rgba(255,96,2,0.2)';
                       }}
                     >
                       <img
@@ -425,7 +425,7 @@ const App: React.FC = () => {
                         }}>
                           B
                         </div>
-                        <h4 className="font-bold text-black">Radar {TURMA_CONFIG['B'].displayName}</h4>
+                        <h4 className="font-bold" style={{ color: 'var(--c-text-primary)' }}>Radar {TURMA_CONFIG['B'].displayName}</h4>
                       </div>
                     </div>
                     <a
@@ -434,22 +434,22 @@ const App: React.FC = () => {
                       rel="noopener noreferrer"
                       style={{
                         display: 'block',
-                        borderRadius: '12px',
+                        borderRadius: '8px',
                         overflow: 'hidden',
-                        border: '1px solid #e5e7eb',
-                        backgroundColor: '#f9fafb',
+                        border: '1px solid rgba(59,130,246,0.2)',
+                        backgroundColor: 'rgba(8,8,14,0.6)',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-4px)';
-                        e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(59,130,246,0.1)';
                         e.currentTarget.style.borderColor = TURMA_CONFIG['B'].color;
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.style.borderColor = '#e5e7eb';
+                        e.currentTarget.style.borderColor = 'rgba(59,130,246,0.2)';
                       }}
                     >
                       <img
@@ -478,7 +478,7 @@ const App: React.FC = () => {
                         }}>
                           C
                         </div>
-                        <h4 className="font-bold text-black">Radar {TURMA_CONFIG['C'].displayName}</h4>
+                        <h4 className="font-bold" style={{ color: 'var(--c-text-primary)' }}>Radar {TURMA_CONFIG['C'].displayName}</h4>
                       </div>
                     </div>
                     <div
@@ -504,8 +504,8 @@ const App: React.FC = () => {
 
                 {/* Reports Download Section */}
                 <div>
-                  <h4 className="text-lg font-bold text-black mb-3 flex items-center gap-2">
-                    <IconImage name="download" alt="relatórios" size={18} fallback={<Download className="text-neutral" size={18}/>} /> 
+                  <h4 className="text-lg font-bold mb-3 flex items-center gap-2" style={{ color: 'var(--c-text-primary)' }}>
+                    <IconImage name="download" alt="relatórios" size={18} fallback={<Download size={18} style={{ color: 'var(--c-orange-cesar)' }}/>} /> 
                     Relatórios Originais (Kori)
                   </h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
@@ -513,14 +513,14 @@ const App: React.FC = () => {
                       const status = extractionStatus[report.id] || 'idle';
                       const isDone = status === 'done';
                       return (
-                          <div key={report.id} className="card" style={isDone ? { borderColor: '#fed7aa', boxShadow: '0 0 0 1px #ffedd5' } : {}}>
+                          <div key={report.id} className="card" style={isDone ? { borderColor: 'rgba(255,96,2,0.45)', boxShadow: '0 0 0 1px rgba(255,96,2,0.15), 0 0 20px rgba(255,96,2,0.06)' } : {}}>
                           <div className="flex items-start justify-between mb-4">
                               <div className="flex items-center gap-4">
                                   <div style={{ width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white', fontSize: '1.125rem', backgroundColor: TURMA_CONFIG[report.turma].color }}>
                                       {report.turma}
                                   </div>
                                   <div>
-                                      <p className="font-bold text-sm text-black">Relatório Turma {report.turma}</p>
+                                      <p className="font-bold text-sm" style={{ color: 'var(--c-text-primary)' }}>Relatório Turma {report.turma}</p>
                                       <p className="text-xs text-neutral font-medium mt-0.5">PDF • {report.size} • {report.date}</p>
                                   </div>
                               </div>
@@ -538,7 +538,7 @@ const App: React.FC = () => {
                                   onClick={() => handleExtraction(report.id, report.turma)}
                                   disabled={status === 'extracting'}
                                   className="btn flex-1 text-xs"
-                                  style={isDone ? { backgroundColor: '#fff7ed', color: 'var(--c-orange)', border: '1px solid #ffedd5' } : { backgroundColor: 'white', color: 'var(--c-orange)', border: '1px solid #fed7aa' }}
+                                  style={isDone ? { background: 'rgba(255,96,2,0.12)', color: 'var(--c-orange-cesar)', border: '1px solid rgba(255,96,2,0.3)' } : { background: 'transparent', color: 'var(--c-orange-cesar)', border: '1px solid rgba(255,96,2,0.25)' }}
                               >
                                   {status === 'extracting' ? (
                                       <>
@@ -567,9 +567,9 @@ const App: React.FC = () => {
 
               {/* Scenarios Grid */}
               <div id="scenarios-grid" style={{ scrollMarginTop: '2rem' }}>
-                <div className="flex flex-col gap-4 mb-6 pt-8 border-t" style={{ borderColor: 'var(--c-border)' }}>
+                <div className="flex flex-col gap-4 mb-6 pt-8 border-t" style={{ borderColor: 'rgba(255,96,2,0.1)' }}>
                     <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-extrabold text-black">
+                        <h2 className="text-2xl font-extrabold" style={{ color: 'var(--c-text-primary)' }}>
                             Cenários Desenvolvidos
                         </h2>
                         {scenariosFilter !== 'ALL' && (
@@ -579,7 +579,7 @@ const App: React.FC = () => {
                                     setExtractionMessage(null);
                                 }}
                                 className="badge flex items-center gap-1"
-                                style={{ backgroundColor: '#fff7ed', color: 'var(--c-orange)', cursor: 'pointer', padding: '0.5rem 1rem' }}
+                                style={{ background: 'rgba(255,96,2,0.1)', color: 'var(--c-orange-cesar)', border: '1px solid rgba(255,96,2,0.3)', cursor: 'pointer', padding: '0.5rem 1rem' }}
                             >
                                 <IconImage name="filter" alt="filtro" size={12} fallback={<Filter size={12} />} />
                                 Filtro Ativo: {TURMA_CONFIG[scenariosFilter as TurmaAluno].displayName} <X size={12} className="ml-1" />
@@ -589,15 +589,15 @@ const App: React.FC = () => {
 
                     {/* Extraction Success Banner */}
                     {extractionMessage && (
-                        <div className="fade-in" style={{ backgroundColor: '#ecfdf5', border: '1px solid #d1fae5', padding: '1rem', borderRadius: '12px', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                            <div style={{ padding: '0.25rem', backgroundColor: '#d1fae5', borderRadius: '50%', color: '#059669' }}>
+                        <div className="fade-in" style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.3)', padding: '1rem', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                            <div style={{ padding: '0.25rem', backgroundColor: 'rgba(16,185,129,0.15)', borderRadius: '6px', color: '#34d399' }}>
                               <IconImage name="sparkles" alt="sucesso" size={16} fallback={<Sparkles size={16} />} />
                             </div>
                             <div style={{ flex: 1 }}>
-                                <p className="text-sm font-bold" style={{ color: '#065f46' }}>Extração Concluída</p>
-                                <p className="text-xs" style={{ color: '#047857' }}>{extractionMessage}</p>
+                                <p className="text-sm font-bold" style={{ color: '#34d399' }}>Extração Concluída</p>
+                                <p className="text-xs" style={{ color: 'rgba(52,211,153,0.75)' }}>{extractionMessage}</p>
                             </div>
-                            <button onClick={() => setExtractionMessage(null)} style={{ color: '#10b981' }}>
+                            <button onClick={() => setExtractionMessage(null)} style={{ color: 'rgba(52,211,153,0.6)' }}>
                               <IconImage name="x" alt="fechar" size={16} fallback={<X size={16} />} />
                             </button>
                         </div>
@@ -609,9 +609,9 @@ const App: React.FC = () => {
                     {scenariosFilteredByTurma.some(sc => sc.turma === 'A') && (
                         <div className="card fade-in" style={{
                             padding: '2rem',
-                            backgroundColor: TURMA_CONFIG['A'].bgColor,
-                            border: `2px solid ${TURMA_CONFIG['A'].borderColor}`,
-                            boxShadow: '0 4px 6px -1px rgba(255, 96, 2, 0.1)'
+                            background: TURMA_CONFIG['A'].bgColor,
+                            border: `1px solid ${TURMA_CONFIG['A'].borderColor}`,
+                            boxShadow: `0 0 30px rgba(255, 96, 2, 0.06), 0 4px 24px rgba(0,0,0,0.4)`
                         }}>
                             <div style={{
                                 display: 'flex',
@@ -640,27 +640,25 @@ const App: React.FC = () => {
                                         padding: 0, 
                                         overflow: 'hidden', 
                                         display: 'flex', 
-                                        flexDirection: 'column',
-                                        backgroundColor: 'white',
-                                        border: '1px solid #e5e7eb'
+                                        flexDirection: 'column'
                                     }}>
                                         <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
-                                            <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
+                                            <h4 className="text-xl font-bold leading-tight mb-6" style={{ color: 'var(--c-text-primary)' }}>{sc.title}</h4>
                                             
                                             <div className="flex flex-col gap-3 mb-5">
                                                 <div>
-                                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
-                                                    <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                                    <span className="uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(237,232,223,0.38)' }}>Arquétipo</span>
+                                                    <p className="font-medium text-sm" style={{ color: 'var(--c-text-secondary)' }}>{sc.archetype}</p>
                                                 </div>
                                                 {sc.metaphor && (
                                                     <div>
-                                                        <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
-                                                        <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
+                                                        <span className="uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(237,232,223,0.38)' }}>Metáfora / Mito</span>
+                                                        <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-cesar)' }}>"{sc.metaphor}"</p>
                                                     </div>
                                                 )}
                                             </div>
 
-                                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                            <p className="text-sm mb-6" style={{ lineHeight: 1.6, color: 'var(--c-text-secondary)' }}>{sc.description}</p>
                                         </div>
                                         
                                         {/* AI Illustration Section */}
@@ -681,9 +679,9 @@ const App: React.FC = () => {
                     {scenariosFilteredByTurma.some(sc => sc.turma === 'B') && (
                         <div className="card fade-in" style={{
                             padding: '2rem',
-                            backgroundColor: TURMA_CONFIG['B'].bgColor,
-                            border: `2px solid ${TURMA_CONFIG['B'].borderColor}`,
-                            boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.1)'
+                            background: TURMA_CONFIG['B'].bgColor,
+                            border: `1px solid ${TURMA_CONFIG['B'].borderColor}`,
+                            boxShadow: `0 0 30px rgba(59, 130, 246, 0.06), 0 4px 24px rgba(0,0,0,0.4)`
                         }}>
                             <div style={{
                                 display: 'flex',
@@ -712,27 +710,25 @@ const App: React.FC = () => {
                                         padding: 0,
                                         overflow: 'hidden',
                                         display: 'flex',
-                                        flexDirection: 'column',
-                                        backgroundColor: 'white',
-                                        border: '1px solid #e5e7eb'
+                                        flexDirection: 'column'
                                     }}>
                                         <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
-                                            <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
+                                            <h4 className="text-xl font-bold leading-tight mb-6" style={{ color: 'var(--c-text-primary)' }}>{sc.title}</h4>
 
                                             <div className="flex flex-col gap-3 mb-5">
                                                 <div>
-                                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
-                                                    <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                                    <span className="uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(237,232,223,0.38)' }}>Arquétipo</span>
+                                                    <p className="font-medium text-sm" style={{ color: 'var(--c-text-secondary)' }}>{sc.archetype}</p>
                                                 </div>
                                                 {sc.metaphor && (
                                                     <div>
-                                                        <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
-                                                        <p className="text-sm font-medium italic" style={{ color: 'var(--c-orange-deep)' }}>"{sc.metaphor}"</p>
+                                                        <span className="uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(237,232,223,0.38)' }}>Metáfora / Mito</span>
+                                                        <p className="text-sm font-medium italic" style={{ color: '#60a5fa' }}>"{sc.metaphor}"</p>
                                                     </div>
                                                 )}
                                             </div>
 
-                                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                            <p className="text-sm mb-6" style={{ lineHeight: 1.6, color: 'var(--c-text-secondary)' }}>{sc.description}</p>
                                         </div>
 
                                         {/* AI Illustration Section */}
@@ -753,9 +749,9 @@ const App: React.FC = () => {
                     {scenariosFilteredByTurma.some(sc => sc.turma === 'C') && (
                         <div className="card fade-in" style={{
                             padding: '2rem',
-                            backgroundColor: TURMA_CONFIG['C'].bgColor,
-                            border: `2px solid ${TURMA_CONFIG['C'].borderColor}`,
-                            boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.1)'
+                            background: TURMA_CONFIG['C'].bgColor,
+                            border: `1px solid ${TURMA_CONFIG['C'].borderColor}`,
+                            boxShadow: `0 0 30px rgba(16, 185, 129, 0.06), 0 4px 24px rgba(0,0,0,0.4)`
                         }}>
                             <div style={{
                                 display: 'flex',
@@ -784,27 +780,25 @@ const App: React.FC = () => {
                                         padding: 0,
                                         overflow: 'hidden',
                                         display: 'flex',
-                                        flexDirection: 'column',
-                                        backgroundColor: 'white',
-                                        border: '1px solid #e5e7eb'
+                                        flexDirection: 'column'
                                     }}>
                                         <div style={{ padding: '2rem 2rem 1rem 2rem', flex: 1 }}>
-                                            <h4 className="text-xl font-bold text-black leading-tight mb-6">{sc.title}</h4>
+                                            <h4 className="text-xl font-bold leading-tight mb-6" style={{ color: 'var(--c-text-primary)' }}>{sc.title}</h4>
 
                                             <div className="flex flex-col gap-3 mb-5">
                                                 <div>
-                                                    <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Arquétipo</span>
-                                                    <p className="text-black font-medium text-sm">{sc.archetype}</p>
+                                                    <span className="uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(237,232,223,0.38)' }}>Arquétipo</span>
+                                                    <p className="font-medium text-sm" style={{ color: 'var(--c-text-secondary)' }}>{sc.archetype}</p>
                                                 </div>
                                                 {sc.metaphor && (
                                                     <div>
-                                                        <span className="text-neutral uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold' }}>Metáfora / Mito</span>
+                                                        <span className="uppercase tracking-widest block mb-0.5" style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(237,232,223,0.38)' }}>Metáfora / Mito</span>
                                                         <p className="text-sm font-medium italic" style={{ color: TURMA_CONFIG['C'].color }}>"{sc.metaphor}"</p>
                                                     </div>
                                                 )}
                                             </div>
 
-                                            <p className="text-gray text-sm mb-6" style={{ lineHeight: 1.6 }}>{sc.description}</p>
+                                            <p className="text-sm mb-6" style={{ lineHeight: 1.6, color: 'var(--c-text-secondary)' }}>{sc.description}</p>
                                         </div>
 
                                         {/* AI Illustration Section */}

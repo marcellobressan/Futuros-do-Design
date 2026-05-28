@@ -6,9 +6,9 @@
 // =============================================================================
 
 export const TURMA_CONFIG = {
-  A: { label: '2025.2 A', displayName: 'Turma 2025.2 A', color: 'var(--c-orange)', bgColor: '#fff7ed', borderColor: 'var(--c-orange)' },
-  B: { label: '2025.2 B', displayName: 'Turma 2025.2 B', color: '#3b82f6',        bgColor: '#f0f9ff',  borderColor: '#3b82f6'         },
-  C: { label: '2026.1',   displayName: 'Turma 2026.1',   color: '#10b981',        bgColor: '#f0fdf4',  borderColor: '#10b981'         },
+  A: { label: '2025.2 A', displayName: 'Turma 2025.2 A', color: 'var(--c-orange-cesar)', bgColor: 'rgba(255, 96, 2, 0.06)',       borderColor: 'rgba(255, 96, 2, 0.35)'   },
+  B: { label: '2025.2 B', displayName: 'Turma 2025.2 B', color: '#60a5fa',              bgColor: 'rgba(59, 130, 246, 0.06)',     borderColor: 'rgba(59, 130, 246, 0.35)' },
+  C: { label: '2026.1',   displayName: 'Turma 2026.1',   color: '#34d399',              bgColor: 'rgba(16, 185, 129, 0.06)',     borderColor: 'rgba(16, 185, 129, 0.35)' },
 } as const;
 
 /** Identificador de turma de estudante: 'A' | 'B' | 'C' */
