@@ -110,6 +110,15 @@
         --shadow-neon-subtle: 0 0 12px rgba(255, 96, 2, 0.2), 0 2px 8px rgba(0, 0, 0, 0.65);
         --shadow-dark-card: 0 4px 24px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.03);
         --shadow-dark-elevated: 0 12px 40px rgba(0, 0, 0, 0.75), 0 4px 16px rgba(0, 0, 0, 0.5);
+
+        /* ═══ DARK-COMPAT ALIASES (override legacy light vars) ═══ */
+        --c-orange: var(--c-orange-cesar);          /* Alias — var(--c-orange) now works */
+        --c-black: var(--c-text-primary);            /* text-black → readable on dark bg */
+        --c-neutral: var(--c-text-secondary);        /* text-neutral → readable on dark bg */
+        --c-gray: rgba(237, 232, 223, 0.18);         /* avatar bg / misc gray on dark */
+        --c-border: rgba(255, 96, 2, 0.1);           /* override light #e2e8f0 */
+        --c-border-light: rgba(255, 255, 255, 0.04); /* override light #f1f5f9 */
+        --c-off-white: var(--c-dark-base);           /* off-white → dark base */
       }
 
       /* ═══════════════════════════════════════════════════════════

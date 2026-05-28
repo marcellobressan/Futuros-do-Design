@@ -287,9 +287,9 @@ Não faça mais perguntas. Registre agora.`;
             <div style={{
               width: '36px', height: '36px', borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              backgroundColor: msg.error ? '#fee2e2' : (msg.role === 'model' ? 'white' : 'var(--c-gray)'),
-              color: msg.error ? '#dc2626' : (msg.role === 'model' ? 'var(--c-orange)' : 'white'),
-              border: msg.role === 'model' ? '1px solid #e5e7eb' : 'none'
+              backgroundColor: msg.error ? 'rgba(220,38,38,0.15)' : (msg.role === 'model' ? 'rgba(255,96,2,0.1)' : 'rgba(255,255,255,0.08)'),
+              color: msg.error ? '#f87171' : (msg.role === 'model' ? 'var(--c-orange-cesar)' : 'white'),
+              border: msg.role === 'model' ? '1px solid rgba(255,96,2,0.2)' : 'none'
             }}>
               {msg.error ? (
                 <IconImage name="alert-circle" alt="erro" size={18} fallback={<AlertCircle size={18} />} />
@@ -300,8 +300,8 @@ Não faça mais perguntas. Registre agora.`;
 
             {/* Bubble */}
             <div className={`msg-bubble ${msg.role}`} style={{
-              backgroundColor: msg.error ? '#fef2f2' : undefined,
-              borderColor: msg.error ? '#fecaca' : undefined,
+              backgroundColor: msg.error ? 'rgba(220,38,38,0.08)' : undefined,
+              borderColor: msg.error ? 'rgba(220,38,38,0.3)' : undefined,
               borderWidth: msg.error ? '1px' : undefined
             }}>
                 <div className="markdown-content">
@@ -315,7 +315,7 @@ Não faça mais perguntas. Registre agora.`;
         {/* Tool Execution Indicator */}
         {activeTool && (
           <div className="flex items-center justify-center py-4">
-              <div className="bg-white border border-orange-200 text-orange px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-bold" style={{ animation: 'fadeIn 0.3s ease-in' }}>
+              <div className="flex items-center gap-2 text-sm font-bold" style={{ animation: 'fadeIn 0.3s ease-in', background: 'rgba(11,11,17,0.88)', border: '1px solid rgba(255,96,2,0.25)', color: 'var(--c-orange-cesar)', padding: '0.5rem 1.25rem', borderRadius: '9999px', backdropFilter: 'blur(12px)' }}>
               <IconImage name="cpu" alt="processando" size={16} fallback={<Cpu className="animate-spin" size={16} />} />
               <span>
                 {activeTool === 'refinarDescricaoSolucao' && '✨ Refinando texto com IA...'}
@@ -342,7 +342,7 @@ Não faça mais perguntas. Registre agora.`;
       </div>
 
       {/* Input Area */}
-      <div style={{ padding: '1.5rem', backgroundColor: 'white', borderTop: '1px solid var(--c-border)' }}>
+      <div style={{ padding: '1.5rem', background: 'var(--c-dark-elevated)', borderTop: '1px solid rgba(255,96,2,0.1)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', display: 'flex', alignItems: 'flex-end', gap: '0.75rem' }}>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <textarea

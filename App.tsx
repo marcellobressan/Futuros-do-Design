@@ -191,13 +191,12 @@ const App: React.FC = () => {
           <button
             onClick={handleSelectKey}
             className="btn btn-primary w-full"
-            style={{ backgroundColor: 'var(--c-black)' }}
           >
             Selecionar API Key
           </button>
 
           {keyError && (
-            <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', color: '#dc2626', fontSize: '0.875rem', display: 'flex', gap: '0.5rem', textAlign: 'left' }}>
+            <div style={{ marginTop: '1rem', padding: '0.75rem', background: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.3)', borderRadius: '8px', color: '#f87171', fontSize: '0.875rem', display: 'flex', gap: '0.5rem', textAlign: 'left' }}>
               <IconImage name="alert-triangle" alt="erro" size={16} fallback={<AlertTriangle size={16} />} />
               <span>Erro ao validar chave. Por favor, tente selecionar novamente.</span>
             </div>
@@ -290,7 +289,7 @@ const App: React.FC = () => {
                 width: '80px',
                 height: '80px',
                 borderRadius: '50%',
-                backgroundColor: '#fff7ed',
+                backgroundColor: 'rgba(255,96,2,0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -825,7 +824,7 @@ const App: React.FC = () => {
                 <div style={{ maxWidth: '900px', margin: '0 auto' }}>
               <div className="flex items-center justify-between mb-4">
                  <h2 className="text-3xl font-extrabold text-black">Soluções Cadastradas</h2>
-                 <div className="text-xs font-bold text-neutral uppercase tracking-widest bg-white px-3 py-1 rounded-full border border-gray-200">
+                 <div className="text-xs font-bold uppercase tracking-widest" style={{ background: 'rgba(255,96,2,0.1)', border: '1px solid rgba(255,96,2,0.25)', color: 'var(--c-orange-cesar)', borderRadius: '9999px', padding: '0.25rem 0.75rem' }}>
                     {filteredSolutions.length} / {registeredSolutions.length} Registros
                  </div>
               </div>
@@ -844,7 +843,7 @@ const App: React.FC = () => {
               </div>
 
               {filteredSolutions.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '6rem 0', backgroundColor: 'white', borderRadius: '24px', border: '1px dashed #e5e7eb' }}>
+                <div style={{ textAlign: 'center', padding: '6rem 0', background: 'rgba(255,96,2,0.04)', borderRadius: '24px', border: '1px dashed rgba(255,96,2,0.15)' }}>
                     {registeredSolutions.length > 0 ? (
                         <>
                           <p className="text-neutral font-medium mb-4">Nenhum resultado encontrado para "{solutionsSearchQuery}".</p>
@@ -868,7 +867,7 @@ const App: React.FC = () => {
                       <div className="flex flex-col md:flex-row gap-6">
                         {/* Imagem */}
                         {sol.imagem && sol.imagem.url && (
-                          <div style={{ width: '280px', height: '200px', backgroundColor: '#f9fafb', borderRadius: '16px', overflow: 'hidden', border: '1px solid #e5e7eb', flexShrink: 0 }}>
+                          <div style={{ width: '280px', height: '200px', background: 'rgba(8,8,14,0.6)', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,96,2,0.12)', flexShrink: 0 }}>
                             <img src={sol.imagem.url} alt={sol.nome_da_solucao} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           </div>
                         )}
@@ -895,9 +894,9 @@ const App: React.FC = () => {
                                   style={{ 
                                     padding: '0.5rem', 
                                     fontSize: '0.875rem',
-                                    backgroundColor: '#fef2f2',
-                                    color: '#dc2626',
-                                    border: '1px solid #fecaca'
+                                    backgroundColor: 'rgba(220,38,38,0.1)',
+                                    color: '#f87171',
+                                    border: '1px solid rgba(220,38,38,0.3)'
                                   }}
                                   title="Excluir solução"
                                 >
@@ -908,21 +907,21 @@ const App: React.FC = () => {
                           </div>
 
                           {/* Participantes */}
-                          <div style={{ backgroundColor: '#f0f9ff', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #e0f2fe' }}>
+                          <div style={{ background: 'rgba(96,165,250,0.06)', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid rgba(96,165,250,0.18)' }}>
                             <p className="font-bold text-black mb-2 text-xs uppercase tracking-wide">Participantes</p>
                             <div className="flex flex-col gap-2">
                               {sol.participantes.map((p, idx) => (
                                 <div key={idx} className="flex items-center gap-2" style={{ fontSize: '0.875rem' }}>
                                   <span className="font-semibold text-black">{p.nome_completo}</span>
                                   <span className="text-neutral">•</span>
-                                  <a href={`mailto:${p.email}`} className="text-blue-600 hover:underline">{p.email}</a>
+                                  <a href={`mailto:${p.email}`} style={{ color: '#60a5fa', textDecoration: 'underline' }}>{p.email}</a>
                                 </div>
                               ))}
                             </div>
                           </div>
 
                           {/* Resumo */}
-                          <div style={{ backgroundColor: '#f9fafb', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #f3f4f6', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                          <div style={{ background: 'rgba(255,96,2,0.05)', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid rgba(255,96,2,0.12)', fontSize: '0.875rem', lineHeight: 1.6 }}>
                             <p className="font-bold text-orange mb-2 text-xs uppercase tracking-wide">Resumo</p>
                             <p className="text-neutral">{sol.descricao_refinada.resumo}</p>
                           </div>
@@ -940,7 +939,7 @@ const App: React.FC = () => {
                           </div>
 
                           {/* Relação com Cenários */}
-                          <div style={{ backgroundColor: '#fef9f5', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid #fed7aa', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                          <div style={{ background: 'rgba(255,96,2,0.07)', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', border: '1px solid rgba(255,96,2,0.2)', fontSize: '0.875rem', lineHeight: 1.6 }}>
                             <p className="font-bold text-orange mb-2 text-xs uppercase tracking-wide">Relação com os Cenários</p>
                             <p className="text-neutral">{sol.descricao_refinada.relacao_com_os_cenarios}</p>
                           </div>
@@ -950,7 +949,7 @@ const App: React.FC = () => {
                             <p className="font-bold text-black mb-2 text-xs uppercase tracking-wide">Cenários Relacionados</p>
                             <div className="flex flex-wrap gap-2">
                               {sol.cenarios_relacionados.map(cen => (
-                                <span key={cen} className="badge" style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', fontWeight: 'bold', fontSize: '0.75rem' }}>
+                                <span key={cen} className="badge" style={{ background: 'rgba(255,96,2,0.08)', border: '1px solid rgba(255,96,2,0.22)', color: 'var(--c-orange-cesar)', fontWeight: 'bold', fontSize: '0.75rem' }}>
                                   {cen}
                                 </span>
                               ))}
