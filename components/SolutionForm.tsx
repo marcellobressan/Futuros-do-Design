@@ -221,7 +221,7 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
-                color: step.filled ? 'var(--c-orange)' : '#9ca3af'
+                color: step.filled ? 'var(--c-orange)' : 'rgba(237,232,223,0.35)'
               }}>
                 {step.label}
               </span>
@@ -315,8 +315,8 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
                   padding: '1.25rem',
                   borderRadius: '12px',
                   border: '2px solid',
-                  borderColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : '#e5e7eb',
-                  backgroundColor: cenariosRelacionados.includes(cenario.id) ? '#fff7ed' : 'white',
+                  borderColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : 'rgba(255,96,2,0.15)',
+                  backgroundColor: cenariosRelacionados.includes(cenario.id) ? 'rgba(255,96,2,0.1)' : 'rgba(255,255,255,0.02)',
                   boxShadow: cenariosRelacionados.includes(cenario.id) ? '0 0 0 3px rgba(255, 96, 2, 0.1)' : 'none'
                 }}
               >
@@ -326,8 +326,8 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
                     height: '24px',
                     borderRadius: '6px',
                     border: '2px solid',
-                    borderColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : '#d1d5db',
-                    backgroundColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : 'white',
+                    borderColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : 'rgba(237,232,223,0.25)',
+                    backgroundColor: cenariosRelacionados.includes(cenario.id) ? 'var(--c-orange)' : 'rgba(255,255,255,0.04)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -449,7 +449,7 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
                 height: '80px',
                 borderRadius: '8px',
                 overflow: 'hidden',
-                border: '1px solid #e5e7eb',
+                border: '1px solid rgba(255,96,2,0.15)',
                 flexShrink: 0
               }}>
                 <img 
@@ -486,21 +486,21 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
         {error && (
           <div style={{
             padding: '1rem',
-            backgroundColor: '#fef2f2',
-            border: '1px solid #fecaca',
+            background: 'rgba(220,38,38,0.08)',
+            border: '1px solid rgba(220,38,38,0.25)',
             borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
             animation: 'fadeIn 0.3s ease-in'
           }}>
-            <AlertCircle size={20} style={{ color: '#dc2626', flexShrink: 0 }} />
-            <p className="text-sm" style={{ color: '#dc2626' }}>{error}</p>
+            <AlertCircle size={20} style={{ color: '#f87171', flexShrink: 0 }} />
+            <p className="text-sm" style={{ color: '#f87171' }}>{error}</p>
           </div>
         )}
         {/* Termos de Uso (apenas para novos cadastros) */}
         {!editingSolution && (
-          <div className="card" style={{ backgroundColor: '#fef3c7', borderLeft: '4px solid var(--c-orange)' }}>
+          <div className="card" style={{ background: 'rgba(255,160,20,0.07)', borderLeft: '4px solid var(--c-orange-cesar)' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <input
@@ -517,7 +517,7 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
                     flexShrink: 0
                   }}
                 />
-                <label htmlFor="acceptTerms" style={{ cursor: 'pointer', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                <label htmlFor="acceptTerms" style={{ cursor: 'pointer', fontSize: '0.95rem', lineHeight: '1.5', color: 'var(--c-text-primary)' }}>
                   Li e aceito os{' '}
                   <button
                     type="button"
@@ -542,13 +542,14 @@ const SolutionForm: React.FC<SolutionFormProps> = ({ userProfile, editingSolutio
                 <div style={{
                   marginTop: '1rem',
                   padding: '1.5rem',
-                  backgroundColor: 'white',
+                  background: 'rgba(0,0,0,0.35)',
                   borderRadius: '8px',
                   maxHeight: '400px',
                   overflowY: 'auto',
                   fontSize: '0.875rem',
                   lineHeight: '1.6',
-                  whiteSpace: 'pre-wrap'
+                  whiteSpace: 'pre-wrap',
+                  color: 'var(--c-text-secondary)'
                 }}>
                   {TERMS_OF_USE}
                 </div>
