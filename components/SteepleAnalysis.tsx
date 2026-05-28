@@ -132,7 +132,7 @@ const SteepleAnalysis: React.FC = () => {
   return (
     <div>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap', borderBottom: '2px solid #e5e7eb', paddingBottom: '1rem' }}>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap', borderBottom: '2px solid rgba(255,96,2,0.15)', paddingBottom: '1rem' }}>
         {tabs.map(([key, data]) => (
           <button
             key={key}
@@ -141,13 +141,13 @@ const SteepleAnalysis: React.FC = () => {
               padding: '0.75rem 1.25rem',
               fontSize: '0.95rem',
               fontWeight: activeTab === key ? 700 : 500,
-              color: activeTab === key ? 'var(--c-orange)' : 'var(--c-gray)',
-              backgroundColor: activeTab === key ? '#fff7ed' : 'transparent',
+              color: activeTab === key ? 'var(--c-orange-cesar)' : 'var(--c-text-secondary)',
+              backgroundColor: activeTab === key ? 'rgba(255,96,2,0.12)' : 'transparent',
               border: 'none',
               borderRadius: '8px',
               cursor: 'pointer',
               transition: 'all 200ms ease',
-              borderBottom: activeTab === key ? '3px solid var(--c-orange)' : 'none'
+              borderBottom: activeTab === key ? '3px solid var(--c-orange-cesar)' : 'none'
             }}
           >
             <span style={{ fontWeight: 800, marginRight: '0.25rem' }}>{data.shortLabel}</span> — {data.label}
@@ -176,8 +176,8 @@ const SteepleAnalysis: React.FC = () => {
                       key={itemKey}
                       style={{
                         padding: '1rem',
-                        backgroundColor: '#f9fafb',
-                        border: '1px solid #e5e7eb',
+                        background: 'rgba(255,255,255,0.03)',
+                        border: '1px solid rgba(255,96,2,0.12)',
                         borderRadius: '0.75rem',
                         cursor: 'pointer',
                         transition: 'all 200ms ease'
@@ -185,13 +185,13 @@ const SteepleAnalysis: React.FC = () => {
                       onClick={() => toggleExpand(itemKey)}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-                        <h4 className="text-sm font-bold text-black" style={{ flex: 1, margin: 0 }}>
+                        <h4 className="text-sm font-bold" style={{ flex: 1, margin: 0, color: 'var(--c-text-primary)' }}>
                           {phenomenon.title}
                         </h4>
                         <ChevronDown
                           size={18}
                           style={{
-                            color: 'var(--c-gray)',
+                            color: 'var(--c-text-muted)',
                             transition: 'transform 200ms ease',
                             transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                             marginTop: '2px',
@@ -200,7 +200,7 @@ const SteepleAnalysis: React.FC = () => {
                         />
                       </div>
                       {isExpanded && (
-                        <p className="text-gray text-sm" style={{ marginTop: '0.75rem', marginBottom: 0 }}>
+                        <p className="text-sm" style={{ marginTop: '0.75rem', marginBottom: 0, color: 'var(--c-text-secondary)' }}>
                           {phenomenon.description}
                         </p>
                       )}
