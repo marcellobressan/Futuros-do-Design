@@ -481,7 +481,7 @@ const App: React.FC = () => {
                       </div>
                     </div>
                     <a
-                      href="https://i.postimg.cc/fwLjm87Z/Captura-de-tela-de-2026-06-15-17-48-15.png"
+                      href="https://kori.social.br/pt-BR/dashboard/projects/1b8af0be-2f76-41ed-9ea4-8e33cfb3b76a/radar"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
