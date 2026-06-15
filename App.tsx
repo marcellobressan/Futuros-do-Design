@@ -480,24 +480,36 @@ const App: React.FC = () => {
                         <h4 className="font-bold" style={{ color: 'var(--c-text-primary)' }}>Radar {TURMA_CONFIG['C'].displayName}</h4>
                       </div>
                     </div>
-                    <div
+                    <a
+                      href="https://i.postimg.cc/fwLjm87Z/Captura-de-tela-de-2026-06-15-17-48-15.png"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: '12px',
+                        display: 'block',
+                        borderRadius: '8px',
                         overflow: 'hidden',
-                        border: `1px dashed ${TURMA_CONFIG['C'].borderColor}`,
-                        backgroundColor: TURMA_CONFIG['C'].bgColor,
-                        minHeight: '200px',
-                        padding: '2rem',
-                        flexDirection: 'column',
-                        gap: '0.75rem'
+                        border: `1px solid ${TURMA_CONFIG['C'].borderColor}`,
+                        backgroundColor: 'rgba(8,8,14,0.6)',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = `0 10px 30px rgba(0,0,0,0.5), 0 0 20px ${TURMA_CONFIG['C'].color}22`;
+                        e.currentTarget.style.borderColor = TURMA_CONFIG['C'].color;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.borderColor = TURMA_CONFIG['C'].borderColor;
                       }}
                     >
-                      <p className="font-bold text-sm" style={{ color: TURMA_CONFIG['C'].color }}>Radar em elaboração</p>
-                      <p className="text-xs text-neutral text-center">O radar de futuros da Turma 2026.1 será disponibilizado ao longo do semestre.</p>
-                    </div>
+                      <img
+                        src="https://i.postimg.cc/fwLjm87Z/Captura-de-tela-de-2026-06-15-17-48-15.png"
+                        alt="Radar de Futuros - Turma 2026.1"
+                        style={{ width: '100%', height: 'auto', display: 'block' }}
+                      />
+                    </a>
                   </div>
                 </div>
 
