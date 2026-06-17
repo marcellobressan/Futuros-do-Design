@@ -204,7 +204,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Design como Instrumento "Cego" / Jason Bourne',
     description: 'O mundo avança por expansão contínua e melhorias incrementais sem alterar o status quo. IA, Guochao, ESPR/DPP e Slow Design moldam um design tecnocêntrico que absorve desafios éticos e ambientais como novas oportunidades de mercado, mantendo a lógica do Vale do Silício.',
     imagePrompt: 'Figura de espião elegante em ambiente urbano com gadgets tecnológicos brilhantes, símbolos de mercado global, IA e sustentabilidade como ferramentas corporativas, paleta laranja e cinza, estética thriller corporativo sofisticado e calculista.',
-    imageUrl: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=800'
+    imageUrl: 'https://i.postimg.cc/ygTnN9V9/Continuacao-Designer-como-instrumento.png'
   },
   {
     id: 'CENARIO_C2',
@@ -214,7 +214,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Victor Frankenstein — Assombrado pela Própria Criação',
     description: 'Proliferação descontrolada de IA leva à "slopificação" generalizada: autenticidade, senso crítico e memória coletiva são erodidos de forma irreversível. O designer, como Victor Frankenstein, é assombrado por sua criação — a automação atrofia a criatividade e o julgamento humano.',
     imagePrompt: 'Cientista atônito diante de uma entidade digital gigantesca que o domina, telas cobertas de conteúdo artificial indistinguível, paleta escura com contrastes de laranja e branco, expressão de horror e arrependimento, metáfora de Frankenstein digital.',
-    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=800'
+    imageUrl: 'https://i.postimg.cc/Kk5QYLZB/Colapso-Designer-como-Victor-Frankenstein.png'
   },
   {
     id: 'CENARIO_C3',
@@ -224,7 +224,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Design como Artesanato / Gepetto e a Fada Madrinha',
     description: 'Consciência sobre limites planetários impõe regras rígidas para preservar o essencial. Modelos colaborativos (Gomo Coop), ESPR/DPP, governança ética da IA (Singapura), sobriedade digital e o Buen Vivir orientam um design artesanal, biocêntrico e decolonial — uma evolução consciente, não um retorno ao passado.',
     imagePrompt: 'Gepetto em sua oficina entalhando uma marionete digital, madeira artesanal mesclada a circuitos luminosos laranjas, fada madrinha como metáfora de IA dando vida à criação, luz quente e aconchegante, ferramentas analógicas e digitais coexistindo em harmonia.',
-    imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800'
+    imageUrl: 'https://i.postimg.cc/7GNXL7xz/Disciplina-Designer-como-Gepetto.png'
   },
   {
     id: 'CENARIO_C4',
@@ -234,7 +234,7 @@ export const SCENARIOS_DATA: Scenario[] = [
     metaphor: 'Designer como Curupira — Regeneração e Proteção da Comunidade',
     description: 'O sistema é subvertido: a visão antropocêntrica cede lugar a uma ecologia de saberes onde a "comuna" supera o indivíduo e a ancestralidade vira pilar da inovação. O design assume o papel de Curupira — redireciona e protege comunidades. Sul Global, Indigenous AI, soberania discursiva e circularidade tornam-se a nova norma.',
     imagePrompt: 'Figura mítica do Curupira com pés invertidos dançando em floresta urbana regenerativa, raízes e dados digitais entrelaçados, comunidades criativas ao redor em celebração, paleta verde exuberante e laranja vibrante, misticismo ancestral fundido à tecnologia decolonial.',
-    imageUrl: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=800'
+    imageUrl: 'https://i.postimg.cc/62hzQR9v/Transformacao-Designer-como-Curupira.png'
   }
 ];
 
