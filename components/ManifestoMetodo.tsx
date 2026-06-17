@@ -360,6 +360,25 @@ const ManifestoMetodo: React.FC<ManifestoMetodoProps> = ({ onNavigate }) => {
                 loading="lazy"
               />
             </div>
+
+            {/* Podcast 3: Bressando */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h3 className="text-xl font-bold" style={{ color: 'var(--c-text-primary)' }}>Bressando</h3>
+              <p className="text-sm" style={{ color: 'rgba(237,232,223,0.62)', lineHeight: '1.6' }}>
+                Podcast produzido por estudantes da graduação em Design da CESAR School, vinculado ao NIX – Laboratório de Design de Narrativas, Imaginação e Experiência. A produção articula um debate sobre autores contemporâneos, decolonialidade e práticas emergentes para repensar o design em suas dimensões teóricas e metodológicas. O programa é parte integrante da disciplina Teoria e Futuro do Design, desenvolvida no ecossistema de inovação do Porto Digital, em Recife. O material oferece uma perspectiva crítica voltada a estudantes, pesquisadores e profissionais da área criativa.
+              </p>
+              <iframe
+                data-testid="embed-iframe"
+                style={{ borderRadius: '12px' }}
+                src="https://open.spotify.com/embed/show/033zVQBs38AwAIkX623A1R?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
