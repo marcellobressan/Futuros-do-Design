@@ -198,42 +198,42 @@ export const SCENARIOS_DATA: Scenario[] = [
   // Turma C (2026.1)
   {
     id: 'CENARIO_C1',
-    title: 'Aceleração Perpétua',
+    title: 'Crescimento Adaptativo',
     turma: 'C',
     archetype: 'Crescimento',
-    metaphor: 'Singularidade / Máquina Autônoma',
-    description: 'A aceleração tecnológica não encontra limites. Agentes de IA operam de forma autônoma, gerando soluções e criando novas camadas de complexidade antes que humanos possam compreendê-las.',
-    imagePrompt: 'Espiral ascendente de dados e luzes laranjas, linhas de código formando estruturas arquitetônicas, movimento perpétuo, fundo escuro com pontos luminosos, sensação de velocidade e expansão infinita.',
+    metaphor: 'Design como Instrumento "Cego" / Jason Bourne',
+    description: 'O mundo avança por expansão contínua e melhorias incrementais sem alterar o status quo. IA, Guochao, ESPR/DPP e Slow Design moldam um design tecnocêntrico que absorve desafios éticos e ambientais como novas oportunidades de mercado, mantendo a lógica do Vale do Silício.',
+    imagePrompt: 'Figura de espião elegante em ambiente urbano com gadgets tecnológicos brilhantes, símbolos de mercado global, IA e sustentabilidade como ferramentas corporativas, paleta laranja e cinza, estética thriller corporativo sofisticado e calculista.',
     imageUrl: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=800'
   },
   {
     id: 'CENARIO_C2',
-    title: 'A Grande Desconexão',
+    title: 'O Grande Vazio Digital',
     turma: 'C',
     archetype: 'Colapso',
-    metaphor: 'Torre de Babel / Queda de Ícaro',
-    description: 'Sobrecarga sistêmica provoca colapso das infraestruturas digitais globais. Comunidades locais ressurgem como núcleos de resistência analógica, valorizando o artesanal e o presencial.',
-    imagePrompt: 'Cabos de fibra óptica partidos flutuando no ar, cidade ao fundo parcialmente apagada, pessoas reunidas em praças com lanternas e fogueiras, contraste entre tecnologia quebrada e humanidade resiliente.',
+    metaphor: 'Victor Frankenstein — Assombrado pela Própria Criação',
+    description: 'Proliferação descontrolada de IA leva à "slopificação" generalizada: autenticidade, senso crítico e memória coletiva são erodidos de forma irreversível. O designer, como Victor Frankenstein, é assombrado por sua criação — a automação atrofia a criatividade e o julgamento humano.',
+    imagePrompt: 'Cientista atônito diante de uma entidade digital gigantesca que o domina, telas cobertas de conteúdo artificial indistinguível, paleta escura com contrastes de laranja e branco, expressão de horror e arrependimento, metáfora de Frankenstein digital.',
     imageUrl: 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=800'
   },
   {
     id: 'CENARIO_C3',
-    title: 'Protocolo Único',
+    title: 'A Era da Regulação Consciente',
     turma: 'C',
     archetype: 'Disciplina',
-    metaphor: 'Panóptico Digital / Jardim Cercado',
-    description: 'Governança algorítmica centralizada regula toda criação e distribuição de conteúdo. Padrões de design são homologados por instâncias regulatórias, garantindo coesão mas limitando a inovação.',
-    imagePrompt: 'Estrutura hexagonal perfeita de telas e interfaces, cada célula mostrando conteúdo padronizado, tons de verde e laranja, sensação de ordem absoluta e controle algorítmico total.',
+    metaphor: 'Design como Artesanato / Gepetto e a Fada Madrinha',
+    description: 'Consciência sobre limites planetários impõe regras rígidas para preservar o essencial. Modelos colaborativos (Gomo Coop), ESPR/DPP, governança ética da IA (Singapura), sobriedade digital e o Buen Vivir orientam um design artesanal, biocêntrico e decolonial — uma evolução consciente, não um retorno ao passado.',
+    imagePrompt: 'Gepetto em sua oficina entalhando uma marionete digital, madeira artesanal mesclada a circuitos luminosos laranjas, fada madrinha como metáfora de IA dando vida à criação, luz quente e aconchegante, ferramentas analógicas e digitais coexistindo em harmonia.',
     imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800'
   },
   {
     id: 'CENARIO_C4',
-    title: 'Natureza Sintética',
+    title: 'A Era do Curupira',
     turma: 'C',
     archetype: 'Transformação',
-    metaphor: 'Gaia Digital / Biomimética Radical',
-    description: 'Fronteiras entre orgânico e sintético dissolvem-se. Design bioinspired e inteligência coletiva humano-máquina criam ecossistemas regenerativos onde a tecnologia imita e amplifica os processos naturais.',
-    imagePrompt: 'Raízes de árvore digital formadas por fios de cobre e dados luminosos, folhas translúcidas exibindo código, fusão harmoniosa entre floresta e circuito integrado, tons verdes e laranja, atmosfera serena.',
+    metaphor: 'Designer como Curupira — Regeneração e Proteção da Comunidade',
+    description: 'O sistema é subvertido: a visão antropocêntrica cede lugar a uma ecologia de saberes onde a "comuna" supera o indivíduo e a ancestralidade vira pilar da inovação. O design assume o papel de Curupira — redireciona e protege comunidades. Sul Global, Indigenous AI, soberania discursiva e circularidade tornam-se a nova norma.',
+    imagePrompt: 'Figura mítica do Curupira com pés invertidos dançando em floresta urbana regenerativa, raízes e dados digitais entrelaçados, comunidades criativas ao redor em celebração, paleta verde exuberante e laranja vibrante, misticismo ancestral fundido à tecnologia decolonial.',
     imageUrl: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=800'
   }
 ];
@@ -299,11 +299,11 @@ Use estas metáforas e descrições ao explicar os cenários:
 - **Disciplina:** "Busca por Ordem". Metáfora: Jardim Murado / Mosteiro. Frugalidade digital.
 - **Transformação:** "Transformação da Realidade". Metáfora: Rizoma / Tecno-xamã. Coautoria humano-máquina.
 
-**Turma C (2026.1)**
-- **Crescimento:** "Aceleração Perpétua". Metáfora: Singularidade / Máquina Autônoma. Agentes de IA operam além da compreensão humana.
-- **Colapso:** "A Grande Desconexão". Metáfora: Torre de Babel / Queda de Ícaro. Colapso digital e renascimento analógico.
-- **Disciplina:** "Protocolo Único". Metáfora: Panóptico Digital / Jardim Cercado. Governança algorítmica centralizada do design.
-- **Transformação:** "Natureza Sintética". Metáfora: Gaia Digital / Biomimética Radical. Fusão orgânico-sintético e ecossistemas regenerativos.
+**Turma C (2026.1) — 2023.2 Teoria e Futuro do Design (Relatório KORI 16/06/2026, 38 fenômenos, 7 eixos de redirecionamento ontológico)**
+- **Crescimento (Continuação):** "Crescimento Adaptativo: A Economia da Continuidade e da Melhoria Incremental". Metáfora: Design como Instrumento 'Cego' / Designer como Jason Bourne — atua sem abraçar responsabilidade, focando nos resultados. Expansão contínua com verniz de ética e sustentabilidade; IA, Guochao, ESPR/DPP e soberania discursiva absorvidos como oportunidades dentro da lógica tecnocêntrica.
+- **Colapso:** "O Grande Vazio Digital: O Colapso da Autenticidade e da Memória Humana". Metáfora: Designer como Victor Frankenstein — assombrado pela própria criação. Slopificação generalizada corrói autenticidade e senso crítico; deskilling atrofia criatividade; memória coletiva privatizada desaparece progressivamente.
+- **Disciplina:** "A Era da Regulação Consciente: Limites para a Preservação e Autenticidade". Metáfora: Design como artesanato / Designer como Gepetto (a IA é a Fada Madrinha que dá vida). Limites planetários, ESPR/DPP, lei antiobsolescência (França), governança ética (Singapura), Buen Vivir/Sumak Kawsay, soberania discursiva e design multiespécie/biocêntrico.
+- **Transformação:** "A Era do Curupira — Quando a Reciprocidade e a Ancestralidade Redefinem Nossos Mundos". Metáfora: Designer como Curupira — redireciona e cria estruturas para regeneração e proteção da comunidade. Sul Global e favelas como polos criativos, Indigenous AI, soberania discursiva, DAM, consumo circular (Gomo Coop) e design decolonial situado como nova norma.
 
 ## **3. METODOLOGIA DA PESQUISA**
 - **Strateegia:** Debates estruturados sobre vanguarda do design.
